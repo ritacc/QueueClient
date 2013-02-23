@@ -17,6 +17,63 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="getQueue">
+        <s:complexType />
+      </s:element>
+      <s:element name="getQueueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getQueueResult" type="tns:ArrayOfBussinessBasicInfoOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfBussinessBasicInfoOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="BussinessBasicInfoOR" nillable="true" type="tns:BussinessBasicInfoOR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="BussinessBasicInfoOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnglishName" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="getCall">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="param" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCallResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getCallResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCustomerInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="billNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCustomerInfoResponse">
+        <s:complexType />
+      </s:element>
+      <s:element name="getCustomerSellInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="billNo" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getCustomerSellInfoResponse">
+        <s:complexType />
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="BussinessQHSoapIn">
@@ -25,10 +82,50 @@
   <wsdl:message name="BussinessQHSoapOut">
     <wsdl:part name="parameters" element="tns:BussinessQHResponse" />
   </wsdl:message>
+  <wsdl:message name="getQueueSoapIn">
+    <wsdl:part name="parameters" element="tns:getQueue" />
+  </wsdl:message>
+  <wsdl:message name="getQueueSoapOut">
+    <wsdl:part name="parameters" element="tns:getQueueResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCallSoapIn">
+    <wsdl:part name="parameters" element="tns:getCall" />
+  </wsdl:message>
+  <wsdl:message name="getCallSoapOut">
+    <wsdl:part name="parameters" element="tns:getCallResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getCustomerInfo" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getCustomerInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerSellInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getCustomerSellInfo" />
+  </wsdl:message>
+  <wsdl:message name="getCustomerSellInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getCustomerSellInfoResponse" />
+  </wsdl:message>
   <wsdl:portType name="QueueClientSoap">
     <wsdl:operation name="BussinessQH">
       <wsdl:input message="tns:BussinessQHSoapIn" />
       <wsdl:output message="tns:BussinessQHSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getQueue">
+      <wsdl:input message="tns:getQueueSoapIn" />
+      <wsdl:output message="tns:getQueueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCall">
+      <wsdl:input message="tns:getCallSoapIn" />
+      <wsdl:output message="tns:getCallSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerInfo">
+      <wsdl:input message="tns:getCustomerInfoSoapIn" />
+      <wsdl:output message="tns:getCustomerInfoSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerSellInfo">
+      <wsdl:input message="tns:getCustomerSellInfoSoapIn" />
+      <wsdl:output message="tns:getCustomerSellInfoSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QueueClientSoap" type="tns:QueueClientSoap">
@@ -42,11 +139,83 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="getQueue">
+      <soap:operation soapAction="http://www.ritacc.com/getQueue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCall">
+      <soap:operation soapAction="http://www.ritacc.com/getCall" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerInfo">
+      <soap:operation soapAction="http://www.ritacc.com/getCustomerInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerSellInfo">
+      <soap:operation soapAction="http://www.ritacc.com/getCustomerSellInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="QueueClientSoap12" type="tns:QueueClientSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
     <wsdl:operation name="BussinessQH">
       <soap12:operation soapAction="http://www.ritacc.com/BussinessQH" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQueue">
+      <soap12:operation soapAction="http://www.ritacc.com/getQueue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCall">
+      <soap12:operation soapAction="http://www.ritacc.com/getCall" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerInfo">
+      <soap12:operation soapAction="http://www.ritacc.com/getCustomerInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getCustomerSellInfo">
+      <soap12:operation soapAction="http://www.ritacc.com/getCustomerSellInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

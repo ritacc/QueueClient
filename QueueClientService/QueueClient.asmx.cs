@@ -4,6 +4,7 @@ using System.Web;
 using System.Web.Services;
 using System.Data;
 using QM.Client.WebService.Control;
+using QM.Client.Entity;
 
 
 namespace QM.Client.WebService
@@ -54,5 +55,68 @@ namespace QM.Client.WebService
             }
             return _Bill;
         }
+
+        /// <summary>
+        /// 4、	获取队列详细信息
+        /// 返回本业务所有的排队票号信息，各票号之间以分号隔开
+        /// </summary>
+        /// <param name="bussinessID">根据业务ID</param>
+        /// <returns></returns>
+        public string getBussinessInfo(string BussinessID)
+        {
+            string strBillList = string.Empty;
+            try
+            {
+                strBillList = Instanse().getBussinessInfo(BussinessID);
+            }
+            catch (Exception ex)
+            {
+                strBillList = string.Format("Error: {0}", ex.Message);
+            }
+            return strBillList;
+        }
+
+        /// <summary>
+        ///5 获取所有业务队列
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public List<BussinessBasicInfoOR> getQueue()
+        {
+            return Instanse().getQueue();
+        }
+
+        /// <summary>
+        /// 呼叫接口
+        /// </summary>
+        /// <param name="param"></param>
+        /// <param name="value"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public string getCall(string param, string value)
+        {
+            return Instanse().getCall( param,  value);
+        }
+
+        /// <summary>
+        /// 6、	获取客户基本信息getCustomerInfo(string billNo): 获取客户姓名、业务名称
+        /// </summary>
+        /// <param name="billNo"></param>
+        [WebMethod]
+        public void getCustomerInfo(string billNo)
+        {
+
+        }
+
+        /// <summary>
+        /// 7、	获取客户营销信息getCustomerSellInfo(string billNo):获取营销详细信息
+        /// </summary>
+        /// <param name="billNo"></param>
+        [WebMethod]
+        public void getCustomerSellInfo(string billNo)
+        {
+
+        }
+
     }
 }

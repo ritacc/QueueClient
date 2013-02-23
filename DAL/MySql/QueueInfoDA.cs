@@ -16,7 +16,8 @@ namespace QM.Client.DA.MySql
        /// <returns></returns>
        public List<QueueInfoOR> selectBussinessQueues(string BussinesID)
        {
-           string sql = "select * from t_Bussiness where BussinessId='{0}' and status<4";
+           string sql = string.Format("select * from t_queueinfo where BussinessId='{0}' and status<4"
+               , BussinesID);
 
            DataTable dt = null;
            try
@@ -59,36 +60,40 @@ namespace QM.Client.DA.MySql
 TransferDestWin, DelayNum, DelayTime, CallTime, ProcessTime, 
 FinishTime, WindowNo, EmployNo, EmployName, CardNo, 
 Judge, WaitInterval, ProcessInterval, WaitPeopleBusssiness, WaitPeopleBank, 
-CustemClass, Description, Staus) 
+CustemClass, Description, Status) 
 values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
 '@TransferDestWin', @DelayNum, @DelayTime,'@CallTime', '@ProcessTime',
 '@FinishTime', '@WindowNo', '@EmployNo', '@EmployName', '@CardNo', 
 @Judge, @WaitInterval, @ProcessInterval, @WaitPeopleBusssiness, @WaitPeopleBank, 
-@CustemClass, '@Description', @Staus)";
+@CustemClass, '@Description', @Status)";
 
            sql = sql.Replace("@Id", queueInfo.Id);
            sql = sql.Replace("@BankNo", queueInfo.Bankno);
            sql = sql.Replace("@BillNo", queueInfo.Billno);
            sql = sql.Replace("@BussinessId", queueInfo.Bussinessid);
            sql = sql.Replace("@PrillBillTime", queueInfo.Prillbilltime.ToString("yyyy-MM-dd HH:mm:ss"));
+
            sql = sql.Replace("@TransferDestWin", queueInfo.Transferdestwin.ToString());
            sql = sql.Replace("@DelayNum", queueInfo.Delaynum.ToString());
-           sql = sql.Replace("@DelayTime", queueInfo.Delaytime.ToString("yyyy-MM-dd HH:mm:ss"));
+           sql = sql.Replace("@DelayTime", queueInfo.Delaytime.ToString());
            sql = sql.Replace("@CallTime", queueInfo.Calltime.ToString("yyyy-MM-dd HH:mm:ss"));
            sql = sql.Replace("@ProcessTime", queueInfo.Processtime.ToString("yyyy-MM-dd HH:mm:ss"));
+
            sql = sql.Replace("@FinishTime", queueInfo.Finishtime.ToString("yyyy-MM-dd HH:mm:ss"));
            sql = sql.Replace("@WindowNo", queueInfo.Windowno);
            sql = sql.Replace("@EmployNo", queueInfo.Employno);
            sql = sql.Replace("@EmployName", queueInfo.Employname);
            sql = sql.Replace("@CardNo", queueInfo.Cardno);
+
            sql = sql.Replace("@Judge", queueInfo.Judge.ToString());
            sql = sql.Replace("@WaitInterval", queueInfo.Waitinterval.ToString());
            sql = sql.Replace("@ProcessInterval", queueInfo.Processinterval.ToString());
            sql = sql.Replace("@WaitPeopleBusssiness", queueInfo.Waitpeoplebusssiness.ToString());
            sql = sql.Replace("@WaitPeopleBank", queueInfo.Waitpeoplebank.ToString());
+
            sql = sql.Replace("@CustemClass", queueInfo.Custemclass.ToString());
            sql = sql.Replace("@Description", queueInfo.Description.ToString());
-           sql = sql.Replace("@Staus", queueInfo.Status.ToString());
+           sql = sql.Replace("@Status", queueInfo.Status.ToString());
 
            return sql;
        }
@@ -100,7 +105,7 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
        public int GetQueueNumber()
        {
            string sql = string.Format("select count(*) from t_queueinfo where PrillBillTime > '{0} 00:00:00' and PrillBillTime < '{0} 23:59:59'",
-               DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
+               DateTime.Now.ToString("yyyy-MM-dd"));
 
            return Convert.ToInt32(dbMySql.ExecuteScalar(sql));
        }

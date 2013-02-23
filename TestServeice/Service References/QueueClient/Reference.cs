@@ -9,7 +9,86 @@
 //------------------------------------------------------------------------------
 
 namespace TestServeice.QueueClient {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BussinessBasicInfoOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class BussinessBasicInfoOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IDField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EnglishNameField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string ID {
+            get {
+                return this.IDField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IDField, value) != true)) {
+                    this.IDField = value;
+                    this.RaisePropertyChanged("ID");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string EnglishName {
+            get {
+                return this.EnglishNameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EnglishNameField, value) != true)) {
+                    this.EnglishNameField = value;
+                    this.RaisePropertyChanged("EnglishName");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.ritacc.com/", ConfigurationName="QueueClient.QueueClientSoap")]
@@ -18,6 +97,22 @@ namespace TestServeice.QueueClient {
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 BussinessID 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/BussinessQH", ReplyAction="*")]
         TestServeice.QueueClient.BussinessQHResponse BussinessQH(TestServeice.QueueClient.BussinessQHRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 getQueueResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getQueue", ReplyAction="*")]
+        TestServeice.QueueClient.getQueueResponse getQueue(TestServeice.QueueClient.getQueueRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 param 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getCall", ReplyAction="*")]
+        TestServeice.QueueClient.getCallResponse getCall(TestServeice.QueueClient.getCallRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 billNo 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getCustomerInfo", ReplyAction="*")]
+        TestServeice.QueueClient.getCustomerInfoResponse getCustomerInfo(TestServeice.QueueClient.getCustomerInfoRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 billNo 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getCustomerSellInfo", ReplyAction="*")]
+        TestServeice.QueueClient.getCustomerSellInfoResponse getCustomerSellInfo(TestServeice.QueueClient.getCustomerSellInfoRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -92,6 +187,261 @@ namespace TestServeice.QueueClient {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getQueueRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getQueue", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getQueueRequestBody Body;
+        
+        public getQueueRequest() {
+        }
+        
+        public getQueueRequest(TestServeice.QueueClient.getQueueRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class getQueueRequestBody {
+        
+        public getQueueRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getQueueResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getQueueResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getQueueResponseBody Body;
+        
+        public getQueueResponse() {
+        }
+        
+        public getQueueResponse(TestServeice.QueueClient.getQueueResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getQueueResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public TestServeice.QueueClient.BussinessBasicInfoOR[] getQueueResult;
+        
+        public getQueueResponseBody() {
+        }
+        
+        public getQueueResponseBody(TestServeice.QueueClient.BussinessBasicInfoOR[] getQueueResult) {
+            this.getQueueResult = getQueueResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getCallRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getCall", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getCallRequestBody Body;
+        
+        public getCallRequest() {
+        }
+        
+        public getCallRequest(TestServeice.QueueClient.getCallRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getCallRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string param;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string value;
+        
+        public getCallRequestBody() {
+        }
+        
+        public getCallRequestBody(string param, string value) {
+            this.param = param;
+            this.value = value;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getCallResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getCallResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getCallResponseBody Body;
+        
+        public getCallResponse() {
+        }
+        
+        public getCallResponse(TestServeice.QueueClient.getCallResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getCallResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string getCallResult;
+        
+        public getCallResponseBody() {
+        }
+        
+        public getCallResponseBody(string getCallResult) {
+            this.getCallResult = getCallResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getCustomerInfoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getCustomerInfo", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getCustomerInfoRequestBody Body;
+        
+        public getCustomerInfoRequest() {
+        }
+        
+        public getCustomerInfoRequest(TestServeice.QueueClient.getCustomerInfoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getCustomerInfoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string billNo;
+        
+        public getCustomerInfoRequestBody() {
+        }
+        
+        public getCustomerInfoRequestBody(string billNo) {
+            this.billNo = billNo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getCustomerInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getCustomerInfoResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getCustomerInfoResponseBody Body;
+        
+        public getCustomerInfoResponse() {
+        }
+        
+        public getCustomerInfoResponse(TestServeice.QueueClient.getCustomerInfoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class getCustomerInfoResponseBody {
+        
+        public getCustomerInfoResponseBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getCustomerSellInfoRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getCustomerSellInfo", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getCustomerSellInfoRequestBody Body;
+        
+        public getCustomerSellInfoRequest() {
+        }
+        
+        public getCustomerSellInfoRequest(TestServeice.QueueClient.getCustomerSellInfoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getCustomerSellInfoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string billNo;
+        
+        public getCustomerSellInfoRequestBody() {
+        }
+        
+        public getCustomerSellInfoRequestBody(string billNo) {
+            this.billNo = billNo;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getCustomerSellInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getCustomerSellInfoResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public TestServeice.QueueClient.getCustomerSellInfoResponseBody Body;
+        
+        public getCustomerSellInfoResponse() {
+        }
+        
+        public getCustomerSellInfoResponse(TestServeice.QueueClient.getCustomerSellInfoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class getCustomerSellInfoResponseBody {
+        
+        public getCustomerSellInfoResponseBody() {
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface QueueClientSoapChannel : TestServeice.QueueClient.QueueClientSoap, System.ServiceModel.IClientChannel {
     }
@@ -131,6 +481,56 @@ namespace TestServeice.QueueClient {
             inValue.Body.mCard = mCard;
             TestServeice.QueueClient.BussinessQHResponse retVal = ((TestServeice.QueueClient.QueueClientSoap)(this)).BussinessQH(inValue);
             return retVal.Body.BussinessQHResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestServeice.QueueClient.getQueueResponse TestServeice.QueueClient.QueueClientSoap.getQueue(TestServeice.QueueClient.getQueueRequest request) {
+            return base.Channel.getQueue(request);
+        }
+        
+        public TestServeice.QueueClient.BussinessBasicInfoOR[] getQueue() {
+            TestServeice.QueueClient.getQueueRequest inValue = new TestServeice.QueueClient.getQueueRequest();
+            inValue.Body = new TestServeice.QueueClient.getQueueRequestBody();
+            TestServeice.QueueClient.getQueueResponse retVal = ((TestServeice.QueueClient.QueueClientSoap)(this)).getQueue(inValue);
+            return retVal.Body.getQueueResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestServeice.QueueClient.getCallResponse TestServeice.QueueClient.QueueClientSoap.getCall(TestServeice.QueueClient.getCallRequest request) {
+            return base.Channel.getCall(request);
+        }
+        
+        public string getCall(string param, string value) {
+            TestServeice.QueueClient.getCallRequest inValue = new TestServeice.QueueClient.getCallRequest();
+            inValue.Body = new TestServeice.QueueClient.getCallRequestBody();
+            inValue.Body.param = param;
+            inValue.Body.value = value;
+            TestServeice.QueueClient.getCallResponse retVal = ((TestServeice.QueueClient.QueueClientSoap)(this)).getCall(inValue);
+            return retVal.Body.getCallResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestServeice.QueueClient.getCustomerInfoResponse TestServeice.QueueClient.QueueClientSoap.getCustomerInfo(TestServeice.QueueClient.getCustomerInfoRequest request) {
+            return base.Channel.getCustomerInfo(request);
+        }
+        
+        public void getCustomerInfo(string billNo) {
+            TestServeice.QueueClient.getCustomerInfoRequest inValue = new TestServeice.QueueClient.getCustomerInfoRequest();
+            inValue.Body = new TestServeice.QueueClient.getCustomerInfoRequestBody();
+            inValue.Body.billNo = billNo;
+            TestServeice.QueueClient.getCustomerInfoResponse retVal = ((TestServeice.QueueClient.QueueClientSoap)(this)).getCustomerInfo(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        TestServeice.QueueClient.getCustomerSellInfoResponse TestServeice.QueueClient.QueueClientSoap.getCustomerSellInfo(TestServeice.QueueClient.getCustomerSellInfoRequest request) {
+            return base.Channel.getCustomerSellInfo(request);
+        }
+        
+        public void getCustomerSellInfo(string billNo) {
+            TestServeice.QueueClient.getCustomerSellInfoRequest inValue = new TestServeice.QueueClient.getCustomerSellInfoRequest();
+            inValue.Body = new TestServeice.QueueClient.getCustomerSellInfoRequestBody();
+            inValue.Body.billNo = billNo;
+            TestServeice.QueueClient.getCustomerSellInfoResponse retVal = ((TestServeice.QueueClient.QueueClientSoap)(this)).getCustomerSellInfo(inValue);
         }
     }
 }

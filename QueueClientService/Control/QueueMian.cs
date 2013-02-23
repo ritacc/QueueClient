@@ -50,14 +50,17 @@ namespace QM.Client.WebService.Control
            
             //查询 所有的业务队列
             ListBuss = _busDA.selectAllBussiness();
-            
+
+            QhQueues = new List<BussinessQueueOR>();
             //根据队列，取出已取号的排队信息。
             foreach (BussinessOR obj in ListBuss)
             {
                 BussinessQueueOR bussQue = new BussinessQueueOR();
                 bussQue.ID = obj.Id;
                 bussQue.Name = obj.Name;
+                bussQue.EnglishName = obj.Englishname;
                 bussQue.BussQueues = _QueueDA.selectBussinessQueues(obj.Id);//获取此队列未办结的取号记录
+                QhQueues.Add(bussQue);
             }
         }
 
@@ -69,6 +72,17 @@ namespace QM.Client.WebService.Control
             BankNo = ConfigurationManager.AppSettings["BankNo"];
         }
         #endregion
+
+        public List<BussinessBasicInfoOR> getQueue()
+        {
+            List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
+            foreach (BussinessQueueOR obj in QhQueues)
+            {
+                BussinessBasicInfoOR _mBasciObj = new BussinessBasicInfoOR(obj);
+                listQueue.Add(_mBasciObj);
+            }
+            return listQueue;
+        }
 
         #region 公用函数
         /// <summary>
@@ -87,6 +101,189 @@ namespace QM.Client.WebService.Control
             return null;
         }
         #endregion
+
+        /// <summary>
+        /// 4、	获取队列详细信息
+        /// 返回本业务所有的排队票号信息，各票号之间以分号隔开
+        /// </summary>
+        /// <param name="bussinessID">根据业务ID</param>
+        /// <returns></returns>
+        public string getBussinessInfo(string bussinessID)
+        {
+            BussinessQueueOR _CurentBuss = GetBussiness(bussinessID);
+            if (_CurentBuss == null)
+            {
+                throw new Exception("获取业务队列失败！，无法取号。");
+            }
+            string strBillList = string.Empty;
+            foreach (QueueInfoOR obj in _CurentBuss.BussQueues)
+            {
+
+                strBillList += string.Format("{0};", obj.Billno);
+            }
+            return strBillList;
+        }
+
+        #region 5呼叫接口
+        /*
+呼叫下一位	CALL	空串
+重呼	RECALL	票号
+延后	DELAY	时长（单位为分钟）
+转移	TRANSFER	目标窗口号
+特呼	SPECALL	票号
+欢迎光临	WELCOME	空串
+请评价	JUDGE	空串
+暂停	PAUSE	空串
+恢复	RESTART	空串
+         */
+
+        public string getCall(string param, string value)
+        {
+            string strReturnValue = "";
+            switch (param)
+            {
+                case "CALL":
+                    strReturnValue = CallGetNext(value);
+                    break;
+                case "RECALL":
+                    CallReCall(value);
+                    break;
+                case "DELAY":
+                    CallDelay(value);
+                    break;
+                case "TRANSFER":
+                    CallTransfer(value);
+                    break;
+                case "SPECALL":
+                    CallSpecall(value);
+                    break;
+                case "WELCOME":
+                    CallWelcome();
+                    break;
+                case "JUDGE":
+                    CallJudge();
+                    break;
+                case "PAUSE":
+                    CallPause();
+                    break;
+                case "RESTART":
+                    CallRestart();
+                    break;
+            }
+
+            return strReturnValue;
+        }
+        
+        /// <summary>
+        /// 呼叫下一位	CALL	空串
+        /// </summary>
+        private string CallGetNext(string mWindowNo)
+        {
+            //据呼叫的窗口号遍历每一个队列，找出延后人数为0的取出作为结果，若不存在，则进行第二次遍历
+            foreach (BussinessQueueOR objQhQue in QhQueues)
+            {
+                foreach (QueueInfoOR objQue in objQhQue.BussQueues )
+                {
+                    if (objQue.Windowno == mWindowNo  && objQue.Delaynum==0 && objQue.Status==0)
+                    {
+                        //更新呼叫
+                        objQue.Status = 1;
+                        return objQue.Billno;
+                    }
+                }
+            }
+            //第二次遍历过程中，转移窗口号不为空且不等于呼叫窗口号的元素略过，更新所有元素的“换算后排队时间”（
+            foreach (BussinessQueueOR objQhQue in QhQueues)
+            {
+                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
+                {
+                    if (objQue.Transferdestwin.Trim() != "" && objQue.Transferdestwin != mWindowNo)
+                    {
+                        continue;
+                    }
+                    if (objQue.Status == 0)
+                    {
+                        objQue.Status = 1;
+                        return objQue.Billno;
+                    }
+                }
+            }
+            return "Error: 没有获取到排队人员。";
+        }
+
+        /// <summary>
+        /// 重呼	RECALL	票号
+        /// </summary>
+        /// <param name="mBill">票号</param>
+        private void CallReCall(string mBill)
+        {
+
+
+        }
+
+        /// <summary>
+        /// 延后	DELAY	时长（单位为分钟）
+        /// </summary>
+        /// <param name="TimeLen">时长</param>
+        private void CallDelay(string TimeLen)
+        {
+
+        }
+
+        /// <summary>
+        /// 转移	TRANSFER	目标窗口号
+        /// </summary>
+        /// <param name="targetWindNo"></param>
+        private void CallTransfer(string targetWindNo)
+        {
+
+
+        }
+
+        /// <summary>
+        /// 特呼	SPECALL	票号
+        /// </summary>
+        /// <param name="mBill"></param>
+        private void CallSpecall(string mBill)
+        {
+
+
+        }
+
+        /// <summary>
+        /// 欢迎光临	WELCOME	空串
+        /// </summary>
+        private void CallWelcome()
+        {
+
+        }
+
+        /// <summary>
+        /// 请评价	JUDGE	空串
+        /// </summary>
+        private void CallJudge()
+        {
+
+        }
+
+        /// <summary>
+        /// 暂停	PAUSE	空串
+        /// </summary>
+        private void CallPause()
+        {
+
+        }
+
+        /// <summary>
+        /// 恢复	RESTART	空串
+        /// </summary>
+        public void CallRestart()
+        {
+
+
+        }
+        #endregion
+        
 
         #region 取号
         /// <summary>

@@ -65,6 +65,9 @@
     </EmbeddedResource>
     <None Include="app.config" />
     <None Include="Service References\QueueClient\QueueClient.wsdl" />
+    <None Include="Service References\QueueClient\TestServeice.QueueClient.BussinessBasicInfoOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\QueueClient\TestServeice.QueueClient.BussinessOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>

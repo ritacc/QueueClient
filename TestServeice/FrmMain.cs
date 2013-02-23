@@ -30,11 +30,26 @@ namespace TestServeice
             return v;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void btnGetAllBussiness_Click(object sender, EventArgs e)
         {
-           // QueueClient.QueueClientSoapClient v = Init();
-           //QueueClient.BussinessOR[] obj= v.HelloWorld();
-           //this.dataGridView1.DataSource = obj;
+            QueueClient.QueueClientSoapClient v = Init();
+            this.dataGridView1.DataSource = v.getQueue();
+        }
+
+        private void btnCH_Click(object sender, EventArgs e)
+        {
+            QueueClient.QueueClientSoapClient v = Init();
+           string mbill= v.BussinessQH(txtBussinessID.Text, "");
+           MessageBox.Show(
+               string.Format("当前所取到的票号：{0}", mbill)
+               );
+        }
+
+        private void btnCall_Click(object sender, EventArgs e)
+        {
+            //QueueClient.QueueClientSoapClient v = Init();
+            //v.
+
         }
     }
 }
