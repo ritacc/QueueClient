@@ -1,0 +1,20 @@
+﻿ //string MyConString = "DRIVER={MySQL ODBC 5.1 Driver};SERVER=localhost;DATABASE=queueclient;UID=root;PASSWORD=ABCabc123;OPTION=3";
+
+            //OdbcConnection MyConnection = new OdbcConnection(MyConString);
+            //MyConnection.Open();
+            //DataSet ds = new DataSet();
+            //OdbcCommand cmd = new OdbcCommand(query, MyConnection);
+            //try
+            //{
+            //    OdbcDataAdapter da = new OdbcDataAdapter(cmd);
+            //    da.Fill(ds);
+            //}
+            //catch (Exception ex)
+            //{
+            //    Console.WriteLine("record duplicate.");
+            //}
+            //finally
+            //{
+            //    cmd.Dispose();
+            //}
+            //return ds.Tables[0];
