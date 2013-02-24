@@ -119,9 +119,47 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
        /// <returns></returns>
        public bool UpdateCall( QueueInfoOR obj)
        {
-           string sql = string.Format(@"update t_queueinfo  set CallTime=now(),status=1
-where  PrillBillTime > '{0} 00:00:00' and PrillBillTime < '{0} 23:59:59'
-and BillNo='{1}' ", DateTime.Now.ToString("yyyy-MM-dd"),obj.Billno);
+           string sql =@"update t_queueinfo  set CallTime=now(),status=1,Waitinterval='@Waitinterval'
+,CallTime='@CallTime' where  PrillBillTime > '@PrillBillTime 00:00:00' and PrillBillTime < '@PrillBillTime 23:59:59'
+and BillNo='@BillNo' ";
+
+           sql = sql.Replace("@Waitinterval", obj.Waitinterval.ToString());
+           sql= sql.Replace("@CallTime",obj.Calltime.ToString("yyyy-MM-dd HH:mm:ss"));
+           sql = sql.Replace("@PrillBillTime", DateTime.Now.ToString("yyyy-MM-dd"));
+           
+           sql = sql.Replace("@BillNo", obj.Billno);
+
+           return dbMySql.ExecuteNoQuery(sql) > 0;
+       }
+
+       /// <summary>
+       /// 更新欢迎状态
+       /// </summary>
+       /// <param name="obj"></param>
+       /// <returns></returns>
+       public bool UpdateWelcome(QueueInfoOR obj)
+       {
+           string sql = @"update t_queueinfo  set CallTime=now(),status=2,ProcessTime='@ProcessTime'
+where  PrillBillTime > '@PrillBillTime 00:00:00' and PrillBillTime < '@PrillBillTime 23:59:59'
+and BillNo='@BillNo' ";
+           //sql = sql.Replace("@Waitinterval", obj.Waitinterval.ToString());
+           sql = sql.Replace("@ProcessTime", obj.Processtime.ToString("yyyy-MM-dd HH:mm:ss"));
+           sql = sql.Replace("@PrillBillTime", DateTime.Now.ToString("yyyy-MM-dd"));           
+           sql = sql.Replace("@BillNo", obj.Billno);
+           return dbMySql.ExecuteNoQuery(sql) > 0;
+       }
+
+       public bool UpdateCallJudge(QueueInfoOR obj)
+       {
+           string sql = @"update t_queueinfo  set CallTime=now(),status=3,FinishTime='@ProcessTime',
+Processinterval=@Processinterval
+where  PrillBillTime > '@PrillBillTime 00:00:00' and PrillBillTime < '@PrillBillTime 23:59:59'
+and BillNo='@BillNo' ";
+           sql = sql.Replace("@Processinterval", obj.Processinterval.ToString());
+           sql = sql.Replace("@ProcessTime", obj.Finishtime.ToString("yyyy-MM-dd HH:mm:ss"));
+
+           sql = sql.Replace("@PrillBillTime", DateTime.Now.ToString("yyyy-MM-dd"));           
+           sql = sql.Replace("@BillNo", obj.Billno);
            return dbMySql.ExecuteNoQuery(sql) > 0;
        }
 
