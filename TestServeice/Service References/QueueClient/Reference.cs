@@ -31,6 +31,8 @@ namespace TestServeice.QueueClient {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string EnglishNameField;
         
+        private int QueueNumberField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -76,6 +78,19 @@ namespace TestServeice.QueueClient {
                 if ((object.ReferenceEquals(this.EnglishNameField, value) != true)) {
                     this.EnglishNameField = value;
                     this.RaisePropertyChanged("EnglishName");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public int QueueNumber {
+            get {
+                return this.QueueNumberField;
+            }
+            set {
+                if ((this.QueueNumberField.Equals(value) != true)) {
+                    this.QueueNumberField = value;
+                    this.RaisePropertyChanged("QueueNumber");
                 }
             }
         }
@@ -275,13 +290,17 @@ namespace TestServeice.QueueClient {
         public string param;
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string mBillNo;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
         public string value;
         
         public getCallRequestBody() {
         }
         
-        public getCallRequestBody(string param, string value) {
+        public getCallRequestBody(string param, string mBillNo, string value) {
             this.param = param;
+            this.mBillNo = mBillNo;
             this.value = value;
         }
     }
@@ -500,10 +519,11 @@ namespace TestServeice.QueueClient {
             return base.Channel.getCall(request);
         }
         
-        public string getCall(string param, string value) {
+        public string getCall(string param, string mBillNo, string value) {
             TestServeice.QueueClient.getCallRequest inValue = new TestServeice.QueueClient.getCallRequest();
             inValue.Body = new TestServeice.QueueClient.getCallRequestBody();
             inValue.Body.param = param;
+            inValue.Body.mBillNo = mBillNo;
             inValue.Body.value = value;
             TestServeice.QueueClient.getCallResponse retVal = ((TestServeice.QueueClient.QueueClientSoap)(this)).getCall(inValue);
             return retVal.Body.getCallResult;

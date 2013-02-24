@@ -47,8 +47,9 @@ namespace TestServeice
 
         private void btnCall_Click(object sender, EventArgs e)
         {
-            //QueueClient.QueueClientSoapClient v = Init();
-            //v.
+            QueueClient.QueueClientSoapClient v = Init();
+           string value= v.getCall("CALL","", txtWindowNo.Text);
+           MessageBox.Show(value);
 
         }
     }

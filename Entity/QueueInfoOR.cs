@@ -14,83 +14,46 @@ namespace QM.Client.Entity
         /// </summary>
         public bool IsVip { get; set; }
 
-        /// <summary>
-        /// 取号状态 0：取号,1:叫号、2：欢迎、3：结束、4上传完成。
-        /// </summary>
-        public int Status { get; set; }
+        
 
         #endregion
 
-        private string _Id;
+       
 		/// <summary>
 		/// 
 		/// </summary>
-		public string Id
-		{
-			get { return _Id; }
-			set { _Id = value; }
-		}
-
-		private string _Bankno;
+		public string Id{ get; set; }
+		
 		/// <summary>
 		/// 网点机构号
 		/// </summary>
-		public string Bankno
-		{
-			get { return _Bankno; }
-			set { _Bankno = value; }
-		}
-
-		private string _Billno;
+		public string Bankno{ get; set; }
+		
 		/// <summary>
 		/// 票号
 		/// </summary>
-		public string Billno
-		{
-			get { return _Billno; }
-			set { _Billno = value; }
-		}
-
-		private string _Bussinessid;
+		public string Billno{ get; set; }
+		
 		/// <summary>
 		/// 业务代码
 		/// </summary>
-		public string Bussinessid
-		{
-			get { return _Bussinessid; }
-			set { _Bussinessid = value; }
-		}
-
-		private DateTime _Prillbilltime;
+        public string Bussinessid { get; set; }
+		
 		/// <summary>
 		/// 取号时间
 		/// </summary>
-		public DateTime Prillbilltime
-		{
-			get { return _Prillbilltime; }
-			set { _Prillbilltime = value; }
-		}
-
+        public DateTime Prillbilltime { get; set; }
 		
 		/// <summary>
 		/// 硬呼叫器或软呼叫按下转移键时记录转移到的目的窗口号，用于排队计算用
 		/// </summary>
-        public string Transferdestwin
-        {
-            get;
-            set;
-        }
-
-		private int _Delaynum;
+        public string Transferdestwin { get; set; }        
+		
 		/// <summary>
 		/// 延后的人数，用于排队计算；按下延后时更新此人数，以后有人办理时也需更新此人数，暂不使用这种策略
 		/// </summary>
-		public int Delaynum
-		{
-			get { return _Delaynum; }
-			set { _Delaynum = value; }
-		}
-
+        public int Delaynum { get; set; }
+		
 		private int _Delaytime;
 		/// <summary>
 		/// 延后秒数。记得在软呼叫或硬件时单位为分钟，需要换算后传过来。延后采用这种策略
@@ -231,24 +194,26 @@ namespace QM.Client.Entity
 			set { _Custemclass = value; }
 		}
 
-		private string _Description;
+		
 		/// <summary>
 		/// 
 		/// </summary>
-		public string Description
-		{
-			get { return _Description; }
-			set { _Description = value; }
-		}
+		public string Description{ get; set; }
+		
 
+        /// <summary>
+        /// 取号状态 0：取号,1:叫号、2：欢迎、3：结束、4上传完成。
+        /// </summary>
+        public int Status { get; set; }
 		/// <summary>
 		/// QueueInfo构造函数
 		/// </summary>
 		public QueueInfoOR()
 		{
             Status = 0; 
-            _Id = Guid.NewGuid().ToString();
+            Id = Guid.NewGuid().ToString();
 		}
+
         /// <param name="mCustemclass">客户级别</param>
  
         /// <summary>
@@ -266,10 +231,10 @@ namespace QM.Client.Entity
         {
             Status = 0;
 
-            _Id = Guid.NewGuid().ToString();
-            _Bankno = mBankNo;// 网点机构号
-            _Billno = mBillno;// 票号
-            _Bussinessid = mBussinessid;// 业务代码
+            Id = Guid.NewGuid().ToString();
+            Bankno = mBankNo;// 网点机构号
+            Billno = mBillno;// 票号
+            Bussinessid = mBussinessid;// 业务代码
             _Cardno = mCardno;// 取号的卡号
             _Waitpeoplebusssiness = mWaitpeoplebusssiness;
             _Waitpeoplebank = mWaitpeoplebank;
@@ -280,11 +245,11 @@ namespace QM.Client.Entity
             
             DateTime _Now = DateTime.Now;            
             // 取号时间
-            _Prillbilltime = _Now;
+            Prillbilltime = _Now;
             // 硬呼叫器或软呼叫按下转移键时记录转移到的目的窗口号，用于排队计算用
             Transferdestwin = "";
             // 延后的人数，用于排队计算；按下延后时更新此人数，以后有人办理时也需更新此人数，暂不使用这种策略
-            _Delaynum =0;
+            Delaynum =0;
             // 延后秒数。记得在软呼叫或硬件时单位为分钟，需要换算后传过来。延后采用这种策略
             _Delaytime =0;
             // 呼叫时间
@@ -311,7 +276,7 @@ namespace QM.Client.Entity
             _Waitpeoplebank = 0;
             // 客户等级
             _Custemclass = 0;
-            _Description = "";
+            Description = "";
         }
 		/// <summary>
 		/// QueueInfo构造函数
@@ -320,19 +285,19 @@ namespace QM.Client.Entity
         {
             
 			// 
-			_Id = row["Id"].ToString().Trim();
+			Id = row["Id"].ToString().Trim();
 			// 网点机构号
-			_Bankno = row["BankNo"].ToString().Trim();
+			Bankno = row["BankNo"].ToString().Trim();
 			// 票号
-			_Billno = row["BillNo"].ToString().Trim();
+			Billno = row["BillNo"].ToString().Trim();
 			// 业务代码
-			_Bussinessid = row["BussinessId"].ToString().Trim();
+			Bussinessid = row["BussinessId"].ToString().Trim();
 			// 取号时间
-			_Prillbilltime = Convert.ToDateTime(row["PrillBillTime"]);
+			Prillbilltime = Convert.ToDateTime(row["PrillBillTime"]);
 			// 硬呼叫器或软呼叫按下转移键时记录转移到的目的窗口号，用于排队计算用
 			Transferdestwin = row["TransferDestWin"].ToString();
 			// 延后的人数，用于排队计算；按下延后时更新此人数，以后有人办理时也需更新此人数，暂不使用这种策略
-			_Delaynum = Convert.ToInt32(row["DelayNum"]);
+			Delaynum = Convert.ToInt32(row["DelayNum"]);
 			// 延后秒数。记得在软呼叫或硬件时单位为分钟，需要换算后传过来。延后采用这种策略
 			_Delaytime = Convert.ToInt32(row["DelayTime"]);
 			// 呼叫时间
@@ -362,7 +327,7 @@ namespace QM.Client.Entity
 			// 客户等级
 			_Custemclass = Convert.ToInt32(row["CustemClass"]);
 			// 
-			_Description = row["Description"].ToString().Trim();
+			Description = row["Description"].ToString().Trim();
 
             Status = Convert.ToInt32(row["status"]);
 		}

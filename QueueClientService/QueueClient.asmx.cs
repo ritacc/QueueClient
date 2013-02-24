@@ -86,16 +86,19 @@ namespace QM.Client.WebService
             return Instanse().getQueue();
         }
 
+
+
         /// <summary>
         /// 呼叫接口
         /// </summary>
         /// <param name="param"></param>
+        /// <param name="mBillNo"></param>
         /// <param name="value"></param>
         /// <returns></returns>
         [WebMethod]
-        public string getCall(string param, string value)
+        public string getCall(string param, string mBillNo, string value)
         {
-            return Instanse().getCall( param,  value);
+            return Instanse().getCall(param, mBillNo, value);
         }
 
         /// <summary>

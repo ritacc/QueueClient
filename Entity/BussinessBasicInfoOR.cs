@@ -24,6 +24,11 @@ namespace QM.Client.Entity
       /// </summary>
       public string EnglishName { get; set; }
 
+      /// <summary>
+      /// 排除人数
+      /// </summary>
+      public int QueueNumber { get; set; }
+
       public BussinessBasicInfoOR()
       {
 
@@ -34,6 +39,17 @@ namespace QM.Client.Entity
           ID = obj.ID;
           Name = obj.Name;
           EnglishName = obj.EnglishName;
+
+          if (obj.BussQueues != null)
+          {
+              int number = 0;
+              foreach (QueueInfoOR _que in obj.BussQueues)
+              {
+                  if (_que.Status == 0)
+                      number++;
+              }
+              QueueNumber = number;
+          }
       }
     }
 }

@@ -16,7 +16,7 @@ namespace QM.Client.DA.MySql
        /// <returns></returns>
        public List<QueueInfoOR> selectBussinessQueues(string BussinesID)
        {
-           string sql = string.Format("select * from t_queueinfo where BussinessId='{0}' and status<4"
+           string sql = string.Format("select * from t_queueinfo where BussinessId='{0}' and status <4"
                , BussinesID);
 
            DataTable dt = null;
@@ -54,7 +54,7 @@ namespace QM.Client.DA.MySql
            return true;
        }
 
-       public string GetQHInsertSQL(QueueInfoOR queueInfo)
+       private string GetQHInsertSQL(QueueInfoOR queueInfo)
        {
            string sql = @"insert into t_QueueInfo (Id, BankNo, BillNo, BussinessId, PrillBillTime, 
 TransferDestWin, DelayNum, DelayTime, CallTime, ProcessTime, 
@@ -111,6 +111,21 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
        }
         #endregion
 
+        #region 呼叫接口更新数据
+
+       /// <summary>
+       /// 叫号
+       /// </summary>
+       /// <returns></returns>
+       public bool UpdateCall( QueueInfoOR obj)
+       {
+           string sql = string.Format(@"update t_queueinfo  set CallTime=now(),status=1
+where  PrillBillTime > '{0} 00:00:00' and PrillBillTime < '{0} 23:59:59'
+and BillNo='{1}' ", DateTime.Now.ToString("yyyy-MM-dd"),obj.Billno);
+           return dbMySql.ExecuteNoQuery(sql) > 0;
+       }
+
+        #endregion
 
     }
 }

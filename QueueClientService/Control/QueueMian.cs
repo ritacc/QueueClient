@@ -73,6 +73,10 @@ namespace QM.Client.WebService.Control
         }
         #endregion
 
+        /// <summary>
+        /// 获取所有业务队业
+        /// </summary>
+        /// <returns></returns>
         public List<BussinessBasicInfoOR> getQueue()
         {
             List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
@@ -124,6 +128,27 @@ namespace QM.Client.WebService.Control
             return strBillList;
         }
 
+        /// <summary>
+        /// 根据票号，获取取票记录
+        /// </summary>
+        /// <param name="bileNo"></param>
+        /// <returns></returns>
+        public QueueInfoOR GetQueueInfo(string billeNo)
+        {
+            foreach (BussinessQueueOR objQhQue in QhQueues)
+            {
+                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
+                {
+                    if (objQue.Billno == billeNo)
+                    {
+                        return objQue;
+                    }
+                }
+            }
+            return null;
+        }
+
+
         #region 5呼叫接口
         /*
 呼叫下一位	CALL	空串
@@ -137,7 +162,14 @@ namespace QM.Client.WebService.Control
 恢复	RESTART	空串
          */
 
-        public string getCall(string param, string value)
+        /// <summary>
+        /// 呼叫接口
+        /// </summary>
+        /// <param name="param">参数类型</param>
+        /// <param name="BillNo">票号</param>
+        /// <param name="value">值</param>
+        /// <returns></returns>
+        public string getCall(string param,string BillNo, string value)
         {
             string strReturnValue = "";
             switch (param)
@@ -148,8 +180,8 @@ namespace QM.Client.WebService.Control
                 case "RECALL":
                     CallReCall(value);
                     break;
-                case "DELAY":
-                    CallDelay(value);
+                case "DELAY": //延后 增加了一个票号
+                    strReturnValue = CallDelay(value, BillNo);
                     break;
                 case "TRANSFER":
                     CallTransfer(value);
@@ -180,6 +212,7 @@ namespace QM.Client.WebService.Control
         private string CallGetNext(string mWindowNo)
         {
             //据呼叫的窗口号遍历每一个队列，找出延后人数为0的取出作为结果，若不存在，则进行第二次遍历
+            QueueInfoOR mSelectQhObj=null;
             foreach (BussinessQueueOR objQhQue in QhQueues)
             {
                 foreach (QueueInfoOR objQue in objQhQue.BussQueues )
@@ -188,7 +221,7 @@ namespace QM.Client.WebService.Control
                     {
                         //更新呼叫
                         objQue.Status = 1;
-                        return objQue.Billno;
+                        mSelectQhObj = objQue;
                     }
                 }
             }
@@ -204,10 +237,18 @@ namespace QM.Client.WebService.Control
                     if (objQue.Status == 0)
                     {
                         objQue.Status = 1;
-                        return objQue.Billno;
+                        mSelectQhObj = objQue;
                     }
                 }
             }
+            if (mSelectQhObj != null)
+            {
+                //更新数据库状态
+                _QueueDA.UpdateCall(mSelectQhObj);
+                //调查用硬件接口，呼叫
+                return mSelectQhObj.Billno;
+            }
+
             return "Error: 没有获取到排队人员。";
         }
 
@@ -217,7 +258,7 @@ namespace QM.Client.WebService.Control
         /// <param name="mBill">票号</param>
         private void CallReCall(string mBill)
         {
-
+            //不做逻辑更处理，直接呼叫
 
         }
 
@@ -225,9 +266,16 @@ namespace QM.Client.WebService.Control
         /// 延后	DELAY	时长（单位为分钟）
         /// </summary>
         /// <param name="TimeLen">时长</param>
-        private void CallDelay(string TimeLen)
+        private string CallDelay(string TimeLen,string mBillNo)
         {
+            QueueInfoOR objQH = GetQueueInfo(mBillNo);
+            if (objQH == null)
+                return "此票号的记录不存在!";
 
+            objQH.Delaytime = Convert.ToInt32(TimeLen) * 60;
+            objQH.Status = 0;
+
+            return "";
         }
 
         /// <summary>

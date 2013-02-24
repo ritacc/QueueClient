@@ -53,12 +53,12 @@
             this.dataGridView1.Location = new System.Drawing.Point(21, 41);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowTemplate.Height = 23;
-            this.dataGridView1.Size = new System.Drawing.Size(327, 195);
+            this.dataGridView1.Size = new System.Drawing.Size(470, 164);
             this.dataGridView1.TabIndex = 1;
             // 
             // btnCH
             // 
-            this.btnCH.Location = new System.Drawing.Point(248, 260);
+            this.btnCH.Location = new System.Drawing.Point(249, 225);
             this.btnCH.Name = "btnCH";
             this.btnCH.Size = new System.Drawing.Size(75, 23);
             this.btnCH.TabIndex = 2;
@@ -68,14 +68,14 @@
             // 
             // txtBussinessID
             // 
-            this.txtBussinessID.Location = new System.Drawing.Point(21, 260);
+            this.txtBussinessID.Location = new System.Drawing.Point(22, 225);
             this.txtBussinessID.Name = "txtBussinessID";
             this.txtBussinessID.Size = new System.Drawing.Size(212, 21);
             this.txtBussinessID.TabIndex = 3;
             // 
             // btnCall
             // 
-            this.btnCall.Location = new System.Drawing.Point(248, 289);
+            this.btnCall.Location = new System.Drawing.Point(249, 254);
             this.btnCall.Name = "btnCall";
             this.btnCall.Size = new System.Drawing.Size(75, 23);
             this.btnCall.TabIndex = 4;
@@ -85,7 +85,7 @@
             // 
             // txtWindowNo
             // 
-            this.txtWindowNo.Location = new System.Drawing.Point(21, 287);
+            this.txtWindowNo.Location = new System.Drawing.Point(22, 252);
             this.txtWindowNo.Name = "txtWindowNo";
             this.txtWindowNo.Size = new System.Drawing.Size(212, 21);
             this.txtWindowNo.TabIndex = 5;
@@ -94,7 +94,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 358);
+            this.ClientSize = new System.Drawing.Size(503, 506);
             this.Controls.Add(this.txtWindowNo);
             this.Controls.Add(this.btnCall);
             this.Controls.Add(this.txtBussinessID);
