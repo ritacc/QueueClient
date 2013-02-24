@@ -13,7 +13,9 @@ namespace QClient.Core.ViewModel
 
         private static readonly WebViewModel _instance = new WebViewModel();
 
+        private readonly Dictionary<string, PageWinOR> _pageCahches = new Dictionary<string, PageWinOR>();
 
+        private readonly Dictionary<string, QhandyOR[]> _qhandyCaches = new Dictionary<string, QhandyOR[]>();
 
         #endregion
 
@@ -33,12 +35,35 @@ namespace QClient.Core.ViewModel
 
         #region 公共方法
 
-        //public List<object> GetPageWinById()
-        //{
-        //    using (QueueClinetServiceReference.QueueClientSoapClient client = new QueueClientSoapClient())
-        //    {
-        //    }
-        //}
+        public PageWinOR GetPageWinById(string id)
+        {
+            if (_pageCahches.ContainsKey(id))
+            {
+                return _pageCahches[id];
+            }
+
+            using (var client = new QueueClientSoapClient())
+            {
+                var result = client.GetPageWinById(id);
+                _pageCahches.Add(id, result);
+                return result;
+            }
+        }
+
+        public QhandyOR[] GetButtonsByPageWinId(string id)
+        {
+             if (_qhandyCaches.ContainsKey(id))
+            {
+                return _qhandyCaches[id];
+            }
+
+            using (var client = new QueueClientSoapClient())
+            {
+                var result = client.GetButtonsByPageWinId(id);
+                _qhandyCaches.Add(id, result);
+                return result;
+            }
+        }
 
         #endregion
     }

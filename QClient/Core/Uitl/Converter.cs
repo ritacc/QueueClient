@@ -38,17 +38,9 @@ namespace QClinet.Core.Util
         /// <param name="o">要转换的字符串对象</param>
         /// <param name="defaultValue">默认值</param>
         /// <returns>返回转化好的值</returns>
-        public static Brush ToBrush(object o, Brush defaultValue = default(Brush))
+        public static Brush ToBrush(object o)
         {
-            if (null != o)
-            {
-                var result = (Brush)new BrushConverter().ConvertFromString(o.ToString());
-                if (null != result)
-                {
-                    return result;
-                }
-            }
-            return defaultValue;
+            return new SolidColorBrush(ToColor(o));
         }
 
         /// <summary>
@@ -61,11 +53,25 @@ namespace QClinet.Core.Util
         {
             if (null != o)
             {
-                var result = (Color)ColorConverter.ConvertFromString(o.ToString());
-                if (null != result)
+                var str = o.ToString();
+
+                switch (str)
                 {
-                    return result;
+                    case "0":
+                        return Colors.Red;
+                    case "1":
+                        return Colors.Blue;
+                    default:
+                        return Colors.Black;
                 }
+                /*
+                if (Regex.IsMatch(str, "#[A-F0-9]{8}"))
+                {
+                    return Color.FromArgb(Convert.ToByte(str.Substring(1, 2), 16),
+                        Convert.ToByte(str.Substring(3, 2), 16),
+                        Convert.ToByte(str.Substring(5, 2), 16),
+                        Convert.ToByte(str.Substring(7, 2), 16));
+                }*/
             }
             return defaultValue;
         }

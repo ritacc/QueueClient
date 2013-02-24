@@ -105,6 +105,801 @@ namespace QClient.QueueClinetServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="PageWinOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class PageWinOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        private int WidthField;
+        
+        private int HeightField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrgbhField;
+        
+        private bool ISSelectField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int Width {
+            get {
+                return this.WidthField;
+            }
+            set {
+                if ((this.WidthField.Equals(value) != true)) {
+                    this.WidthField = value;
+                    this.RaisePropertyChanged("Width");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public int Height {
+            get {
+                return this.HeightField;
+            }
+            set {
+                if ((this.HeightField.Equals(value) != true)) {
+                    this.HeightField = value;
+                    this.RaisePropertyChanged("Height");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Orgbh {
+            get {
+                return this.OrgbhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrgbhField, value) != true)) {
+                    this.OrgbhField = value;
+                    this.RaisePropertyChanged("Orgbh");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public bool ISSelect {
+            get {
+                return this.ISSelectField;
+            }
+            set {
+                if ((this.ISSelectField.Equals(value) != true)) {
+                    this.ISSelectField = value;
+                    this.RaisePropertyChanged("ISSelect");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="QhandyOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class QhandyOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrgbhField;
+        
+        private int LabelIdxField;
+        
+        private bool LabelVisibleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelCaptionField;
+        
+        private int LabelFontcolorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelFontnameField;
+        
+        private bool LabelFontunderlineField;
+        
+        private bool LabelFontitalicField;
+        
+        private bool LabelFontboldField;
+        
+        private int LabelFontsizeField;
+        
+        private int LabelTopField;
+        
+        private int LabelLeftField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelJobnoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelJobnameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelPrintstrField;
+        
+        private bool LabelShadeField;
+        
+        private bool TagVisibleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TagCaptionField;
+        
+        private int TagFontcolorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TagFontnameField;
+        
+        private bool TagFontunderlineField;
+        
+        private bool TagFontitalicField;
+        
+        private bool TagFontboldField;
+        
+        private int TagFontsizeField;
+        
+        private int TagTopoffsetField;
+        
+        private int TagLeftoffsetField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LabelTypeField;
+        
+        private bool EnlabelVisibleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EnlabelCaptionField;
+        
+        private int EnlabelFontcolorField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EnlabelFontnameField;
+        
+        private bool EnlabelFontitalicField;
+        
+        private bool EnlabelFontunderlineField;
+        
+        private bool EnlabelFontboldField;
+        
+        private int EnlabelFontsizeField;
+        
+        private int ScreentypeField;
+        
+        private int EnlabelLeftoffsetField;
+        
+        private int EnlabelTopoffsetField;
+        
+        private bool ButtomTypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WindowonidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WindowidField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Orgbh {
+            get {
+                return this.OrgbhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrgbhField, value) != true)) {
+                    this.OrgbhField = value;
+                    this.RaisePropertyChanged("Orgbh");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int LabelIdx {
+            get {
+                return this.LabelIdxField;
+            }
+            set {
+                if ((this.LabelIdxField.Equals(value) != true)) {
+                    this.LabelIdxField = value;
+                    this.RaisePropertyChanged("LabelIdx");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public bool LabelVisible {
+            get {
+                return this.LabelVisibleField;
+            }
+            set {
+                if ((this.LabelVisibleField.Equals(value) != true)) {
+                    this.LabelVisibleField = value;
+                    this.RaisePropertyChanged("LabelVisible");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string LabelCaption {
+            get {
+                return this.LabelCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelCaptionField, value) != true)) {
+                    this.LabelCaptionField = value;
+                    this.RaisePropertyChanged("LabelCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public int LabelFontcolor {
+            get {
+                return this.LabelFontcolorField;
+            }
+            set {
+                if ((this.LabelFontcolorField.Equals(value) != true)) {
+                    this.LabelFontcolorField = value;
+                    this.RaisePropertyChanged("LabelFontcolor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string LabelFontname {
+            get {
+                return this.LabelFontnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelFontnameField, value) != true)) {
+                    this.LabelFontnameField = value;
+                    this.RaisePropertyChanged("LabelFontname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public bool LabelFontunderline {
+            get {
+                return this.LabelFontunderlineField;
+            }
+            set {
+                if ((this.LabelFontunderlineField.Equals(value) != true)) {
+                    this.LabelFontunderlineField = value;
+                    this.RaisePropertyChanged("LabelFontunderline");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        public bool LabelFontitalic {
+            get {
+                return this.LabelFontitalicField;
+            }
+            set {
+                if ((this.LabelFontitalicField.Equals(value) != true)) {
+                    this.LabelFontitalicField = value;
+                    this.RaisePropertyChanged("LabelFontitalic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public bool LabelFontbold {
+            get {
+                return this.LabelFontboldField;
+            }
+            set {
+                if ((this.LabelFontboldField.Equals(value) != true)) {
+                    this.LabelFontboldField = value;
+                    this.RaisePropertyChanged("LabelFontbold");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public int LabelFontsize {
+            get {
+                return this.LabelFontsizeField;
+            }
+            set {
+                if ((this.LabelFontsizeField.Equals(value) != true)) {
+                    this.LabelFontsizeField = value;
+                    this.RaisePropertyChanged("LabelFontsize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        public int LabelTop {
+            get {
+                return this.LabelTopField;
+            }
+            set {
+                if ((this.LabelTopField.Equals(value) != true)) {
+                    this.LabelTopField = value;
+                    this.RaisePropertyChanged("LabelTop");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
+        public int LabelLeft {
+            get {
+                return this.LabelLeftField;
+            }
+            set {
+                if ((this.LabelLeftField.Equals(value) != true)) {
+                    this.LabelLeftField = value;
+                    this.RaisePropertyChanged("LabelLeft");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        public string LabelJobno {
+            get {
+                return this.LabelJobnoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelJobnoField, value) != true)) {
+                    this.LabelJobnoField = value;
+                    this.RaisePropertyChanged("LabelJobno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string LabelJobname {
+            get {
+                return this.LabelJobnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelJobnameField, value) != true)) {
+                    this.LabelJobnameField = value;
+                    this.RaisePropertyChanged("LabelJobname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public string LabelPrintstr {
+            get {
+                return this.LabelPrintstrField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelPrintstrField, value) != true)) {
+                    this.LabelPrintstrField = value;
+                    this.RaisePropertyChanged("LabelPrintstr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=16)]
+        public bool LabelShade {
+            get {
+                return this.LabelShadeField;
+            }
+            set {
+                if ((this.LabelShadeField.Equals(value) != true)) {
+                    this.LabelShadeField = value;
+                    this.RaisePropertyChanged("LabelShade");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=17)]
+        public bool TagVisible {
+            get {
+                return this.TagVisibleField;
+            }
+            set {
+                if ((this.TagVisibleField.Equals(value) != true)) {
+                    this.TagVisibleField = value;
+                    this.RaisePropertyChanged("TagVisible");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=18)]
+        public string TagCaption {
+            get {
+                return this.TagCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TagCaptionField, value) != true)) {
+                    this.TagCaptionField = value;
+                    this.RaisePropertyChanged("TagCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=19)]
+        public int TagFontcolor {
+            get {
+                return this.TagFontcolorField;
+            }
+            set {
+                if ((this.TagFontcolorField.Equals(value) != true)) {
+                    this.TagFontcolorField = value;
+                    this.RaisePropertyChanged("TagFontcolor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=20)]
+        public string TagFontname {
+            get {
+                return this.TagFontnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TagFontnameField, value) != true)) {
+                    this.TagFontnameField = value;
+                    this.RaisePropertyChanged("TagFontname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=21)]
+        public bool TagFontunderline {
+            get {
+                return this.TagFontunderlineField;
+            }
+            set {
+                if ((this.TagFontunderlineField.Equals(value) != true)) {
+                    this.TagFontunderlineField = value;
+                    this.RaisePropertyChanged("TagFontunderline");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=22)]
+        public bool TagFontitalic {
+            get {
+                return this.TagFontitalicField;
+            }
+            set {
+                if ((this.TagFontitalicField.Equals(value) != true)) {
+                    this.TagFontitalicField = value;
+                    this.RaisePropertyChanged("TagFontitalic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
+        public bool TagFontbold {
+            get {
+                return this.TagFontboldField;
+            }
+            set {
+                if ((this.TagFontboldField.Equals(value) != true)) {
+                    this.TagFontboldField = value;
+                    this.RaisePropertyChanged("TagFontbold");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
+        public int TagFontsize {
+            get {
+                return this.TagFontsizeField;
+            }
+            set {
+                if ((this.TagFontsizeField.Equals(value) != true)) {
+                    this.TagFontsizeField = value;
+                    this.RaisePropertyChanged("TagFontsize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=25)]
+        public int TagTopoffset {
+            get {
+                return this.TagTopoffsetField;
+            }
+            set {
+                if ((this.TagTopoffsetField.Equals(value) != true)) {
+                    this.TagTopoffsetField = value;
+                    this.RaisePropertyChanged("TagTopoffset");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=26)]
+        public int TagLeftoffset {
+            get {
+                return this.TagLeftoffsetField;
+            }
+            set {
+                if ((this.TagLeftoffsetField.Equals(value) != true)) {
+                    this.TagLeftoffsetField = value;
+                    this.RaisePropertyChanged("TagLeftoffset");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=27)]
+        public string LabelType {
+            get {
+                return this.LabelTypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LabelTypeField, value) != true)) {
+                    this.LabelTypeField = value;
+                    this.RaisePropertyChanged("LabelType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=28)]
+        public bool EnlabelVisible {
+            get {
+                return this.EnlabelVisibleField;
+            }
+            set {
+                if ((this.EnlabelVisibleField.Equals(value) != true)) {
+                    this.EnlabelVisibleField = value;
+                    this.RaisePropertyChanged("EnlabelVisible");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=29)]
+        public string EnlabelCaption {
+            get {
+                return this.EnlabelCaptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EnlabelCaptionField, value) != true)) {
+                    this.EnlabelCaptionField = value;
+                    this.RaisePropertyChanged("EnlabelCaption");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=30)]
+        public int EnlabelFontcolor {
+            get {
+                return this.EnlabelFontcolorField;
+            }
+            set {
+                if ((this.EnlabelFontcolorField.Equals(value) != true)) {
+                    this.EnlabelFontcolorField = value;
+                    this.RaisePropertyChanged("EnlabelFontcolor");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=31)]
+        public string EnlabelFontname {
+            get {
+                return this.EnlabelFontnameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EnlabelFontnameField, value) != true)) {
+                    this.EnlabelFontnameField = value;
+                    this.RaisePropertyChanged("EnlabelFontname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=32)]
+        public bool EnlabelFontitalic {
+            get {
+                return this.EnlabelFontitalicField;
+            }
+            set {
+                if ((this.EnlabelFontitalicField.Equals(value) != true)) {
+                    this.EnlabelFontitalicField = value;
+                    this.RaisePropertyChanged("EnlabelFontitalic");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=33)]
+        public bool EnlabelFontunderline {
+            get {
+                return this.EnlabelFontunderlineField;
+            }
+            set {
+                if ((this.EnlabelFontunderlineField.Equals(value) != true)) {
+                    this.EnlabelFontunderlineField = value;
+                    this.RaisePropertyChanged("EnlabelFontunderline");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=34)]
+        public bool EnlabelFontbold {
+            get {
+                return this.EnlabelFontboldField;
+            }
+            set {
+                if ((this.EnlabelFontboldField.Equals(value) != true)) {
+                    this.EnlabelFontboldField = value;
+                    this.RaisePropertyChanged("EnlabelFontbold");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=35)]
+        public int EnlabelFontsize {
+            get {
+                return this.EnlabelFontsizeField;
+            }
+            set {
+                if ((this.EnlabelFontsizeField.Equals(value) != true)) {
+                    this.EnlabelFontsizeField = value;
+                    this.RaisePropertyChanged("EnlabelFontsize");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=36)]
+        public int Screentype {
+            get {
+                return this.ScreentypeField;
+            }
+            set {
+                if ((this.ScreentypeField.Equals(value) != true)) {
+                    this.ScreentypeField = value;
+                    this.RaisePropertyChanged("Screentype");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=37)]
+        public int EnlabelLeftoffset {
+            get {
+                return this.EnlabelLeftoffsetField;
+            }
+            set {
+                if ((this.EnlabelLeftoffsetField.Equals(value) != true)) {
+                    this.EnlabelLeftoffsetField = value;
+                    this.RaisePropertyChanged("EnlabelLeftoffset");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=38)]
+        public int EnlabelTopoffset {
+            get {
+                return this.EnlabelTopoffsetField;
+            }
+            set {
+                if ((this.EnlabelTopoffsetField.Equals(value) != true)) {
+                    this.EnlabelTopoffsetField = value;
+                    this.RaisePropertyChanged("EnlabelTopoffset");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=39)]
+        public bool ButtomType {
+            get {
+                return this.ButtomTypeField;
+            }
+            set {
+                if ((this.ButtomTypeField.Equals(value) != true)) {
+                    this.ButtomTypeField = value;
+                    this.RaisePropertyChanged("ButtomType");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=40)]
+        public string Windowonid {
+            get {
+                return this.WindowonidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WindowonidField, value) != true)) {
+                    this.WindowonidField = value;
+                    this.RaisePropertyChanged("Windowonid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=41)]
+        public string Windowid {
+            get {
+                return this.WindowidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WindowidField, value) != true)) {
+                    this.WindowidField = value;
+                    this.RaisePropertyChanged("Windowid");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.ritacc.com/", ConfigurationName="QueueClinetServiceReference.QueueClientSoap")]
     public interface QueueClientSoap {
@@ -128,6 +923,14 @@ namespace QClient.QueueClinetServiceReference {
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 billNo 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getCustomerSellInfo", ReplyAction="*")]
         QClient.QueueClinetServiceReference.getCustomerSellInfoResponse getCustomerSellInfo(QClient.QueueClinetServiceReference.getCustomerSellInfoRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 id 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetPageWinById", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetPageWinByIdResponse GetPageWinById(QClient.QueueClinetServiceReference.GetPageWinByIdRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 windowId 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetButtonsByPageWinId", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponse GetButtonsByPageWinId(QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -461,6 +1264,142 @@ namespace QClient.QueueClinetServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetPageWinByIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetPageWinById", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetPageWinByIdRequestBody Body;
+        
+        public GetPageWinByIdRequest() {
+        }
+        
+        public GetPageWinByIdRequest(QClient.QueueClinetServiceReference.GetPageWinByIdRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetPageWinByIdRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string id;
+        
+        public GetPageWinByIdRequestBody() {
+        }
+        
+        public GetPageWinByIdRequestBody(string id) {
+            this.id = id;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetPageWinByIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetPageWinByIdResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetPageWinByIdResponseBody Body;
+        
+        public GetPageWinByIdResponse() {
+        }
+        
+        public GetPageWinByIdResponse(QClient.QueueClinetServiceReference.GetPageWinByIdResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetPageWinByIdResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.PageWinOR GetPageWinByIdResult;
+        
+        public GetPageWinByIdResponseBody() {
+        }
+        
+        public GetPageWinByIdResponseBody(QClient.QueueClinetServiceReference.PageWinOR GetPageWinByIdResult) {
+            this.GetPageWinByIdResult = GetPageWinByIdResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetButtonsByPageWinIdRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetButtonsByPageWinId", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequestBody Body;
+        
+        public GetButtonsByPageWinIdRequest() {
+        }
+        
+        public GetButtonsByPageWinIdRequest(QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetButtonsByPageWinIdRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string windowId;
+        
+        public GetButtonsByPageWinIdRequestBody() {
+        }
+        
+        public GetButtonsByPageWinIdRequestBody(string windowId) {
+            this.windowId = windowId;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetButtonsByPageWinIdResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetButtonsByPageWinIdResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponseBody Body;
+        
+        public GetButtonsByPageWinIdResponse() {
+        }
+        
+        public GetButtonsByPageWinIdResponse(QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetButtonsByPageWinIdResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.QhandyOR[] GetButtonsByPageWinIdResult;
+        
+        public GetButtonsByPageWinIdResponseBody() {
+        }
+        
+        public GetButtonsByPageWinIdResponseBody(QClient.QueueClinetServiceReference.QhandyOR[] GetButtonsByPageWinIdResult) {
+            this.GetButtonsByPageWinIdResult = GetButtonsByPageWinIdResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface QueueClientSoapChannel : QClient.QueueClinetServiceReference.QueueClientSoap, System.ServiceModel.IClientChannel {
     }
@@ -551,6 +1490,32 @@ namespace QClient.QueueClinetServiceReference {
             inValue.Body = new QClient.QueueClinetServiceReference.getCustomerSellInfoRequestBody();
             inValue.Body.billNo = billNo;
             QClient.QueueClinetServiceReference.getCustomerSellInfoResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).getCustomerSellInfo(inValue);
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetPageWinByIdResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetPageWinById(QClient.QueueClinetServiceReference.GetPageWinByIdRequest request) {
+            return base.Channel.GetPageWinById(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.PageWinOR GetPageWinById(string id) {
+            QClient.QueueClinetServiceReference.GetPageWinByIdRequest inValue = new QClient.QueueClinetServiceReference.GetPageWinByIdRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetPageWinByIdRequestBody();
+            inValue.Body.id = id;
+            QClient.QueueClinetServiceReference.GetPageWinByIdResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetPageWinById(inValue);
+            return retVal.Body.GetPageWinByIdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetButtonsByPageWinId(QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequest request) {
+            return base.Channel.GetButtonsByPageWinId(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.QhandyOR[] GetButtonsByPageWinId(string windowId) {
+            QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequest inValue = new QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequestBody();
+            inValue.Body.windowId = windowId;
+            QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetButtonsByPageWinId(inValue);
+            return retVal.Body.GetButtonsByPageWinIdResult;
         }
     }
 }

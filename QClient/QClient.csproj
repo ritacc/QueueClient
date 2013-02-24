@@ -57,7 +57,16 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="ButtomAdmin.cs" />
+    <Compile Include="ButtomControl.cs" />
+    <Compile Include="Control\BottomKJ.cs" />
+    <Compile Include="Control\ControlBase.cs" />
+    <Compile Include="Control\ENLableControl.cs" />
+    <Compile Include="Control\TagControl.cs" />
     <Compile Include="Core\ViewModel\WebViewModel.cs" />
+    <Compile Include="PopupWindow.xaml.cs">
+      <DependentUpon>PopupWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Service References\QueueClinetServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -84,6 +93,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PopupWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -110,6 +123,12 @@
     </None>
     <AppDesigner Include="Properties\" />
     <None Include="Service References\QueueClinetServiceReference\QClient.QueueClinetServiceReference.BussinessBasicInfoOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\QueueClinetServiceReference\QClient.QueueClinetServiceReference.PageWinOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\QueueClinetServiceReference\QClient.QueueClinetServiceReference.QhandyOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\QueueClinetServiceReference\QueueClient.wsdl" />

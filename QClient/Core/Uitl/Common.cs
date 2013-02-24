@@ -61,5 +61,116 @@ namespace QClient.Core.Util
         //{
         //    return new WindowsPrincipal(WindowsIdentity.GetCurrent()).IsInRole(WindowsBuiltInRole.Administrator);
         //}
+
+        #region  字体处理
+
+        /// <summary>
+        /// 中文转英文
+        /// </summary>
+        /// <returns></returns>
+        public static string GetFontEn(string str)
+        {
+            switch (str.Trim())
+            {
+                case "隶书":
+                    str = "LiSu";
+                    break;
+                case "幼圆":
+                    str = "YouYuan";
+                    break;
+                case "舒体":
+                    str = "FZShuTi";
+                    break;
+                case "姚体":
+                    str = "FZYaoti";
+                    break;
+                case "楷体":
+                    str = "STKaiti";
+                    break;
+                case "宋体":
+                    str = "STSong";
+                    break;
+                case "中宋":
+                    str = "STZhongsong";
+                    break;
+                case "仿宋":
+                    str = "STFangsong";
+                    break;
+                case "彩云":
+                    str = "STCaiyun";
+                    break;
+                case "琥珀":
+                    str = "STHupo";
+                    break;
+                case "行楷":
+                    str = "STXingkai";
+                    break;
+                case "新魏":
+                    str = "STXinwei";
+                    break;
+                case "细黑":
+                    str = "STXihei";
+                    break;
+                default:
+                    str = "STSong";
+                    break;
+            }
+            return str;
+        }
+        /// <summary>
+        /// 英文转中文
+        /// </summary>
+        /// <param name="str"></param>
+        /// <returns></returns>
+        public static string GetFontCN(string str)
+        {
+            switch (str.Trim())
+            {
+                case "LiSu":
+                    str = "隶书";
+                    break;
+                case "YouYuan":
+                    str = "幼圆";
+                    break;
+                case "FZShuTi":
+                    str = "舒体";
+                    break;
+                case "FZYaoti":
+                    str = "姚体";
+                    break;
+                case "STKaiti":
+                    str = "楷体";
+                    break;
+                case "STSong":
+                    str = "宋体";
+                    break;
+                case "STZhongsong":
+                    str = "中宋";
+                    break;
+                case "STFangsong":
+                    str = "仿宋";
+                    break;
+                case "STCaiyun":
+                    str = "彩云";
+                    break;
+                case "STHupo":
+                    str = "琥珀";
+                    break;
+                case "STXingkai":
+                    str = "行楷";
+                    break;
+                case "STXinwei":
+                    str = "新魏";
+                    break;
+                case "STXihei":
+                    str = "细黑";
+                    break;
+                default:
+                    str = "宋体";
+                    break;
+            }
+            return str;
+        }
+        #endregion
     }
 }
