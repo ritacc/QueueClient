@@ -405,6 +405,7 @@ namespace QM.Client.WebService.Control
            int nowNumber = QueNumber + 1;
            return nowNumber.ToString().PadLeft(4, '0');
         }
+
         #endregion
 
     }
