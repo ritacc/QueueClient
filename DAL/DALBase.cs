@@ -10,6 +10,6 @@ namespace QM.Client.DA
     {
         public MySqlHelper dbMySql = new MySqlHelper();
 
-        public SqlHelper dbSql = new SqlHelper("Queue");
+        public SqlHelper dbSql = new SqlHelper("MySql");
     }
 }

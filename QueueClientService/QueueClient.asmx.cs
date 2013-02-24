@@ -20,6 +20,7 @@ namespace QM.Client.WebService
     {
         public static QueueMian _QueueMain { set; get; }
         public object lockObj = new object();
+        private readonly QClientDA _qClientDA = new QClientDA();
         private QueueMian Instanse()
         {
             if (_QueueMain == null)
@@ -155,5 +156,16 @@ namespace QM.Client.WebService
 
         }
 
+        [WebMethod]
+        public PageWinOR GetPageWinById(string id)
+        {
+            return _qClientDA.GetPageWinId(id);
+        }
+
+        [WebMethod]
+        public List<QhandyOR> GetButtonsByPageWinId(string windowId)
+        {
+            return _qClientDA.GetButtonsByPageWinId(windowId);
+        }
     }
 }

@@ -43,6 +43,7 @@
     <Compile Include="MySql\BussinessMySqlDA.cs" />
     <Compile Include="MySql\EmployeeMySqlDA.cs" />
     <Compile Include="MySql\QhandyMySql.cs" />
+    <Compile Include="MySql\QClientDA.cs" />
     <Compile Include="MySql\QueueInfoDA.cs" />
     <Compile Include="MySql\WindowLoginInfoDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

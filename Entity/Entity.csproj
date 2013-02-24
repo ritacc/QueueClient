@@ -45,7 +45,9 @@
     <Compile Include="BussinessOR.cs" />
     <Compile Include="BussinessQueueOR.cs" />
     <Compile Include="EmployeeOR.cs" />
+    <Compile Include="PageWinOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="QhandyOR.cs" />
     <Compile Include="QueueInfoOR.cs" />
     <Compile Include="WindowLoginInfoOR.cs" />
   </ItemGroup>

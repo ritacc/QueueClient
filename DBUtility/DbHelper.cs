@@ -13,15 +13,18 @@ namespace DBUtility
     /// </summary>
     public abstract class DbHelper : IDisposable
     {
-        #region 构造函数
+        #region 构造函数
+
 
         /// <summary>
-        /// 数据库名称
+        /// 数据库名称
+
         /// </summary>
         private string _name = string.Empty;
 
         /// <summary>
-        /// 构造函数
+        /// 构造函数
+
         /// </summary>
         public DbHelper()
         {
@@ -29,7 +32,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 构造函数
+        /// 构造函数
+
         /// </summary>
         /// <param name="name">数据库名称</param>
         public DbHelper(string name)
@@ -39,7 +43,8 @@ namespace DBUtility
 
         #endregion
 
-        #region 数据库操作
+        #region 数据库操作
+
 
         /**/
         /// <summary>
@@ -205,7 +210,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行查询 SQL 脚本返回第一条记录的第一个字段
+        /// 执行查询 SQL 脚本返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText">查询SQL 脚本</param>
         /// <returns>DataTable</returns>
@@ -215,7 +221,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行查询 存储过程 返回第一条记录的第一个字段
+        /// 执行查询 存储过程 返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText">查询SQL 脚本</param>
         /// <returns>DataTable</returns>
@@ -226,7 +233,8 @@ namespace DBUtility
 
 
         /// <summary>
-        /// 执行查询操作 返回第一条记录的第一个字段
+        /// 执行查询操作 返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="commandType"></param>
@@ -380,7 +388,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行查询 SQL 脚本返回第一条记录的第一个字段
+        /// 执行查询 SQL 脚本返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText">存储过程名称</param>
         /// <param name="arg0">参数</param>
@@ -391,7 +400,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        ///  执行存储过程 返回第一条记录的第一个字段
+        ///  执行存储过程 返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="arg0"></param>
@@ -403,7 +413,8 @@ namespace DBUtility
 
         
         /// <summary>
-        /// 执行查询 脚本返回第一条记录的第一个字段
+        /// 执行查询 脚本返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="arg0"></param>
@@ -558,7 +569,8 @@ namespace DBUtility
        
        
         /// <summary>
-        /// 执行查询 SQL 脚本 返回第一条记录的第一个字段
+        /// 执行查询 SQL 脚本 返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="args"></param>
@@ -570,7 +582,8 @@ namespace DBUtility
 
         
         /// <summary>
-        /// 执行查询 存储过程返回第一条记录的第一个字段
+        /// 执行查询 存储过程返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="args"></param>
@@ -583,7 +596,8 @@ namespace DBUtility
         
 
         /// <summary>
-        /// 执行查询  返回第一条记录的第一个字段
+        /// 执行查询  返回第一条记录的第一个字段
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="args"></param>
@@ -614,7 +628,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行SQL 脚本返回受影响的行数，错误返回-1。
+        /// 执行SQL 脚本返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">SQL 脚本</param>
         /// <returns>受影响的行数</returns>
@@ -624,7 +639,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行 存储过程 返回受影响的行数，错误返回-1。
+        /// 执行 存储过程 返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">存储过程</param>
         /// <returns>受影响的行数</returns>
@@ -634,7 +650,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行数据库操作 返回受影响的行数，错误返回-1。
+        /// 执行数据库操作 返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText"></param>
         /// <param name="commandType"></param>
@@ -667,7 +684,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行SQL 脚本返回受影响的行数，错误返回-1。
+        /// 执行SQL 脚本返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">SQL 脚本</param>
         /// <param name="arg0">参数</param>
@@ -678,7 +696,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行 存储过程 返回受影响的行数，错误返回-1。
+        /// 执行 存储过程 返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">存储过程</param>
         /// <param name="arg0">参数</param>
@@ -689,7 +708,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行数据库操作返回受影响的行数，错误返回-1。
+        /// 执行数据库操作返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">SQL</param>
         /// <param name="arg0">参数</param>
@@ -725,7 +745,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行SQL 脚本返回受影响的行数，错误返回-1。
+        /// 执行SQL 脚本返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">SQL 脚本</param>
         /// <param name="args">参数</param>
@@ -736,7 +757,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行 存储过程 返回受影响的行数，错误返回-1。
+        /// 执行 存储过程 返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">存储过程</param>
         /// <param name="args">参数</param>
@@ -747,7 +769,8 @@ namespace DBUtility
         }
 
         /// <summary>
-        /// 执行数据库操作 返回受影响的行数，错误返回-1。
+        /// 执行数据库操作 返回受影响的行数，错误返回-1。
+
         /// </summary>
         /// <param name="strCmdText">SQL</param>
         /// <param name="args">参数</param>
@@ -923,7 +946,8 @@ namespace DBUtility
             Dispose(true);
             //.NET Framework 类库
             // GC..::.SuppressFinalize 方法
-            //请求系统不要调用指定对象的终结器。
+            //请求系统不要调用指定对象的终结器。
+
             GC.SuppressFinalize(this);
         }
 
