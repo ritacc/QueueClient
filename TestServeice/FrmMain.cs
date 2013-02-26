@@ -52,5 +52,12 @@ namespace TestServeice
            MessageBox.Show(value);
 
         }
+
+        private void btnWelcome_Click(object sender, EventArgs e)
+        {
+            QueueClient.QueueClientSoapClient v = Init();
+            string value = v.getCall("WELCOME", txtBill.Text, "");
+            MessageBox.Show(value);
+        }
     }
 }

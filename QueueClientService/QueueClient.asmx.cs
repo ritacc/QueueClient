@@ -35,7 +35,40 @@ namespace QM.Client.WebService
             }
             return _QueueMain;
         }
+
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="password"></param>
+        /// <param name="windowid"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public int getLogin(string userid, string password, string windowid)
+        {
+            EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployee(userid, password);
+            if (_empOR == null)
+            {
+
+            }
+            WindowLoginInfoOR _Login = new WindowLoginInfoOR();
+            //_Login.EmployNo= _empOR.
+            return 0;
+        }
+
         
+        /// <summary>
+        /// 结束服务
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="windowid"></param>
+        /// <returns></returns>
+        public int endService(string userid, string windowid)
+        {
+
+
+            return 0;
+        }
 
         /// <summary>
         /// 业务队列取号

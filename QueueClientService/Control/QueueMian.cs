@@ -28,6 +28,11 @@ namespace QM.Client.WebService.Control
         public List<BussinessQueueOR> QhQueues { get; set; }
 
         /// <summary>
+        /// 已登录窗口的用户
+        /// </summary>
+        public List<WindowLoginInfoOR> LoginWindows { get; set; }
+
+        /// <summary>
         /// 网点机构号
         /// </summary>
         public string BankNo { get; set; }
@@ -37,7 +42,7 @@ namespace QM.Client.WebService.Control
  
         BussinessMySqlDA _busDA = new BussinessMySqlDA();//业务DA
         QueueInfoDA _QueueDA=new QueueInfoDA();//取号DA
-
+        
         #region 初使化
         /// <summary>
         /// 初使化、
@@ -73,20 +78,13 @@ namespace QM.Client.WebService.Control
         }
         #endregion
 
-        /// <summary>
-        /// 获取所有业务队业
-        /// </summary>
-        /// <returns></returns>
-        public List<BussinessBasicInfoOR> getQueue()
+        public int getLogin(string userid, string password, string windowid)
         {
-            List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
-            foreach (BussinessQueueOR obj in QhQueues)
-            {
-                BussinessBasicInfoOR _mBasciObj = new BussinessBasicInfoOR(obj);
-                listQueue.Add(_mBasciObj);
-            }
-            return listQueue;
+            //t_Employee
+
+            return 0;
         }
+       
 
         #region 公用函数
         /// <summary>
@@ -104,7 +102,50 @@ namespace QM.Client.WebService.Control
             }
             return null;
         }
+
+        /// <summary>
+        /// 根据票号，获取取票记录
+        /// </summary>
+        /// <param name="bileNo"></param>
+        /// <returns></returns>
+        private QueueInfoOR GetQueueInfo(string billeNo)
+        {
+            foreach (BussinessQueueOR objQhQue in QhQueues)
+            {
+                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
+                {
+                    if (objQue.Billno == billeNo)
+                    {
+                        return objQue;
+                    }
+                }
+            }
+            return null;
+        }
+
+        private int GetTimeLen(DateTime Start, DateTime EndTime)
+        {
+            int TimeLen = 0;
+            TimeSpan t = EndTime - Start;
+            TimeLen = (t.Hours * 60 * 60) + t.Minutes * 60 + t.Milliseconds;
+            return TimeLen;
+        }
         #endregion
+
+        /// <summary>
+        /// 获取所有业务队业
+        /// </summary>
+        /// <returns></returns>
+        public List<BussinessBasicInfoOR> getQueue()
+        {
+            List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
+            foreach (BussinessQueueOR obj in QhQueues)
+            {
+                BussinessBasicInfoOR _mBasciObj = new BussinessBasicInfoOR(obj);
+                listQueue.Add(_mBasciObj);
+            }
+            return listQueue;
+        }
 
         /// <summary>
         /// 4、	获取队列详细信息
@@ -122,31 +163,12 @@ namespace QM.Client.WebService.Control
             string strBillList = string.Empty;
             foreach (QueueInfoOR obj in _CurentBuss.BussQueues)
             {
-
                 strBillList += string.Format("{0};", obj.Billno);
             }
             return strBillList;
         }
 
-        /// <summary>
-        /// 根据票号，获取取票记录
-        /// </summary>
-        /// <param name="bileNo"></param>
-        /// <returns></returns>
-        public QueueInfoOR GetQueueInfo(string billeNo)
-        {
-            foreach (BussinessQueueOR objQhQue in QhQueues)
-            {
-                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
-                {
-                    if (objQue.Billno == billeNo)
-                    {
-                        return objQue;
-                    }
-                }
-            }
-            return null;
-        }
+       
 
 
         #region 5呼叫接口
@@ -190,10 +212,10 @@ namespace QM.Client.WebService.Control
                     CallSpecall(value);
                     break;
                 case "WELCOME":
-                    CallWelcome();
+                    strReturnValue = CallWelcome(BillNo);
                     break;
                 case "JUDGE":
-                    CallJudge();
+                    strReturnValue = CallJudge(BillNo);
                     break;
                 case "PAUSE":
                     CallPause();
@@ -220,7 +242,7 @@ namespace QM.Client.WebService.Control
                     if (objQue.Windowno == mWindowNo  && objQue.Delaynum==0 && objQue.Status==0)
                     {
                         //更新呼叫
-                        objQue.Status = 1;
+                        //objQue.Status = 1;
                         mSelectQhObj = objQue;
                     }
                 }
@@ -236,7 +258,7 @@ namespace QM.Client.WebService.Control
                     }
                     if (objQue.Status == 0)
                     {
-                        objQue.Status = 1;
+                        //objQue.Status = 1;
                         mSelectQhObj = objQue;
                     }
                 }
@@ -244,6 +266,10 @@ namespace QM.Client.WebService.Control
             if (mSelectQhObj != null)
             {
                 //更新数据库状态
+                
+                mSelectQhObj.Status = 1;
+                mSelectQhObj.Waitinterval = GetTimeLen(mSelectQhObj.Prillbilltime
+                    , DateTime.Now);
                 _QueueDA.UpdateCall(mSelectQhObj);
                 //调查用硬件接口，呼叫
                 return mSelectQhObj.Billno;
@@ -274,7 +300,6 @@ namespace QM.Client.WebService.Control
 
             objQH.Delaytime = Convert.ToInt32(TimeLen) * 60;
             objQH.Status = 0;
-
             return "";
         }
 
@@ -301,17 +326,32 @@ namespace QM.Client.WebService.Control
         /// <summary>
         /// 欢迎光临	WELCOME	空串
         /// </summary>
-        private void CallWelcome()
+        private string CallWelcome(string mBillNo)
         {
+            QueueInfoOR objQH = GetQueueInfo(mBillNo);
+            if (objQH == null)
+                return "此票号的记录不存在!";
 
+            objQH.Status = 2;
+            objQH.Processtime = DateTime.Now;
+            _QueueDA.UpdateCall(objQH);
+            return "";
         }
 
         /// <summary>
         /// 请评价	JUDGE	空串
         /// </summary>
-        private void CallJudge()
+        private string CallJudge(string mBillNo)
         {
+            QueueInfoOR objQH = GetQueueInfo(mBillNo);
+            if (objQH == null)
+                return "此票号的记录不存在!";
 
+            objQH.Status = 3;
+            objQH.Finishtime = DateTime.Now;
+            objQH.Processinterval = GetTimeLen(objQH.Processtime, objQH.Finishtime);
+            _QueueDA.UpdateCallJudge(objQH);
+            return "";
         }
 
         /// <summary>

@@ -39,9 +39,13 @@
   <ItemGroup>
     <Compile Include="DALBase.cs" />
     <Compile Include="MSSql\BussinessDA.cs" />
-    <Compile Include="MySql\BussinessDA.cs" />
+    <Compile Include="MSSql\QhandyMSSqlDA.cs" />
+    <Compile Include="MySql\BussinessMySqlDA.cs" />
+    <Compile Include="MySql\EmployeeMySqlDA.cs" />
+    <Compile Include="MySql\QhandyMySql.cs" />
     <Compile Include="MySql\QClientDA.cs" />
     <Compile Include="MySql\QueueInfoDA.cs" />
+    <Compile Include="MySql\WindowLoginInfoDA.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup />
