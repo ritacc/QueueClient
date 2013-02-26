@@ -1,0 +1,21 @@
+﻿<Application x:Class="QSoft.App"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             StartupUri="MainWindow.xaml">
+    <Application.Resources>
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Metro Themes Begin -->
+                <ResourceDictionary Source="/Resources/ColorPicker.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <!-- Metro Themes End -->
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Application.Resources>
+</Application>
