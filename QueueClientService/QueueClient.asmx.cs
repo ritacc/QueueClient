@@ -52,7 +52,7 @@ namespace QM.Client.WebService
 
             }
             WindowLoginInfoOR _Login = new WindowLoginInfoOR();
-            //_Login.EmployNo= _empOR.
+            
             return 0;
         }
 

@@ -41,6 +41,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BankOR.cs" />
     <Compile Include="BussinessBasicInfoOR.cs" />
     <Compile Include="BussinessOR.cs" />
     <Compile Include="BussinessQueueOR.cs" />
