@@ -18,7 +18,8 @@ namespace QM.Client.UpdateDB
         /// 网点编号: 从配置文件中读取
         /// </summary>
         public string BankNo { get; set; }
-        public string BankOrgBH { get; set; }
+
+        public BankOR BankInfo { get; set; }
 
         public string OrgbhWhere { get; set; }
         #endregion
@@ -26,7 +27,7 @@ namespace QM.Client.UpdateDB
         #region 初使化
         public bool Init()
         {
-            string OrgbhWhere = GetOrgBHWhere();
+            GetOrgBHWhere();
             if (string.IsNullOrEmpty(OrgbhWhere))
             {
                 WriteMsg("0001", "无法获取网点信息，不能更新数据。\r\n");
@@ -50,7 +51,7 @@ namespace QM.Client.UpdateDB
         private void WriteMsg(string strErrorCode, string msg)
         {
             OnShowMsg(msg);
-            WriteLog.writeMsgLog("0001", "无法获取网点信息，不能更新数据。\r\n");
+            WriteLog.writeMsgLog(strErrorCode, msg + "\r\n");
         }
 
 
@@ -59,28 +60,30 @@ namespace QM.Client.UpdateDB
         /// <summary>
         /// 根据当前网点的机构编号：获取查询条件(网点的当前级、上一级、到最上层一级)
         /// </summary>
-        private string GetOrgBHWhere()
+        private void GetOrgBHWhere()
         {
             BankMSSqlDA BankDA = new BankMSSqlDA();
-            string orgbhWhere = string.Empty;
+           
             try
             {
                 BankNo = ConfigurationManager.AppSettings["BankNo"];
                 BankOR _bankOR = BankDA.selectABank(BankNo);
+                BankInfo = _bankOR;
+
                 if (_bankOR == null)
                 {
                     string msg = string.Format("无法查询到网点编号为:{0}的信息。", BankNo);
                     WriteMsg("0002", msg);
-                    return "";
                 }
-                BankOrgBH = _bankOR.Orgname;
-                orgbhWhere = GetOrgbhWhere("b.orgbh", BankOrgBH);
+                
+                OrgbhWhere = GetOrgbhWhere("b.orgbh", BankInfo.Orgno);
+                WriteMsg("0000",string.Format("机构编号：{0},机构名称：{1}",_bankOR.Orgbh,_bankOR.Orgname));
             }
             catch (Exception ex)
             {
                 WriteMsg("0003", ex.Message);
             }
-            return orgbhWhere;
+           
         }
 
         /// <summary>
@@ -110,6 +113,30 @@ namespace QM.Client.UpdateDB
 
 
         #region 更新数据
+
+        /// <summary>
+        /// 更新网点数据。
+        /// </summary>
+        /// <returns></returns>
+        public bool UpdateBank()
+        {
+            if (BankNo == null)
+            {
+                WriteMsg("0000", "网点信息为空。");
+                return false;
+            }
+            try
+            {
+                new BankMySqlDA().UpdateBank(BankInfo);
+                WriteMsg("0000", "更新网点信息成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
+
         /// <summary>
         ///  业务类型
         /// </summary>
@@ -118,14 +145,22 @@ namespace QM.Client.UpdateDB
         {
             if (string.IsNullOrEmpty(OrgbhWhere))
                 return false;
-            
-            BussinessMSSqlDA mssqlBus = new BussinessMSSqlDA();
-            List<BussinessOR> listBuss = mssqlBus.selectBankData(OrgbhWhere);
-            WriteMsg("0000", string.Format("查询到业务类型数据：{0}条",listBuss.Count));
-            BussinessMySqlDA mysqlBus = new BussinessMySqlDA();
-            mysqlBus.UpdateBussiness(listBuss);
+            try
+            {
+                BussinessMSSqlDA mssqlBus = new BussinessMSSqlDA();
+                List<BussinessOR> listBuss = mssqlBus.selectBankData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到业务类型数据：{0}条", listBuss.Count));
+                BussinessMySqlDA mysqlBus = new BussinessMySqlDA();
+                mysqlBus.UpdateBussiness(listBuss);
+                WriteMsg("0000", "更新业务类型成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
             return true;
         }
+
 
 
 
@@ -137,7 +172,20 @@ namespace QM.Client.UpdateDB
         {
             if (string.IsNullOrEmpty(OrgbhWhere))
                 return false;
+            try
+            {
+                EmployeeMSSqlDA mssqlEmp = new EmployeeMSSqlDA();
+                List<EmployeeOR> listEmp = mssqlEmp.selectEmployeeData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 柜员 数量：{0}条", listEmp.Count));
 
+                EmployeeMySqlDA mysqlEmp = new EmployeeMySqlDA();
+                mysqlEmp.UpdateEmployee(listEmp);
+                WriteMsg("0000", "更新 柜员 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
             return true;
         }
 

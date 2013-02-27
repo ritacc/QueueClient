@@ -1,19 +1,19 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using QM.Client.Entity;
 using System.Data;
+using QM.Client.Entity;
 
 namespace QM.Client.DA.MSSql
 {
-   public class PageWinMSSqlDA:DALBase
+   public class EmployeeMSSqlDA:DALBase
    {
-       public List<PageWinOR> selectBankData(string orgbhWhere)
+       public List<EmployeeOR> selectEmployeeData(string orgbhWhere)
        {
            if (string.IsNullOrEmpty(orgbhWhere))
                return null;
 
-           string sql = @"select bu.* from t_Bussiness bu
+           string sql = @"select bu.* from t_Employee bu
 inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
            DataTable dt = null;
            try
@@ -26,13 +26,14 @@ inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
            }
            if (dt == null)
                return null;
-           List<PageWinOR> listPWin = new List<PageWinOR>();
+           List<EmployeeOR> listEmp = new List<EmployeeOR>();
            foreach (DataRow dr in dt.Rows)
            {
-               PageWinOR obj = new PageWinOR(dr);
-               listPWin.Add(obj);
+               EmployeeOR obj = new EmployeeOR(dr);
+               listEmp.Add(obj);
            }
-           return listPWin;
+           return listEmp;
        }
+
     }
 }

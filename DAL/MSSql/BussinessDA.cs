@@ -17,12 +17,12 @@ namespace QM.Client.DA.MSSql
             if (string.IsNullOrEmpty(orgbhWhere))
                 return null;
 
-            string sql = @"select b.* from t_Bussiness b
+            string sql = @"select bu.* from t_Bussiness bu
 inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
             DataTable dt = null;
             try
             {
-                dt = dbSql.ExecuteQuery(sql);
+                dt = dbMsSql.ExecuteQuery(sql);
             }
             catch (Exception ex)
             {
@@ -44,7 +44,7 @@ inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
             DataTable dt = null;
             try
             {
-                dt = dbSql.ExecuteQueryDataSet(sql).Tables[0];
+                dt = dbMsSql.ExecuteQueryDataSet(sql).Tables[0];
             }
             catch (Exception ex)
             {

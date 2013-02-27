@@ -23,11 +23,18 @@ namespace QM.Client.UpdateDB
         {
             BussinessControl _BussCon = new BussinessControl();
             _BussCon.ShowErr += new BussinessControl.ShowErrHeader(BussCon_ShowErr);
-            _BussCon.UpdateBussiness();
+            if (_BussCon.Init())
+            {
+                _BussCon.UpdateBussiness();
+
+                _BussCon.UpdateBank();
+                _BussCon.UpdateEmployee();
+
+                BussCon_ShowErr(null, "更新完成。");
+            }
 
 
-
-            MessageBox.Show("完成！");
+            
         }
 
         public void BussCon_ShowErr(object sender, string msg)

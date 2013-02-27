@@ -44,9 +44,9 @@
             // 
             // rtbMsg
             // 
-            this.rtbMsg.Location = new System.Drawing.Point(23, 78);
+            this.rtbMsg.Location = new System.Drawing.Point(23, 57);
             this.rtbMsg.Name = "rtbMsg";
-            this.rtbMsg.Size = new System.Drawing.Size(222, 183);
+            this.rtbMsg.Size = new System.Drawing.Size(384, 204);
             this.rtbMsg.TabIndex = 1;
             this.rtbMsg.Text = "";
             // 
