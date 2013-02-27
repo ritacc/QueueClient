@@ -106,12 +106,6 @@ values ('@Id', '@Name', '@EnglishName', '@TypeName', @WaitTime1,
 
                 return sql;
         }
-        private string boolGetFlag(bool v)
-        {
-            if (v)
-                return "1";
-            return "0";
-        }
         #endregion
 
        

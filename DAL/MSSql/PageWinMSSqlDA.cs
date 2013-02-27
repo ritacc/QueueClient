@@ -8,12 +8,12 @@ namespace QM.Client.DA.MSSql
 {
    public class PageWinMSSqlDA:DALBase
    {
-       public List<BussinessOR> selectBankData(string orgbhWhere)
+       public List<PageWinOR> selectBankData(string orgbhWhere)
        {
            if (string.IsNullOrEmpty(orgbhWhere))
                return null;
 
-           string sql = @"select b.* from t_Bussiness b
+           string sql = @"select bu.* from t_Bussiness bu
 inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
            DataTable dt = null;
            try
@@ -26,13 +26,13 @@ inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
            }
            if (dt == null)
                return null;
-           List<BussinessOR> listBussi = new List<BussinessOR>();
+           List<PageWinOR> listPWin = new List<PageWinOR>();
            foreach (DataRow dr in dt.Rows)
            {
-               BussinessOR obj = new BussinessOR(dr);
-               listBussi.Add(obj);
+               PageWinOR obj = new PageWinOR(dr);
+               listPWin.Add(obj);
            }
-           return listBussi;
+           return listPWin;
        }
     }
 }
