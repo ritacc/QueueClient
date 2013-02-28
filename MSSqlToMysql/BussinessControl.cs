@@ -21,7 +21,15 @@ namespace QM.Client.UpdateDB
 
         public BankOR BankInfo { get; set; }
 
+        /// <summary>
+        /// 机构编号条件(当前级上级网点)
+        /// </summary>
         public string OrgbhWhere { get; set; }
+
+        /// <summary>
+        /// 自己网点
+        /// </summary>
+        public string OrgbhWhereSelf { get; set; }
         #endregion
 
         #region 初使化
@@ -76,7 +84,8 @@ namespace QM.Client.UpdateDB
                     WriteMsg("0002", msg);
                 }
                 
-                OrgbhWhere = GetOrgbhWhere("b.orgbh", BankInfo.Orgno);
+                OrgbhWhere = GetOrgbhWhere("b.orgbh", BankInfo.Orgbh);
+                OrgbhWhereSelf = string.Format("b.orgbh='{0}'", BankInfo.Orgbh);
                 WriteMsg("0000",string.Format("机构编号：{0},机构名称：{1}",_bankOR.Orgbh,_bankOR.Orgname));
             }
             catch (Exception ex)
