@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using QSoft.View;
 
 namespace QSoft
 {
@@ -22,7 +23,32 @@ namespace QSoft
     {
         public MainWindow()
         {
-            InitializeComponent();
+            var loginWindow = new LoginWindow();
+            if (loginWindow.ShowDialog() == true)
+            {
+                InitializeComponent();
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
+        }
+
+        private void PauseButton_Click(object sender, RoutedEventArgs e)
+        {
+            var button = sender as Button;
+            if (button.CommandParameter.ToString() == "Pause")
+            {
+                PauseButtonTextBlock.Text = "恢复";
+                button.CommandParameter = "Resume";
+                PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/resume.png", UriKind.RelativeOrAbsolute));
+            }
+            else
+            {
+                PauseButtonTextBlock.Text = "暂停";
+                button.CommandParameter = "Pause";
+                PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/pause.png", UriKind.RelativeOrAbsolute));
+            }
         }
     }
 }

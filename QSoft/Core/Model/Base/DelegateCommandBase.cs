@@ -2,7 +2,7 @@
 using System;
 using System.Windows.Input;
 
-namespace QClinet.Core
+namespace QSoft.Core
 {
     /// <summary>
     /// Command 实体基类
