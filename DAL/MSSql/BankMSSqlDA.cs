@@ -19,7 +19,7 @@ namespace QM.Client.DA.MSSql
            DataTable dt = null;
            try
            {
-               dt = dbSql.ExecuteQueryDataSet(sql).Tables[0];
+               dt = dbMsSql.ExecuteQueryDataSet(sql).Tables[0];
            }
            catch (Exception ex)
            {

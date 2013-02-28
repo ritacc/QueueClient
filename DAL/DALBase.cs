@@ -8,8 +8,15 @@ namespace QM.Client.DA
 {
     public class DALBase
     {
-        public MySqlHelper dbMySql = new MySqlHelper();
+        public MySqlHelper dbMySql = new MySqlHelper("MySql");
 
-        public SqlHelper dbSql = new SqlHelper("MySql");
+        public SqlHelper dbMsSql = new SqlHelper("Queue");
+
+        protected string boolGetFlag(bool v)
+        {
+            if (v)
+                return "1";
+            return "0";
+        }
     }
 }

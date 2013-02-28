@@ -10,15 +10,17 @@ namespace QM.Client.DA.MSSql
     /// <summary>
     /// 
     /// </summary>
-    public class QhandyMSSqlDA : DALBase
+    public class BussinessRoleONMSSqlDA : DALBase
     {
-        public List<QhandyOR> selectQhandyData(string orgbhWhere)
+        public List<BussinessRoleONOR> selectBussinessRoleONData(string orgbhWhere)
         {
             if (string.IsNullOrEmpty(orgbhWhere))
                 return null;
 
-            string sql = @"select bu.* from t_Qhandy bu
-inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
+            string sql = @"select bron.* from t_BussinessRoleON bron
+inner join t_BussinessRole bu on   bron.BussinessRoleID= bu.id
+inner join t_Bank b on b.orgbh= bu.orgbh
+ where " + orgbhWhere;
             DataTable dt = null;
             try
             {
@@ -30,13 +32,13 @@ inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
             }
             if (dt == null)
                 return null;
-            List<QhandyOR> listQhan = new List<QhandyOR>();
+            List<BussinessRoleONOR> listBuss = new List<BussinessRoleONOR>();
             foreach (DataRow dr in dt.Rows)
             {
-                QhandyOR obj = new QhandyOR(dr);
-                listQhan.Add(obj);
+                BussinessRoleONOR obj = new BussinessRoleONOR(dr);
+                listBuss.Add(obj);
             }
-            return listQhan;
+            return listBuss;
         }        
     }
 }

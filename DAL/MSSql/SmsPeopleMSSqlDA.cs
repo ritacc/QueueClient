@@ -10,14 +10,14 @@ namespace QM.Client.DA.MSSql
     /// <summary>
     /// 
     /// </summary>
-    public class QhandyMSSqlDA : DALBase
+    public class SmsPeopleMSSqlDA : DALBase
     {
-        public List<QhandyOR> selectQhandyData(string orgbhWhere)
+        public List<SmsPeopleOR> selectSmsPeopleData(string orgbhWhere)
         {
             if (string.IsNullOrEmpty(orgbhWhere))
                 return null;
 
-            string sql = @"select bu.* from t_Qhandy bu
+            string sql = @"select bu.* from t_SmsPeople bu
 inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
             DataTable dt = null;
             try
@@ -30,13 +30,13 @@ inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
             }
             if (dt == null)
                 return null;
-            List<QhandyOR> listQhan = new List<QhandyOR>();
+            List<SmsPeopleOR> listSmsP = new List<SmsPeopleOR>();
             foreach (DataRow dr in dt.Rows)
             {
-                QhandyOR obj = new QhandyOR(dr);
-                listQhan.Add(obj);
+                SmsPeopleOR obj = new SmsPeopleOR(dr);
+                listSmsP.Add(obj);
             }
-            return listQhan;
+            return listSmsP;
         }        
     }
 }

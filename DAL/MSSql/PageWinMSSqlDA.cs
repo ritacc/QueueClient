@@ -1,38 +1,44 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
-using QM.Client.Entity;
 using System.Data;
+using System.Data.SqlClient;
+using QM.Client.Entity;
 
 namespace QM.Client.DA.MSSql
 {
-   public class PageWinMSSqlDA:DALBase
-   {
-       public List<BussinessOR> selectBankData(string orgbhWhere)
-       {
-           if (string.IsNullOrEmpty(orgbhWhere))
-               return null;
+    /// <summary>
+    /// 
+    /// </summary>
+    public class PageWinMSSqlDA : DALBase
+    {
+        public List<PageWinOR> selectPageWinData(string orgbhWhere)
+        {
+            if (string.IsNullOrEmpty(orgbhWhere))
+                return null;
 
-           string sql = @"select b.* from t_Bussiness b
+            string sql = @"select bu.* from t_PageWin bu
 inner join t_Bank b on b.orgbh= bu.orgbh where " + orgbhWhere;
-           DataTable dt = null;
-           try
-           {
-               dt = dbSql.ExecuteQuery(sql);
-           }
-           catch (Exception ex)
-           {
-               throw ex;
-           }
-           if (dt == null)
-               return null;
-           List<BussinessOR> listBussi = new List<BussinessOR>();
-           foreach (DataRow dr in dt.Rows)
-           {
-               BussinessOR obj = new BussinessOR(dr);
-               listBussi.Add(obj);
-           }
-           return listBussi;
-       }
+            DataTable dt = null;
+            try
+            {
+                dt = dbMsSql.ExecuteQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (dt == null)
+                return null;
+            List<PageWinOR> listPage = new List<PageWinOR>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                PageWinOR obj = new PageWinOR(dr);
+                listPage.Add(obj);
+            }
+            return listPage;
+        }        
     }
 }
+
+
