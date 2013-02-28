@@ -111,15 +111,20 @@ namespace QM.Client.UpdateDB
         /// </summary>
         /// <param name="ErrorCode"></param>
         /// <param name="FileText"></param>
-        public static void writeMsgLog(string ErrorCode, string msg)
+        public static void writeMsgLog(string ErrorCode, string msg, bool isAddLine = false)
         {
             try
             {
                 string path = string.Format("{0}log{1}Msg.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(fs);
-
+                
                 sw.BaseStream.Seek(0, SeekOrigin.End);
+                if (isAddLine)
+                {
+                    sw.WriteLine();
+                    sw.WriteLine();
+                }
                 sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, msg));
                 sw.Flush();
                 sw.Dispose();

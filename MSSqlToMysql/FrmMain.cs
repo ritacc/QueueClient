@@ -26,9 +26,18 @@ namespace QM.Client.UpdateDB
             if (_BussCon.Init())
             {
                 _BussCon.UpdateBussiness();
-
                 _BussCon.UpdateBank();
                 _BussCon.UpdateEmployee();
+                _BussCon.UpdateBussinessRole();
+                _BussCon.UpdateBussinessRoleON();
+                _BussCon.UpdateEmployType();
+                _BussCon.UpdateNearbyInfo();
+                _BussCon.UpdateShutdownTime();
+                _BussCon.UpdateSmsPeople();
+                _BussCon.UpdateSysPara();
+                _BussCon.UpdateVIPCardKey();
+                _BussCon.UpdateVipCardType();
+                _BussCon.UpdateWindow();
 
                 BussCon_ShowErr(null, "更新完成。");
             }

@@ -5,8 +5,9 @@ using QM.Client.Entity;
 
 namespace QM.Client.DA.MySql
 {
-   public class BankMySqlDA:DALBase
+    public class BankMySqlDA : DALBase
     {
+
         #region 更新业务类型
         public void UpdateBank(BankOR _bank)
         {
@@ -41,9 +42,6 @@ values ('@Id','@OrgNo','@OrgName','@OrgBH','@ParentOrgBH',
             return sql;
         }
         #endregion
-
-
-
 
     }
 }

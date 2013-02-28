@@ -400,7 +400,7 @@ namespace QM.Client.Entity
         /// <summary>
         /// 按钮类型
         /// </summary>
-        public bool ButtomType { get; set; }
+        public bool Buttomtype { get; set; }
 
         private string _Windowonid;
         /// <summary>
@@ -598,7 +598,7 @@ namespace QM.Client.Entity
             _EnlabelTopoffset = Convert.ToInt32(row["ENLABEL_TOPOFFSET"]);
 
             //按钮类型
-            ButtomType = Convert.ToBoolean(row["ButtomType"]);
+            Buttomtype = Convert.ToBoolean(row["ButtomType"]);
             // 按钮关联窗口ID
             _Windowonid = row["windowOnID"].ToString().Trim();
             // 窗口ID

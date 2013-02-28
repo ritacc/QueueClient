@@ -18,7 +18,7 @@ namespace QM.Client.DA.MySql
         public List<BussinessOR> selectAllBussiness()
         {
             string sql = "select * from t_Bussiness";
-            
+
             DataTable dt = null;
             try
             {
@@ -56,7 +56,7 @@ namespace QM.Client.DA.MySql
             dbMySql.ExecuteNoQueryTran(listCmd);
         }
 
-       
+
 
         /// <summary>
         /// 获取插入数据
@@ -76,41 +76,41 @@ values ('@Id', '@Name', '@EnglishName', '@TypeName', @WaitTime1,
 '@FridayTime', @SaturdayFlag, '@SaturdayTime', @SundayFlag, '@SundayTime', 
 '@Description', '@OrgBH')");
 
-                sql = sql.Replace("@Id", bussiness.Id);
-                sql = sql.Replace("@Name", bussiness.Name);
-                sql = sql.Replace("@EnglishName", bussiness.Englishname);
-                sql = sql.Replace("@TypeName", bussiness.Typename);
-                sql = sql.Replace("@WaitTime1", bussiness.Waittime1.ToString());
-                sql = sql.Replace("@PriorTime1", bussiness.Priortime1.ToString());
-                sql = sql.Replace("@WaitTime2", bussiness.Waittime2.ToString());
-                sql = sql.Replace("@PriorTime2", bussiness.Priortime2.ToString());
-                sql = sql.Replace("@WaitTime3", bussiness.Waittime3.ToString());
-                sql = sql.Replace("@PriorTime3", bussiness.Priortime3.ToString());
-                sql = sql.Replace("@TicketMethod", bussiness.Ticketmethod.ToString());
-                sql = sql.Replace("@MondayFlag", boolGetFlag(bussiness.Mondayflag));
-                sql = sql.Replace("@MondayTime", bussiness.Mondaytime);
-                sql = sql.Replace("@TuesdayFlag", boolGetFlag(bussiness.Tuesdayflag));
-                sql = sql.Replace("@TuesdayTime", bussiness.Tuesdaytime);
-                sql = sql.Replace("@WednesdayFlag", boolGetFlag(bussiness.Wednesdayflag));
-                sql = sql.Replace("@WednesdayTime", bussiness.Wednesdaytime);
-                sql = sql.Replace("@ThurdayFlag", boolGetFlag(bussiness.Thurdayflag));
-                sql = sql.Replace("@ThurdayTime", bussiness.Thurdaytime);
-                sql = sql.Replace("@FridayFlag", boolGetFlag(bussiness.Fridayflag));
-                sql = sql.Replace("@FridayTime", bussiness.Fridaytime);
-                sql = sql.Replace("@SaturdayFlag", boolGetFlag(bussiness.Saturdayflag));
-                sql = sql.Replace("@SaturdayTime", bussiness.Saturdaytime);
-                sql = sql.Replace("@SundayFlag", boolGetFlag(bussiness.Sundayflag));
-                sql = sql.Replace("@SundayTime", bussiness.Sundaytime);
-                sql = sql.Replace("@Description", bussiness.Description);
-                sql = sql.Replace("@OrgBH", bussiness.Orgbh);
+            sql = sql.Replace("@Id", bussiness.Id);
+            sql = sql.Replace("@Name", bussiness.Name);
+            sql = sql.Replace("@EnglishName", bussiness.Englishname);
+            sql = sql.Replace("@TypeName", bussiness.Typename);
+            sql = sql.Replace("@WaitTime1", bussiness.Waittime1.ToString());
+            sql = sql.Replace("@PriorTime1", bussiness.Priortime1.ToString());
+            sql = sql.Replace("@WaitTime2", bussiness.Waittime2.ToString());
+            sql = sql.Replace("@PriorTime2", bussiness.Priortime2.ToString());
+            sql = sql.Replace("@WaitTime3", bussiness.Waittime3.ToString());
+            sql = sql.Replace("@PriorTime3", bussiness.Priortime3.ToString());
+            sql = sql.Replace("@TicketMethod", bussiness.Ticketmethod.ToString());
+            sql = sql.Replace("@MondayFlag", boolGetFlag(bussiness.Mondayflag));
+            sql = sql.Replace("@MondayTime", bussiness.Mondaytime);
+            sql = sql.Replace("@TuesdayFlag", boolGetFlag(bussiness.Tuesdayflag));
+            sql = sql.Replace("@TuesdayTime", bussiness.Tuesdaytime);
+            sql = sql.Replace("@WednesdayFlag", boolGetFlag(bussiness.Wednesdayflag));
+            sql = sql.Replace("@WednesdayTime", bussiness.Wednesdaytime);
+            sql = sql.Replace("@ThurdayFlag", boolGetFlag(bussiness.Thurdayflag));
+            sql = sql.Replace("@ThurdayTime", bussiness.Thurdaytime);
+            sql = sql.Replace("@FridayFlag", boolGetFlag(bussiness.Fridayflag));
+            sql = sql.Replace("@FridayTime", bussiness.Fridaytime);
+            sql = sql.Replace("@SaturdayFlag", boolGetFlag(bussiness.Saturdayflag));
+            sql = sql.Replace("@SaturdayTime", bussiness.Saturdaytime);
+            sql = sql.Replace("@SundayFlag", boolGetFlag(bussiness.Sundayflag));
+            sql = sql.Replace("@SundayTime", bussiness.Sundaytime);
+            sql = sql.Replace("@Description", bussiness.Description);
+            sql = sql.Replace("@OrgBH", bussiness.Orgbh);
 
-                return sql;
+            return sql;
         }
         #endregion
 
-       
 
-       
+
+
     }
 }
 

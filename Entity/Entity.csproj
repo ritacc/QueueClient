@@ -45,12 +45,22 @@
     <Compile Include="BussinessBasicInfoOR.cs" />
     <Compile Include="BussinessOR.cs" />
     <Compile Include="BussinessQueueOR.cs" />
+    <Compile Include="BussinessRoleONOR.cs" />
+    <Compile Include="BussinessRoleOR.cs" />
     <Compile Include="EmployeeOR.cs" />
+    <Compile Include="EmployTypeOR.cs" />
+    <Compile Include="NearbyInfoOR.cs" />
     <Compile Include="PageWinOR.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QhandyOR.cs" />
     <Compile Include="QueueInfoOR.cs" />
+    <Compile Include="ShutdownTimeOR.cs" />
+    <Compile Include="SmsPeopleOR.cs" />
+    <Compile Include="SysParaOR.cs" />
+    <Compile Include="VIPCardKeyOR.cs" />
+    <Compile Include="VipCardTypeOR.cs" />
     <Compile Include="WindowLoginInfoOR.cs" />
+    <Compile Include="WindowOR.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
