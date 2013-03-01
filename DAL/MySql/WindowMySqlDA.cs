@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using QM.Client.Entity;
+using System.Data;
 
 namespace QM.Client.DA.MySql
 {
@@ -27,10 +28,8 @@ namespace QM.Client.DA.MySql
         /// </summary>
         public string GetInsertSql(WindowOR window)
         {
-            string sql = @"insert into t_Window (Id,Name,Role,SoundDev,Description,
-OrgBH)
-values ('@Id','@Name','@Role',SoundDev,'@Description',
-'@OrgBH')";
+            string sql = @"insert into t_Window (Id,Name,Role,SoundDev,Description,OrgBH)
+values ('@Id','@Name','@Role',SoundDev,'@Description','@OrgBH')";
             sql = sql.Replace("@Id", window.Id);	//
             sql = sql.Replace("@Name", window.Name);	//窗口名称
             sql = sql.Replace("@Role", window.Role);	//业务角色
@@ -41,6 +40,18 @@ values ('@Id','@Name','@Role',SoundDev,'@Description',
             return sql;
         }
         #endregion
+
+        public WindowOR SelectWindowByNo(string windowNo)
+        {
+            string sql =string.Format( "select * from t_Window where Name='{0}' ",windowNo);
+            DataTable dt = dbMySql.ExecuteQuery(sql);
+
+            if (dt == null)
+                return null;
+            if (dt.Rows.Count > 0)
+                return new WindowOR(dt.Rows[0]);
+            return null;
+        }
 
     }
 }

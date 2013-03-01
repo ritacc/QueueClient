@@ -2,14 +2,21 @@
 using System.Collections.Generic;
 using System.Text;
 using QM.Client.Entity;
+using System.Data;
 
 namespace QM.Client.DA.MySql
 {
     public class EmployeeMySqlDA : DALBase
     {
-        public EmployeeOR SelectAEmployee(string userID, string pwd)
+        public EmployeeOR SelectAEmployeeLogin(string userID, string pwd)
         {
+            string sql =string.Format( "select * from t_Employee where EmployNo='{0}' ",userID);
+            DataTable dt = dbMySql.ExecuteQuery(sql);
 
+            if (dt == null)
+                return null;
+            if (dt.Rows.Count > 0)
+                return new EmployeeOR(dt.Rows[0]);
             return null;
         }
 

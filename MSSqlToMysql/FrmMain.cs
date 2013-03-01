@@ -27,17 +27,24 @@ namespace QM.Client.UpdateDB
             {
                 _BussCon.UpdateBussiness();
                 _BussCon.UpdateBank();
+                //只更新自己网点数据
                 _BussCon.UpdateEmployee();
+                _BussCon.UpdateSysPara();
+                _BussCon.UpdatePageWin();
+                _BussCon.UpdateQhandy();
+                _BussCon.UpdateShutdownTime();
+                _BussCon.UpdateWindow();
+                _BussCon.UpdateNearbyInfo();
+
+                //继承关系统
                 _BussCon.UpdateBussinessRole();
                 _BussCon.UpdateBussinessRoleON();
                 _BussCon.UpdateEmployType();
-                _BussCon.UpdateNearbyInfo();
-                _BussCon.UpdateShutdownTime();
                 _BussCon.UpdateSmsPeople();
-                _BussCon.UpdateSysPara();
                 _BussCon.UpdateVIPCardKey();
                 _BussCon.UpdateVipCardType();
-                _BussCon.UpdateWindow();
+
+                
 
                 BussCon_ShowErr(null, "更新完成。");
             }

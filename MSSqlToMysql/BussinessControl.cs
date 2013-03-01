@@ -56,10 +56,10 @@ namespace QM.Client.UpdateDB
             }
         }
 
-        private void WriteMsg(string strErrorCode, string msg,bool isAddLine=false)
+        private void WriteMsg(string strErrorCode, string msg, bool isAddLine = false)
         {
             OnShowMsg(msg);
-            WriteLog.writeMsgLog(strErrorCode, msg , isAddLine);
+            WriteLog.writeMsgLog(strErrorCode, msg, isAddLine);
         }
 
 
@@ -71,7 +71,7 @@ namespace QM.Client.UpdateDB
         private void GetOrgBHWhere()
         {
             BankMSSqlDA BankDA = new BankMSSqlDA();
-           
+
             try
             {
                 BankNo = ConfigurationManager.AppSettings["BankNo"];
@@ -83,16 +83,16 @@ namespace QM.Client.UpdateDB
                     string msg = string.Format("无法查询到网点编号为:{0}的信息。", BankNo);
                     WriteMsg("0002", msg);
                 }
-                
+
                 OrgbhWhere = GetOrgbhWhere("b.orgbh", BankInfo.Orgbh);
                 OrgbhWhereSelf = string.Format("b.orgbh='{0}'", BankInfo.Orgbh);
-                WriteMsg("0000",string.Format("机构编号：{0},机构名称：{1}",_bankOR.Orgbh,_bankOR.Orgname));
+                WriteMsg("0000", string.Format("机构编号：{0},机构名称：{1}", _bankOR.Orgbh, _bankOR.Orgname));
             }
             catch (Exception ex)
             {
                 WriteMsg("0003", ex.Message);
             }
-           
+
         }
 
         /// <summary>
@@ -119,9 +119,9 @@ namespace QM.Client.UpdateDB
         }
         #endregion
         #endregion
-        
-        #region 更新数据
 
+        #region 更新数据
+        #region 继承关系
         /// <summary>
         /// 更新网点数据。
         /// </summary>
@@ -135,7 +135,7 @@ namespace QM.Client.UpdateDB
             }
             try
             {
-                WriteMsg("0000", "开始更新“网点”",true);
+                WriteMsg("0000", "开始更新“网点”", true);
                 new BankMySqlDA().UpdateBank(BankInfo);
                 WriteMsg("0000", "更新 网点 信息成功。");
             }
@@ -171,9 +171,153 @@ namespace QM.Client.UpdateDB
             }
             return true;
         }
+        public bool UpdateBussinessRole()
+        {
+            if (string.IsNullOrEmpty(OrgbhWhere))
+                return false;
+
+            try
+            {
+                WriteMsg("0000", "开始更新“业务角色”", true);
+
+                BussinessRoleMSSqlDA mssqlBuss = new BussinessRoleMSSqlDA();
+                List<BussinessRoleOR> listBuss = mssqlBuss.selectBussinessRoleData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 BussinessRole 数量：{0}条", listBuss.Count));
+
+                BussinessRoleMySqlDA mysqlBuss = new BussinessRoleMySqlDA();
+                mysqlBuss.UpdateBussinessRole(listBuss);
+                WriteMsg("0000", "更新 BussinessRole 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
+        public bool UpdateBussinessRoleON()
+        {
+            if (string.IsNullOrEmpty(OrgbhWhere))
+                return false;
+
+            try
+            {
+                WriteMsg("0000", "开始更新“业务角色详细”", true);
+
+                BussinessRoleONMSSqlDA mssqlBuss = new BussinessRoleONMSSqlDA();
+                List<BussinessRoleONOR> listBuss = mssqlBuss.selectBussinessRoleONData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 BussinessRoleON 数量：{0}条", listBuss.Count));
+
+                BussinessRoleONMySqlDA mysqlBuss = new BussinessRoleONMySqlDA();
+                mysqlBuss.UpdateBussinessRoleON(listBuss);
+                WriteMsg("0000", "更新 BussinessRoleON 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
 
 
 
+
+        public bool UpdateEmployType()
+        {
+            if (string.IsNullOrEmpty(OrgbhWhere))
+                return false;
+
+            try
+            {
+                WriteMsg("0000", "开始更新“柜员”", true);
+
+                EmployTypeMSSqlDA mssqlEmpl = new EmployTypeMSSqlDA();
+                List<EmployTypeOR> listEmpl = mssqlEmpl.selectEmployTypeData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 EmployType 数量：{0}条", listEmpl.Count));
+
+                EmployTypeMySqlDA mysqlEmpl = new EmployTypeMySqlDA();
+                mysqlEmpl.UpdateEmployType(listEmpl);
+                WriteMsg("0000", "更新 EmployType 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
+
+        public bool UpdateSmsPeople()
+        {
+            if (string.IsNullOrEmpty(OrgbhWhere))
+                return false;
+
+            try
+            {
+                WriteMsg("0000", "开始更新“SnmpEople”", true);
+
+                SmsPeopleMSSqlDA mssqlSmsP = new SmsPeopleMSSqlDA();
+                List<SmsPeopleOR> listSmsP = mssqlSmsP.selectSmsPeopleData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 SmsPeople 数量：{0}条", listSmsP.Count));
+
+                SmsPeopleMySqlDA mysqlSmsP = new SmsPeopleMySqlDA();
+                mysqlSmsP.UpdateSmsPeople(listSmsP);
+                WriteMsg("0000", "更新 SmsPeople 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
+
+        public bool UpdateVIPCardKey()
+        {
+            if (string.IsNullOrEmpty(OrgbhWhere))
+                return false;
+
+            try
+            {
+                WriteMsg("0000", "开始更新“VIPCardKey”", true);
+
+                VIPCardKeyMSSqlDA mssqlVIPC = new VIPCardKeyMSSqlDA();
+                List<VIPCardKeyOR> listVIPC = mssqlVIPC.selectVIPCardKeyData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 VIPCardKey 数量：{0}条", listVIPC.Count));
+
+                VIPCardKeyMySqlDA mysqlVIPC = new VIPCardKeyMySqlDA();
+                mysqlVIPC.UpdateVIPCardKey(listVIPC);
+                WriteMsg("0000", "更新 VIPCardKey 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
+
+        public bool UpdateVipCardType()
+        {
+            if (string.IsNullOrEmpty(OrgbhWhere))
+                return false;
+
+            try
+            {
+                WriteMsg("0000", "开始更新“Vip类型”", true);
+
+                VipCardTypeMSSqlDA mssqlVipC = new VipCardTypeMSSqlDA();
+                List<VipCardTypeOR> listVipC = mssqlVipC.selectVipCardTypeData(OrgbhWhere);
+                WriteMsg("0000", string.Format("查询到 VipCardType 数量：{0}条", listVipC.Count));
+
+                VipCardTypeMySqlDA mysqlVipC = new VipCardTypeMySqlDA();
+                mysqlVipC.UpdateVipCardType(listVipC);
+                WriteMsg("0000", "更新 VipCardType 成功。");
+            }
+            catch (Exception ex)
+            {
+                WriteMsg("", ex.Message);
+            }
+            return true;
+        }
+        #endregion
+        #region 只更新自己网点数据
 
         /// <summary>
         /// 更新柜员
@@ -188,7 +332,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“柜员”", true);
 
                 EmployeeMSSqlDA mssqlEmp = new EmployeeMSSqlDA();
-                List<EmployeeOR> listEmp = mssqlEmp.selectEmployeeData(OrgbhWhere);
+                List<EmployeeOR> listEmp = mssqlEmp.selectEmployeeData(OrgbhWhereSelf);
                 WriteMsg("0000", string.Format("查询到 柜员 数量：{0}条", listEmp.Count));
 
                 EmployeeMySqlDA mysqlEmp = new EmployeeMySqlDA();
@@ -216,8 +360,8 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“页窗口”", true);
 
                 PageWinMSSqlDA mssqlPage = new PageWinMSSqlDA();
-                List<PageWinOR> listPage = mssqlPage.selectPageWinData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 PageWin 数量：PageWin条", listPage.Count));
+                List<PageWinOR> listPage = mssqlPage.selectPageWinData(OrgbhWhereSelf);
+                WriteMsg("0000", string.Format("查询到 PageWin 数量：{0}条", listPage.Count));
 
                 PageWinMySqlDA mysqlPage = new PageWinMySqlDA();
                 mysqlPage.UpdatePageWin(listPage);
@@ -229,82 +373,6 @@ namespace QM.Client.UpdateDB
             }
             return true;
         }
-        
-        public bool UpdateBussinessRole()
-        {
-            if (string.IsNullOrEmpty(OrgbhWhere))
-                return false;
-
-            try
-            {
-                WriteMsg("0000", "开始更新“业务角色”", true);
-
-                BussinessRoleMSSqlDA mssqlBuss = new BussinessRoleMSSqlDA();
-                List<BussinessRoleOR> listBuss = mssqlBuss.selectBussinessRoleData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 BussinessRole 数量：{0}条", listBuss.Count));
-
-                BussinessRoleMySqlDA mysqlBuss = new BussinessRoleMySqlDA();
-                mysqlBuss.UpdateBussinessRole(listBuss);
-                WriteMsg("0000", "更新 BussinessRole 成功。");
-            }
-            catch (Exception ex)
-            {
-                WriteMsg("", ex.Message);
-            }
-            return true;
-        }
-
-
-
-        public bool UpdateBussinessRoleON()
-        {
-            if (string.IsNullOrEmpty(OrgbhWhere))
-                return false;
-
-            try
-            {
-                WriteMsg("0000", "开始更新“业务角色详细”", true);
-
-                BussinessRoleONMSSqlDA mssqlBuss = new BussinessRoleONMSSqlDA();
-                List<BussinessRoleONOR> listBuss = mssqlBuss.selectBussinessRoleONData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 BussinessRoleON 数量：{0}条", listBuss.Count));
-
-                BussinessRoleONMySqlDA mysqlBuss = new BussinessRoleONMySqlDA();
-                mysqlBuss.UpdateBussinessRoleON(listBuss);
-                WriteMsg("0000", "更新 BussinessRoleON 成功。");
-            }
-            catch (Exception ex)
-            {
-                WriteMsg("", ex.Message);
-            }
-            return true;
-        }
-
-        public bool UpdateEmployType()
-        {
-            if (string.IsNullOrEmpty(OrgbhWhere))
-                return false;
-
-            try
-            {
-                WriteMsg("0000", "开始更新“柜员”", true);
-
-                EmployTypeMSSqlDA mssqlEmpl = new EmployTypeMSSqlDA();
-                List<EmployTypeOR> listEmpl = mssqlEmpl.selectEmployTypeData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 EmployType 数量：{0}条", listEmpl.Count));
-
-                EmployTypeMySqlDA mysqlEmpl = new EmployTypeMySqlDA();
-                mysqlEmpl.UpdateEmployType(listEmpl);
-                WriteMsg("0000", "更新 EmployType 成功。");
-            }
-            catch (Exception ex)
-            {
-                WriteMsg("", ex.Message);
-            }
-            return true;
-        }
-
-
 
         public bool UpdateQhandy()
         {
@@ -316,7 +384,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“Qhandy”", true);
 
                 QhandyMSSqlDA mssqlQhan = new QhandyMSSqlDA();
-                List<QhandyOR> listQhan = mssqlQhan.selectQhandyData(OrgbhWhere);
+                List<QhandyOR> listQhan = mssqlQhan.selectQhandyData(OrgbhWhereSelf);
                 WriteMsg("0000", string.Format("查询到 Qhandy 数量：{0}条", listQhan.Count));
 
                 QhandyMySqlDA mysqlQhan = new QhandyMySqlDA();
@@ -330,8 +398,6 @@ namespace QM.Client.UpdateDB
             return true;
         }
 
-
-
         public bool UpdateShutdownTime()
         {
             if (string.IsNullOrEmpty(OrgbhWhere))
@@ -342,7 +408,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“关机时间”", true);
 
                 ShutdownTimeMSSqlDA mssqlShut = new ShutdownTimeMSSqlDA();
-                List<ShutdownTimeOR> listShut = mssqlShut.selectShutdownTimeData(OrgbhWhere);
+                List<ShutdownTimeOR> listShut = mssqlShut.selectShutdownTimeData(OrgbhWhereSelf);
                 WriteMsg("0000", string.Format("查询到 ShutdownTime 数量：{0}条", listShut.Count));
 
                 ShutdownTimeMySqlDA mysqlShut = new ShutdownTimeMySqlDA();
@@ -355,35 +421,6 @@ namespace QM.Client.UpdateDB
             }
             return true;
         }
-
-
-
-        public bool UpdateSmsPeople()
-        {
-            if (string.IsNullOrEmpty(OrgbhWhere))
-                return false;
-
-            try
-            {
-                WriteMsg("0000", "开始更新“SnmpEople”", true);
-
-                SmsPeopleMSSqlDA mssqlSmsP = new SmsPeopleMSSqlDA();
-                List<SmsPeopleOR> listSmsP = mssqlSmsP.selectSmsPeopleData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 SmsPeople 数量：{0}条", listSmsP.Count));
-
-                SmsPeopleMySqlDA mysqlSmsP = new SmsPeopleMySqlDA();
-                mysqlSmsP.UpdateSmsPeople(listSmsP);
-                WriteMsg("0000", "更新 SmsPeople 成功。");
-            }
-            catch (Exception ex)
-            {
-                WriteMsg("", ex.Message);
-            }
-            return true;
-        }
-
-
-
         public bool UpdateSysPara()
         {
             if (string.IsNullOrEmpty(OrgbhWhere))
@@ -394,7 +431,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“参数设置”", true);
 
                 SysParaMSSqlDA mssqlSysP = new SysParaMSSqlDA();
-                List<SysParaOR> listSysP = mssqlSysP.selectSysParaData(OrgbhWhere);
+                List<SysParaOR> listSysP = mssqlSysP.selectSysParaData(OrgbhWhereSelf);
                 WriteMsg("0000", string.Format("查询到 SysPara 数量：{0}条", listSysP.Count));
 
                 SysParaMySqlDA mysqlSysP = new SysParaMySqlDA();
@@ -408,60 +445,6 @@ namespace QM.Client.UpdateDB
             return true;
         }
 
-
-
-        public bool UpdateVIPCardKey()
-        {
-            if (string.IsNullOrEmpty(OrgbhWhere))
-                return false;
-
-            try
-            {
-                WriteMsg("0000", "开始更新“VIPCardKey”", true);
-
-                VIPCardKeyMSSqlDA mssqlVIPC = new VIPCardKeyMSSqlDA();
-                List<VIPCardKeyOR> listVIPC = mssqlVIPC.selectVIPCardKeyData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 VIPCardKey 数量：{0}条", listVIPC.Count));
-
-                VIPCardKeyMySqlDA mysqlVIPC = new VIPCardKeyMySqlDA();
-                mysqlVIPC.UpdateVIPCardKey(listVIPC);
-                WriteMsg("0000", "更新 VIPCardKey 成功。");
-            }
-            catch (Exception ex)
-            {
-                WriteMsg("", ex.Message);
-            }
-            return true;
-        }
-
-
-
-        public bool UpdateVipCardType()
-        {
-            if (string.IsNullOrEmpty(OrgbhWhere))
-                return false;
-
-            try
-            {
-                WriteMsg("0000", "开始更新“Vip类型”", true);
-
-                VipCardTypeMSSqlDA mssqlVipC = new VipCardTypeMSSqlDA();
-                List<VipCardTypeOR> listVipC = mssqlVipC.selectVipCardTypeData(OrgbhWhere);
-                WriteMsg("0000", string.Format("查询到 VipCardType 数量：{0}条", listVipC.Count));
-
-                VipCardTypeMySqlDA mysqlVipC = new VipCardTypeMySqlDA();
-                mysqlVipC.UpdateVipCardType(listVipC);
-                WriteMsg("0000", "更新 VipCardType 成功。");
-            }
-            catch (Exception ex)
-            {
-                WriteMsg("", ex.Message);
-            }
-            return true;
-        }
-
-
-
         public bool UpdateWindow()
         {
             if (string.IsNullOrEmpty(OrgbhWhere))
@@ -472,7 +455,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“窗口”", true);
 
                 WindowMSSqlDA mssqlWind = new WindowMSSqlDA();
-                List<WindowOR> listWind = mssqlWind.selectWindowData(OrgbhWhere);
+                List<WindowOR> listWind = mssqlWind.selectWindowData(OrgbhWhereSelf);
                 WriteMsg("0000", string.Format("查询到 Window 数量：{0}条", listWind.Count));
 
                 WindowMySqlDA mysqlWind = new WindowMySqlDA();
@@ -497,7 +480,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“监控网点”", true);
 
                 NearbyInfoMSSqlDA mssqlNear = new NearbyInfoMSSqlDA();
-                List<NearbyInfoOR> listNear = mssqlNear.selectNearbyInfoData(OrgbhWhere);
+                List<NearbyInfoOR> listNear = mssqlNear.selectNearbyInfoData(OrgbhWhereSelf);
                 WriteMsg("0000", string.Format("查询到 NearbyInfo 数量：{0}条", listNear.Count));
 
                 NearbyInfoMySqlDA mysqlNear = new NearbyInfoMySqlDA();
@@ -511,6 +494,7 @@ namespace QM.Client.UpdateDB
             return true;
         }
 
+        #endregion
         #endregion
     }
 }

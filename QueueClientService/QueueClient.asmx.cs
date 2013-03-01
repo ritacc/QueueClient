@@ -46,14 +46,7 @@ namespace QM.Client.WebService
         [WebMethod]
         public int getLogin(string userid, string password, string windowid)
         {
-            EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployee(userid, password);
-            if (_empOR == null)
-            {
-
-            }
-            WindowLoginInfoOR _Login = new WindowLoginInfoOR();
-            
-            return 0;
+            return Instanse().getLogin(userid,password,windowid);
         }
 
         
@@ -62,12 +55,14 @@ namespace QM.Client.WebService
         /// </summary>
         /// <param name="userid"></param>
         /// <param name="windowid"></param>
-        /// <returns></returns>
-        public int endService(string userid, string windowid)
+        /// <returns>1;登录用户、窗口号不存在
+        /// "0";正常结束
+        /// 其它字符串：异常信息
+        /// </returns>
+        [WebMethod]
+        public string endService(string userid, string windowid)
         {
-
-
-            return 0;
+            return Instanse().endService(userid, windowid);
         }
 
         /// <summary>

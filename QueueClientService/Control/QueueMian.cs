@@ -20,28 +20,22 @@ namespace QM.Client.WebService.Control
 元素结构包含：是否VIP、取号时间、换算后排队时间、转移窗口号、延后人数、延后时间。
 其中，转移窗口号只有按下转移后才使用，延后人数在按下延后以及后面的呼叫后更新；数据结构采用hash实现，关键字是业务类型ID，值是队列，队列里面是元素。延后人数和延后时间作为延后策略的可选项，目前先实现延后时间，预留延后人数的逻辑与接口，实现时可以快速实现；
          */
+         
+        BussinessMySqlDA _busDA = new BussinessMySqlDA();//业务DA
+        QueueInfoDA _QueueDA=new QueueInfoDA();//取号DA
+        WindowLoginInfoDA _WindowLoginDA = new WindowLoginInfoDA();
 
         #region 属性
         /// <summary>
         /// 网点业务队列
         /// </summary>
         public List<BussinessQueueOR> QhQueues { get; set; }
-
-        /// <summary>
-        /// 已登录窗口的用户
-        /// </summary>
-        public List<WindowLoginInfoOR> LoginWindows { get; set; }
-
+               
         /// <summary>
         /// 网点机构号
         /// </summary>
         public string BankNo { get; set; }
         #endregion
-
-
- 
-        BussinessMySqlDA _busDA = new BussinessMySqlDA();//业务DA
-        QueueInfoDA _QueueDA=new QueueInfoDA();//取号DA
         
         #region 初使化
         /// <summary>
@@ -78,13 +72,101 @@ namespace QM.Client.WebService.Control
         }
         #endregion
 
+        #region 1登录 、call(暂停 、恢复) 、2结束服务
+        /// <summary>
+        /// 登录
+        /// </summary>
+        /// <param name="userid"></param>
+        /// <param name="password"></param>
+        /// <param name="windowid"></param>
+        /// <returns></returns>
         public int getLogin(string userid, string password, string windowid)
         {
-            //t_Employee
+            EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployeeLogin(userid, password);
+            if (_empOR == null)
+            {
+                return 1;//用户名或密码错误
+            }
+            WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(windowid);
+            if (_winOR == null)
+                return 2;//窗口不存在
 
+            try
+            {
+                WindowLoginInfoOR _Login = new WindowLoginInfoOR();
+                _Login.Windowno = windowid;
+                _Login.Employname = _empOR.Name;
+                _Login.Employno = _empOR.Employno;
+                _Login.Alerttime = _Login.Logintime = DateTime.Now;
+                _Login.Status = 0;
+                _WindowLoginDA.InsertLoginWindowInfo(_Login);//写入数据库
+            }
+            catch (Exception ex)
+            {
+                return 3;//写入数据库出错。
+            }
             return 0;
         }
-       
+
+        public string endService(string userid, string windowid)
+        {
+            WindowLoginInfoOR _winLog = _WindowLoginDA.SelectLoginLogByUserIDAndWindowID(userid, windowid);
+            if (_winLog == null)
+                return "1";//登录用户、窗口号不存在
+            try
+            {
+                _winLog.Status = 1;
+                _WindowLoginDA.EndServer(_winLog);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "0";//正常结束
+        }
+        
+        /// <summary>
+        /// 暂停	PAUSE	空串
+        /// </summary>
+        private string CallPause(string userID)
+        {
+            try
+            {
+                WindowLoginInfoOR obj = _WindowLoginDA.SelectLoginLogByUserID(userID, "0");
+                if (obj == null)
+                {
+                    return "1";
+                }
+                _WindowLoginDA.PauseServer(obj);
+            }
+            catch (Exception Ex)
+            {
+                return Ex.Message;
+            }
+            return "0";
+        }
+
+        /// <summary>
+        /// 恢复	RESTART	空串
+        /// </summary>
+        private string CallRestart(string userID)
+        {
+            try
+            {
+                WindowLoginInfoOR obj = _WindowLoginDA.SelectLoginLogByUserID(userID, "0");
+                if (obj == null)
+                {
+                    return "1";
+                }
+                _WindowLoginDA.PauseServer(obj);
+            }
+            catch (Exception Ex)
+            {
+                return Ex.Message;
+            }
+            return "0";
+        }
+        #endregion
 
         #region 公用函数
         /// <summary>
@@ -168,9 +250,6 @@ namespace QM.Client.WebService.Control
             return strBillList;
         }
 
-       
-
-
         #region 5呼叫接口
         /*
 呼叫下一位	CALL	空串
@@ -218,10 +297,10 @@ namespace QM.Client.WebService.Control
                     strReturnValue = CallJudge(BillNo);
                     break;
                 case "PAUSE":
-                    CallPause();
+                    strReturnValue = CallPause(value);
                     break;
                 case "RESTART":
-                    CallRestart();
+                    strReturnValue = CallRestart(value);
                     break;
             }
 
@@ -354,24 +433,9 @@ namespace QM.Client.WebService.Control
             return "";
         }
 
-        /// <summary>
-        /// 暂停	PAUSE	空串
-        /// </summary>
-        private void CallPause()
-        {
-
-        }
-
-        /// <summary>
-        /// 恢复	RESTART	空串
-        /// </summary>
-        public void CallRestart()
-        {
-
-
-        }
+       
         #endregion
-        
+                
 
         #region 取号
         /// <summary>
