@@ -119,12 +119,13 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
        /// <returns></returns>
        public bool UpdateCall( QueueInfoOR obj)
        {
-           string sql =@"update t_queueinfo  set CallTime=now(),status=1
- where  ID='@ID' ";
-
+           string sql = @"update t_queueinfo  set CallTime=now(),status=1,
+Windowno='@Windowno',Employno='@Employno',Employname='@Employname' where  ID='@ID' ";
            
-           //sql= sql.Replace("@CallTime",obj.Calltime.ToString("yyyy-MM-dd HH:mm:ss"));
-           //sql = sql.Replace("@PrillBillTime", DateTime.Now.ToString("yyyy-MM-dd"));
+
+           sql = sql.Replace("@Windowno", obj.Windowno);
+           sql = sql.Replace("@Employno", obj.Employno);
+           sql=sql.Replace("@Employname",obj.Employname);
            sql = sql.Replace("@ID", obj.Id);
 
            return dbMySql.ExecuteNoQuery(sql) > 0;

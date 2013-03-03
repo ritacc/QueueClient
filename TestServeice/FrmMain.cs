@@ -86,5 +86,26 @@ namespace TestServeice
             string value = v.getCall("JUDGE", txtBill.Text);
             MessageBox.Show(value);
         }
+
+        private void btnEnd_Click(object sender, EventArgs e)
+        {
+            QueueClient.QueueClientSoapClient v = Init();
+            string value = v.endService(txtEmployeeNo.Text,txtWindowNo.Text);
+            MessageBox.Show(value);
+        }
+
+        private void btnPause_Click(object sender, EventArgs e)
+        {
+            QueueClient.QueueClientSoapClient v = Init();
+            string value = v.getCall("PAUSE", txtWindowNo.Text);
+            MessageBox.Show(value);
+        }
+
+        private void btnRestart_Click(object sender, EventArgs e)
+        {
+            QueueClient.QueueClientSoapClient v = Init();
+            string value = v.getCall("RESTART", txtWindowNo.Text);
+            MessageBox.Show(value);
+        }
     }
 }

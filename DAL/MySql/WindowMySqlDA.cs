@@ -53,6 +53,22 @@ values ('@Id','@Name','@Role',SoundDev,'@Description','@OrgBH')";
             return null;
         }
 
+        public List<WindowOR> SelectWindows()
+        {
+            string sql = "select * from t_Window order by name";
+            DataTable dt = dbMySql.ExecuteQuery(sql);
+
+            if (dt == null)
+                return null;
+            List<WindowOR> listWindow = new List<WindowOR>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                listWindow.Add( new WindowOR(dt.Rows[0]));
+            }
+            return listWindow;
+
+        }
+
     }
 }
 

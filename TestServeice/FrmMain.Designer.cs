@@ -46,6 +46,9 @@
             this.txtEmployeeNo = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.btnJudge = new System.Windows.Forms.Button();
+            this.btnEnd = new System.Windows.Forms.Button();
+            this.btnPause = new System.Windows.Forms.Button();
+            this.btnRestart = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -209,11 +212,44 @@
             this.btnJudge.UseVisualStyleBackColor = true;
             this.btnJudge.Click += new System.EventHandler(this.btnJudge_Click);
             // 
+            // btnEnd
+            // 
+            this.btnEnd.Location = new System.Drawing.Point(393, 452);
+            this.btnEnd.Name = "btnEnd";
+            this.btnEnd.Size = new System.Drawing.Size(75, 23);
+            this.btnEnd.TabIndex = 18;
+            this.btnEnd.Text = "结束服务";
+            this.btnEnd.UseVisualStyleBackColor = true;
+            this.btnEnd.Click += new System.EventHandler(this.btnEnd_Click);
+            // 
+            // btnPause
+            // 
+            this.btnPause.Location = new System.Drawing.Point(368, 481);
+            this.btnPause.Name = "btnPause";
+            this.btnPause.Size = new System.Drawing.Size(75, 23);
+            this.btnPause.TabIndex = 19;
+            this.btnPause.Text = "暂停";
+            this.btnPause.UseVisualStyleBackColor = false;
+            this.btnPause.Click += new System.EventHandler(this.btnPause_Click);
+            // 
+            // btnRestart
+            // 
+            this.btnRestart.Location = new System.Drawing.Point(449, 481);
+            this.btnRestart.Name = "btnRestart";
+            this.btnRestart.Size = new System.Drawing.Size(75, 23);
+            this.btnRestart.TabIndex = 20;
+            this.btnRestart.Text = "恢复";
+            this.btnRestart.UseVisualStyleBackColor = true;
+            this.btnRestart.Click += new System.EventHandler(this.btnRestart_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(547, 506);
+            this.Controls.Add(this.btnRestart);
+            this.Controls.Add(this.btnPause);
+            this.Controls.Add(this.btnEnd);
             this.Controls.Add(this.btnJudge);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.txtEmployeeNo);
@@ -260,6 +296,9 @@
         private System.Windows.Forms.TextBox txtEmployeeNo;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Button btnJudge;
+        private System.Windows.Forms.Button btnEnd;
+        private System.Windows.Forms.Button btnPause;
+        private System.Windows.Forms.Button btnRestart;
     }
 }
 

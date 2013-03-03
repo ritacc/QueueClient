@@ -270,10 +270,10 @@ namespace QM.Client.Entity
             _Waitinterval = 0;
             // 办理时长(秒)
             _Processinterval = 0;
-            // 取号时该业务的等待人数
-            _Waitpeoplebusssiness = 0;
-            // 取号时该网点的等待人数
-            _Waitpeoplebank = 0;
+            //// 取号时该业务的等待人数
+            //_Waitpeoplebusssiness = 0;
+            //// 取号时该网点的等待人数
+            //_Waitpeoplebank = 0;
             // 客户等级
             _Custemclass = 0;
             Description = "";
