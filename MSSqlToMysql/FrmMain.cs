@@ -16,6 +16,7 @@ namespace QM.Client.UpdateDB
         public FrmMain()
         {
             InitializeComponent();
+            this.Icon = Img.arrow_down_32;
         }
        
 

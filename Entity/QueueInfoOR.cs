@@ -47,7 +47,7 @@ namespace QM.Client.Entity
 		/// <summary>
 		/// 硬呼叫器或软呼叫按下转移键时记录转移到的目的窗口号，用于排队计算用
 		/// </summary>
-        public string Transferdestwin { get; set; }        
+        public int Transferdestwin { get; set; }        
 		
 		/// <summary>
 		/// 延后的人数，用于排队计算；按下延后时更新此人数，以后有人办理时也需更新此人数，暂不使用这种策略
@@ -247,7 +247,7 @@ namespace QM.Client.Entity
             // 取号时间
             Prillbilltime = _Now;
             // 硬呼叫器或软呼叫按下转移键时记录转移到的目的窗口号，用于排队计算用
-            Transferdestwin = "";
+            Transferdestwin = 0;
             // 延后的人数，用于排队计算；按下延后时更新此人数，以后有人办理时也需更新此人数，暂不使用这种策略
             Delaynum =0;
             // 延后秒数。记得在软呼叫或硬件时单位为分钟，需要换算后传过来。延后采用这种策略
@@ -295,7 +295,9 @@ namespace QM.Client.Entity
 			// 取号时间
 			Prillbilltime = Convert.ToDateTime(row["PrillBillTime"]);
 			// 硬呼叫器或软呼叫按下转移键时记录转移到的目的窗口号，用于排队计算用
-			Transferdestwin = row["TransferDestWin"].ToString();
+            Transferdestwin = 0;
+            if (row["TransferDestWin"] != DBNull.Value)
+                Transferdestwin = Convert.ToInt32(row["TransferDestWin"]);
 			// 延后的人数，用于排队计算；按下延后时更新此人数，以后有人办理时也需更新此人数，暂不使用这种策略
 			Delaynum = Convert.ToInt32(row["DelayNum"]);
 			// 延后秒数。记得在软呼叫或硬件时单位为分钟，需要换算后传过来。延后采用这种策略

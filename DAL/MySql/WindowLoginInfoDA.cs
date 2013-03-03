@@ -17,7 +17,7 @@ namespace QM.Client.DA.MySql
       {
 
           List<WindowLoginInfoOR> listLogins = new List<WindowLoginInfoOR>();
-          string sql = string.Format("select * from t_WindowLoginInfo where  logintime > '{0} 00:00:00' and status != 1 ",
+          string sql = string.Format("select * from t_WindowLoginInfo where  logintime > '{0}' and status != 1 order by logintime",
               DateTime.Now.ToString("yyyy-MM-dd"));
           DataTable dt = dbMySql.ExecuteQuery(sql);
           foreach (DataRow dr in dt.Rows)
@@ -41,14 +41,14 @@ namespace QM.Client.DA.MySql
       public string GetInsertSql(WindowLoginInfoOR windowlogininfo)
       {
           string sql = @"insert into t_windowlogininfo (ID,LoginTime,WindowNo,EmployNo,EmployName,Status,AlertTime)
-values ('@ID',LoginTime,'@WindowNo','@EmployNo','@EmployName',Status,AlertTime)";
+values ('@ID',now(),'@WindowNo','@EmployNo','@EmployName',Status,now())";
           sql = sql.Replace("@ID", windowlogininfo.Id);	//
-          sql = sql.Replace("@LoginTime", windowlogininfo.Logintime.ToString("yyyy-MM-dd HH:mm:ss"));	//
+          //sql = sql.Replace("@LoginTime", windowlogininfo.Logintime.ToString("yyyy-MM-dd HH:mm:ss"));	//
           sql = sql.Replace("@WindowNo", windowlogininfo.Windowno);	//
           sql = sql.Replace("@EmployNo", windowlogininfo.Employno);	//
           sql = sql.Replace("@EmployName", windowlogininfo.Employname);	//
           sql = sql.Replace("@Status", windowlogininfo.Status.ToString());	//
-          sql = sql.Replace("@AlertTime", windowlogininfo.Alerttime.ToString("yyyy-MM-dd HH:mm:ss"));	//
+          //sql = sql.Replace("@AlertTime", windowlogininfo.Alerttime.ToString("yyyy-MM-dd HH:mm:ss"));	//
 
           return sql;
       }
@@ -99,7 +99,6 @@ and status='{1}' and LoginTime > '{2} 00:00:00'", userID, status, DateTime.Now.T
       /// <returns></returns>
       public bool EndServer(WindowLoginInfoOR _obj)
       {
-          _obj.Status = 1;
          return UpdateLoginStatus(_obj);
       }
 
@@ -110,7 +109,6 @@ and status='{1}' and LoginTime > '{2} 00:00:00'", userID, status, DateTime.Now.T
       /// <returns></returns>
       public bool PauseServer(WindowLoginInfoOR _obj)
       {
-          _obj.Status = 2;
           return UpdateLoginStatus(_obj);
       }
 
@@ -121,7 +119,6 @@ and status='{1}' and LoginTime > '{2} 00:00:00'", userID, status, DateTime.Now.T
       /// <returns></returns>
       public bool RestarServer(WindowLoginInfoOR _obj)
       {
-          _obj.Status = 0;
           return UpdateLoginStatus(_obj);
       }
       /// <summary>
@@ -131,9 +128,9 @@ and status='{1}' and LoginTime > '{2} 00:00:00'", userID, status, DateTime.Now.T
       /// <returns></returns>
       public bool UpdateLoginStatus(WindowLoginInfoOR _obj)
       {
-          string sql = string.Format("update t_windowlogininfo set Status=1 ,AlertTime='{0}' where id='{1}'"
-              ,DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"), _obj.Id);
-          return dbMsSql.ExecuteNoQuery(sql) > 0;
+          string sql = string.Format("update t_windowlogininfo set Status={0} ,AlertTime=now() where id='{1}'"
+             , _obj.Status, _obj.Id);
+          return dbMySql.ExecuteNoQuery(sql) > 0;
       }
 
       #endregion

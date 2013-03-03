@@ -36,9 +36,9 @@
             // 
             this.btnBussiness.Location = new System.Drawing.Point(23, 13);
             this.btnBussiness.Name = "btnBussiness";
-            this.btnBussiness.Size = new System.Drawing.Size(75, 23);
+            this.btnBussiness.Size = new System.Drawing.Size(116, 23);
             this.btnBussiness.TabIndex = 0;
-            this.btnBussiness.Text = "Bussiness";
+            this.btnBussiness.Text = "与服务器数据同步";
             this.btnBussiness.UseVisualStyleBackColor = true;
             this.btnBussiness.Click += new System.EventHandler(this.btnBussiness_Click);
             // 
@@ -46,7 +46,7 @@
             // 
             this.rtbMsg.Location = new System.Drawing.Point(23, 57);
             this.rtbMsg.Name = "rtbMsg";
-            this.rtbMsg.Size = new System.Drawing.Size(384, 204);
+            this.rtbMsg.Size = new System.Drawing.Size(428, 204);
             this.rtbMsg.TabIndex = 1;
             this.rtbMsg.Text = "";
             // 
@@ -59,7 +59,7 @@
             this.Controls.Add(this.btnBussiness);
             this.MaximizeBox = false;
             this.Name = "FrmMain";
-            this.Text = "FrmMain";
+            this.Text = "更新数据";
             this.ResumeLayout(false);
 
         }

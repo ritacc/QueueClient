@@ -2,6 +2,37 @@
 <wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://www.ritacc.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://www.ritacc.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://www.ritacc.com/">
+      <s:element name="getLogin">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="password" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getLoginResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getLoginResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="endService">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userid" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowid" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="endServiceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="endServiceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="BussinessQH">
         <s:complexType>
           <s:sequence>
@@ -40,11 +71,24 @@
           <s:element minOccurs="1" maxOccurs="1" name="QueueNumber" type="s:int" />
         </s:sequence>
       </s:complexType>
+      <s:element name="getBussinessInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BussinessID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getBussinessInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getBussinessInfoResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="getCall">
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="param" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="mBillNo" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="value" type="s:string" />
           </s:sequence>
         </s:complexType>
@@ -76,8 +120,109 @@
       <s:element name="getCustomerSellInfoResponse">
         <s:complexType />
       </s:element>
+      <s:element name="GetPageWinById">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="id" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetPageWinByIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetPageWinByIdResult" type="tns:PageWinOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="PageWinOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Width" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Height" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="ISSelect" type="s:boolean" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetButtonsByPageWinId">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="windowId" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetButtonsByPageWinIdResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetButtonsByPageWinIdResult" type="tns:ArrayOfQhandyOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfQhandyOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="QhandyOR" nillable="true" type="tns:QhandyOR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="QhandyOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelIdx" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelVisible" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelCaption" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelFontcolor" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelFontname" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelFontunderline" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelFontitalic" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelFontbold" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelFontsize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelTop" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelLeft" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelJobno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelJobname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelPrintstr" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="LabelShade" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagVisible" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="TagCaption" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagFontcolor" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="TagFontname" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagFontunderline" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagFontitalic" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagFontbold" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagFontsize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagTopoffset" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="TagLeftoffset" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="LabelType" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelVisible" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnlabelCaption" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelFontcolor" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="EnlabelFontname" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelFontitalic" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelFontunderline" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelFontbold" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelFontsize" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Screentype" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelLeftoffset" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="EnlabelTopoffset" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Buttomtype" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Windowonid" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Windowid" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
+  <wsdl:message name="getLoginSoapIn">
+    <wsdl:part name="parameters" element="tns:getLogin" />
+  </wsdl:message>
+  <wsdl:message name="getLoginSoapOut">
+    <wsdl:part name="parameters" element="tns:getLoginResponse" />
+  </wsdl:message>
+  <wsdl:message name="endServiceSoapIn">
+    <wsdl:part name="parameters" element="tns:endService" />
+  </wsdl:message>
+  <wsdl:message name="endServiceSoapOut">
+    <wsdl:part name="parameters" element="tns:endServiceResponse" />
+  </wsdl:message>
   <wsdl:message name="BussinessQHSoapIn">
     <wsdl:part name="parameters" element="tns:BussinessQH" />
   </wsdl:message>
@@ -89,6 +234,12 @@
   </wsdl:message>
   <wsdl:message name="getQueueSoapOut">
     <wsdl:part name="parameters" element="tns:getQueueResponse" />
+  </wsdl:message>
+  <wsdl:message name="getBussinessInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:getBussinessInfo" />
+  </wsdl:message>
+  <wsdl:message name="getBussinessInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:getBussinessInfoResponse" />
   </wsdl:message>
   <wsdl:message name="getCallSoapIn">
     <wsdl:part name="parameters" element="tns:getCall" />
@@ -108,7 +259,27 @@
   <wsdl:message name="getCustomerSellInfoSoapOut">
     <wsdl:part name="parameters" element="tns:getCustomerSellInfoResponse" />
   </wsdl:message>
+  <wsdl:message name="GetPageWinByIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetPageWinById" />
+  </wsdl:message>
+  <wsdl:message name="GetPageWinByIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetPageWinByIdResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetButtonsByPageWinIdSoapIn">
+    <wsdl:part name="parameters" element="tns:GetButtonsByPageWinId" />
+  </wsdl:message>
+  <wsdl:message name="GetButtonsByPageWinIdSoapOut">
+    <wsdl:part name="parameters" element="tns:GetButtonsByPageWinIdResponse" />
+  </wsdl:message>
   <wsdl:portType name="QueueClientSoap">
+    <wsdl:operation name="getLogin">
+      <wsdl:input message="tns:getLoginSoapIn" />
+      <wsdl:output message="tns:getLoginSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="endService">
+      <wsdl:input message="tns:endServiceSoapIn" />
+      <wsdl:output message="tns:endServiceSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="BussinessQH">
       <wsdl:input message="tns:BussinessQHSoapIn" />
       <wsdl:output message="tns:BussinessQHSoapOut" />
@@ -116,6 +287,10 @@
     <wsdl:operation name="getQueue">
       <wsdl:input message="tns:getQueueSoapIn" />
       <wsdl:output message="tns:getQueueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getBussinessInfo">
+      <wsdl:input message="tns:getBussinessInfoSoapIn" />
+      <wsdl:output message="tns:getBussinessInfoSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="getCall">
       <wsdl:input message="tns:getCallSoapIn" />
@@ -129,9 +304,35 @@
       <wsdl:input message="tns:getCustomerSellInfoSoapIn" />
       <wsdl:output message="tns:getCustomerSellInfoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetPageWinById">
+      <wsdl:input message="tns:GetPageWinByIdSoapIn" />
+      <wsdl:output message="tns:GetPageWinByIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetButtonsByPageWinId">
+      <wsdl:input message="tns:GetButtonsByPageWinIdSoapIn" />
+      <wsdl:output message="tns:GetButtonsByPageWinIdSoapOut" />
+    </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QueueClientSoap" type="tns:QueueClientSoap">
     <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getLogin">
+      <soap:operation soapAction="http://www.ritacc.com/getLogin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="endService">
+      <soap:operation soapAction="http://www.ritacc.com/endService" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="BussinessQH">
       <soap:operation soapAction="http://www.ritacc.com/BussinessQH" style="document" />
       <wsdl:input>
@@ -143,6 +344,15 @@
     </wsdl:operation>
     <wsdl:operation name="getQueue">
       <soap:operation soapAction="http://www.ritacc.com/getQueue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBussinessInfo">
+      <soap:operation soapAction="http://www.ritacc.com/getBussinessInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -177,9 +387,45 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetPageWinById">
+      <soap:operation soapAction="http://www.ritacc.com/GetPageWinById" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetButtonsByPageWinId">
+      <soap:operation soapAction="http://www.ritacc.com/GetButtonsByPageWinId" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="QueueClientSoap12" type="tns:QueueClientSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="getLogin">
+      <soap12:operation soapAction="http://www.ritacc.com/getLogin" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="endService">
+      <soap12:operation soapAction="http://www.ritacc.com/endService" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="BussinessQH">
       <soap12:operation soapAction="http://www.ritacc.com/BussinessQH" style="document" />
       <wsdl:input>
@@ -191,6 +437,15 @@
     </wsdl:operation>
     <wsdl:operation name="getQueue">
       <soap12:operation soapAction="http://www.ritacc.com/getQueue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getBussinessInfo">
+      <soap12:operation soapAction="http://www.ritacc.com/getBussinessInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -218,6 +473,24 @@
     </wsdl:operation>
     <wsdl:operation name="getCustomerSellInfo">
       <soap12:operation soapAction="http://www.ritacc.com/getCustomerSellInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageWinById">
+      <soap12:operation soapAction="http://www.ritacc.com/GetPageWinById" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetButtonsByPageWinId">
+      <soap12:operation soapAction="http://www.ritacc.com/GetButtonsByPageWinId" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

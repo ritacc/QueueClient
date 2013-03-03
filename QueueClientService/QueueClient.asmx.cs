@@ -44,7 +44,7 @@ namespace QM.Client.WebService
         /// <param name="windowid"></param>
         /// <returns></returns>
         [WebMethod]
-        public int getLogin(string userid, string password, string windowid)
+        public string getLogin(string userid, string password, string windowid)
         {
             return Instanse().getLogin(userid,password,windowid);
         }
@@ -85,6 +85,16 @@ namespace QM.Client.WebService
             }
             return _Bill;
         }
+        
+        /// <summary>
+        ///3 获取所有业务队列
+        /// </summary>
+        /// <returns></returns>
+        [WebMethod]
+        public List<BussinessBasicInfoOR> getQueue()
+        {
+            return Instanse().getQueue();
+        }
 
         /// <summary>
         /// 4、	获取队列详细信息
@@ -92,6 +102,7 @@ namespace QM.Client.WebService
         /// </summary>
         /// <param name="bussinessID">根据业务ID</param>
         /// <returns></returns>
+         [WebMethod]
         public string getBussinessInfo(string BussinessID)
         {
             string strBillList = string.Empty;
@@ -105,30 +116,18 @@ namespace QM.Client.WebService
             }
             return strBillList;
         }
-
+        
         /// <summary>
-        ///5 获取所有业务队列
-        /// </summary>
-        /// <returns></returns>
-        [WebMethod]
-        public List<BussinessBasicInfoOR> getQueue()
-        {
-            return Instanse().getQueue();
-        }
-
-
-
-        /// <summary>
-        /// 呼叫接口
+        ///5 呼叫接口
         /// </summary>
         /// <param name="param"></param>
         /// <param name="mBillNo"></param>
         /// <param name="value"></param>
         /// <returns></returns>
         [WebMethod]
-        public string getCall(string param, string mBillNo, string value)
+        public string getCall(string param, string value)
         {
-            return Instanse().getCall(param, mBillNo, value);
+            return Instanse().getCall(param, value);
         }
 
         /// <summary>

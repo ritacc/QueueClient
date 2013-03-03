@@ -35,8 +35,57 @@ namespace QM.Client.WebService.Control
         /// 网点机构号
         /// </summary>
         public string BankNo { get; set; }
+
+        List<WindowLoginInfoOR> ListWindowLogins = new List<WindowLoginInfoOR>();
         #endregion
-        
+
+        #region 登录函数
+        /// <summary>
+        /// 查询员工是否已经登录
+        /// </summary>
+        /// <param name="mEmployeeNo"></param>
+        /// <returns></returns>
+        private WindowLoginInfoOR GetLoginLogByEmployeeNo(string mEmployeeNo)
+        {
+            foreach (WindowLoginInfoOR obj in ListWindowLogins)
+            {
+                if (obj.Status != 0 && obj.Employno == mEmployeeNo)
+                    return obj;
+            }
+            return null;
+        }
+
+        private WindowLoginInfoOR GetLoginLogByWindowNo(string mWindowno)
+        {
+            foreach (WindowLoginInfoOR obj in ListWindowLogins)
+            {
+                if (obj.Status != 0 && obj.Windowno == mWindowno)
+                    return obj;
+            }
+            return null;
+        }
+
+        private WindowLoginInfoOR GetLoginLog(string userid, string windowid)
+        {
+            foreach (WindowLoginInfoOR obj in ListWindowLogins)
+            {
+                if (obj.Employno == userid && obj.Windowno == windowid)
+                    return obj;
+            }
+            return null;
+        }
+
+        private WindowLoginInfoOR GetLoginLogByUserID(string userid, int mStatus)
+        {
+            foreach (WindowLoginInfoOR obj in ListWindowLogins)
+            {
+                if (obj.Employno == userid && obj.Status == mStatus)
+                    return obj;
+            }
+            return null;
+        }
+        #endregion
+
         #region 初使化
         /// <summary>
         /// 初使化、
@@ -61,6 +110,9 @@ namespace QM.Client.WebService.Control
                 bussQue.BussQueues = _QueueDA.selectBussinessQueues(obj.Id);//获取此队列未办结的取号记录
                 QhQueues.Add(bussQue);
             }
+
+            //初使化登录日志
+           ListWindowLogins= _WindowLoginDA.SelectToDayLogins();
         }
 
         /// <summary>
@@ -80,16 +132,46 @@ namespace QM.Client.WebService.Control
         /// <param name="password"></param>
         /// <param name="windowid"></param>
         /// <returns></returns>
-        public int getLogin(string userid, string password, string windowid)
+        public string getLogin(string userid, string password, string windowid)
         {
             EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployeeLogin(userid, password);
             if (_empOR == null)
             {
-                return 1;//用户名或密码错误
+                return "1";//用户名或密码错误
             }
             WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(windowid);
             if (_winOR == null)
-                return 2;//窗口不存在
+                return "2";//窗口不存在
+
+            WindowLoginInfoOR _Log = GetLoginLog(userid, windowid);
+            if (_Log == null)
+            {
+                //在内存中查询用户是否已经登录
+                WindowLoginInfoOR _LoginRecordEmp = GetLoginLogByEmployeeNo(userid);
+                if (_LoginRecordEmp != null)
+                {
+                    return "3";//用户已经登录
+                }
+
+                WindowLoginInfoOR _LoginRecordWin = GetLoginLogByWindowNo(windowid);
+                if (_LoginRecordWin != null)
+                {
+                    return "4";//此窗口已登录
+                }
+            }
+            else
+            {
+                int TimeLen = GetTimeLen(_Log.Logintime, DateTime.Now);
+                if (TimeLen < 300)
+                {
+                    return "5";
+                }
+                else//更新上次记录为结束
+                {
+                    _Log.Status = 1;
+                    _WindowLoginDA.UpdateLoginStatus(_Log);
+                }
+            }
 
             try
             {
@@ -100,19 +182,23 @@ namespace QM.Client.WebService.Control
                 _Login.Alerttime = _Login.Logintime = DateTime.Now;
                 _Login.Status = 0;
                 _WindowLoginDA.InsertLoginWindowInfo(_Login);//写入数据库
+
+                ListWindowLogins.Add(_Login);
             }
             catch (Exception ex)
             {
-                return 3;//写入数据库出错。
+                return ex.Message; //写入数据库出错。
             }
-            return 0;
+            return "0";
         }
 
         public string endService(string userid, string windowid)
         {
-            WindowLoginInfoOR _winLog = _WindowLoginDA.SelectLoginLogByUserIDAndWindowID(userid, windowid);
+            WindowLoginInfoOR _winLog = GetLoginLog(userid, windowid);
+            //WindowLoginInfoOR _winLog = _WindowLoginDA.SelectLoginLogByUserIDAndWindowID(userid, windowid);
             if (_winLog == null)
                 return "1";//登录用户、窗口号不存在
+
             try
             {
                 _winLog.Status = 1;
@@ -132,11 +218,13 @@ namespace QM.Client.WebService.Control
         {
             try
             {
-                WindowLoginInfoOR obj = _WindowLoginDA.SelectLoginLogByUserID(userID, "0");
+                WindowLoginInfoOR obj = GetLoginLogByUserID(userID, 0);
+                //WindowLoginInfoOR obj = _WindowLoginDA.SelectLoginLogByUserID(userID, "0");
                 if (obj == null)
                 {
-                    return "1";
+                    return "2";
                 }
+                obj.Status = 2;
                 _WindowLoginDA.PauseServer(obj);
             }
             catch (Exception Ex)
@@ -153,12 +241,14 @@ namespace QM.Client.WebService.Control
         {
             try
             {
-                WindowLoginInfoOR obj = _WindowLoginDA.SelectLoginLogByUserID(userID, "0");
+                WindowLoginInfoOR obj = GetLoginLogByUserID(userID, 2);
+                //WindowLoginInfoOR obj = _WindowLoginDA.SelectLoginLogByUserID(userID, "0");
                 if (obj == null)
                 {
                     return "1";
                 }
-                _WindowLoginDA.PauseServer(obj);
+                obj.Status = 0;
+                _WindowLoginDA.RestarServer(obj);
             }
             catch (Exception Ex)
             {
@@ -209,7 +299,7 @@ namespace QM.Client.WebService.Control
         {
             int TimeLen = 0;
             TimeSpan t = EndTime - Start;
-            TimeLen = (t.Hours * 60 * 60) + t.Minutes * 60 + t.Milliseconds;
+            TimeLen = (t.Hours * 60 * 60) + t.Minutes * 60 + t.Seconds;
             return TimeLen;
         }
         #endregion
@@ -259,6 +349,7 @@ namespace QM.Client.WebService.Control
 特呼	SPECALL	票号
 欢迎光临	WELCOME	空串
 请评价	JUDGE	空串
+
 暂停	PAUSE	空串
 恢复	RESTART	空串
          */
@@ -270,7 +361,7 @@ namespace QM.Client.WebService.Control
         /// <param name="BillNo">票号</param>
         /// <param name="value">值</param>
         /// <returns></returns>
-        public string getCall(string param,string BillNo, string value)
+        public string getCall(string param, string value)
         {
             string strReturnValue = "";
             switch (param)
@@ -281,8 +372,11 @@ namespace QM.Client.WebService.Control
                 case "RECALL":
                     CallReCall(value);
                     break;
-                case "DELAY": //延后 增加了一个票号
-                    strReturnValue = CallDelay(value, BillNo);
+                case "DELAY": //延后 增加了一个票号 (票号##时长)
+                    int mindex = value.IndexOf("##");
+                    string mBill = value.Substring(0, mindex);
+                    string mvalue = value.Substring(mindex + 2);
+                    strReturnValue = CallDelay(mvalue, mBill);
                     break;
                 case "TRANSFER":
                     CallTransfer(value);
@@ -291,10 +385,10 @@ namespace QM.Client.WebService.Control
                     CallSpecall(value);
                     break;
                 case "WELCOME":
-                    strReturnValue = CallWelcome(BillNo);
+                    strReturnValue = CallWelcome(value);
                     break;
                 case "JUDGE":
-                    strReturnValue = CallJudge(BillNo);
+                    strReturnValue = CallJudge(value);
                     break;
                 case "PAUSE":
                     strReturnValue = CallPause(value);
@@ -312,6 +406,8 @@ namespace QM.Client.WebService.Control
         /// </summary>
         private string CallGetNext(string mWindowNo)
         {
+            int iWindowNo = Convert.ToInt16(mWindowNo);
+
             //据呼叫的窗口号遍历每一个队列，找出延后人数为0的取出作为结果，若不存在，则进行第二次遍历
             QueueInfoOR mSelectQhObj=null;
             foreach (BussinessQueueOR objQhQue in QhQueues)
@@ -331,13 +427,12 @@ namespace QM.Client.WebService.Control
             {
                 foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                 {
-                    if (objQue.Transferdestwin.Trim() != "" && objQue.Transferdestwin != mWindowNo)
+                    if (objQue.Transferdestwin != 0 && objQue.Transferdestwin != iWindowNo)
                     {
                         continue;
                     }
                     if (objQue.Status == 0)
                     {
-                        //objQue.Status = 1;
                         mSelectQhObj = objQue;
                     }
                 }
@@ -345,7 +440,6 @@ namespace QM.Client.WebService.Control
             if (mSelectQhObj != null)
             {
                 //更新数据库状态
-                
                 mSelectQhObj.Status = 1;
                 mSelectQhObj.Waitinterval = GetTimeLen(mSelectQhObj.Prillbilltime
                     , DateTime.Now);
@@ -410,11 +504,18 @@ namespace QM.Client.WebService.Control
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return "此票号的记录不存在!";
-
-            objQH.Status = 2;
-            objQH.Processtime = DateTime.Now;
-            _QueueDA.UpdateCall(objQH);
-            return "";
+            try
+            {
+                objQH.Status = 2;
+                objQH.Processtime = DateTime.Now;
+                objQH.Waitinterval = GetTimeLen(objQH.Prillbilltime, DateTime.Now);
+                _QueueDA.UpdateWelcome(objQH);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "0";
         }
 
         /// <summary>
@@ -425,12 +526,18 @@ namespace QM.Client.WebService.Control
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return "此票号的记录不存在!";
-
-            objQH.Status = 3;
-            objQH.Finishtime = DateTime.Now;
-            objQH.Processinterval = GetTimeLen(objQH.Processtime, objQH.Finishtime);
-            _QueueDA.UpdateCallJudge(objQH);
-            return "";
+            try
+            {
+                objQH.Status = 3;
+                objQH.Finishtime = DateTime.Now;
+                objQH.Processinterval = GetTimeLen(objQH.Processtime, objQH.Finishtime);
+                _QueueDA.UpdateCallJudge(objQH);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "0";
         }
 
        
@@ -451,21 +558,27 @@ namespace QM.Client.WebService.Control
             {
                 throw new Exception("获取业务队列失败！，无法取号。");
             }
+            try
+            {
+                string _BillNo = GetBillNo();
 
-            string _BillNo = GetBillNo();
+                int mWaitpeoplebusssiness = 0;
+                int mWaitpeoplebank = 0;
+                //int mCustemclass = 0;
+                GetWaitPeople(bussinessID, out  mWaitpeoplebusssiness, out mWaitpeoplebank);
 
-            int mWaitpeoplebusssiness = 0;
-            int mWaitpeoplebank = 0;
-            //int mCustemclass = 0;
-            GetWaitPeople(bussinessID, out  mWaitpeoplebusssiness, out mWaitpeoplebank);
+                QueueInfoOR _qhOR = new QueueInfoOR(BankNo, _BillNo, bussinessID, mCardno
+                    , mWaitpeoplebusssiness, mWaitpeoplebank);//初使化取号
+                _QueueDA.QH(_qhOR);//将取号插入到数据库
 
-            QueueInfoOR _qhOR = new QueueInfoOR(BankNo, _BillNo, bussinessID, mCardno
-                , mWaitpeoplebusssiness, mWaitpeoplebank);//初使化取号
-            _QueueDA.QH(_qhOR);//将取号插入到数据库
-
-            //插入到当前队列
-            _CurentBuss.BussQueues.Add(_qhOR);
-            return _BillNo;
+                //插入到当前队列
+                _CurentBuss.BussQueues.Add(_qhOR);
+                return _BillNo;
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
         }
         
         

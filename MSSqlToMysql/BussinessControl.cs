@@ -217,10 +217,7 @@ namespace QM.Client.UpdateDB
             }
             return true;
         }
-
-
-
-
+        
         public bool UpdateEmployType()
         {
             if (string.IsNullOrEmpty(OrgbhWhere))

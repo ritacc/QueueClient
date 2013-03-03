@@ -37,6 +37,15 @@
             this.btnWelcome = new System.Windows.Forms.Button();
             this.txtBill = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.btnGetQueues = new System.Windows.Forms.Button();
+            this.rtbMsg = new System.Windows.Forms.RichTextBox();
+            this.lblBill = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.btnLogin = new System.Windows.Forms.Button();
+            this.txtEmployeeNo = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.btnJudge = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -61,7 +70,7 @@
             // 
             // btnCH
             // 
-            this.btnCH.Location = new System.Drawing.Point(249, 225);
+            this.btnCH.Location = new System.Drawing.Point(311, 225);
             this.btnCH.Name = "btnCH";
             this.btnCH.Size = new System.Drawing.Size(75, 23);
             this.btnCH.TabIndex = 2;
@@ -71,14 +80,14 @@
             // 
             // txtBussinessID
             // 
-            this.txtBussinessID.Location = new System.Drawing.Point(22, 225);
+            this.txtBussinessID.Location = new System.Drawing.Point(52, 225);
             this.txtBussinessID.Name = "txtBussinessID";
-            this.txtBussinessID.Size = new System.Drawing.Size(212, 21);
+            this.txtBussinessID.Size = new System.Drawing.Size(253, 21);
             this.txtBussinessID.TabIndex = 3;
             // 
             // btnCall
             // 
-            this.btnCall.Location = new System.Drawing.Point(249, 254);
+            this.btnCall.Location = new System.Drawing.Point(188, 255);
             this.btnCall.Name = "btnCall";
             this.btnCall.Size = new System.Drawing.Size(75, 23);
             this.btnCall.TabIndex = 4;
@@ -88,14 +97,14 @@
             // 
             // txtWindowNo
             // 
-            this.txtWindowNo.Location = new System.Drawing.Point(22, 252);
+            this.txtWindowNo.Location = new System.Drawing.Point(435, 370);
             this.txtWindowNo.Name = "txtWindowNo";
-            this.txtWindowNo.Size = new System.Drawing.Size(212, 21);
+            this.txtWindowNo.Size = new System.Drawing.Size(100, 21);
             this.txtWindowNo.TabIndex = 5;
             // 
             // btnWelcome
             // 
-            this.btnWelcome.Location = new System.Drawing.Point(249, 284);
+            this.btnWelcome.Location = new System.Drawing.Point(178, 284);
             this.btnWelcome.Name = "btnWelcome";
             this.btnWelcome.Size = new System.Drawing.Size(75, 23);
             this.btnWelcome.TabIndex = 6;
@@ -105,7 +114,7 @@
             // 
             // txtBill
             // 
-            this.txtBill.Location = new System.Drawing.Point(72, 284);
+            this.txtBill.Location = new System.Drawing.Point(52, 284);
             this.txtBill.Name = "txtBill";
             this.txtBill.Size = new System.Drawing.Size(120, 21);
             this.txtBill.TabIndex = 7;
@@ -113,17 +122,107 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(23, 290);
+            this.label1.Location = new System.Drawing.Point(12, 289);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(41, 12);
             this.label1.TabIndex = 8;
             this.label1.Text = "票号：";
             // 
+            // btnGetQueues
+            // 
+            this.btnGetQueues.Location = new System.Drawing.Point(249, 394);
+            this.btnGetQueues.Name = "btnGetQueues";
+            this.btnGetQueues.Size = new System.Drawing.Size(75, 23);
+            this.btnGetQueues.TabIndex = 9;
+            this.btnGetQueues.Text = "获取取号记录";
+            this.btnGetQueues.UseVisualStyleBackColor = true;
+            this.btnGetQueues.Click += new System.EventHandler(this.btnGetQueues_Click);
+            // 
+            // rtbMsg
+            // 
+            this.rtbMsg.Location = new System.Drawing.Point(13, 396);
+            this.rtbMsg.Name = "rtbMsg";
+            this.rtbMsg.Size = new System.Drawing.Size(221, 96);
+            this.rtbMsg.TabIndex = 10;
+            this.rtbMsg.Text = "";
+            // 
+            // lblBill
+            // 
+            this.lblBill.AutoSize = true;
+            this.lblBill.Location = new System.Drawing.Point(402, 225);
+            this.lblBill.Name = "lblBill";
+            this.lblBill.Size = new System.Drawing.Size(29, 12);
+            this.lblBill.TabIndex = 11;
+            this.lblBill.Text = "票号";
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(-1, 229);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(53, 12);
+            this.label2.TabIndex = 12;
+            this.label2.Text = "业务ID：";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(391, 377);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(41, 12);
+            this.label3.TabIndex = 13;
+            this.label3.Text = "窗口：";
+            // 
+            // btnLogin
+            // 
+            this.btnLogin.Location = new System.Drawing.Point(435, 408);
+            this.btnLogin.Name = "btnLogin";
+            this.btnLogin.Size = new System.Drawing.Size(75, 23);
+            this.btnLogin.TabIndex = 14;
+            this.btnLogin.Text = "登录";
+            this.btnLogin.UseVisualStyleBackColor = true;
+            this.btnLogin.Click += new System.EventHandler(this.btnLogin_Click);
+            // 
+            // txtEmployeeNo
+            // 
+            this.txtEmployeeNo.Location = new System.Drawing.Point(435, 334);
+            this.txtEmployeeNo.Name = "txtEmployeeNo";
+            this.txtEmployeeNo.Size = new System.Drawing.Size(100, 21);
+            this.txtEmployeeNo.TabIndex = 15;
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(366, 343);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(65, 12);
+            this.label4.TabIndex = 16;
+            this.label4.Text = "用户编号：";
+            // 
+            // btnJudge
+            // 
+            this.btnJudge.Location = new System.Drawing.Point(260, 283);
+            this.btnJudge.Name = "btnJudge";
+            this.btnJudge.Size = new System.Drawing.Size(75, 23);
+            this.btnJudge.TabIndex = 17;
+            this.btnJudge.Text = "请评价";
+            this.btnJudge.UseVisualStyleBackColor = true;
+            this.btnJudge.Click += new System.EventHandler(this.btnJudge_Click);
+            // 
             // FrmMain
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(503, 506);
+            this.ClientSize = new System.Drawing.Size(547, 506);
+            this.Controls.Add(this.btnJudge);
+            this.Controls.Add(this.label4);
+            this.Controls.Add(this.txtEmployeeNo);
+            this.Controls.Add(this.btnLogin);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.lblBill);
+            this.Controls.Add(this.rtbMsg);
+            this.Controls.Add(this.btnGetQueues);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtBill);
             this.Controls.Add(this.btnWelcome);
@@ -152,6 +251,15 @@
         private System.Windows.Forms.Button btnWelcome;
         private System.Windows.Forms.TextBox txtBill;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Button btnGetQueues;
+        private System.Windows.Forms.RichTextBox rtbMsg;
+        private System.Windows.Forms.Label lblBill;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.Button btnLogin;
+        private System.Windows.Forms.TextBox txtEmployeeNo;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.Button btnJudge;
     }
 }
 

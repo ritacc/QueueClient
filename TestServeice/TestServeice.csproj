@@ -71,6 +71,12 @@
     <None Include="Service References\QueueClient\TestServeice.QueueClient.BussinessOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\QueueClient\TestServeice.QueueClient.PageWinOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\QueueClient\TestServeice.QueueClient.QhandyOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />

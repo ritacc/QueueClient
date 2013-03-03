@@ -90,9 +90,13 @@ namespace QM.Client.Entity
 			_Name = row["Name"].ToString().Trim();
 			// 业务角色
 			_Role = row["Role"].ToString().Trim();
+
 			// 声音设备
-			_Sounddev = Convert.ToInt32(row["SoundDev"]);
-			// 描述
+            _Sounddev = 0;
+            if (row["SoundDev"] != DBNull.Value)
+                _Sounddev = Convert.ToInt32(row["SoundDev"]);
+			
+            // 描述
 			_Description = row["Description"].ToString().Trim();
 			// 机构
 			_Orgbh = row["OrgBH"].ToString().Trim();

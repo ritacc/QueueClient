@@ -87,6 +87,7 @@ namespace QM.Client.Entity
         public WindowLoginInfoOR()
         {
             _Id = System.Guid.NewGuid().ToString();
+            _Logintime = _Alerttime = DateTime.Now;
 
         }
 
