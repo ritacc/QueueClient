@@ -47,6 +47,7 @@
     <Compile Include="MSSql\NearbyInfoMSSqlDA.cs" />
     <Compile Include="MSSql\PageWinMSSqlDA.cs" />
     <Compile Include="MSSql\QhandyMSSqlDA.cs" />
+    <Compile Include="MSSql\QueueInfoMSSqlDA.cs" />
     <Compile Include="MSSql\ShutdownTimeMSSqlDA.cs" />
     <Compile Include="MSSql\SmsPeopleMSSqlDA.cs" />
     <Compile Include="MSSql\SysParaMSSqlDA.cs" />

@@ -34,22 +34,29 @@ namespace QM.Client.UpdateDB
             // TODO: 在此处添加代码以启动服务。
             if (InitAppSett())
             {
-                //参数同步
-                
-                 if (ParaDownTime < -1 || ParaDownTime > 23)
+                //参数同步                
+                if (ParaDownTime < -1 || ParaDownTime > 23)
                 {
                     WriteLog.writLog("1002", "参数配置");
                 }
-                 else if (ParaDownTime == -1)
-                 {
-                     UpdataParaControl();
-                 }
-                 else
-                 {
-                     ParaUpdateThread = new Thread(UpdataParaThread);
-                     ParaUpdateThread.Start();
-                 }
+                else if (ParaDownTime == -1)
+                {
+                    UpdataParaControl();
+                }
+                else
+                {
+                    ParaUpdateThread = new Thread(UpdataParaThread);
+                    ParaUpdateThread.Start();
+                }
+                
+                //上传取号数据
+                if (ParaDownTime < 30)//最小时间30
+                    ParaDownTime = 30;
+                trUpQueue.Interval = ParaDownTime * 1000;
+                trUpQueue.Enabled = true;
             }
+            
+            
         }
 
         /// <summary>
@@ -74,6 +81,7 @@ namespace QM.Client.UpdateDB
             {
                 ParaUpdateThread.Abort();
             }
+            trUpQueue.Enabled = false;
         }
         
         private bool InitAppSett()
@@ -114,6 +122,13 @@ namespace QM.Client.UpdateDB
                 _BussCon.UpdateVIPCardKey();
                 _BussCon.UpdateVipCardType();
             }
+        }
+
+        private void trUpQueue_Tick(object sender, EventArgs e)
+        {
+            WriteLog.writeMsgLog("0000", "开始更新取号数据。");
+            QueueinfoControl QC = new QueueinfoControl();
+            QC.UpQueueData();
         }
     }
 }

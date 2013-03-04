@@ -22,7 +22,7 @@ namespace QM.Client.WebService.Control
          */
          
         BussinessMySqlDA _busDA = new BussinessMySqlDA();//业务DA
-        QueueInfoDA _QueueDA=new QueueInfoDA();//取号DA
+        QueueInfoMySqlDA _QueueDA = new QueueInfoMySqlDA();//取号DA
         WindowLoginInfoDA _WindowLoginDA = new WindowLoginInfoDA();
 
         #region 属性

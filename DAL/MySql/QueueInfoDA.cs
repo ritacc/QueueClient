@@ -6,7 +6,7 @@ using QM.Client.Entity;
 
 namespace QM.Client.DA.MySql
 {
-   public class QueueInfoDA:DALBase
+   public class QueueInfoMySqlDA:DALBase
     {
 
        /// <summary>
@@ -198,6 +198,17 @@ Processinterval=@Processinterval  where ID='@ID' ";
        /// <returns></returns>
        public bool UpdateQueueUploadStatus(List<QueueInfoOR> UpList)
        {
+           if (UpList != null && UpList.Count > 0)
+           {
+               List<string> listSql = new List<string>();
+               foreach (QueueInfoOR obj in UpList)
+               {
+                   string sql = string.Format("update t_queueinfo set upstatus={0} where id='{0}'",
+                       obj.Status, obj.Id);
+                   listSql.Add(sql);
+               }
+               dbMySql.ExecuteNoQueryTran(listSql);
+           }
            return true;
        }
         #endregion

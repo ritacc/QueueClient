@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using QM.Client.Entity;
 using QM.Client.DA.MySql;
+using QM.Client.DA.MSSql;
 
 namespace QM.Client.UpdateDB
 {
@@ -25,8 +26,22 @@ ADD COLUMN `UpStatus`  int NOT NULL DEFAULT '-1' AFTER `Status`;
         {
             try
             {
-                List<QueueInfoOR> ListQue = new QueueInfoDA().SelectUpdata();
-
+                QueueInfoMySqlDA _queMysql = new QueueInfoMySqlDA();
+                QueueInfoMSSqlDA _queMSSql = new QueueInfoMSSqlDA();
+                //查询需要更新的数据
+                List<QueueInfoOR> ListQue = _queMysql.SelectUpdata();
+                if (ListQue != null && ListQue.Count > 0)
+                {
+                    //上传数据
+                    _queMSSql.UpData(ListQue);
+                    //更新mysql状态
+                    _queMysql.UpdateQueueUploadStatus(ListQue);
+                    WriteLog.writLog("0000", string.Format("更新数据:{0}条", ListQue.Count));
+                }
+                else
+                {
+                    WriteLog.writLog("0000", "没有可更新数据。");
+                }
             }
             catch (Exception ex)
             {
