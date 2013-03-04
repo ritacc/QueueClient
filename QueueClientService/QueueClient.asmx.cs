@@ -20,7 +20,7 @@ namespace QM.Client.WebService
     {
         public static QueueMian _QueueMain { set; get; }
         public object lockObj = new object();
-        private readonly QClientDA _qClientDA = new QClientDA();
+        private readonly QhandyMySqlDA _qClientDA = new QhandyMySqlDA();
         private QueueMian Instanse()
         {
             if (_QueueMain == null)

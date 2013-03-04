@@ -161,5 +161,46 @@ Processinterval=@Processinterval  where ID='@ID' ";
 
         #endregion
 
+        #region 数据同步
+       /// <summary>
+       /// 查询需要同步的数据
+       /// </summary>
+       /// <returns></returns>
+       public List<QueueInfoOR> SelectUpdata()
+       {
+           string sql = "select * from t_queueinfo where status != upstatus order by status";
+
+           DataTable dt = null;
+           try
+           {
+               dt = dbMySql.ExecuteQuery(sql);
+           }
+           catch (Exception ex)
+           {
+               throw ex;
+           }
+           if (dt == null)
+           {
+               return null;
+           }
+           List<QueueInfoOR> listQue = new List<QueueInfoOR>();
+           foreach (DataRow dr in dt.Rows)
+           {
+               QueueInfoOR obj = new QueueInfoOR(dr);
+               listQue.Add(obj);
+           }
+           return listQue;
+       }
+
+       /// <summary>
+       /// 更新同步状态
+       /// </summary>
+       /// <returns></returns>
+       public bool UpdateQueueUploadStatus(List<QueueInfoOR> UpList)
+       {
+           return true;
+       }
+        #endregion
+
     }
 }

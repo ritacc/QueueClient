@@ -205,6 +205,11 @@ namespace QM.Client.Entity
         /// 取号状态 0：取号,1:叫号、2：欢迎、3：结束、4上传完成。
         /// </summary>
         public int Status { get; set; }
+        /// <summary>
+        /// 数据同步状态
+        /// </summary>
+        public int UpStatus { get; set; }
+
 		/// <summary>
 		/// QueueInfo构造函数
 		/// </summary>
@@ -270,10 +275,7 @@ namespace QM.Client.Entity
             _Waitinterval = 0;
             // 办理时长(秒)
             _Processinterval = 0;
-            //// 取号时该业务的等待人数
-            //_Waitpeoplebusssiness = 0;
-            //// 取号时该网点的等待人数
-            //_Waitpeoplebank = 0;
+           
             // 客户等级
             _Custemclass = 0;
             Description = "";
@@ -332,6 +334,7 @@ namespace QM.Client.Entity
 			Description = row["Description"].ToString().Trim();
 
             Status = Convert.ToInt32(row["status"]);
+            UpStatus = Convert.ToInt32(row["upstatus"]);
 		}
     }
 }

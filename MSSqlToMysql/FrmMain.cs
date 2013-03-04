@@ -22,8 +22,8 @@ namespace QM.Client.UpdateDB
 
         private void btnBussiness_Click(object sender, EventArgs e)
         {
-            BussinessControl _BussCon = new BussinessControl();
-            _BussCon.ShowErr += new BussinessControl.ShowErrHeader(BussCon_ShowErr);
+            ParaUpdateControl _BussCon = new ParaUpdateControl();
+            _BussCon.ShowErr += new ParaUpdateControl.ShowErrHeader(BussCon_ShowErr);
             if (_BussCon.Init())
             {
                 _BussCon.UpdateBussiness();
@@ -44,8 +44,6 @@ namespace QM.Client.UpdateDB
                 _BussCon.UpdateSmsPeople();
                 _BussCon.UpdateVIPCardKey();
                 _BussCon.UpdateVipCardType();
-
-                
 
                 BussCon_ShowErr(null, "更新完成。");
             }

@@ -61,7 +61,6 @@
     <Compile Include="MySql\EmployTypeMySqlDA.cs" />
     <Compile Include="MySql\NearbyInfoMySqlDA.cs" />
     <Compile Include="MySql\PageWinMySqlDA.cs" />
-    <Compile Include="MySql\QClientDA.cs" />
     <Compile Include="MySql\QhandyMySqlDA.cs" />
     <Compile Include="MySql\QueueInfoDA.cs" />
     <Compile Include="MySql\ShutdownTimeMySqlDA.cs" />

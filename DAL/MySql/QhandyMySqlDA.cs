@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Text;
 using QM.Client.Entity;
+using System.Data;
 
 namespace QM.Client.DA.MySql
 {
@@ -36,14 +37,14 @@ TAG_TOPOFFSET,TAG_LEFTOFFSET,LABEL_TYPE,ENLABEL_VISIBLE,ENLABEL_CAPTION,
 ENLABEL_FONTCOLOR,ENLABEL_FONTNAME,ENLABEL_FONTITALIC,ENLABEL_FONTUNDERLINE,ENLABEL_FONTBOLD,
 ENLABEL_FONTSIZE,SCREENTYPE,ENLABEL_LEFTOFFSET,ENLABEL_TOPOFFSET,ButtomType,
 windowOnID,windowID)
-values ('@ID','@OrgBH',LABEL_IDX,LABEL_VISIBLE,'@LABEL_CAPTION',
-LABEL_FONTCOLOR,'@LABEL_FONTNAME',LABEL_FONTUNDERLINE,LABEL_FONTITALIC,LABEL_FONTBOLD,
-LABEL_FONTSIZE,LABEL_TOP,LABEL_LEFT,'@LABEL_JOBNO','@LABEL_JOBNAME',
-'@LABEL_PRINTSTR',LABEL_SHADE,TAG_VISIBLE,'@TAG_CAPTION',TAG_FONTCOLOR,
-'@TAG_FONTNAME',TAG_FONTUNDERLINE,TAG_FONTITALIC,TAG_FONTBOLD,TAG_FONTSIZE,
-TAG_TOPOFFSET,TAG_LEFTOFFSET,'@LABEL_TYPE',ENLABEL_VISIBLE,'@ENLABEL_CAPTION',
-ENLABEL_FONTCOLOR,'@ENLABEL_FONTNAME',ENLABEL_FONTITALIC,ENLABEL_FONTUNDERLINE,ENLABEL_FONTBOLD,
-ENLABEL_FONTSIZE,SCREENTYPE,ENLABEL_LEFTOFFSET,ENLABEL_TOPOFFSET,ButtomType,
+values ('@ID','@OrgBH',@LABEL_IDX,@LABEL_VISIBLE,'@LABEL_CAPTION',
+@LABEL_FONTCOLOR,'@LABEL_FONTNAME',@LABEL_FONTUNDERLINE,@LABEL_FONTITALIC,@LABEL_FONTBOLD,
+@LABEL_FONTSIZE,@LABEL_TOP,@LABEL_LEFT,'@LABEL_JOBNO','@LABEL_JOBNAME',
+'@LABEL_PRINTSTR',@LABEL_SHADE,@TAG_VISIBLE,'@TAG_CAPTION',@TAG_FONTCOLOR,
+'@TAG_FONTNAME',@TAG_FONTUNDERLINE,@TAG_FONTITALIC,@TAG_FONTBOLD,@TAG_FONTSIZE,
+@TAG_TOPOFFSET,@TAG_LEFTOFFSET,'@LABEL_TYPE',@ENLABEL_VISIBLE,'@ENLABEL_CAPTION',
+@ENLABEL_FONTCOLOR,'@ENLABEL_FONTNAME',@ENLABEL_FONTITALIC,@ENLABEL_FONTUNDERLINE,@ENLABEL_FONTBOLD,
+@ENLABEL_FONTSIZE,@SCREENTYPE,@ENLABEL_LEFTOFFSET,@ENLABEL_TOPOFFSET,@ButtomType,
 '@windowOnID','@windowID')";
             sql = sql.Replace("@ID", qhandy.Id);	//
             sql = sql.Replace("@OrgBH", qhandy.Orgbh);	//
@@ -91,6 +92,33 @@ ENLABEL_FONTSIZE,SCREENTYPE,ENLABEL_LEFTOFFSET,ENLABEL_TOPOFFSET,ButtomType,
             return sql;
         }
         #endregion
+
+
+        public PageWinOR GetPageWinId(string id)
+        {
+            var sql = string.Format("SELECT * FROM T_PAGEWIN WHERE ID = '{0}'", id);
+            var dt = dbMySql.ExecuteQuery(sql);
+            if (null != dt && dt.Rows.Count > 0)
+            {
+                return new PageWinOR(dt.Rows[0]);
+            }
+            return null;
+        }
+
+        public List<QhandyOR> GetButtonsByPageWinId(string windowID)
+        {
+            var result = new List<QhandyOR>();
+            var sql = string.Format("SELECT * FROM t_qhandy WHERE windowID = '{0}'", windowID);
+            var dt = dbMySql.ExecuteQuery(sql);
+            if (null != dt)
+            {
+                foreach (DataRow row in dt.Rows)
+                {
+                    result.Add(new QhandyOR(row));
+                }
+            }
+            return result;
+        }
 
     }
 }

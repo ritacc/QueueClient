@@ -8,7 +8,7 @@ using System.Configuration;
 
 namespace QM.Client.UpdateDB
 {
-    public class BussinessControl
+    public class ParaUpdateControl
     {
         #region 属性
         public delegate void ShowErrHeader(object sender, string msg);
