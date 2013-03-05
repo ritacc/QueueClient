@@ -33,7 +33,7 @@ ADD COLUMN `UpStatus`  int NOT NULL DEFAULT '-1' AFTER `Status`;
                 if (ListQue != null && ListQue.Count > 0)
                 {
                     //上传数据
-                    _queMSSql.UpData(ListQue);
+                    _queMSSql.Updata(ListQue);
                     //更新mysql状态
                     _queMysql.UpdateQueueUploadStatus(ListQue);
                     WriteLog.writLog("0000", string.Format("更新数据:{0}条", ListQue.Count));

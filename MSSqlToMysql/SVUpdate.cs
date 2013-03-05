@@ -124,6 +124,11 @@ namespace QM.Client.UpdateDB
             }
         }
 
+        /// <summary>
+        /// 同步(上传取号数据)
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void trUpQueue_Tick(object sender, EventArgs e)
         {
             WriteLog.writeMsgLog("0000", "开始更新取号数据。");

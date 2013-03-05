@@ -59,6 +59,7 @@
             this.Controls.Add(this.btnBussiness);
             this.MaximizeBox = false;
             this.Name = "FrmMain";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "更新数据";
             this.ResumeLayout(false);
 
