@@ -6,7 +6,7 @@ namespace ServerInstall
 {
    public class StrCommon
     {
-       public static string GetParamValue(ref string strValue, string strKey, string strSpitKey)
+       public static string GetParamValue(string strValue, string strKey, string strSpitKey)
        {
            string str = "";
            int length = -1;

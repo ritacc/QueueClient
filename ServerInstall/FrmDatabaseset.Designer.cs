@@ -39,6 +39,7 @@
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnMysqlTest = new System.Windows.Forms.Button();
             this.txtMysqlUserName = new System.Windows.Forms.TextBox();
             this.txtMysqlIP = new System.Windows.Forms.TextBox();
             this.txtMySqlPwd = new System.Windows.Forms.TextBox();
@@ -47,8 +48,15 @@
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
-            this.btnMysqlTest = new System.Windows.Forms.Button();
             this.btnnext = new System.Windows.Forms.Button();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtQueueUpTimeLen = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
+            this.txtBankno = new System.Windows.Forms.TextBox();
+            this.label12 = new System.Windows.Forms.Label();
+            this.cbUpTimelen = new System.Windows.Forms.ComboBox();
+            this.label13 = new System.Windows.Forms.Label();
             this.gpDB.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -64,24 +72,25 @@
             this.gpDB.Controls.Add(this.label3);
             this.gpDB.Controls.Add(this.label1);
             this.gpDB.Controls.Add(this.label2);
-            this.gpDB.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.gpDB.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.gpDB.Location = new System.Drawing.Point(14, 14);
             this.gpDB.Name = "gpDB";
-            this.gpDB.Size = new System.Drawing.Size(265, 205);
+            this.gpDB.Size = new System.Drawing.Size(242, 179);
             this.gpDB.TabIndex = 14;
             this.gpDB.TabStop = false;
             this.gpDB.Text = "服务器数据库配置(SQLServer)";
             // 
             // txtBcmUid
             // 
-            this.txtBcmUid.Location = new System.Drawing.Point(103, 65);
+            this.txtBcmUid.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtBcmUid.Location = new System.Drawing.Point(103, 51);
             this.txtBcmUid.Name = "txtBcmUid";
-            this.txtBcmUid.Size = new System.Drawing.Size(135, 26);
+            this.txtBcmUid.Size = new System.Drawing.Size(105, 23);
             this.txtBcmUid.TabIndex = 1;
             // 
             // btnMSSqlTest
             // 
-            this.btnMSSqlTest.Location = new System.Drawing.Point(183, 168);
+            this.btnMSSqlTest.Location = new System.Drawing.Point(153, 138);
             this.btnMSSqlTest.Name = "btnMSSqlTest";
             this.btnMSSqlTest.Size = new System.Drawing.Size(55, 27);
             this.btnMSSqlTest.TabIndex = 9;
@@ -91,60 +100,66 @@
             // 
             // txtBcmIp
             // 
-            this.txtBcmIp.Location = new System.Drawing.Point(103, 33);
+            this.txtBcmIp.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtBcmIp.Location = new System.Drawing.Point(103, 22);
             this.txtBcmIp.Name = "txtBcmIp";
-            this.txtBcmIp.Size = new System.Drawing.Size(135, 26);
+            this.txtBcmIp.Size = new System.Drawing.Size(105, 23);
             this.txtBcmIp.TabIndex = 0;
             // 
             // txtBcmPwd
             // 
-            this.txtBcmPwd.Location = new System.Drawing.Point(103, 97);
+            this.txtBcmPwd.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtBcmPwd.Location = new System.Drawing.Point(103, 80);
             this.txtBcmPwd.Name = "txtBcmPwd";
-            this.txtBcmPwd.Size = new System.Drawing.Size(135, 26);
+            this.txtBcmPwd.Size = new System.Drawing.Size(105, 23);
             this.txtBcmPwd.TabIndex = 2;
             this.txtBcmPwd.UseSystemPasswordChar = true;
             // 
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(9, 132);
+            this.label4.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label4.Location = new System.Drawing.Point(14, 113);
             this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(88, 16);
+            this.label4.Size = new System.Drawing.Size(77, 14);
             this.label4.TabIndex = 7;
             this.label4.Text = "数据库名称";
             // 
             // txtBcmName
             // 
-            this.txtBcmName.Location = new System.Drawing.Point(103, 128);
+            this.txtBcmName.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.txtBcmName.Location = new System.Drawing.Point(103, 109);
             this.txtBcmName.Name = "txtBcmName";
-            this.txtBcmName.Size = new System.Drawing.Size(135, 26);
+            this.txtBcmName.Size = new System.Drawing.Size(105, 23);
             this.txtBcmName.TabIndex = 3;
-            this.txtBcmName.Text = "BCM_FZ";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(59, 100);
+            this.label3.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label3.Location = new System.Drawing.Point(59, 83);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(40, 16);
+            this.label3.Size = new System.Drawing.Size(35, 14);
             this.label3.TabIndex = 6;
             this.label3.Text = "密码";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(41, 36);
+            this.label1.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label1.Location = new System.Drawing.Point(41, 25);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(56, 16);
+            this.label1.Size = new System.Drawing.Size(49, 14);
             this.label1.TabIndex = 4;
             this.label1.Text = "IP地址";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(42, 68);
+            this.label2.Font = new System.Drawing.Font("宋体", 10.5F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
+            this.label2.Location = new System.Drawing.Point(42, 54);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(56, 16);
+            this.label2.Size = new System.Drawing.Size(49, 14);
             this.label2.TabIndex = 5;
             this.label2.Text = "用户名";
             // 
@@ -159,39 +174,49 @@
             this.groupBox1.Controls.Add(this.label6);
             this.groupBox1.Controls.Add(this.label7);
             this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Location = new System.Drawing.Point(294, 14);
+            this.groupBox1.Location = new System.Drawing.Point(273, 14);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(239, 205);
+            this.groupBox1.Size = new System.Drawing.Size(234, 179);
             this.groupBox1.TabIndex = 15;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "客户端数据库(MySQL)";
             // 
+            // btnMysqlTest
+            // 
+            this.btnMysqlTest.Location = new System.Drawing.Point(136, 141);
+            this.btnMysqlTest.Name = "btnMysqlTest";
+            this.btnMysqlTest.Size = new System.Drawing.Size(55, 27);
+            this.btnMysqlTest.TabIndex = 16;
+            this.btnMysqlTest.Text = "测试";
+            this.btnMysqlTest.UseVisualStyleBackColor = true;
+            this.btnMysqlTest.Click += new System.EventHandler(this.btnMysqlTest_Click);
+            // 
             // txtMysqlUserName
             // 
-            this.txtMysqlUserName.Location = new System.Drawing.Point(86, 68);
+            this.txtMysqlUserName.Location = new System.Drawing.Point(86, 53);
             this.txtMysqlUserName.Name = "txtMysqlUserName";
-            this.txtMysqlUserName.Size = new System.Drawing.Size(135, 23);
+            this.txtMysqlUserName.Size = new System.Drawing.Size(105, 23);
             this.txtMysqlUserName.TabIndex = 9;
             // 
             // txtMysqlIP
             // 
-            this.txtMysqlIP.Location = new System.Drawing.Point(86, 36);
+            this.txtMysqlIP.Location = new System.Drawing.Point(86, 22);
             this.txtMysqlIP.Name = "txtMysqlIP";
-            this.txtMysqlIP.Size = new System.Drawing.Size(135, 23);
+            this.txtMysqlIP.Size = new System.Drawing.Size(105, 23);
             this.txtMysqlIP.TabIndex = 8;
             // 
             // txtMySqlPwd
             // 
-            this.txtMySqlPwd.Location = new System.Drawing.Point(86, 100);
+            this.txtMySqlPwd.Location = new System.Drawing.Point(86, 83);
             this.txtMySqlPwd.Name = "txtMySqlPwd";
-            this.txtMySqlPwd.Size = new System.Drawing.Size(135, 23);
+            this.txtMySqlPwd.Size = new System.Drawing.Size(105, 23);
             this.txtMySqlPwd.TabIndex = 10;
             this.txtMySqlPwd.UseSystemPasswordChar = true;
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 137);
+            this.label5.Location = new System.Drawing.Point(3, 118);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(77, 14);
             this.label5.TabIndex = 15;
@@ -199,16 +224,15 @@
             // 
             // txtMysqlDB
             // 
-            this.txtMysqlDB.Location = new System.Drawing.Point(86, 131);
+            this.txtMysqlDB.Location = new System.Drawing.Point(86, 112);
             this.txtMysqlDB.Name = "txtMysqlDB";
-            this.txtMysqlDB.Size = new System.Drawing.Size(135, 23);
+            this.txtMysqlDB.Size = new System.Drawing.Size(105, 23);
             this.txtMysqlDB.TabIndex = 11;
-            this.txtMysqlDB.Text = "BCM_FZ";
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(45, 106);
+            this.label6.Location = new System.Drawing.Point(45, 89);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(35, 14);
             this.label6.TabIndex = 14;
@@ -217,7 +241,7 @@
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(31, 41);
+            this.label7.Location = new System.Drawing.Point(31, 27);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(49, 14);
             this.label7.TabIndex = 12;
@@ -226,26 +250,16 @@
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(31, 73);
+            this.label8.Location = new System.Drawing.Point(31, 58);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 14);
             this.label8.TabIndex = 13;
             this.label8.Text = "用户名";
             // 
-            // btnMysqlTest
-            // 
-            this.btnMysqlTest.Location = new System.Drawing.Point(166, 168);
-            this.btnMysqlTest.Name = "btnMysqlTest";
-            this.btnMysqlTest.Size = new System.Drawing.Size(55, 27);
-            this.btnMysqlTest.TabIndex = 16;
-            this.btnMysqlTest.Text = "测试";
-            this.btnMysqlTest.UseVisualStyleBackColor = true;
-            this.btnMysqlTest.Click += new System.EventHandler(this.btnMysqlTest_Click);
-            // 
             // btnnext
             // 
             this.btnnext.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
-            this.btnnext.Location = new System.Drawing.Point(458, 234);
+            this.btnnext.Location = new System.Drawing.Point(422, 299);
             this.btnnext.Name = "btnnext";
             this.btnnext.Size = new System.Drawing.Size(75, 32);
             this.btnnext.TabIndex = 16;
@@ -253,11 +267,113 @@
             this.btnnext.UseVisualStyleBackColor = true;
             this.btnnext.Click += new System.EventHandler(this.btnnext_Click);
             // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(12, 241);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(161, 14);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "取号数据同步时间间隔：";
+            // 
+            // txtQueueUpTimeLen
+            // 
+            this.txtQueueUpTimeLen.Location = new System.Drawing.Point(180, 238);
+            this.txtQueueUpTimeLen.Name = "txtQueueUpTimeLen";
+            this.txtQueueUpTimeLen.Size = new System.Drawing.Size(76, 23);
+            this.txtQueueUpTimeLen.TabIndex = 18;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(262, 247);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(21, 14);
+            this.label10.TabIndex = 19;
+            this.label10.Text = "秒";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(96, 212);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(77, 14);
+            this.label11.TabIndex = 20;
+            this.label11.Text = "网点编号：";
+            // 
+            // txtBankno
+            // 
+            this.txtBankno.Location = new System.Drawing.Point(179, 209);
+            this.txtBankno.Name = "txtBankno";
+            this.txtBankno.Size = new System.Drawing.Size(100, 23);
+            this.txtBankno.TabIndex = 21;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.Location = new System.Drawing.Point(67, 270);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(105, 14);
+            this.label12.TabIndex = 22;
+            this.label12.Text = "参数同步时间：";
+            // 
+            // cbUpTimelen
+            // 
+            this.cbUpTimelen.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbUpTimelen.FormattingEnabled = true;
+            this.cbUpTimelen.Items.AddRange(new object[] {
+            "-1",
+            "0",
+            "1",
+            "2",
+            "3",
+            "4",
+            "5",
+            "6",
+            "7",
+            "8",
+            "9",
+            "10",
+            "11",
+            "12",
+            "13",
+            "14",
+            "15",
+            "16",
+            "17",
+            "18",
+            "19",
+            "20",
+            "21",
+            "22",
+            "23"});
+            this.cbUpTimelen.Location = new System.Drawing.Point(179, 267);
+            this.cbUpTimelen.Name = "cbUpTimelen";
+            this.cbUpTimelen.Size = new System.Drawing.Size(77, 22);
+            this.cbUpTimelen.TabIndex = 23;
+            // 
+            // label13
+            // 
+            this.label13.AutoSize = true;
+            this.label13.Location = new System.Drawing.Point(262, 275);
+            this.label13.Name = "label13";
+            this.label13.Size = new System.Drawing.Size(252, 14);
+            this.label13.TabIndex = 24;
+            this.label13.Text = "-1:启动时更新。每天0-23：更新一次。";
+            // 
             // FrmDatabaseset
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 14F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(549, 284);
+            this.ClientSize = new System.Drawing.Size(519, 343);
+            this.Controls.Add(this.label13);
+            this.Controls.Add(this.cbUpTimelen);
+            this.Controls.Add(this.label12);
+            this.Controls.Add(this.txtBankno);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.txtQueueUpTimeLen);
+            this.Controls.Add(this.label9);
             this.Controls.Add(this.btnnext);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.gpDB);
@@ -266,13 +382,14 @@
             this.MinimizeBox = false;
             this.Name = "FrmDatabaseset";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "数据库设置";
+            this.Text = "数据库、参数设置";
             this.Load += new System.EventHandler(this.FrmDatabaseset_Load);
             this.gpDB.ResumeLayout(false);
             this.gpDB.PerformLayout();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -299,5 +416,13 @@
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Button btnMysqlTest;
         private System.Windows.Forms.Button btnnext;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txtQueueUpTimeLen;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.TextBox txtBankno;
+        private System.Windows.Forms.Label label12;
+        private System.Windows.Forms.ComboBox cbUpTimelen;
+        private System.Windows.Forms.Label label13;
     }
 }

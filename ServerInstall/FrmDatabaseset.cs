@@ -42,20 +42,7 @@ namespace ServerInstall
             }
         }
 
-        private string getMSSqlCon()
-        {
-            string strMSSqlCon = string.Format("Data Source={0};uid={1};pwd={2};Initial Catalog={3};Timeout=300000000",
-               txtBcmIp.Text, txtBcmUid.Text, txtBcmPwd.Text, txtBcmName.Text);
-            return strMSSqlCon;
-        }
-        private string GetMySqlCon()
-        {
-            string strMySql = "DRIVER={MySQL ODBC 5.1 Driver};SERVER=" + txtMysqlIP.Text
-                + ";DATABASE=" + txtMysqlDB.Text + ";UID=" + txtMysqlUserName.Text +
-                ";PASSWORD=" + txtMySqlPwd.Text + ";OPTION=3;charset=UTF8;";
-                    
-            return strMySql;
-        }
+       
         private bool SaveMSSqlDBSet()
         {
             try
@@ -102,11 +89,11 @@ namespace ServerInstall
                     MessageBox.Show(strErrorMsg);
                     return  false;
                 }
-                //初使化MySql
-                
+                //初使化MySql                
                 string strMSSqlCon = getMSSqlCon();
                 string strMySql = GetMySqlCon();
 
+                //更新服务配置文件
                 string path = Common.GetStartPath(GlobalOR.ServerExeName + ".config");
                 ExeConfigurationFileMap map = new ExeConfigurationFileMap();
                 map.ExeConfigFilename = path;
@@ -115,6 +102,24 @@ namespace ServerInstall
                 //实例化mssql
                 config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString = strMSSqlCon;
                 config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString = strMySql;
+
+                config.AppSettings.Settings["Bankno"].Value = txtBankno.Text;
+                config.AppSettings.Settings["QueueUpTimeLen"].Value = txtQueueUpTimeLen.Text;
+                config.AppSettings.Settings["ParaDownTime"].Value = cbUpTimelen.Text;
+                config.Save();
+                //更新参数配置文件
+
+                //Winform更新数据
+                path = Common.GetStartPath("UpdateFrm.exe" + ".config");
+                map.ExeConfigFilename = path;
+                config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+                //实例化mssql
+                config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString = strMSSqlCon;
+                config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString = strMySql;
+
+                config.AppSettings.Settings["Bankno"].Value = txtBankno.Text;
+                config.AppSettings.Settings["QueueUpTimeLen"].Value = txtQueueUpTimeLen.Text;
+                config.AppSettings.Settings["ParaDownTime"].Value = cbUpTimelen.Text;
                 config.Save();
             }
             catch (Exception ex)
@@ -124,14 +129,26 @@ namespace ServerInstall
             }
             return true;
         }
+
+        private string getMSSqlCon()
+        {
+            string strMSSqlCon = string.Format("server={0};uid={1};pwd={2};database={3};",
+               txtBcmIp.Text, txtBcmUid.Text, txtBcmPwd.Text, txtBcmName.Text);
+            return strMSSqlCon;
+        }
+        private string GetMySqlCon()
+        {
+            string strMySql = "DRIVER={MySQL ODBC 5.1 Driver};SERVER=" + txtMysqlIP.Text
+                + ";DATABASE=" + txtMysqlDB.Text + ";UID=" + txtMysqlUserName.Text +
+                ";PASSWORD=" + txtMySqlPwd.Text + ";OPTION=3;charset=UTF8;";
+
+            return strMySql;
+        }
         private void InitDBSet()
         {
             try
             {
-                //string path = Application.StartupPath + "\\web.config";
                 string path = Common.GetStartPath(GlobalOR.ServerExeName + ".config");
-
-               // string path = Common.GetStartPath(GlobalOR.ServerExeName + ".config");
                 if (!File.Exists(path))
                 {
                     MessageBox.Show(string.Format("配置文件：“{0}”不存在！", path));
@@ -142,23 +159,24 @@ namespace ServerInstall
                 Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
                 //实例化mssql
                 string nodeMsSqlValue= config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString;
-                //server=.;database=Queue;uid=sa;pwd=sa1111
-                string[] arrBcmValue = nodeMsSqlValue.Split(';');
-                txtBcmIp.Text = StrCommon.GetParamValue(ref nodeMsSqlValue, "server=", ";");
-                txtBcmName.Text = StrCommon.GetParamValue(ref nodeMsSqlValue, "database=", ";");
-
-                txtBcmUid.Text = StrCommon.GetParamValue(ref nodeMsSqlValue, "uid=", ";");
-                txtBcmPwd.Text = StrCommon.GetParamValue(ref nodeMsSqlValue, "pwd=", "");
                 
+                //string[] arrBcmValue = nodeMsSqlValue.Split(';');
+                txtBcmIp.Text = StrCommon.GetParamValue( nodeMsSqlValue, "server=", ";");
+                txtBcmName.Text = StrCommon.GetParamValue( nodeMsSqlValue, "database=", ";");
+                txtBcmUid.Text = StrCommon.GetParamValue( nodeMsSqlValue, "uid=", ";");
+                txtBcmPwd.Text = StrCommon.GetParamValue( nodeMsSqlValue, "pwd=", ";");
 
-                //初使化MySql
-                //DRIVER={MySQL ODBC 5.1 Driver};SERVER=localhost;DATABASE=queueclient;
-                //UID=root;PASSWORD=ABCabc123;OPTION=3;charset=UTF8;
                 string strMySql = config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString;
-                txtMysqlIP.Text = StrCommon.GetParamValue(ref strMySql, "SERVER=", ";");
-                txtMysqlDB.Text = StrCommon.GetParamValue(ref strMySql, "DATABASE=", ";");
-                txtMysqlUserName.Text = StrCommon.GetParamValue(ref strMySql, "UID=", ";");
-                txtMySqlPwd.Text = StrCommon.GetParamValue(ref strMySql, "PASSWORD=", ";");
+                txtMysqlIP.Text = StrCommon.GetParamValue( strMySql, "SERVER=", ";");
+                txtMysqlDB.Text = StrCommon.GetParamValue( strMySql, "DATABASE=", ";");
+                txtMysqlUserName.Text = StrCommon.GetParamValue( strMySql, "UID=", ";");
+                txtMySqlPwd.Text = StrCommon.GetParamValue(strMySql, "PASSWORD=", ";");
+
+
+                txtBankno.Text = config.AppSettings.Settings["Bankno"].Value;
+                txtQueueUpTimeLen.Text = config.AppSettings.Settings["QueueUpTimeLen"].Value;
+                cbUpTimelen.Text = config.AppSettings.Settings["ParaDownTime"].Value;
+
             }
             catch (Exception ex)
             {

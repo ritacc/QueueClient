@@ -56,13 +56,12 @@
             // 
             // btnnext
             // 
-            this.btnnext.Enabled = false;
             this.btnnext.Font = new System.Drawing.Font("宋体", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(134)));
             this.btnnext.Location = new System.Drawing.Point(296, 252);
             this.btnnext.Name = "btnnext";
             this.btnnext.Size = new System.Drawing.Size(75, 32);
             this.btnnext.TabIndex = 17;
-            this.btnnext.Text = "下一步";
+            this.btnnext.Text = "完成";
             this.btnnext.UseVisualStyleBackColor = true;
             this.btnnext.Click += new System.EventHandler(this.btnnext_Click);
             // 
@@ -74,6 +73,7 @@
             this.Controls.Add(this.btnnext);
             this.Controls.Add(this.gpServerStart);
             this.Name = "FrimServiceStart";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "服务启动";
             this.Load += new System.EventHandler(this.FrimServiceStart_Load);
             this.gpServerStart.ResumeLayout(false);

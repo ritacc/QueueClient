@@ -26,7 +26,7 @@ namespace ServerInstall
             if (ServerControl.StartService(GlobalOR.ServerName))
             {
                 lblStartServer.Text = "服务启动成功。。。";
-                btnnext.Text = "完成";
+                //btnnext.Text = "完成";
             }
         }
     }

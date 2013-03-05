@@ -15,23 +15,24 @@ namespace ServerInstall
         static void Main(String[] args)
         {
             OpType mop = OpType.Install;
-            if (args.Length > 0)
-            {
-                if (args[0] == "UnInstall")
-                {
-                    mop = OpType.UnInstall;
-                }
-            }
-            
-            
+            //if (args.Length > 0)
+            //{
+            //    if (args[0] == "UnInstall")
+            //    {
+            //        mop = OpType.UnInstall;
+            //    }
+            //}
+
+            //mop = OpType.UnInstall;
+
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
             
             FrmMain frm = new FrmMain();
             frm.MOpType = mop;
 
-            //Application.Run(frm);
-            Application.Run(new FrmDatabaseset());
+            Application.Run(frm);
+            //Application.Run(new FrmDatabaseset());
         }
     }
 }
