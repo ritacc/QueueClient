@@ -145,11 +145,11 @@ namespace QM.Client.WebService.Control
             EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployeeLogin(userid, password);
             if (_empOR == null)
             {
-                return "1";//用户名或密码错误
+                return "error:用户名或密码错误";//用户名或密码错误
             }
             WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(windowid);
             if (_winOR == null)
-                return "2";//窗口不存在
+                return "error:窗口不存在";//窗口不存在
 
             WindowLoginInfoOR _Log = GetLoginLog(userid, windowid);
             if (_Log == null)
@@ -158,13 +158,13 @@ namespace QM.Client.WebService.Control
                 WindowLoginInfoOR _LoginRecordEmp = GetLoginLogByEmployeeNo(userid);
                 if (_LoginRecordEmp != null)
                 {
-                    return "3";//用户已经登录
+                    return "error:用户已经登录";//用户已经登录
                 }
 
                 WindowLoginInfoOR _LoginRecordWin = GetLoginLogByWindowNo(windowid);
                 if (_LoginRecordWin != null)
                 {
-                    return "4";//此窗口已登录
+                    return "error:此窗口已登录";//此窗口已登录
                 }
             }
             else
@@ -172,7 +172,7 @@ namespace QM.Client.WebService.Control
                 int TimeLen = GetTimeLen(_Log.Logintime, DateTime.Now);
                 if (TimeLen < 300)
                 {
-                    return "5";
+                    return "error:已登录。";
                 }
                 else//更新上次记录为结束
                 {
@@ -234,7 +234,7 @@ namespace QM.Client.WebService.Control
                 WindowLoginInfoOR obj = GetLoginLogByWindowNo(windowNo);
                 if (obj == null)
                 {
-                    return string.Format("error:找不到窗口编号：{0} 登录记录。",windowNo);
+                    return string.Format("error:找不到窗口编号：{0} 的登录记录。",windowNo);
                 }
                 obj.Status = 2;
                 _WindowLoginDA.PauseServer(obj);
@@ -541,6 +541,9 @@ namespace QM.Client.WebService.Control
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return "此票号的记录不存在!";
+            if (objQH.Status == 0)
+                return "请先叫号。";
+
             try
             {
                 objQH.Status = 2;

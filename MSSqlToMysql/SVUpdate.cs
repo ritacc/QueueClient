@@ -28,10 +28,11 @@ namespace QM.Client.UpdateDB
         public int ParaDownTime { get; set; }
         #endregion
         Thread ParaUpdateThread;
-
+        Thread QueueinfoUpdateThread;
         protected override void OnStart(string[] args)
         {
             // TODO: 在此处添加代码以启动服务。
+            WriteLog.writLog("0000", "OnStart");
             if (InitAppSett())
             {
                 //参数同步                
@@ -47,33 +48,23 @@ namespace QM.Client.UpdateDB
                 {
                     ParaUpdateThread = new Thread(UpdataParaThread);
                     ParaUpdateThread.Start();
+
                 }
-                
+
                 //上传取号数据
-                if (ParaDownTime < 30)//最小时间30
-                    ParaDownTime = 30;
-                trUpQueue.Interval = ParaDownTime * 1000;
-                trUpQueue.Enabled = true;
+
+                QueueinfoUpdateThread = new Thread(QueueUpdateControl);
+                QueueinfoUpdateThread.Start();
+                //trUpQueue.Interval = QueueUpTimeLen * 1000;
+                //trUpQueue.Start();// = true;
+                WriteLog.writLog("0000", string.Format("OnStartEnd :QueueUpTimeLen={0};ParaDownTime={1}", QueueUpTimeLen, ParaDownTime));
+            }
+            else
+            {
+                WriteLog.writLog("0000", "OnStart InitAppSett 出错。");
             }
             
-            
         }
-
-        /// <summary>
-        /// 指定时间更新参数
-        /// </summary>
-        private void UpdataParaThread()
-        {
-            do
-            {
-                if (DateTime.Now.Hour == ParaDownTime)
-                {
-                    UpdataParaControl();
-                }
-                Thread.Sleep(60 * 60 * 1000);//一小时
-            } while (true);
-        }
-
         protected override void OnStop()
         {
             // TODO: 在此处添加代码以执行停止服务所需的关闭操作。
@@ -81,9 +72,16 @@ namespace QM.Client.UpdateDB
             {
                 ParaUpdateThread.Abort();
             }
-            trUpQueue.Enabled = false;
+
+            if (QueueinfoUpdateThread != null)
+                QueueinfoUpdateThread.Abort();
+
+            WriteLog.writLog("0000", "服务已停止");
         }
-        
+        /// <summary>
+        /// 从配置文件读参数
+        /// </summary>
+        /// <returns></returns>
         private bool InitAppSett()
         {
             try
@@ -98,8 +96,42 @@ namespace QM.Client.UpdateDB
             }
             return false;
         }
+
+        /// <summary>
+        /// 指定时间更新参数
+        /// </summary>
+        private void UpdataParaThread()
+        {
+            do
+            {
+                WriteLog.writLog("0000", "UpdataParaThread。");
+                if (DateTime.Now.Hour == ParaDownTime)
+                {
+                    UpdataParaControl();
+                }
+                Thread.Sleep(60 * 60 * 1000);//一小时
+            } while (true);
+        }
+
+        /// <summary>
+        /// 更新取号数据
+        /// </summary>
+        private void QueueUpdateControl()
+        {
+            if (QueueUpTimeLen < 30)//最小时间30
+                QueueUpTimeLen = 30;
+            do
+            {
+                WriteLog.writLog("0000", "QueueUpdateControl。");
+                QueueinfoUpdate();
+                Thread.Sleep(QueueUpTimeLen * 1000);
+            } while (true);
+        }
+
+        
         protected void UpdataParaControl()
         {
+            WriteLog.writLog("0000", "UpdataParaControl");
             ParaUpdateControl _BussCon = new ParaUpdateControl();
             if (_BussCon.Init())
             {
@@ -129,9 +161,9 @@ namespace QM.Client.UpdateDB
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
-        private void trUpQueue_Tick(object sender, EventArgs e)
+        private void QueueinfoUpdate()
         {
-            WriteLog.writeMsgLog("0000", "开始更新取号数据。");
+            WriteLog.writLog("0000", "QueueinfoUpdate:开始更新取号数据。");
             QueueinfoControl QC = new QueueinfoControl();
             QC.UpQueueData();
         }

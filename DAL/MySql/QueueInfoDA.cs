@@ -203,7 +203,7 @@ Processinterval=@Processinterval  where ID='@ID' ";
                List<string> listSql = new List<string>();
                foreach (QueueInfoOR obj in UpList)
                {
-                   string sql = string.Format("update t_queueinfo set upstatus={0} where id='{0}'",
+                   string sql = string.Format("update t_queueinfo set upstatus={0} where id='{1}'",
                        obj.Status, obj.Id);
                    listSql.Add(sql);
                }

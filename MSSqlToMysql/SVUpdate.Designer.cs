@@ -28,14 +28,6 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
-            this.trUpQueue = new System.Windows.Forms.Timer(this.components);
-            // 
-            // trUpQueue
-            // 
-            this.trUpQueue.Enabled = true;
-            this.trUpQueue.Interval = 60000;
-            this.trUpQueue.Tick += new System.EventHandler(this.trUpQueue_Tick);
             // 
             // SVUpdate
             // 
@@ -45,6 +37,5 @@
 
         #endregion
 
-        private System.Windows.Forms.Timer trUpQueue;
     }
 }

@@ -15,22 +15,28 @@ namespace QM.Client.DA.MSSql
        /// </summary>
        /// <param name="listQue"></param>
        /// <returns></returns>
-       public bool Updata(List<QueueInfoOR> listQue)
+       public void Updata(List<QueueInfoOR> listQue)
        {
-           List<CommandList> listCommond = new List<CommandList>();
-           foreach (QueueInfoOR obj in listQue)
+           try
            {
-               if (obj.UpStatus == -1)
+               List<CommandList> listCommond = new List<CommandList>();
+               foreach (QueueInfoOR obj in listQue)
                {
-                   listCommond.Add(Insert(obj));
+                   if (obj.UpStatus == -1)
+                   {
+                       listCommond.Add(Insert(obj));
+                   }
+                   else
+                   {
+                       listCommond.Add(UpdateQueue(obj));
+                   }
                }
-               else
-               {
-                   listCommond.Add(UpdateQueue(obj));
-               }
+               dbMsSql.ExecuteNoQueryTranPro(listCommond);
            }
-
-           return true;
+           catch (Exception ex)
+           {
+               throw ex;
+           }
        }
 
        private CommandList Insert(QueueInfoOR queueInfo)
