@@ -1,7 +1,7 @@
 /*
 Navicat MySQL Data Transfer
 
-Source Server         : localRoot
+Source Server         : loacal
 Source Server Version : 50146
 Source Host           : localhost:3306
 Source Database       : queueclient
@@ -10,7 +10,7 @@ Target Server Type    : MYSQL
 Target Server Version : 50146
 File Encoding         : 65001
 
-Date: 2013-03-01 16:01:17
+Date: 2013-03-06 23:01:01
 */
 
 SET FOREIGN_KEY_CHECKS=0;
@@ -93,8 +93,8 @@ CREATE TABLE `t_bussinessrole` (
 -- ----------------------------
 -- Records of t_bussinessrole
 -- ----------------------------
-INSERT INTO `t_bussinessrole` VALUES ('5d807131-39ff-4189-a8cf-1b10377fb264', '特色业务', '', '000001000001');
-INSERT INTO `t_bussinessrole` VALUES ('5f2a69e9-a168-43ec-8c25-ff98508cad21', '个人业务', '', '000001000001');
+INSERT INTO `t_bussinessrole` VALUES ('5d807131-39ff-4189-a8cf-1b10377fb264', '特色业务', '', '000001');
+INSERT INTO `t_bussinessrole` VALUES ('5f2a69e9-a168-43ec-8c25-ff98508cad21', '个人业务', '', '000001');
 
 -- ----------------------------
 -- Table structure for `t_bussinessroleon`
@@ -133,7 +133,7 @@ CREATE TABLE `t_employee` (
 -- ----------------------------
 -- Records of t_employee
 -- ----------------------------
-INSERT INTO `t_employee` VALUES ('bda0adff-84ad-4713-856c-3deda606ccd0', '深圳朱长双', '5301881', '196fe741-c442-4145-aaa8-4922498a46fd', '5f2a69e9-a168-43ec-8c25-ff98508cad21', '5f2a69e9-a168-43ec-8c25-ff98508cad21', '', '000001000001');
+INSERT INTO `t_employee` VALUES ('bda0adff-84ad-4713-856c-3deda606ccd0', '深圳朱长双', '530100', '196fe741-c442-4145-aaa8-4922498a46fd', '5f2a69e9-a168-43ec-8c25-ff98508cad21', '5f2a69e9-a168-43ec-8c25-ff98508cad21', '', '000001000001');
 
 -- ----------------------------
 -- Table structure for `t_employtype`
@@ -174,11 +174,6 @@ CREATE TABLE `t_nearbyinfo` (
 -- ----------------------------
 -- Records of t_nearbyinfo
 -- ----------------------------
-INSERT INTO `t_nearbyinfo` VALUES ('020d3eed-4841-4a41-af92-42083a737843', '000001000001', '0', null, '白云支行', '', '', null, '');
-INSERT INTO `t_nearbyinfo` VALUES ('18127660-7717-4dbf-b781-65bb76408a2d', '000001000001', '0', null, '黄贝领支行', '', '', null, '');
-INSERT INTO `t_nearbyinfo` VALUES ('229afd26-3ee1-43e0-b9e3-9bb448c1d783', '000001000001', '0', null, '花都支行', '', '', null, '');
-INSERT INTO `t_nearbyinfo` VALUES ('757f34ec-caae-499d-b6f8-c5cb872661a0', '000001000001', '0', null, '罗湖分行', '', '', null, '');
-INSERT INTO `t_nearbyinfo` VALUES ('e2a4c670-9ae3-4bc8-947f-51e997584a26', '000001000001', '0', null, '蛇口支行', '', '', null, '');
 
 -- ----------------------------
 -- Table structure for `t_pagewin`
@@ -196,8 +191,7 @@ CREATE TABLE `t_pagewin` (
 -- ----------------------------
 -- Records of t_pagewin
 -- ----------------------------
-INSERT INTO `t_pagewin` VALUES ('135b20b0-25ae-4935-8fdd-66c47f1c2abc', '页窗口1', '0', '0', '000001000001');
-INSERT INTO `t_pagewin` VALUES ('535c261f-f67f-4fc7-aaf5-cafdcd7f1582', '公积金', '0', '0', '000001000001');
+INSERT INTO `t_pagewin` VALUES ('77e194e1-c1cb-4a96-b040-71db2daba955', 'T', '0', '0', '000001000001');
 
 -- ----------------------------
 -- Table structure for `t_qhandy`
@@ -252,10 +246,8 @@ CREATE TABLE `t_qhandy` (
 -- ----------------------------
 -- Records of t_qhandy
 -- ----------------------------
-INSERT INTO `t_qhandy` VALUES ('364a0fc7-3fb6-4a6f-b0a6-227e5a86ad5f', '000001000001', '0', null, 'Text', null, '宋体', null, null, null, null, null, null, '', '', '', null, null, 'TagText', null, '宋体', null, null, null, null, null, null, '', null, 'EnLabelText', null, '宋体', null, null, null, null, null, null, null, '\0', '', '');
-INSERT INTO `t_qhandy` VALUES ('80a84859-b503-45c5-a428-3a35789a161b', '000001000001', '0', null, '公积金', null, '舒体', null, null, null, null, null, null, '', '', '', null, null, 'TagText', null, '宋体', null, null, null, null, null, null, '', null, 'EnLabelText', null, '宋体', null, null, null, null, null, null, null, '\0', '', '');
-INSERT INTO `t_qhandy` VALUES ('c55a41c3-5e80-4e7c-8edf-50b77dfc4cc0', '000001000001', '0', null, 'Text', null, '宋体', null, null, null, null, null, null, '', '', '', null, null, 'TagText', null, '宋体', null, null, null, null, null, null, '', null, 'EnLabelText', null, '宋体', null, null, null, null, null, null, null, '\0', '', '535c261f-f67f-4fc7-aaf5-cafdcd7f1582');
-INSERT INTO `t_qhandy` VALUES ('d73949b7-387f-4ee1-ae7a-2713f4387892', '000001000001', '0', null, 'Text', null, '宋体', null, null, null, null, null, null, '', '', '', null, null, 'TagText', null, '宋体', null, null, null, null, null, null, '', null, 'EnLabelText', null, '宋体', null, null, null, null, null, null, null, '\0', '', '135b20b0-25ae-4935-8fdd-66c47f1c2abc');
+INSERT INTO `t_qhandy` VALUES ('1913b60f-c8b2-48a0-ae13-f58ac9ae5d7c', '000001000001', '9', '', '窗口页', '0', '宋体', '\0', '\0', '\0', '12', '98', '564', '', '', '', '\0', '\0', 'TagText', '0', '宋体', '\0', '\0', '\0', '9', '118', '699', '', '\0', 'EnLabelText', '0', '宋体', '\0', '\0', '', '12', '-1', '564', '159', '', '77e194e1-c1cb-4a96-b040-71db2daba955', '');
+INSERT INTO `t_qhandy` VALUES ('b83fb348-75af-4e80-9211-fef85c435820', '000001000001', '10', '', 'Text', '0', '宋体', '\0', '\0', '\0', '12', '217', '567', '', '', '', '\0', '', 'TagText', '0', '宋体', '\0', '\0', '\0', '9', '239', '689', '', '', 'EnLabelText', '0', '宋体', '\0', '\0', '', '12', '-1', '568', '275', '\0', '', '');
 
 -- ----------------------------
 -- Table structure for `t_queueinfo`
@@ -284,13 +276,20 @@ CREATE TABLE `t_queueinfo` (
   `WaitPeopleBank` int(11) DEFAULT NULL,
   `CustemClass` int(11) DEFAULT NULL,
   `Description` varchar(100) DEFAULT NULL,
-  `Staus` int(11) DEFAULT '0' COMMENT '0：取号,1:叫号、2：欢迎、3：结束、4上传完成。',
+  `Status` int(11) DEFAULT '0' COMMENT '0：取号,1:叫号、2：欢迎、3：结束、4上传完成。',
+  `UpStatus` int(11) NOT NULL DEFAULT '-1',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 -- ----------------------------
 -- Records of t_queueinfo
 -- ----------------------------
+INSERT INTO `t_queueinfo` VALUES ('2178d594-8731-451b-bc64-c8bb68760526', '530', '0002', 'b7c7318a-d86c-4165-a47a-0d0909e70932', '2013-03-03 22:21:33', '0', '0', '0', '2013-03-03 22:22:55', '2013-03-03 22:21:33', '2013-03-03 22:21:33', '1', '530100', '深圳朱长双', '', '0', '0', '0', '1', '1', '0', '', '1', '0');
+INSERT INTO `t_queueinfo` VALUES ('380137f2-5829-4066-b1f6-713362532611', '530', '0003', '31d0a213-015c-4d78-8f29-2c72a0df1e8d', '2013-03-03 22:21:53', '0', '0', '0', '2013-03-03 22:21:53', '2013-03-03 22:21:53', '2013-03-03 22:21:53', '', '', '', '', '0', '0', '0', '0', '2', '0', '', '0', '0');
+INSERT INTO `t_queueinfo` VALUES ('99fb0bfd-3998-4aee-9675-04539b65b034', '530', '0005', '31d0a213-015c-4d78-8f29-2c72a0df1e8d', '2013-03-03 22:22:19', '0', '0', '0', '2013-03-03 22:22:19', '2013-03-03 22:22:19', '2013-03-03 22:22:19', '', '', '', '', '0', '0', '0', '2', '4', '0', '', '0', '0');
+INSERT INTO `t_queueinfo` VALUES ('a7cd1462-6661-4eb9-904c-6f5854a951b8', '530', '0004', '31d0a213-015c-4d78-8f29-2c72a0df1e8d', '2013-03-03 22:22:19', '0', '0', '0', '2013-03-03 22:22:19', '2013-03-03 22:22:19', '2013-03-03 22:22:19', '', '', '', '', '0', '0', '0', '1', '3', '0', '', '0', '0');
+INSERT INTO `t_queueinfo` VALUES ('b49a2af9-a704-4408-a401-2f14fef53619', '530', '0001', 'b7c7318a-d86c-4165-a47a-0d0909e70932', '2013-03-03 22:21:25', '0', '0', '0', '2013-03-03 22:21:25', '2013-03-03 22:21:25', '2013-03-03 22:21:25', '', '', '', '', '0', '0', '0', '0', '0', '0', '', '0', '0');
+INSERT INTO `t_queueinfo` VALUES ('da53b5e3-7134-4fa9-ab3c-ff05efc94d23', '530', '0001', '31d0a213-015c-4d78-8f29-2c72a0df1e8d', '2013-03-06 22:45:33', '0', '0', '0', '2013-03-06 22:46:20', '2013-03-06 22:46:26', '2013-03-06 22:46:29', '1', '530100', '深圳朱长双', '', '0', '52', '2', '0', '0', '0', '', '3', '-1');
 
 -- ----------------------------
 -- Table structure for `t_queueinfohistory`
@@ -348,7 +347,6 @@ CREATE TABLE `t_shutdowntime` (
 -- ----------------------------
 -- Records of t_shutdowntime
 -- ----------------------------
-INSERT INTO `t_shutdowntime` VALUES ('30050A21-8FDC-4269-82F2-9AB6DCAF6877', '1330', '1500', '2000', '2000', '2000', '', '', '', '000001000001');
 
 -- ----------------------------
 -- Table structure for `t_smspeople`
@@ -385,19 +383,6 @@ CREATE TABLE `t_syspara` (
 -- ----------------------------
 -- Records of t_syspara
 -- ----------------------------
-INSERT INTO `t_syspara` VALUES ('155BF9FA-C7B9-40AF-A359-0235FB821F31', '000001000001', 'backgroundsound', '2', '');
-INSERT INTO `t_syspara` VALUES ('2F65AD5E-65BE-4CB4-B028-8599B06E3CCA', '000001000001', 'contickettime', '6', '');
-INSERT INTO `t_syspara` VALUES ('5D2E07A4-9012-4E56-82FF-44DBC39E722F', '000001000001', 'thirdsound', '2', '');
-INSERT INTO `t_syspara` VALUES ('7B101643-084F-4053-B0BA-AFD0A132877E', '000001000001', 'calllimittime', '6', '');
-INSERT INTO `t_syspara` VALUES ('85EE404C-E40C-4AF6-B1B2-E0CFF743A75E', '000001000001', 'cartickettime', '6', '');
-INSERT INTO `t_syspara` VALUES ('8A116137-8410-4185-8650-38C87FB2E906', '000001000001', 'secondsound', '2', '');
-INSERT INTO `t_syspara` VALUES ('8EC914C1-E39B-40D2-9C2B-333302D17148', '000001000001', 'callvolumn', '6', '');
-INSERT INTO `t_syspara` VALUES ('91C0BCF7-6182-425B-85FD-E73FD29DC758', '000001000001', 'mainwindowinfo', '欢迎光临1', '');
-INSERT INTO `t_syspara` VALUES ('97094BFE-5F90-4EE5-B3DB-0CAD36167E83', '000001000001', 'backgroundvolumn', '6', '');
-INSERT INTO `t_syspara` VALUES ('A6CED3BC-747B-4FBF-B02D-84B290BCD917', '000001000001', 'curshowtime', '1', '');
-INSERT INTO `t_syspara` VALUES ('B14730EE-5D40-4B93-B2EE-03038AC258EF', '000001000001', 'windowinfo', '欢迎光临1', '');
-INSERT INTO `t_syspara` VALUES ('BFB17C84-E93B-4064-A8D6-E6987C7A7B94', '000001000001', 'firstsound', '2', '');
-INSERT INTO `t_syspara` VALUES ('C723A58C-1A06-4F55-9B82-6D6465F42ED7', '000001000001', 'popswiptime', '15', '');
 
 -- ----------------------------
 -- Table structure for `t_vipcardkey`
@@ -436,7 +421,7 @@ CREATE TABLE `t_vipcardtype` (
 -- Records of t_vipcardtype
 -- ----------------------------
 INSERT INTO `t_vipcardtype` VALUES ('1430b2ce-5e80-4785-8abd-34c88c099eb3', '金卡', '0', '', '000001');
-INSERT INTO `t_vipcardtype` VALUES ('bcf97a6d-404b-4421-931f-537a8534fcad', '银卡', '0', '', '000001');
+INSERT INTO `t_vipcardtype` VALUES ('bcf97a6d-404b-4421-931f-537a8534fcad', '银卡', '0', '描述', '000001');
 
 -- ----------------------------
 -- Table structure for `t_window`
@@ -455,7 +440,7 @@ CREATE TABLE `t_window` (
 -- ----------------------------
 -- Records of t_window
 -- ----------------------------
-INSERT INTO `t_window` VALUES ('3e8a42f2-3098-4805-ae46-7081338d5dfa', '深圳分行01', '5f2a69e9-a168-43ec-8c25-ff98508cad21', null, '', '000001000001');
+INSERT INTO `t_window` VALUES ('3e8a42f2-3098-4805-ae46-7081338d5dfa', '1', '5f2a69e9-a168-43ec-8c25-ff98508cad21', null, '', '000001000001');
 
 -- ----------------------------
 -- Table structure for `t_windowlogininfo`
@@ -475,3 +460,7 @@ CREATE TABLE `t_windowlogininfo` (
 -- ----------------------------
 -- Records of t_windowlogininfo
 -- ----------------------------
+INSERT INTO `t_windowlogininfo` VALUES ('37a1bb26-efe3-485b-acc6-d914a43a0c5f', '2013-03-06 22:46:13', '1', '530100', '深圳朱长双', '0', '2013-03-06 22:46:16');
+INSERT INTO `t_windowlogininfo` VALUES ('3a80486d-6dab-4e2e-8d35-8ed5c9abfcda', '2013-03-06 22:45:43', '1', '530100', '深圳朱长双', '1', '2013-03-06 22:45:50');
+INSERT INTO `t_windowlogininfo` VALUES ('bfbc9fe8-f525-4ed3-9b68-10dba0b4269c', '2013-03-03 22:22:47', '1', '530100', '深圳朱长双', '0', '2013-03-03 22:22:47');
+INSERT INTO `t_windowlogininfo` VALUES ('d6609c1b-2224-4c59-b288-34e09627ecd3', '2013-03-03 20:42:14', '1', '530100', '深圳朱长双', '1', '2013-03-03 20:49:46');
