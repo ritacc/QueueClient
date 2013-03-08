@@ -24,15 +24,15 @@ namespace QClient
         private readonly PageWinOR _pageWinOR;
         public PageWinOR PageWinOR { get { return _pageWinOR; } }
 
-        public static void Show(string id)
-        {
-            var pageWinOR = WebViewModel.Instance.GetPageWinById(id);
-            var window = new PopupWindow(pageWinOR);
-            window.Owner = Application.Current.MainWindow;
-            window.ShowDialog();
-        }
+        //public static void Show(string id)
+        //{
+        //    var pageWinOR = WebViewModel.Instance.GetPageWinById(id);
+        //    var window = new PopupWindow(pageWinOR);
+        //    window.Owner = Application.Current.MainWindow;
+        //    window.ShowDialog();
+        //}
 
-        private PopupWindow(PageWinOR pageWinOR)
+        public PopupWindow(PageWinOR pageWinOR)
         {
             if (null == pageWinOR)
             {
@@ -92,7 +92,9 @@ namespace QClient
                     }
                     else
                     {
-                        PopupWindow.Show(qhandy.Windowonid);
+                        PopPage pp = new PopPage();
+                        
+                        //PopupWindow.Show(qhandy.Windowonid);
                     }
                 }
             }

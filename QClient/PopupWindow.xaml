@@ -4,7 +4,7 @@
         Title="PopupWindow" Height="300" Width="300"
         WindowStyle="None"
         WindowStartupLocation="CenterOwner"
-        ResizeMode="NoResize">
+        ResizeMode="NoResize" Topmost="True" ShowInTaskbar="False">
     <Border Background="Aquamarine">
         <Canvas
             x:Name="MainCanvas"/>

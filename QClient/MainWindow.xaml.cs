@@ -17,6 +17,7 @@ using QClient.QueueClinetServiceReference;
 namespace QClient
 {
     /// <summary>
+    /// <!--WindowState="Maximized"-->
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
     public partial class MainWindow : Window
@@ -37,8 +38,8 @@ namespace QClient
 
         private void Init()
         {
-            MainCanvas.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
-            MainCanvas.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
+            //MainCanvas.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
+            //MainCanvas.Height = System.Windows.SystemParameters.PrimaryScreenHeight;
             LoadButton(string.Empty);
         }
 
@@ -70,7 +71,13 @@ namespace QClient
                     }
                     else
                     {
-                        PopupWindow.Show(qhandy.Windowonid);
+                        var pageWinOR = WebViewModel.Instance.GetPageWinById(qhandy.Windowonid);
+                        PopupWindow pw = new PopupWindow(pageWinOR);
+                        pw.Owner = Application.Current.MainWindow;
+                        pw.Width = 400;
+                        pw.Height = 400;
+                        pw.ShowDialog();
+                        //PopupWindow.Show();
                     }
                 }
             }

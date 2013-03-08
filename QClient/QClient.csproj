@@ -64,6 +64,9 @@
     <Compile Include="Control\ENLableControl.cs" />
     <Compile Include="Control\TagControl.cs" />
     <Compile Include="Core\ViewModel\WebViewModel.cs" />
+    <Compile Include="PopPage.xaml.cs">
+      <DependentUpon>PopPage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
     </Compile>
@@ -93,6 +96,10 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PopPage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="PopupWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
