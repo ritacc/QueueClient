@@ -65,17 +65,31 @@ namespace QClient
                 if (element.DataContext is QhandyOR)
                 {
                     var qhandy = element.DataContext as QhandyOR;
-                    if (string.IsNullOrEmpty(qhandy.Windowonid))
+                    if (!qhandy.Buttomtype)
                     {
-                        MessageBox.Show(string.Format("此处执行业务共号：{0}.", qhandy.LabelJobno));
+                        string mCard=string.Empty;
+                        string mErrorMsg=string.Empty;
+                        if(WebViewModel.Instance.QH(qhandy.LabelJobno,mCard,out mErrorMsg))
+                        {
+                            //成功不处理
+                            MessageBox.Show(mErrorMsg);
+                        }
+                        else{
+
+                            MessageBox.Show(mErrorMsg);
+                        }
                     }
                     else
                     {
                         var pageWinOR = WebViewModel.Instance.GetPageWinById(qhandy.Windowonid);
                         PopupWindow pw = new PopupWindow(pageWinOR);
                         pw.Owner = Application.Current.MainWindow;
-                        pw.Width = 400;
-                        pw.Height = 400;
+                        
+                        double mWidht = pageWinOR.Width < 300 ? 300 : pageWinOR.Width;
+                        double mHeight = pageWinOR.Height < 300 ? 300 : pageWinOR.Height;
+                        pw.Width = mWidht;
+                        pw.Height = mHeight;
+                        pw.Name = pageWinOR.Name;
                         pw.ShowDialog();
                         //PopupWindow.Show();
                     }

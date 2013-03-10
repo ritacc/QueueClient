@@ -54,7 +54,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="QueueClient.asmx" />
-    <Content Include="web.config" />
+    <Content Include="web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="资料.txt" />
   </ItemGroup>
   <ItemGroup>

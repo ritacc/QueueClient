@@ -43,7 +43,7 @@ namespace QM.Client.DA.MSSql
        {
            string sql = @"insert into t_QueueInfo (Id, BankNo, BillNo, BussinessId, PrillBillTime, TransferDestWin, DelayNum, DelayTime,
 CallTime, ProcessTime, FinishTime, WindowNo, EmployNo, EmployName, CardNo, Judge, WaitInterval, ProcessInterval, WaitPeopleBusssiness,
-WaitPeopleBank, CustemClass, Description, Staus)
+WaitPeopleBank, CustemClass, Description, Status)
 values (@Id, @BankNo, @BillNo, @BussinessId, @PrillBillTime, @TransferDestWin, @DelayNum, @DelayTime,
 @CallTime, @ProcessTime, @FinishTime, @WindowNo, @EmployNo, @EmployName, @CardNo, @Judge, @WaitInterval, @ProcessInterval, @WaitPeopleBusssiness, 
 @WaitPeopleBank, @CustemClass, @Description, @Staus)";
@@ -81,7 +81,7 @@ values (@Id, @BankNo, @BillNo, @BussinessId, @PrillBillTime, @TransferDestWin, @
            string sql = @"update t_QueueInfo set  BillNo = @BillNo,TransferDestWin = @TransferDestWin,  DelayNum = @DelayNum, 
 DelayTime = @DelayTime,  CallTime = @CallTime,  ProcessTime = @ProcessTime,  FinishTime = @FinishTime,  WindowNo = @WindowNo, 
 EmployNo = @EmployNo,  EmployName = @EmployName,Judge = @Judge,  WaitInterval = @WaitInterval,  ProcessInterval = @ProcessInterval, 
-CustemClass = @CustemClass,  Description = @Description,  Staus = @Staus where  Id = @Id";
+CustemClass = @CustemClass,  Description = @Description,  Status = @Staus where  Id = @Id";
            SqlParameter[] parameters = new SqlParameter[]
 			{
 				new SqlParameter("@Id", SqlDbType.Char, 36, ParameterDirection.Input, false, 0, 0, "Id", DataRowVersion.Default, queueInfo.Id),
@@ -102,7 +102,7 @@ CustemClass = @CustemClass,  Description = @Description,  Staus = @Staus where  
 				
 				new SqlParameter("@CustemClass", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "CustemClass", DataRowVersion.Default, queueInfo.Custemclass),
 				new SqlParameter("@Description", SqlDbType.VarChar, 100, ParameterDirection.Input, false, 0, 0, "Description", DataRowVersion.Default, queueInfo.Description),
-				new SqlParameter("@Staus", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "Staus", DataRowVersion.Default, queueInfo.Status)
+				new SqlParameter("@Staus", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "Status", DataRowVersion.Default, queueInfo.Status)
 			};
            return new CommandList(sql, parameters);
        }

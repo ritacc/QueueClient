@@ -149,7 +149,9 @@ namespace QM.Client.WebService.Control
             }
             WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(windowid);
             if (_winOR == null)
-                return "error:窗口不存在";//窗口不存在
+            {
+                return string.Format("error:窗口号：{0}不存在", windowid);//此窗口已登录
+            }
 
             WindowLoginInfoOR _Log = GetLoginLog(userid, windowid);
             if (_Log == null)
@@ -164,21 +166,21 @@ namespace QM.Client.WebService.Control
                 WindowLoginInfoOR _LoginRecordWin = GetLoginLogByWindowNo(windowid);
                 if (_LoginRecordWin != null)
                 {
-                    return "error:此窗口已登录";//此窗口已登录
+                    return string.Format("error:此窗口号：{0}已登录",windowid);//此窗口已登录
                 }
             }
             else
             {
-                int TimeLen = GetTimeLen(_Log.Logintime, DateTime.Now);
-                if (TimeLen < 300)
-                {
-                    return "error:已登录。";
-                }
-                else//更新上次记录为结束
-                {
+                //int TimeLen = GetTimeLen(_Log.Logintime, DateTime.Now);
+                //if (TimeLen < 300)
+                //{
+                //    return "error:已登录。";
+                //}
+                //else//更新上次记录为结束
+                //{
                     _Log.Status = 1;
                     _WindowLoginDA.UpdateLoginStatus(_Log);
-                }
+                //}
             }
 
             try

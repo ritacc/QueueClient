@@ -30,7 +30,7 @@ namespace QM.Client.DA.MySql
         public string GetInsertSql(PageWinOR pageWin)
         {
             string sql = @"insert into t_PageWin (Id,Name,Width,Height,orgBH) 
-values ('@Id','@Name',Width,Height,'@orgBH')";
+values ('@Id','@Name',@Width,@Height,'@orgBH')";
             sql = sql.Replace("@Id", pageWin.Id);	//
             sql = sql.Replace("@Name", pageWin.Name);	//名称
             sql = sql.Replace("@Width", pageWin.Width.ToString());	//宽

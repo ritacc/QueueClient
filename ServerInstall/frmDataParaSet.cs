@@ -5,24 +5,23 @@ using System.Data;
 using System.Drawing;
 using System.Text;
 using System.Windows.Forms;
-using System.Data.SqlClient;
-using System.Xml;
-using ritacc.ServerAdmin;
-using System.IO;
-using System.Configuration;
-using System.Data.OleDb;
 using System.Data.Odbc;
+using ritacc.ServerAdmin;
+using System.Configuration;
+using System.IO;
+using System.Data.SqlClient;
 
 namespace ServerInstall
 {
-    public partial class FrmDatabaseset : Form
+    public partial class frmDataParaSet : Form
     {
-        public FrmDatabaseset()
+        public frmDataParaSet()
         {
             InitializeComponent();
             this.Icon = Resource.set;
         }
-        #region mssql 
+
+        #region mssql
         private void btnMSSqlTest_Click(object sender, EventArgs e)
         {
             SqlConnection con = new SqlConnection(getMSSqlCon());
@@ -43,12 +42,12 @@ namespace ServerInstall
             }
         }
 
-       
+
         private bool SaveMSSqlDBSet()
         {
             try
             {
-                
+
                 string strErrorMsg = "";
                 if (string.IsNullOrEmpty(txtBcmIp.Text))
                 {
@@ -66,10 +65,10 @@ namespace ServerInstall
                 {
                     strErrorMsg += "MMSql:“密码”不能为空。\r\n";
                 }
-                
-                
-                              
-                if(string.IsNullOrEmpty(txtMysqlIP.Text))
+
+
+
+                if (string.IsNullOrEmpty(txtMysqlIP.Text))
                 {
                     strErrorMsg += "Mysql:“IP”不能为空。\r\n";
                 }
@@ -88,7 +87,7 @@ namespace ServerInstall
                 if (!string.IsNullOrEmpty(strErrorMsg))
                 {
                     MessageBox.Show(strErrorMsg);
-                    return  false;
+                    return false;
                 }
                 //初使化MySql                
                 string strMSSqlCon = getMSSqlCon();
@@ -154,23 +153,23 @@ namespace ServerInstall
                 {
                     MessageBox.Show(string.Format("配置文件：“{0}”不存在！", path));
                     return;
-                }                
+                }
                 ExeConfigurationFileMap map = new ExeConfigurationFileMap();
                 map.ExeConfigFilename = path;
                 Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
                 //实例化mssql
-                string nodeMsSqlValue= config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString;
-                
+                string nodeMsSqlValue = config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString;
+
                 //string[] arrBcmValue = nodeMsSqlValue.Split(';');
-                txtBcmIp.Text = StrCommon.GetParamValue( nodeMsSqlValue, "server=", ";");
-                txtBcmName.Text = StrCommon.GetParamValue( nodeMsSqlValue, "database=", ";");
-                txtBcmUid.Text = StrCommon.GetParamValue( nodeMsSqlValue, "uid=", ";");
-                txtBcmPwd.Text = StrCommon.GetParamValue( nodeMsSqlValue, "pwd=", ";");
+                txtBcmIp.Text = StrCommon.GetParamValue(nodeMsSqlValue, "server=", ";");
+                txtBcmName.Text = StrCommon.GetParamValue(nodeMsSqlValue, "database=", ";");
+                txtBcmUid.Text = StrCommon.GetParamValue(nodeMsSqlValue, "uid=", ";");
+                txtBcmPwd.Text = StrCommon.GetParamValue(nodeMsSqlValue, "pwd=", ";");
 
                 string strMySql = config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString;
-                txtMysqlIP.Text = StrCommon.GetParamValue( strMySql, "SERVER=", ";");
-                txtMysqlDB.Text = StrCommon.GetParamValue( strMySql, "DATABASE=", ";");
-                txtMysqlUserName.Text = StrCommon.GetParamValue( strMySql, "UID=", ";");
+                txtMysqlIP.Text = StrCommon.GetParamValue(strMySql, "SERVER=", ";");
+                txtMysqlDB.Text = StrCommon.GetParamValue(strMySql, "DATABASE=", ";");
+                txtMysqlUserName.Text = StrCommon.GetParamValue(strMySql, "UID=", ";");
                 txtMySqlPwd.Text = StrCommon.GetParamValue(strMySql, "PASSWORD=", ";");
 
 
@@ -190,7 +189,7 @@ namespace ServerInstall
         private void btnMysqlTest_Click(object sender, EventArgs e)
         {
 
-            OdbcConnection con=null;
+            OdbcConnection con = null;
             try
             {
                 string mysql = GetMySqlCon();
@@ -216,19 +215,15 @@ namespace ServerInstall
             {
                 return;
             }
-
-            FrimServiceStart frm = new FrimServiceStart();
-            frm.Show();
-            this.Hide();
+            this.Close();
         }
 
-        private void FrmDatabaseset_Load(object sender, EventArgs e)
+
+        private void frmDataParaSet_Load(object sender, EventArgs e)
         {
             InitDBSet();
         }
 
-       
-
-       
+        
     }
 }

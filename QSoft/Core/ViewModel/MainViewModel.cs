@@ -29,7 +29,7 @@ namespace QSoft.Core.ViewModel
 
         private MainViewModel()
         {
-            _command = new DelegateCommand<string>(Excute, CanExcute);
+            _command = new DelegateCommand<string>(Excute);//, CanExcute);
         }
 
         #endregion
@@ -40,10 +40,10 @@ namespace QSoft.Core.ViewModel
 
         #region 私有方法
 
-        private bool CanExcute(string parameter)
-        {
-            return true;
-        }
+        //private bool CanExcute(string parameter)
+        //{
+        //    return true;
+        //}
 
         private void Excute(string parameter)
         {

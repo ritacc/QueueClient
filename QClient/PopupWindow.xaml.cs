@@ -12,13 +12,14 @@ using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using QClient.Core.ViewModel;
 using QClient.QueueClinetServiceReference;
+using MahApps.Metro.Controls;
 
 namespace QClient
 {
     /// <summary>
     /// PopupWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class PopupWindow : Window
+    public partial class PopupWindow : MetroWindow
     {
         private readonly ButtomAdmin _buttonAdmin = new ButtomAdmin();
         private readonly PageWinOR _pageWinOR;
@@ -79,25 +80,36 @@ namespace QClient
                 if (element.DataContext is QhandyOR)
                 {
                     var qhandy = element.DataContext as QhandyOR;
-                    if (string.IsNullOrEmpty(qhandy.Windowonid))
+                    if (!qhandy.Buttomtype)
                     {
-                        if (string.IsNullOrEmpty(qhandy.LabelJobno))
+                        string mCard = string.Empty;
+                        string mErrorMsg = string.Empty;
+                        if (WebViewModel.Instance.QH(qhandy.LabelJobno, mCard, out mErrorMsg))
                         {
+                            //成功不处理
                             this.Close();
                         }
                         else
                         {
-                            MessageBox.Show(string.Format("此处执行业务共号：{0}.", qhandy.LabelJobno));
+
+                            MessageBox.Show(mErrorMsg);
                         }
                     }
                     else
                     {
-                        PopPage pp = new PopPage();
-                        
-                        //PopupWindow.Show(qhandy.Windowonid);
+                        var pageWinOR = WebViewModel.Instance.GetPageWinById(qhandy.Windowonid);
+                        PopupWindow pw = new PopupWindow(pageWinOR);
+                        pw.Owner = Application.Current.MainWindow;
+
+                        double mWidht = pageWinOR.Width < 300 ? 300 : pageWinOR.Width;
+                        double mHeight = pageWinOR.Height < 300 ? 300 : pageWinOR.Height;
+                        pw.Width = mWidht;
+                        pw.Height = mHeight;
+                        pw.ShowDialog();
                     }
                 }
             }
         }
-    }
+
+    }//end class
 }

@@ -112,7 +112,7 @@ namespace QM.Client.WebService
             }
             catch (Exception ex)
             {
-                strBillList = string.Format("Error: {0}", ex.Message);
+                strBillList = string.Format("error: {0}", ex.Message);
             }
             return strBillList;
         }

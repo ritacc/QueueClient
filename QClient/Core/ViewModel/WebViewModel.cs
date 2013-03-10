@@ -65,6 +65,36 @@ namespace QClient.Core.ViewModel
             }
         }
 
+        /// <summary>
+        /// 取号
+        /// </summary>
+        /// <param name="_qhjobNo">取号业务号</param>
+        /// <param name="mCard">取号卡号</param>
+        /// <param name="errorMsg">错误信息</param>
+        /// <returns></returns>
+        public bool QH(string  _qhjobNo,string mCard,out string errorMsg)
+        {
+            errorMsg = string.Empty;
+            using (var client = new QueueClientSoapClient())
+            {
+                if (string.IsNullOrEmpty(_qhjobNo))
+                {
+                    errorMsg = "没有配置业务队列不能取号！";
+                    return false;
+                }
+                var result = client.BussinessQH(_qhjobNo, mCard);
+                if (result.IndexOf("error:") >= 0)//有错
+                {
+                    errorMsg = result;
+                    return false;
+                }
+                //取号成功： result票号
+                errorMsg = result;
+                //打印票号
+                return true;
+            }
+
+        }
         #endregion
     }
 }

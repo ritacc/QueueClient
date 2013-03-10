@@ -11,6 +11,8 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
+using System.Configuration;
+using QSoft.Core.ViewModel;
 
 namespace QSoft.View
 {
@@ -23,6 +25,22 @@ namespace QSoft.View
         {
             InitializeComponent();
             this.Loaded += LoginWindow_Loaded;
+
+            try
+            {
+                string windowNo = ConfigurationManager.AppSettings["WindowNo"];
+                if (string.IsNullOrEmpty(windowNo))
+                {
+                    MessageBox.Show("没有配置窗口号！");
+                    this.Close();
+                    return;
+                }
+                GlobalData.WindowNo = windowNo;
+            }
+            catch (ConfigurationErrorsException cex)
+            {
+                MessageBox.Show(cex.Message);
+            }
         }
 
         private void LoginWindow_Loaded(object sender, RoutedEventArgs e)
@@ -40,12 +58,16 @@ namespace QSoft.View
             {
                 MessageTextBlock.Text = "* 请输入用户名";
                 UserNameTextBox.Focus();
+                return;
             }
             else if (password.Length == 0)
             {
                 PasswordBox.Focus();
+                return;
             }
-            else if (Login(userName, password))
+
+            string mErrorMsg = string.Empty;
+            if (LoginViewModel.Instance.Login(userName, password, out mErrorMsg))
             {
                 MessageTextBlock.Text = "登录成功，正在加载数据...";
                 MessageTextBlock.Foreground = Brushes.Blue;
@@ -54,14 +76,10 @@ namespace QSoft.View
             }
             else
             {
-                MessageTextBlock.Text = "* 用户名或密码不正确.";
+                MessageTextBlock.Text = mErrorMsg;
+                MessageTextBlock.Foreground = Brushes.Red;
             }
-
         }
-
-        private bool Login(string userName, string password)
-        {
-            return new Random().Next(10) > 3;
-        }
+    
     }
 }

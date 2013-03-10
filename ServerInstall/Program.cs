@@ -27,12 +27,22 @@ namespace ServerInstall
 
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            
+
             FrmMain frm = new FrmMain();
             frm.MOpType = mop;
 
             Application.Run(frm);
             //Application.Run(new FrmDatabaseset());
         }
+
+        //[STAThread]
+        //static void Main(String[] args)
+        //{           
+        //    Application.EnableVisualStyles();
+        //    Application.SetCompatibleTextRenderingDefault(false);
+
+        //    frmDataParaSet frm = new frmDataParaSet();
+        //    Application.Run(frm);
+        //}
     }
 }

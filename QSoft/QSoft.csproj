@@ -11,7 +11,8 @@
     <RootNamespace>QSoft</RootNamespace>
     <AssemblyName>QSoft</AssemblyName>
     <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
-    <TargetFrameworkProfile>Client</TargetFrameworkProfile>
+    <TargetFrameworkProfile>
+    </TargetFrameworkProfile>
     <FileAlignment>512</FileAlignment>
     <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
     <WarningLevel>4</WarningLevel>
@@ -43,6 +44,7 @@
     </Reference>
     <Reference Include="Microsoft.Expression.Interactions" />
     <Reference Include="System" />
+    <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
     <Reference Include="System.Drawing" />
     <Reference Include="System.Runtime.Serialization" />
@@ -71,7 +73,9 @@
     </ApplicationDefinition>
     <Compile Include="Controls\ColorPicker.cs" />
     <Compile Include="Core\Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Core\ViewModel\LoginViewModel.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
+    <Compile Include="GlobalData.cs" />
     <Compile Include="Service References\QueueClientServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -97,7 +101,6 @@
     <Compile Include="Core\Uitl\Logger\LoggerFactory.cs" />
     <Compile Include="Core\Uitl\Logger\LoggerLevel.cs" />
     <Compile Include="Core\Uitl\Logger\WriteFileLogger.cs" />
-    <Compile Include="Core\ViewModel\WebViewModel.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

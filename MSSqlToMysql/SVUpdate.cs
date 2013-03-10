@@ -146,7 +146,7 @@ namespace QM.Client.UpdateDB
                 _BussCon.UpdateWindow();
                 _BussCon.UpdateNearbyInfo();
 
-                //继承关系统
+                //继承上级数据
                 _BussCon.UpdateBussinessRole();
                 _BussCon.UpdateBussinessRoleON();
                 _BussCon.UpdateEmployType();

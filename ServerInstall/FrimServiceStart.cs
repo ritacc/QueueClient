@@ -13,7 +13,7 @@ namespace ServerInstall
     {
         public FrimServiceStart()
         {
-            InitializeComponent();
+            InitializeComponent(); this.Icon = Resource.set;
         }
 
         private void btnnext_Click(object sender, EventArgs e)
