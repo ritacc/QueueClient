@@ -22,6 +22,7 @@ namespace QSoft.Core.ViewModel
                     errorMsg = msg;
                     return false;
                 }
+                GlobalData.UserID = userid.Trim();
             }
             return true;
         }

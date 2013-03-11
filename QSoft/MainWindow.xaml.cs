@@ -13,6 +13,7 @@ using System.Windows.Navigation;
 using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using QSoft.View;
+using QSoft.Core.ViewModel;
 
 namespace QSoft
 {
@@ -21,12 +22,16 @@ namespace QSoft
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
+        public MainViewModel ViewModel { get; set; }
         public MainWindow()
         {
             var loginWindow = new LoginWindow();
             if (loginWindow.ShowDialog() == true)
             {
                 InitializeComponent();
+                ViewModel = MainViewModel.Instance;
+                ViewModel.MianPage = this;
+                this.DataContext = ViewModel;
             }
             else
             {
@@ -34,21 +39,6 @@ namespace QSoft
             }
         }
 
-        private void PauseButton_Click(object sender, RoutedEventArgs e)
-        {
-            var button = sender as Button;
-            if (button.CommandParameter.ToString() == "Pause")
-            {
-                PauseButtonTextBlock.Text = "恢复";
-                button.CommandParameter = "Resume";
-                PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/resume.png", UriKind.RelativeOrAbsolute));
-            }
-            else
-            {
-                PauseButtonTextBlock.Text = "暂停";
-                button.CommandParameter = "Pause";
-                PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/pause.png", UriKind.RelativeOrAbsolute));
-            }
-        }
+       
     }
 }

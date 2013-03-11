@@ -6,8 +6,7 @@
     xmlns:vm="clr-namespace:QSoft.Core.ViewModel"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="QSoft.MainWindow"
     Title="柜员叫号客户端" Height="600" Width="800"
-    WindowStartupLocation="CenterScreen"
-    DataContext="{x:Static vm:MainViewModel.Instance}">
+    WindowStartupLocation="CenterScreen">
     <metro:MetroWindow.Resources>
     	<Style x:Key="ImageButtonImageStyle" TargetType="{x:Type Image}">
     		<Setter Property="Height" Value="36"/>
@@ -269,7 +268,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="Next"
+        				CommandParameter="CALL"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -282,7 +281,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="ReCall"
+        				CommandParameter="RECALL"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -295,7 +294,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="Wait"
+        				CommandParameter="DELAY"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -308,7 +307,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="Transfer"
+        				CommandParameter="TRANSFER"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -321,7 +320,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="Special"
+        				CommandParameter="SPECALL"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -334,7 +333,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="Welcome"
+        				CommandParameter="WELCOME"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -347,7 +346,7 @@
         			</Button>
         			<Button
         				Command="{Binding Command}"
-        				CommandParameter="Evaluation"
+        				CommandParameter="JUDGE"
         				Style="{StaticResource ImageButtonStyle}">
         				<StackPanel>
         					<Image
@@ -358,11 +357,10 @@
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
         				</StackPanel>
         			</Button>
-                    <Button
+                    <Button x:Name="btnPauseReStart"
         				Command="{Binding Command}"
-        				CommandParameter="Pause"
-        				Style="{StaticResource ImageButtonStyle}"
-                        Click="PauseButton_Click">
+        				CommandParameter="PAUSE"
+        				Style="{StaticResource ImageButtonStyle}">
                         <StackPanel>
                             <Image
                                 x:Name="PauseButtonImage"

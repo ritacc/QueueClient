@@ -9,7 +9,7 @@ namespace QSoft.Core.Model
     /// <summary>
     /// 实体对象基类
     /// </summary>
-    internal abstract class EntityObject : INotifyPropertyChanged
+    public abstract class EntityObject : INotifyPropertyChanged
     {
         /// <summary>
         /// 属性通知更改通知事件

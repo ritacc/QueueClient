@@ -567,7 +567,7 @@ namespace QM.Client.WebService.Control
         {
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
-                return "此票号的记录不存在!";
+                return "error:此票号的记录不存在!";
             try
             {
                 objQH.Status = 3;
