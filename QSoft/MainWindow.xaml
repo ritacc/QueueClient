@@ -4,7 +4,11 @@
     xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:converter="clr-namespace:QSoft.Core.Converter"
     xmlns:vm="clr-namespace:QSoft.Core.ViewModel"
-    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity" xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d" x:Class="QSoft.MainWindow"
+    xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
+    xmlns:ei="http://schemas.microsoft.com/expression/2010/interactions"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    mc:Ignorable="d" x:Class="QSoft.MainWindow"
     Title="柜员叫号客户端" Height="600" Width="800"
     WindowStartupLocation="CenterScreen">
     <metro:MetroWindow.Resources>
@@ -21,7 +25,6 @@
     		<Setter Property="TextTrimming" Value="CharacterEllipsis"/>
     		<Setter Property="TextAlignment" Value="Center"/>
     	</Style>
-
     	<Style x:Key="ImageButtonStyle" TargetType="{x:Type Button}">
     		<Setter Property="Margin" Value="3"/>
     		<Setter Property="Background" Value="Transparent"/>
@@ -90,12 +93,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
         	<ColumnDefinition Width="Auto"/>
-        	<ColumnDefinition/>
+            <ColumnDefinition Width="*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
         	<RowDefinition Height="Auto"/>
         	<RowDefinition Height="Auto"/>
-        	<RowDefinition/>
+            <RowDefinition/>
         </Grid.RowDefinitions>
         <Border
             x:Name="TopImageBorder"
@@ -112,268 +115,284 @@
             Grid.ColumnSpan="2"
             Height="40"
             Background="#FF336699"/>
-        <Border
+        <!---下面内容-->
+        <Grid Grid.Row="2"
+            Grid.Column="0" Grid.ColumnSpan="2">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="auto"/>
+                <ColumnDefinition Width="*"/>
+            </Grid.ColumnDefinitions>
+            <!--工具栏-->
+            <Border
             x:Name="LeftBorder"
             VerticalAlignment="Top"
-            Grid.Row="2"
-            Grid.Column="0"
+            
             Margin="10"
             BorderThickness="1"
             CornerRadius="5" RenderTransformOrigin="0.5,0.5">
-        	<Border.RenderTransform>
-        		<TransformGroup>
-        			<ScaleTransform/>
-        			<SkewTransform/>
-        			<RotateTransform/>
-        			<TranslateTransform/>
-        		</TransformGroup>
-        	</Border.RenderTransform>
-            <Border.Background>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FF99CCFF" Offset="0"/>
-                    <GradientStop Color="#FF3366CC" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.Background>
-            <Border.BorderBrush>
-                <LinearGradientBrush EndPoint="0,1">
-                    <GradientStop Color="#FFCCCCFF" Offset="0"/>
-                    <GradientStop Color="#FF669999" Offset="1"/>
-                </LinearGradientBrush>
-            </Border.BorderBrush>
-        	<Grid>
-        		<Grid.RowDefinitions>
-        			<RowDefinition Height="Auto"/>
-        			<RowDefinition Height="Auto"/>
-        			<RowDefinition Height="*"/>
-        		</Grid.RowDefinitions>
-        		<ToggleButton
+                <Border.RenderTransform>
+                    <TransformGroup>
+                        <ScaleTransform/>
+                        <SkewTransform/>
+                        <RotateTransform/>
+                        <TranslateTransform/>
+                    </TransformGroup>
+                </Border.RenderTransform>
+                <Border.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FF99CCFF" Offset="0"/>
+                        <GradientStop Color="#FF3366CC" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.Background>
+                <Border.BorderBrush>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FFCCCCFF" Offset="0"/>
+                        <GradientStop Color="#FF669999" Offset="1"/>
+                    </LinearGradientBrush>
+                </Border.BorderBrush>
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="Auto"/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <!--<ToggleButton
         			x:Name="ExplandButton"
         			Content="收缩"
         			Margin="0,5,8,5"
         			HorizontalAlignment="Right" Height="16">
-        			<ToggleButton.Style>
-        				<Style TargetType="{x:Type ToggleButton}">
-        					<Setter Property="Height" Value="16"/>
-        					<Setter Property="Width" Value="16"/>
-        					<Setter Property="Template">
-        						<Setter.Value>
-        							<ControlTemplate TargetType="{x:Type ToggleButton}">
-        								<Border
+                        <ToggleButton.Style>
+                            <Style TargetType="{x:Type ToggleButton}">
+                                <Setter Property="Height" Value="16"/>
+                                <Setter Property="Width" Value="16"/>
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                            <Border
         									Background="{TemplateBinding Background}"
         									BorderBrush="{TemplateBinding BorderBrush}"
         									BorderThickness="1"
         									CornerRadius="3">
-        									<Image x:Name="Image" Source="Resources/Images/expanded.jpg"/>
-        								</Border>
-        								<ControlTemplate.Triggers>
-        									<Trigger Property="IsMouseOver" Value="True">
-        										<Setter Property="Background" Value="#95F5357C"/>
-        										<Setter Property="BorderBrush" Value="#FCFFDD9E"/>
-        									</Trigger>
-        									<Trigger Property="IsPressed" Value="True">
-        										<Setter Property="RenderTransform">
-        											<Setter.Value>
-        												<TranslateTransform X="1" Y="1"/>
-        											</Setter.Value>
-        										</Setter>
-        									</Trigger>
-        									<Trigger Property="IsChecked" Value="True">
-        										<Setter TargetName="Image" Property="Source" Value="Resources/Images/collapsed.jpg"/>
-        									</Trigger>
-        								</ControlTemplate.Triggers>
-        							</ControlTemplate>
-        						</Setter.Value>
-        					</Setter>
-        				</Style>
-        			</ToggleButton.Style>
-        			<i:Interaction.Triggers>
-        				<i:EventTrigger EventName="Checked">
-        					<ei:ControlStoryboardAction Storyboard="{StaticResource CollapseStoryboard}"/>
-        				</i:EventTrigger>
-        				<i:EventTrigger EventName="Unchecked">
-        					<ei:ControlStoryboardAction Storyboard="{StaticResource ExplandStoryboard}"/>
-        				</i:EventTrigger>
-        			</i:Interaction.Triggers>
-        		</ToggleButton>
-        		<Border
+                                                <Image x:Name="Image" Source="Resources/Images/expanded.jpg"/>
+                                            </Border>
+                                            <ControlTemplate.Triggers>
+                                                <Trigger Property="IsMouseOver" Value="True">
+                                                    <Setter Property="Background" Value="#95F5357C"/>
+                                                    <Setter Property="BorderBrush" Value="#FCFFDD9E"/>
+                                                </Trigger>
+                                                <Trigger Property="IsPressed" Value="True">
+                                                    <Setter Property="RenderTransform">
+                                                        <Setter.Value>
+                                                            <TranslateTransform X="1" Y="1"/>
+                                                        </Setter.Value>
+                                                    </Setter>
+                                                </Trigger>
+                                                <Trigger Property="IsChecked" Value="True">
+                                                    <Setter TargetName="Image" Property="Source" Value="Resources/Images/collapsed.jpg"/>
+                                                </Trigger>
+                                            </ControlTemplate.Triggers>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </ToggleButton.Style>
+                        <i:Interaction.Triggers>
+                            <i:EventTrigger EventName="Checked">
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource CollapseStoryboard}"/>
+                            </i:EventTrigger>
+                            <i:EventTrigger EventName="Unchecked">
+                                <ei:ControlStoryboardAction Storyboard="{StaticResource ExplandStoryboard}"/>
+                            </i:EventTrigger>
+                        </i:Interaction.Triggers>
+                    </ToggleButton>-->
+                    <Border
         			x:Name="ToolsTitleBorder"
         			BorderThickness="1"
         			CornerRadius="5,5,0,0"
                     Height="27"
         			Margin="8,0,8,-1" Grid.Row="1">
-        			<Border.Background>
-        				<LinearGradientBrush EndPoint="0,1">
-        					<GradientStop Color="#FFDBEAF7"/>
-        					<GradientStop Color="#FFC7D8E4" Offset="0.5"/>
-        					<GradientStop Color="#FFBACDDA" Offset="0.49"/>
-        					<GradientStop Color="#FFD9E5F3" Offset="1"/>
-        				</LinearGradientBrush>
-        			</Border.Background>
-        			<TextBlock
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#FFDBEAF7"/>
+                                <GradientStop Color="#FFC7D8E4" Offset="0.5"/>
+                                <GradientStop Color="#FFBACDDA" Offset="0.49"/>
+                                <GradientStop Color="#FFD9E5F3" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock
         				VerticalAlignment="Center"
         				HorizontalAlignment="Center"
         				Foreground="Black"
         				FontSize="14"
         				Text="工具栏"/>
-        		</Border>
-        		<Border
+                    </Border>
+                    <Border
         			x:Name="VerticalToolsTitleBorder"
         			BorderThickness="1"
         			CornerRadius="0,5,5,0"
         			Margin="0" Grid.Row="1" Grid.RowSpan="2" HorizontalAlignment="Right" Width="27" Visibility="Collapsed">
-        			<Border.Background>
-        				<LinearGradientBrush EndPoint="0,1">
-        					<GradientStop Color="#FFDBEAF7"/>
-        					<GradientStop Color="#FFC7D8E4" Offset="0.5"/>
-        					<GradientStop Color="#FFBACDDA" Offset="0.49"/>
-        					<GradientStop Color="#FFD9E5F3" Offset="1"/>
-        				</LinearGradientBrush>
-        			</Border.Background>
-        			<TextBlock
+                        <Border.Background>
+                            <LinearGradientBrush EndPoint="0,1">
+                                <GradientStop Color="#FFDBEAF7"/>
+                                <GradientStop Color="#FFC7D8E4" Offset="0.5"/>
+                                <GradientStop Color="#FFBACDDA" Offset="0.49"/>
+                                <GradientStop Color="#FFD9E5F3" Offset="1"/>
+                            </LinearGradientBrush>
+                        </Border.Background>
+                        <TextBlock
         				VerticalAlignment="Center"
         				HorizontalAlignment="Center"
         				Foreground="Black"
         				FontSize="14"
         				Text="工具栏" Width="18" TextWrapping="Wrap" Margin="5"/>
-        		</Border>
-        		<UniformGrid
+                    </Border>
+                    <UniformGrid
         			x:Name="ToolsGrid"
         			Columns="3"
         			Margin="8" d:LayoutOverrides="Height" Grid.Row="2">
-        			<Button
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="Setting"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/setting.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="系统设置"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="Stop"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/stop.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="结束服务"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="CALL"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/next.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="呼叫下一位"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="RECALL"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/recall.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="重呼"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="DELAY"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/wait.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="延后"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="TRANSFER"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/transfer.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="转移"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="SPECALL"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/special.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="特呼"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="WELCOME"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/welcome.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="欢迎"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-        			<Button
+                            </StackPanel>
+                        </Button>
+                        <Button
         				Command="{Binding Command}"
         				CommandParameter="JUDGE"
         				Style="{StaticResource ImageButtonStyle}">
-        				<StackPanel>
-        					<Image
+                            <StackPanel>
+                                <Image
         						Source="Resources/Images/evaluation.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-        					<TextBlock
+                                <TextBlock
         						Text="请评价"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-        				</StackPanel>
-        			</Button>
-                    <Button x:Name="btnPauseReStart"
+                            </StackPanel>
+                        </Button>
+                        <Button x:Name="btnPauseReStart"
         				Command="{Binding Command}"
         				CommandParameter="PAUSE"
         				Style="{StaticResource ImageButtonStyle}">
-                        <StackPanel>
-                            <Image
+                            <StackPanel>
+                                <Image
                                 x:Name="PauseButtonImage"
         						Source="Resources/Images/pause.png"
         						Style="{StaticResource ImageButtonImageStyle}"/>
-                            <TextBlock
+                                <TextBlock
                                 x:Name="PauseButtonTextBlock"
         						Text="暂停"
         						Style="{StaticResource ImageButtonTextBlockStyle}"/>
-                        </StackPanel>
-                    </Button>
-                </UniformGrid>
-        	</Grid>
-        </Border>
+                            </StackPanel>
+                        </Button>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+            <ScrollViewer Grid.Column="1">
+                <StackPanel>
+                    <TextBlock Text="1"></TextBlock>
+                    
+                </StackPanel>                
+            </ScrollViewer>
+        </Grid>
+        
+        
     </Grid>
 </metro:MetroWindow>

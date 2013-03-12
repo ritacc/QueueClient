@@ -506,6 +506,7 @@ namespace QM.Client.WebService.Control
         /// <param name="TimeLen">时长</param>
         private string CallDelay(string TimeLen,string mBillNo)
         {
+            
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return "此票号的记录不存在!";
