@@ -1,0 +1,16 @@
+﻿<metro:MetroWindow x:Class="QSoft.View.SysSetWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+    Title="系统设置" Height="240" Width="350"
+    ShowInTaskbar="False"
+    WindowStartupLocation="CenterScreen"
+    ShowMaxRestoreButton="False"
+    ResizeMode="NoResize">
+    <Window.Background>
+        <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
+    </Window.Background>
+    <Grid>
+        
+    </Grid>
+</metro:MetroWindow>

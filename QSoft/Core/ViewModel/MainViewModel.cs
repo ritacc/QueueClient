@@ -6,6 +6,7 @@ using QSoft.Core.Model;
 using System.Windows;
 using QSoft.QueueClientServiceReference;
 using System.Windows.Media.Imaging;
+using QSoft.View;
 
 namespace QSoft.Core.ViewModel
 {
@@ -57,44 +58,79 @@ namespace QSoft.Core.ViewModel
         #region 按钮事件
         private void Excute(string parameter)
         {
-            if (_NowEmployeeStaus != EmployeeStatus.Normal)
+            if (parameter == "Setting")
             {
-                if (parameter != "RESTART")
+                SysSetWindow sysSet = new SysSetWindow();
+                sysSet.ShowDialog();
+            }
+            else if (parameter == "Stop")
+            {
+                StopServer();
+            }
+            else
+            {
+                if (_NowEmployeeStaus != EmployeeStatus.Normal)
                 {
-                    return;
+                    if (parameter != "RESTART")
+                    {
+                        return;
+                    }
+                }
+                switch (parameter)
+                {
+                    case "CALL":
+                        CallGetNext();
+                        break;
+                    case "RECALL":
+                        CallReCall();
+                        break;
+                    case "DELAY": //延后 增加了一个票号 (票号##时长)
+                        CallDelay();
+                        break;
+                    case "TRANSFER":
+                        CallTransfer();
+                        break;
+                    case "SPECALL":
+                        CallSpecall();
+                        break;
+                    case "WELCOME":
+                        CallWelcome();
+                        break;
+                    case "JUDGE":
+                        CallJudge();
+                        break;
+                    case "PAUSE":
+                        CallPause();
+                        break;
+                    case "RESTART":
+                        CallRestart();
+                        break;
+                }
+                //MessageBox.Show(string.Format("执行按钮命令[{0}]., 查找关键字[cba]添加功能", parameter));
+            }
+        }
+
+        /// <summary>
+        /// 结束服务
+        /// </summary>
+        private void StopServer()
+        {
+            if (MessageBox.Show("确定要退出系统吗？","提示",MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+            {
+                return;
+            }
+            using (var client = new QueueClientSoapClient())
+            {
+                string msg = client.endService(GlobalData.UserID, GlobalData.WindowNo);
+                if (msg == "0")
+                {
+                    Application.Current.Shutdown();
+                }
+                else
+                {
+                    ShowErrorMsg(msg);
                 }
             }
-            switch (parameter)
-            {
-                case "CALL":
-                    CallGetNext();
-                    break;
-                case "RECALL":
-                    CallReCall();
-                    break;
-                case "DELAY": //延后 增加了一个票号 (票号##时长)
-                    CallDelay();
-                    break;
-                case "TRANSFER":
-                    CallTransfer();
-                    break;
-                case "SPECALL":
-                    CallSpecall();
-                    break;
-                case "WELCOME":
-                    CallWelcome();
-                    break;
-                case "JUDGE":
-                    CallJudge();
-                    break;
-                case "PAUSE":
-                    CallPause();
-                    break;
-                case "RESTART":
-                    CallRestart();
-                    break;
-            }
-            //MessageBox.Show(string.Format("执行按钮命令[{0}]., 查找关键字[cba]添加功能", parameter));
         }
         private void CallReCall()
         {

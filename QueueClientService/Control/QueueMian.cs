@@ -397,7 +397,7 @@ namespace QM.Client.WebService.Control
                     strReturnValue = CallGetNext(value);
                     break;
                 case "RECALL":
-                    CallReCall(value);
+                    strReturnValue = CallReCall(value);
                     break;
                 case "DELAY": //延后 增加了一个票号 (票号##时长)
                     int mindex = value.IndexOf("##");
@@ -494,10 +494,26 @@ namespace QM.Client.WebService.Control
         /// 重呼	RECALL	票号
         /// </summary>
         /// <param name="mBill">票号</param>
-        private void CallReCall(string mBillNo)
+        private string CallReCall(string mBillNo)
         {
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
-
+            if (objQH == null)
+            {
+                return "此票号的记录不存在!";
+            }
+            else if (objQH.Status == 0)
+            {
+                return "未叫号！";
+            }
+            else if (objQH.Status == 3)
+            {
+                return "已办结！";
+            }
+            else if (objQH.Status == 1)
+            {
+                return "0";
+            }
+            return "未知错误！";
         }
 
         /// <summary>
@@ -506,7 +522,6 @@ namespace QM.Client.WebService.Control
         /// <param name="TimeLen">时长</param>
         private string CallDelay(string TimeLen,string mBillNo)
         {
-            
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return "此票号的记录不存在!";
