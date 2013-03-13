@@ -10,7 +10,23 @@
     <Window.Background>
         <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
     </Window.Background>
+    <Window.Resources>
+        <DataTemplate x:Key="myTaskTemplate">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock Text="c# " Width="80" Background="Red"/>
+                <TextBlock Text="Java " Width="80" />
+                <TextBlock Text="VB " Width="80" />
+                <TextBlock Text="C++ " Width="80" />
+            </StackPanel>
+        </DataTemplate>
+    </Window.Resources>
+
+
     <Grid>
-        
+        <ListBox Width="400" Margin="10" Background="LightBlue"
+         ItemTemplate="{StaticResource myTaskTemplate}" >
+            <StackPanel>
+            </StackPanel>
+        </ListBox>
     </Grid>
 </metro:MetroWindow>
