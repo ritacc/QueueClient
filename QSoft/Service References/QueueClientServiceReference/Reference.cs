@@ -15,8 +15,32 @@ namespace QSoft.QueueClientServiceReference {
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="BussinessQueueOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class BussinessQueueOR : QSoft.QueueClientServiceReference.BussinessBasicInfoOR {
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private QSoft.QueueClientServiceReference.QueueInfoOR[] BussQueuesField;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public QSoft.QueueClientServiceReference.QueueInfoOR[] BussQueues {
+            get {
+                return this.BussQueuesField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BussQueuesField, value) != true)) {
+                    this.BussQueuesField = value;
+                    this.RaisePropertyChanged("BussQueues");
+                }
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
     [System.Runtime.Serialization.DataContractAttribute(Name="BussinessBasicInfoOR", Namespace="http://www.ritacc.com/")]
     [System.SerializableAttribute()]
+    [System.Runtime.Serialization.KnownTypeAttribute(typeof(QSoft.QueueClientServiceReference.BussinessQueueOR))]
     public partial class BussinessBasicInfoOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
         
         [System.NonSerializedAttribute()]
@@ -91,6 +115,419 @@ namespace QSoft.QueueClientServiceReference {
                 if ((this.QueueNumberField.Equals(value) != true)) {
                     this.QueueNumberField = value;
                     this.RaisePropertyChanged("QueueNumber");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="QueueInfoOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class QueueInfoOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        private bool IsVipField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BanknoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BillnoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BussinessidField;
+        
+        private System.DateTime PrillbilltimeField;
+        
+        private int TransferdestwinField;
+        
+        private int DelaynumField;
+        
+        private int DelaytimeField;
+        
+        private System.DateTime CalltimeField;
+        
+        private System.DateTime ProcesstimeField;
+        
+        private System.DateTime FinishtimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WindownoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmploynoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmploynameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CardnoField;
+        
+        private int JudgeField;
+        
+        private int WaitintervalField;
+        
+        private int ProcessintervalField;
+        
+        private int WaitpeoplebusssinessField;
+        
+        private int WaitpeoplebankField;
+        
+        private int CustemclassField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        private int StatusField;
+        
+        private int UpStatusField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public bool IsVip {
+            get {
+                return this.IsVipField;
+            }
+            set {
+                if ((this.IsVipField.Equals(value) != true)) {
+                    this.IsVipField = value;
+                    this.RaisePropertyChanged("IsVip");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Bankno {
+            get {
+                return this.BanknoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BanknoField, value) != true)) {
+                    this.BanknoField = value;
+                    this.RaisePropertyChanged("Bankno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Billno {
+            get {
+                return this.BillnoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BillnoField, value) != true)) {
+                    this.BillnoField = value;
+                    this.RaisePropertyChanged("Billno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Bussinessid {
+            get {
+                return this.BussinessidField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BussinessidField, value) != true)) {
+                    this.BussinessidField = value;
+                    this.RaisePropertyChanged("Bussinessid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=5)]
+        public System.DateTime Prillbilltime {
+            get {
+                return this.PrillbilltimeField;
+            }
+            set {
+                if ((this.PrillbilltimeField.Equals(value) != true)) {
+                    this.PrillbilltimeField = value;
+                    this.RaisePropertyChanged("Prillbilltime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        public int Transferdestwin {
+            get {
+                return this.TransferdestwinField;
+            }
+            set {
+                if ((this.TransferdestwinField.Equals(value) != true)) {
+                    this.TransferdestwinField = value;
+                    this.RaisePropertyChanged("Transferdestwin");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public int Delaynum {
+            get {
+                return this.DelaynumField;
+            }
+            set {
+                if ((this.DelaynumField.Equals(value) != true)) {
+                    this.DelaynumField = value;
+                    this.RaisePropertyChanged("Delaynum");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        public int Delaytime {
+            get {
+                return this.DelaytimeField;
+            }
+            set {
+                if ((this.DelaytimeField.Equals(value) != true)) {
+                    this.DelaytimeField = value;
+                    this.RaisePropertyChanged("Delaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public System.DateTime Calltime {
+            get {
+                return this.CalltimeField;
+            }
+            set {
+                if ((this.CalltimeField.Equals(value) != true)) {
+                    this.CalltimeField = value;
+                    this.RaisePropertyChanged("Calltime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public System.DateTime Processtime {
+            get {
+                return this.ProcesstimeField;
+            }
+            set {
+                if ((this.ProcesstimeField.Equals(value) != true)) {
+                    this.ProcesstimeField = value;
+                    this.RaisePropertyChanged("Processtime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        public System.DateTime Finishtime {
+            get {
+                return this.FinishtimeField;
+            }
+            set {
+                if ((this.FinishtimeField.Equals(value) != true)) {
+                    this.FinishtimeField = value;
+                    this.RaisePropertyChanged("Finishtime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string Windowno {
+            get {
+                return this.WindownoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WindownoField, value) != true)) {
+                    this.WindownoField = value;
+                    this.RaisePropertyChanged("Windowno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        public string Employno {
+            get {
+                return this.EmploynoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmploynoField, value) != true)) {
+                    this.EmploynoField = value;
+                    this.RaisePropertyChanged("Employno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string Employname {
+            get {
+                return this.EmploynameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmploynameField, value) != true)) {
+                    this.EmploynameField = value;
+                    this.RaisePropertyChanged("Employname");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public string Cardno {
+            get {
+                return this.CardnoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CardnoField, value) != true)) {
+                    this.CardnoField = value;
+                    this.RaisePropertyChanged("Cardno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=16)]
+        public int Judge {
+            get {
+                return this.JudgeField;
+            }
+            set {
+                if ((this.JudgeField.Equals(value) != true)) {
+                    this.JudgeField = value;
+                    this.RaisePropertyChanged("Judge");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=17)]
+        public int Waitinterval {
+            get {
+                return this.WaitintervalField;
+            }
+            set {
+                if ((this.WaitintervalField.Equals(value) != true)) {
+                    this.WaitintervalField = value;
+                    this.RaisePropertyChanged("Waitinterval");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=18)]
+        public int Processinterval {
+            get {
+                return this.ProcessintervalField;
+            }
+            set {
+                if ((this.ProcessintervalField.Equals(value) != true)) {
+                    this.ProcessintervalField = value;
+                    this.RaisePropertyChanged("Processinterval");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=19)]
+        public int Waitpeoplebusssiness {
+            get {
+                return this.WaitpeoplebusssinessField;
+            }
+            set {
+                if ((this.WaitpeoplebusssinessField.Equals(value) != true)) {
+                    this.WaitpeoplebusssinessField = value;
+                    this.RaisePropertyChanged("Waitpeoplebusssiness");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=20)]
+        public int Waitpeoplebank {
+            get {
+                return this.WaitpeoplebankField;
+            }
+            set {
+                if ((this.WaitpeoplebankField.Equals(value) != true)) {
+                    this.WaitpeoplebankField = value;
+                    this.RaisePropertyChanged("Waitpeoplebank");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=21)]
+        public int Custemclass {
+            get {
+                return this.CustemclassField;
+            }
+            set {
+                if ((this.CustemclassField.Equals(value) != true)) {
+                    this.CustemclassField = value;
+                    this.RaisePropertyChanged("Custemclass");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=22)]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
+        public int Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
+        public int UpStatus {
+            get {
+                return this.UpStatusField;
+            }
+            set {
+                if ((this.UpStatusField.Equals(value) != true)) {
+                    this.UpStatusField = value;
+                    this.RaisePropertyChanged("UpStatus");
                 }
             }
         }
@@ -1216,12 +1653,12 @@ namespace QSoft.QueueClientServiceReference {
     public partial class getQueueResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public QSoft.QueueClientServiceReference.BussinessBasicInfoOR[] getQueueResult;
+        public QSoft.QueueClientServiceReference.BussinessQueueOR[] getQueueResult;
         
         public getQueueResponseBody() {
         }
         
-        public getQueueResponseBody(QSoft.QueueClientServiceReference.BussinessBasicInfoOR[] getQueueResult) {
+        public getQueueResponseBody(QSoft.QueueClientServiceReference.BussinessQueueOR[] getQueueResult) {
             this.getQueueResult = getQueueResult;
         }
     }
@@ -1699,7 +2136,7 @@ namespace QSoft.QueueClientServiceReference {
             return base.Channel.getQueue(request);
         }
         
-        public QSoft.QueueClientServiceReference.BussinessBasicInfoOR[] getQueue() {
+        public QSoft.QueueClientServiceReference.BussinessQueueOR[] getQueue() {
             QSoft.QueueClientServiceReference.getQueueRequest inValue = new QSoft.QueueClientServiceReference.getQueueRequest();
             inValue.Body = new QSoft.QueueClientServiceReference.getQueueRequestBody();
             QSoft.QueueClientServiceReference.getQueueResponse retVal = ((QSoft.QueueClientServiceReference.QueueClientSoap)(this)).getQueue(inValue);

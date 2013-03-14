@@ -331,15 +331,23 @@ namespace QM.Client.WebService.Control
         /// 获取所有业务队业
         /// </summary>
         /// <returns></returns>
-        public List<BussinessBasicInfoOR> getQueue()
+        public List<BussinessQueueOR> getQueue()
         {
-            List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
-            foreach (BussinessQueueOR obj in QhQueues)
+            if (QhQueues != null)
             {
-                BussinessBasicInfoOR _mBasciObj = new BussinessBasicInfoOR(obj);
-                listQueue.Add(_mBasciObj);
+                foreach (var v in QhQueues)
+                {
+                    v.InitNumber();
+                }
             }
-            return listQueue;
+            return QhQueues;
+            //List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
+            //foreach (BussinessQueueOR obj in QhQueues)
+            //{
+            //    BussinessBasicInfoOR _mBasciObj = new BussinessBasicInfoOR(obj);
+            //    listQueue.Add(_mBasciObj);
+            //}
+            //return listQueue;
         }
 
         /// <summary>

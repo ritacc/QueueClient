@@ -2,7 +2,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
-    Title="系统设置" Height="240" Width="350"
+    Title="系统设置" Height="240" Width="950"
     ShowInTaskbar="False"
     WindowStartupLocation="CenterScreen"
     ShowMaxRestoreButton="False"
@@ -11,22 +11,38 @@
         <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
     </Window.Background>
     <Window.Resources>
-        <DataTemplate x:Key="myTaskTemplate">
+        <DataTemplate x:Key="myTaskTemplateChild">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock Text="c# " Width="80" Background="Red"/>
-                <TextBlock Text="Java " Width="80" />
-                <TextBlock Text="VB " Width="80" />
-                <TextBlock Text="C++ " Width="80" />
+                <TextBlock  Background="LightBlue" Text="{Binding ID}"></TextBlock>
             </StackPanel>
         </DataTemplate>
+        <DataTemplate x:Key="myTaskTemplate">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="60"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                <!--排队总信息-->
+                <Grid>
+                    <TextBlock  Text="{Binding Name}" Width="80" Background="LightBlue"/>
+                </Grid>
+                <!--排队列表-->
+                <ListBox Grid.Column="1" ItemTemplate="{StaticResource myTaskTemplateChild}"
+                         ItemsSource="{Binding ChildItems}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
+        </DataTemplate>
     </Window.Resources>
-
-
     <Grid>
-        <ListBox Width="400" Margin="10" Background="LightBlue"
-         ItemTemplate="{StaticResource myTaskTemplate}" >
-            <StackPanel>
-            </StackPanel>
+        <ListBox Margin="10" Background="LightBlue" x:Name="lbItem"
+         ItemTemplate="{StaticResource myTaskTemplate}"  ItemsSource="{Binding ListStu}">
         </ListBox>
+        <Button  VerticalAlignment="Top" HorizontalAlignment="Left" Width="30" Content="bnt" Click="Button_Click"></Button>
     </Grid>
+    
 </metro:MetroWindow>

@@ -19,6 +19,21 @@ namespace QM.Client.Entity
        {
 
        }
+       public void InitNumber()
+       {
+           if (BussQueues == null)
+           {
+               this.QueueNumber = 0;
+               return;
+           }
+           int qhNumber = 0;
+           foreach (var v in BussQueues)
+           {
+               if (v.Status == 0)
+                   qhNumber++;
+           }
+           this.QueueNumber = qhNumber;
+       }
 
        //public BussinessQueueOR(DataRow dr)
        //{

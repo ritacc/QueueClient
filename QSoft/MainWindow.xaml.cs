@@ -25,18 +25,18 @@ namespace QSoft
         public MainViewModel ViewModel { get; set; }
         public MainWindow()
         {
-            var loginWindow = new LoginWindow();
-            if (loginWindow.ShowDialog() == true)
-            {
+            //var loginWindow = new LoginWindow();
+            //if (loginWindow.ShowDialog() == true)
+            //{
                 InitializeComponent();
                 ViewModel = MainViewModel.Instance;
                 ViewModel.MianPage = this;
                 this.DataContext = ViewModel;
-            }
-            else
-            {
-                Application.Current.Shutdown();
-            }
+            //}
+            //else
+            //{
+            //    Application.Current.Shutdown();
+            //}
         }
 
        

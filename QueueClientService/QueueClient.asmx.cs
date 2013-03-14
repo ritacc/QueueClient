@@ -91,7 +91,7 @@ namespace QM.Client.WebService
         /// </summary>
         /// <returns></returns>
         [WebMethod]
-        public List<BussinessBasicInfoOR> getQueue()
+        public List<BussinessQueueOR> getQueue()
         {
             return Instanse().getQueue();
         }

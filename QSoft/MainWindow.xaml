@@ -86,6 +86,46 @@
     			<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
     		</DoubleAnimationUsingKeyFrames>
     	</Storyboard>
+        
+        <!--队列-->
+        <DataTemplate x:Key="myTaskTemplateChild">
+            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                <TextBlock  Background="LightBlue" Text="{Binding Prillbilltime}"></TextBlock>
+                <TextBlock Text="{Binding Billno}"></TextBlock>
+            </StackPanel>
+        </DataTemplate>
+        <DataTemplate x:Key="myTaskTemplate">
+            <Grid>
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="125"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+                <!--排队总信息-->
+                <Grid Height="90" Width="120">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="50"/>
+                        <ColumnDefinition/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition />
+                        <RowDefinition/>
+                        <RowDefinition Height="*"/>
+                    </Grid.RowDefinitions>
+                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80" Background="LightBlue"/>
+                    <TextBlock Grid.Row="1"  Text="取号数量："></TextBlock>
+                    <TextBlock Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
+                </Grid>
+                <!--排队列表-->
+                <ListBox Grid.Column="1" ItemTemplate="{StaticResource myTaskTemplateChild}"
+                         ItemsSource="{Binding BussQueues}">
+                    <ListBox.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <WrapPanel IsItemsHost="True" />
+                        </ItemsPanelTemplate>
+                    </ListBox.ItemsPanel>
+                </ListBox>
+            </Grid>
+        </DataTemplate>
     </metro:MetroWindow.Resources>
     <metro:MetroWindow.Background>
         <ImageBrush ImageSource="Resources/Images/background.jpg"/>
@@ -385,14 +425,17 @@
                     </UniformGrid>
                 </Grid>
             </Border>
+            <!--列表信息-->
             <ScrollViewer Grid.Column="1">
                 <StackPanel>
-                    <TextBlock Text="1"></TextBlock>
-                    
+                    <ListBox  Background="LightBlue" x:Name="lbItem"
+         ItemTemplate="{StaticResource myTaskTemplate}"  ItemsSource="{Binding QueuesInfo}">
+                    </ListBox>
                 </StackPanel>                
             </ScrollViewer>
         </Grid>
         
         
     </Grid>
+    
 </metro:MetroWindow>

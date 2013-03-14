@@ -7,6 +7,7 @@ using System.Windows;
 using QSoft.QueueClientServiceReference;
 using System.Windows.Media.Imaging;
 using QSoft.View;
+using System.Collections.ObjectModel;
 
 namespace QSoft.Core.ViewModel
 {
@@ -30,6 +31,11 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         EmployeeStatus _NowEmployeeStaus = EmployeeStatus.Normal;
 
+        /// <summary>
+        /// 业务队列，排队信息
+        /// </summary>
+        public ObservableCollection<BussinessQueueOR> QueuesInfo { get; set; }
+
         MainWindow _Page;
         /// <summary>
         /// 主页，用于切换
@@ -42,8 +48,53 @@ namespace QSoft.Core.ViewModel
         private MainViewModel()
         {
             _command = new DelegateCommand<string>(Excute);//, CanExcute);
+
+            InitData();
         }
 
+        #endregion
+
+        #region 业务队列-排队处理
+        /// <summary>
+        /// 加载业务队列数据
+        /// </summary>
+        private void InitData()
+        {
+            QueuesInfo = new ObservableCollection<BussinessQueueOR>();
+            using (var client = new QueueClientSoapClient())
+            {
+                var v = client.getQueue();
+                foreach (var obj in v)
+                {
+                    AddBussiness(obj);
+                }
+            }
+        }
+
+        private void AddBussiness(BussinessQueueOR obj)
+        {
+            if (isHaveAddObj(obj))
+            {
+                
+            }
+            else
+            {
+                QueuesInfo.Add(obj);
+            }
+            
+        }
+
+        private bool isHaveAddObj(BussinessQueueOR obj)
+        {
+            foreach (var v in QueuesInfo)
+            {
+                if (v.ID == obj.ID)
+                {
+                    return true;
+                }
+            }
+            return false;
+        }
         #endregion
 
         #region 公共方法
