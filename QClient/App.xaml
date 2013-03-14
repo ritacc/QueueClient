@@ -4,6 +4,18 @@
              StartupUri="MainWindow.xaml"
               ShutdownMode="OnMainWindowClose">
     <Application.Resources>
-         
+        <ResourceDictionary>
+            <ResourceDictionary.MergedDictionaries>
+                <!-- Metro Themes Begin -->
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Colours.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Fonts.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Controls.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Accents/Blue.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
+                <ResourceDictionary Source="/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
+                <!-- Metro Themes End -->
+
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
     </Application.Resources>
 </Application>
