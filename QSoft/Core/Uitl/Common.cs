@@ -3,13 +3,14 @@ using System.ComponentModel;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Windows.Media;
 
 namespace QSoft.Core.Util
 {
     /// <summary>
     /// 通用帮助类
     /// </summary>
-    internal static class Common
+    public static class Common
     {
         public readonly static string ApplicationDataPath = Path.Combine(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData), "QSoft");
 
@@ -52,6 +53,42 @@ namespace QSoft.Core.Util
                 return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
             }
             return path;
+        }
+
+        public static Color StringToColor(string htmlColr)
+        {
+            try
+            {
+                int baseIndex = 1;
+                byte a, r, g, b; a = r = g = b = 255;
+                if (htmlColr.Length == 9)
+                {
+                    a = Convert.ToByte(htmlColr.Substring(baseIndex, 2), 16); baseIndex += 2;
+                }
+                if (htmlColr.IndexOf("RGB(") == 0)
+                {
+                    string[] rgb = htmlColr.ToUpper().Replace("RGB(", "").Replace(")", "").Split(',');
+                    if (rgb.Length == 3)//RGB(177,255,255)
+                    {
+                        r = Convert.ToByte(int.Parse(rgb[0]));
+                        g = Convert.ToByte(int.Parse(rgb[1]));
+                        b = Convert.ToByte(int.Parse(rgb[2]));
+                    }
+                }
+                else
+                {
+                    r = Convert.ToByte(htmlColr.Substring(baseIndex, 2), 16);
+                    g = Convert.ToByte(htmlColr.Substring(baseIndex += 2, 2), 16);
+                    b = Convert.ToByte(htmlColr.Substring(baseIndex += 2, 2), 16);
+                }
+                return Color.FromArgb(a, r, g, b);
+
+                //ColorTranslator.FromHtml(strColor);
+            }
+            catch
+            {
+                return Colors.White;
+            }
         }
 
         ///// <summary>

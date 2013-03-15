@@ -9,7 +9,9 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:QSoft.Controls"
-    mc:Ignorable="d" x:Class="QSoft.MainWindow"
+    
+    mc:Ignorable="d" x:Class="QSoft.MainWindow" 
+    
     Title="柜员叫号客户端" Height="600" Width="800"
     WindowStartupLocation="CenterScreen">
     <metro:MetroWindow.Resources>
@@ -89,25 +91,53 @@
     	</Storyboard>
         
         <!--队列-->
+        <Style TargetType="ListBox">
+            <Setter Property="Background" Value="LightBlue" />
+            <Setter Property="BorderThickness" Value="0"/>
+        </Style>
         <Style TargetType="{x:Type ListBoxItem}">
-            <Setter Property="Background" Value="White" />
-            <Setter Property="Margin" Value="1" />
-            
+            <Style.Resources>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black"/>
+            </Style.Resources>
+            <Setter Property="Margin" Value="0.5" />
         </Style>
         
         <DataTemplate x:Key="myTaskTemplateChild">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
                 <my:QhQueueInfo  Width="100" Height="50" ShowContent="{Binding Billno}"/>
-            </StackPanel>
+            </StackPanel>            
         </DataTemplate>
         <DataTemplate x:Key="myTaskTemplate">
             <Grid>
+                <Grid.Resources>
+                
+                    <Style  TargetType="Border">
+                        <Setter   Property="BorderBrush"   Value="LawnGreen"/>
+                        <Setter Property="BorderThickness" Value="0.5"/>
+                    </Style>
+                
+                </Grid.Resources>
+                <!--<Grid.Background>
+                    <LinearGradientBrush EndPoint="0,1">
+                        <GradientStop Color="#FF99CCFF" Offset="0"/>
+                        <GradientStop Color="#FF3366CC" Offset="0.5"/>
+                        <GradientStop Color="#FF99CCFF" Offset="1"/>
+                    </LinearGradientBrush>
+                </Grid.Background>-->
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="125"/>
                     <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="*"/>
+                    <RowDefinition Height="1"/>
+                </Grid.RowDefinitions>
+                
                 <!--排队总信息-->
-                <Grid Height="90" Width="125">
+                <Grid Height="60" Width="125" Margin="1">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="60"/>
                         <ColumnDefinition/>
@@ -117,7 +147,7 @@
                         <RowDefinition/>
                         <RowDefinition Height="*"/>
                     </Grid.RowDefinitions>
-                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80" Background="LightBlue"/>
+                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80"/>
                     <TextBlock Grid.Row="1"  Text="等待人数："></TextBlock>
                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
                 </Grid>
@@ -130,6 +160,7 @@
                         </ItemsPanelTemplate>
                     </ListBox.ItemsPanel>
                 </ListBox>
+                <Border  Grid.Row="1" Grid.ColumnSpan="2"></Border>
             </Grid>
         </DataTemplate>
     </metro:MetroWindow.Resources>
@@ -160,7 +191,7 @@
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Height="40"
-            Background="#FF336699"/>
+            Background="#FF336699"></Grid>
         <!---下面内容-->
         <Grid Grid.Row="2"
             Grid.Column="0" Grid.ColumnSpan="2">
@@ -169,13 +200,8 @@
                 <ColumnDefinition Width="*"/>
             </Grid.ColumnDefinitions>
             <!--工具栏-->
-            <Border
-            x:Name="LeftBorder"
-            VerticalAlignment="Top"
-            
-            Margin="10"
-            BorderThickness="1"
-            CornerRadius="5" RenderTransformOrigin="0.5,0.5">
+            <Border x:Name="LeftBorder" VerticalAlignment="Top"  Margin="10"
+            BorderThickness="1"  CornerRadius="5" RenderTransformOrigin="0.5,0.5">
                 <Border.RenderTransform>
                     <TransformGroup>
                         <ScaleTransform/>
@@ -251,12 +277,8 @@
                             </i:EventTrigger>
                         </i:Interaction.Triggers>
                     </ToggleButton>-->
-                    <Border
-        			x:Name="ToolsTitleBorder"
-        			BorderThickness="1"
-        			CornerRadius="5,5,0,0"
-                    Height="27"
-        			Margin="8,0,8,-1" Grid.Row="1">
+                    <Border x:Name="ToolsTitleBorder" BorderThickness="1"
+        			CornerRadius="5,5,0,0"  Height="27" Margin="8,0,8,-1" Grid.Row="1">
                         <Border.Background>
                             <LinearGradientBrush EndPoint="0,1">
                                 <GradientStop Color="#FFDBEAF7"/>
@@ -266,11 +288,8 @@
                             </LinearGradientBrush>
                         </Border.Background>
                         <TextBlock
-        				VerticalAlignment="Center"
-        				HorizontalAlignment="Center"
-        				Foreground="Black"
-        				FontSize="14"
-        				Text="工具栏"/>
+        				VerticalAlignment="Center" 	HorizontalAlignment="Center"
+        				Foreground="Black" 	FontSize="14" Text="工具栏"/>
                     </Border>
                     <Border
         			x:Name="VerticalToolsTitleBorder"
@@ -432,12 +451,10 @@
                 </Grid>
             </Border>
             <!--列表信息-->
-            <ScrollViewer Grid.Column="1">
-                <StackPanel>
+            <ScrollViewer Grid.Column="1" Background="LightBlue">               
                     <ListBox  Background="LightBlue" x:Name="lbItem"
          ItemTemplate="{StaticResource myTaskTemplate}"  ItemsSource="{Binding QueuesInfo}">
-                    </ListBox>
-                </StackPanel>                
+                    </ListBox>                         
             </ScrollViewer>
         </Grid>
         

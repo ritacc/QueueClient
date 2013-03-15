@@ -43,6 +43,11 @@ namespace QSoft.Core.ViewModel
         public MainWindow MianPage { set { _Page = value; } }
         #endregion
 
+        public void Clear()
+        {
+            QueuesInfo[1].BussQueues=null;
+        }
+
         #region 构造函数
 
         private MainViewModel()

@@ -32,11 +32,22 @@ namespace QSoft
                 ViewModel = MainViewModel.Instance;
                 ViewModel.MianPage = this;
                 this.DataContext = ViewModel;
+            
             //}
             //else
             //{
             //    Application.Current.Shutdown();
             //}
+
+                //foreach (var v in lbItem.)
+                //{
+
+                //}
+        }
+
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            ViewModel.Clear();
         }
 
        
