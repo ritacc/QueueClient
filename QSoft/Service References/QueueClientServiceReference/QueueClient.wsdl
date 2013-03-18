@@ -109,6 +109,7 @@
           <s:element minOccurs="1" maxOccurs="1" name="Waitpeoplebusssiness" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="Waitpeoplebank" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="Custemclass" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="IsNowQueue" type="s:boolean" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="UpStatus" type="s:int" />

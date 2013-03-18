@@ -1,0 +1,65 @@
+﻿<metro:MetroWindow x:Class="QSoft.View.Specall"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
+        Title="特呼" Height="201" Width="300" WindowStartupLocation="CenterOwner" 
+        ShowIconOnTitleBar="False" ShowInTaskbar="False" ShowMinButton="False"
+        ShowMaxRestoreButton="False">
+    <Window.Background>
+        <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
+    </Window.Background>
+    <Grid 
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="22"/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <TextBlock Grid.Column="0"  Grid.Row="0" VerticalAlignment="Center" HorizontalAlignment="Left"
+                Text="呼号类型：" Foreground="White" />
+        <ComboBox x:Name="cbType"  Grid.Column="1"    VerticalAlignment="Center" HorizontalAlignment="Left"
+                   Margin="5" Width="120" DropDownClosed="ComboBox_DropDownClosed">
+            <ComboBoxItem Content="大堂经理" IsSelected="True" />
+            <ComboBoxItem Content="客户经理" />
+            <ComboBoxItem Content="客户" />
+        </ComboBox>
+
+        <TextBlock x:Name="tbCallType" Grid.Column="0"  Grid.Row="1" VerticalAlignment="Center" HorizontalAlignment="Left"
+                Text="排队票号：" Foreground="White" />
+        <TextBox   x:Name="txtBillNo" Margin="5"   Grid.Row="1"   Grid.Column="1"   VerticalAlignment="Center"
+                HorizontalAlignment="Left" Width="120" ></TextBox> 
+
+        <TextBlock   x:Name="MessageTextBlock"  Grid.Row="2"  Grid.ColumnSpan="2"  Foreground="Red"   
+           VerticalAlignment="Center"  Margin="5"  Width="200"  TextTrimming="CharacterEllipsis"
+                HorizontalAlignment="Left"/>
+        
+        <Button
+                x:Name="OKButton"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="5,5,90,5"
+                Height="23"
+                Width="65"
+                Click="OKButton_Click"
+                IsDefault="True" Content="确定" />
+
+        <Button
+                x:Name="CancelButton"
+                Grid.Row="3"
+                Grid.ColumnSpan="2"
+                HorizontalAlignment="Center"
+                VerticalAlignment="Center"
+                Margin="90,5,5,5"
+                Height="23"
+                Width="65"
+                IsCancel="True" Content="取消" />
+    </Grid>
+</metro:MetroWindow>

@@ -190,6 +190,8 @@ namespace QSoft.QueueClientServiceReference {
         
         private int CustemclassField;
         
+        private bool IsNowQueueField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string DescriptionField;
         
@@ -493,7 +495,20 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=22)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=22)]
+        public bool IsNowQueue {
+            get {
+                return this.IsNowQueueField;
+            }
+            set {
+                if ((this.IsNowQueueField.Equals(value) != true)) {
+                    this.IsNowQueueField = value;
+                    this.RaisePropertyChanged("IsNowQueue");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=23)]
         public string Description {
             get {
                 return this.DescriptionField;
@@ -506,7 +521,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
         public int Status {
             get {
                 return this.StatusField;
@@ -519,7 +534,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=25)]
         public int UpStatus {
             get {
                 return this.UpStatusField;

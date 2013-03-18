@@ -407,19 +407,14 @@ namespace QM.Client.WebService.Control
                 case "RECALL":
                     strReturnValue = CallReCall(value);
                     break;
-                case "DELAY": //延后 增加了一个票号 (票号##时长)
-                    int mindex = value.IndexOf("##");
-                    if (mindex <= 0)
-                        return "error:参数错误！";
-                    string mBill = value.Substring(0, mindex);
-                    string mvalue = value.Substring(mindex + 2);
-                    strReturnValue = CallDelay(mvalue, mBill);
+                case "DELAY": //延后 增加了一个票号 (票号##时长)                   
+                    strReturnValue = CallDelay(value);
                     break;
                 case "TRANSFER":
-                    CallTransfer(value);
+                    strReturnValue = CallTransfer(value);
                     break;
                 case "SPECALL":
-                    CallSpecall(value);
+                    strReturnValue = CallSpecall(value);
                     break;
                 case "WELCOME":
                     strReturnValue = CallWelcome(value);
@@ -477,6 +472,7 @@ namespace QM.Client.WebService.Control
                     if (objQue.Status == 0)
                     {
                         mSelectQhObj = objQue;
+                        break;
                     }
                 }
             }
@@ -507,7 +503,7 @@ namespace QM.Client.WebService.Control
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
             {
-                return "此票号的记录不存在!";
+                return string.Format("票号:{0} 不存在!", mBillNo);
             }
             else if (objQH.Status == 0)
             {
@@ -525,38 +521,80 @@ namespace QM.Client.WebService.Control
         }
 
         /// <summary>
-        /// 延后	DELAY	时长（单位为分钟）
+        /// 延后	DELAY	票号##时长
         /// </summary>
         /// <param name="TimeLen">时长</param>
-        private string CallDelay(string TimeLen,string mBillNo)
+        private string CallDelay(string mparam)
         {
+            int mindex = mparam.IndexOf("##");
+            if (mindex <= 0)
+                return "error:参数错误！";
+            string mBillNo = mparam.Substring(0, mindex);
+            string TimeLen = mparam.Substring(mindex + 2);
+
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
-                return "此票号的记录不存在!";
+                return string.Format("票号:{0} 的记录不存在!", mBillNo);
 
             objQH.Delaytime = Convert.ToInt32(TimeLen) * 60;
             objQH.Status = 0;
-            return "";
+            return "0";
         }
 
         /// <summary>
         /// 转移	TRANSFER	目标窗口号
         /// </summary>
         /// <param name="targetWindNo"></param>
-        private void CallTransfer(string targetWindNo)
+        private string CallTransfer(string mparam)
         {
+            //targetWindNo
+            //票号##目标窗口号
+            int mindex = mparam.IndexOf("##");
+            if (mindex <= 0)
+                return "error:参数错误！";
+            string mBillNo = mparam.Substring(0, mindex);
+            string targetWin = mparam.Substring(mindex + 2);
 
-
+            QueueInfoOR objQH = GetQueueInfo(mBillNo);
+            if (objQH == null)
+                return string.Format("票号:{0} 不存在!",mBillNo);
+            objQH.Transferdestwin = int.Parse(targetWin);
+           
+            return "0";
         }
 
         /// <summary>
-        /// 特呼	SPECALL	票号
+        /// 特呼	SPECALL	窗口号##呼号类型#票号
         /// </summary>
         /// <param name="mBill"></param>
-        private void CallSpecall(string mBill)
+        private string CallSpecall(string mparam)
         {
+            if (string.IsNullOrEmpty(mparam))
+                return "参数错误";
+            string[] strArr = mparam.Replace("##","#").Split('#');
+            if(strArr.Length != 3)
+                return "参数错误";
 
+            string mWindowNo = strArr[0];//窗口号
+            string mCallType = strArr[1];//呼叫类型
+            string mBillNo = strArr[2];//票号
 
+            if (mCallType == "客户")
+            {
+                QueueInfoOR objQH = GetQueueInfo(mBillNo);
+                if (objQH == null)
+                    return string.Format("票号:{0} 不存在!", mBillNo);
+                //呼号代码
+            }
+            else if (mCallType == "大堂经理")
+            {
+
+            }
+            else if (mCallType == "客户经理")
+            {
+
+            }
+            return "0";
         }
 
         /// <summary>
@@ -566,7 +604,7 @@ namespace QM.Client.WebService.Control
         {
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
-                return "此票号的记录不存在!";
+                return string.Format("票号:{0} 不存在!", mBillNo);
             if (objQH.Status == 0)
                 return "请先叫号。";
 
@@ -591,13 +629,19 @@ namespace QM.Client.WebService.Control
         {
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
-                return "error:此票号的记录不存在!";
+                return string.Format("票号:{0} 不存在!", mBillNo);
             try
             {
                 objQH.Status = 3;
                 objQH.Finishtime = DateTime.Now;
                 objQH.Processinterval = GetTimeLen(objQH.Processtime, objQH.Finishtime);
                 _QueueDA.UpdateCallJudge(objQH);
+                //移出此号码
+                foreach (BussinessQueueOR objQhQue in QhQueues)
+                {
+                    objQhQue.BussQueues.Remove(objQH);
+                }
+
             }
             catch (Exception ex)
             {

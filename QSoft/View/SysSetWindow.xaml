@@ -5,7 +5,7 @@
     xmlns:my="clr-namespace:QSoft.Controls"
     Title="系统设置" Height="240" Width="950"
     ShowInTaskbar="False"
-    WindowStartupLocation="CenterScreen"
+    WindowStartupLocation="CenterOwner"
     ShowMaxRestoreButton="False"
     ResizeMode="NoResize">
     <!--<Window.Background>

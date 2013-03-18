@@ -8,6 +8,7 @@ using QSoft.QueueClientServiceReference;
 using System.Windows.Media.Imaging;
 using QSoft.View;
 using System.Collections.ObjectModel;
+using System.Windows.Threading;
 
 namespace QSoft.Core.ViewModel
 {
@@ -55,51 +56,137 @@ namespace QSoft.Core.ViewModel
             _command = new DelegateCommand<string>(Excute);//, CanExcute);
 
             InitData();
+
+            //刷新队列
+            //定时更新值
+            DispatcherTimer timer = new DispatcherTimer();
+            timer.Interval = new TimeSpan(0, 0, 10);
+            timer.Tick += new EventHandler(timer_Tick);
+            timer.Start();
         }
 
         #endregion
 
         #region 业务队列-排队处理
+
+        protected void timer_Tick(object sender, EventArgs e)
+        {
+            RefQueues();
+        }
+
         /// <summary>
         /// 加载业务队列数据
         /// </summary>
         private void InitData()
         {
             QueuesInfo = new ObservableCollection<BussinessQueueOR>();
-            using (var client = new QueueClientSoapClient())
+
+            var v = GetBussinessList();
+            if (v != null)
             {
-                var v = client.getQueue();
                 foreach (var obj in v)
                 {
-                    AddBussiness(obj);
+                    QueuesInfo.Add(obj);
                 }
             }
         }
 
-        private void AddBussiness(BussinessQueueOR obj)
+        private BussinessQueueOR[] GetBussinessList()
         {
-            if (isHaveAddObj(obj))
+            using (var client = new QueueClientSoapClient())
             {
-                
+                var v = client.getQueue();
+                return v;
             }
-            else
-            {
-                QueuesInfo.Add(obj);
-            }
-            
         }
 
-        private bool isHaveAddObj(BussinessQueueOR obj)
+        /// <summary>
+        /// 刷新队队信息
+        /// </summary>
+        /// <param name="obj"></param>
+        private void RefQueues()
         {
-            foreach (var v in QueuesInfo)
+            var vBussQue = GetBussinessList();
+            bool mIsChange = false;
+            if (vBussQue != null)
             {
-                if (v.ID == obj.ID)
+                foreach (var mBuss in vBussQue)
+                {
+                    BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.ID);
+                    if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
+                    {
+                        if (mCatchBussQue != null)
+                        {
+                            mCatchBussQue.BussQueues = mBuss.BussQueues;
+                        }
+                        else
+                        {
+                            this.QueuesInfo.Add(mBuss);
+                        }
+                        mIsChange = true;
+                    }
+                }
+                if (mIsChange)
+                {
+                    SetCurrentQueue(_NowBillNo);
+                }
+            }
+        }
+
+        /// <summary>
+        /// 判断队列是否改变
+        /// </summary>
+        /// <param name="list1"></param>
+        /// <param name="list2"></param>
+        /// <returns></returns>
+        private bool isChange(QueueInfoOR[] list1, QueueInfoOR[] list2)
+        {
+            if (list1 == null && list2 == null)
+                return false;
+            else if (list1 == null || list1 == null)//两者不同
+                return true;
+            else if (list1.Count() != list2.Count())//两者不同
+                return true;
+            else
+            {
+                
+                foreach (var v in list1)
+                {
+                    if (!IsExists(v.Billno, list2))//list1 的无素在list2中不存在
+                    {
+                        return true;
+                    }
+                }
+            }
+
+            return false;
+        }
+
+        private bool IsExists(string billno, QueueInfoOR[] list)
+        {
+            foreach (QueueInfoOR obj in list)
+            {
+                if (obj.Billno == billno)
                 {
                     return true;
                 }
             }
             return false;
         }
+
+
+        private BussinessQueueOR GetBussinessQueueOR(string mBussinessID)
+        {
+            foreach (var v in QueuesInfo)
+            {
+                if (v.ID == mBussinessID)
+                {
+                    return v;
+                }
+            }
+            return null;
+        }
+
         #endregion
 
         #region 公共方法
@@ -132,6 +219,13 @@ namespace QSoft.Core.ViewModel
                         return;
                     }
                 }
+                if (string.IsNullOrEmpty(_NowBillNo) &&
+                    (parameter == "RECALL" || parameter == "DELAY" || parameter == "TRANSFER"
+                   || parameter == "WELCOME" || parameter == "JUDGE" ))
+                {
+                    ShowErrorMsg("请先呼号客户!");
+                    return;
+                }
                 switch (parameter)
                 {
                     case "CALL":
@@ -143,10 +237,10 @@ namespace QSoft.Core.ViewModel
                     case "DELAY": //延后 增加了一个票号 (票号##时长)
                         CallDelay();
                         break;
-                    case "TRANSFER":
+                    case "TRANSFER"://转移 票号##目标窗口号
                         CallTransfer();
                         break;
-                    case "SPECALL":
+                    case "SPECALL"://窗口号##呼号类型#票号
                         CallSpecall();
                         break;
                     case "WELCOME":
@@ -188,62 +282,139 @@ namespace QSoft.Core.ViewModel
                 }
             }
         }
-        private void CallReCall()
+        
+        /// <summary>
+        /// 调用呼号接口
+        /// </summary>
+        /// <param name="mType"></param>
+        /// <param name="mParameter"></param>
+        /// <returns></returns>
+        private string GetCall(string mType, string mParameter)
         {
-            if (string.IsNullOrEmpty(_NowBillNo))
-            {
-                ShowErrorMsg("请先呼叫用户！");
-                return;
-            }
             using (var client = new QueueClientSoapClient())
             {
-                string value = client.getCall("RECALL", _NowBillNo);
-                if (value != "0")
+                string value = client.getCall(mType, mParameter);
+                return value;
+            }
+        }
+
+        /// <summary>
+        /// 延后
+        /// </summary>
+        private void CallDelay()
+        {
+            Delay mObj = new Delay();
+            mObj.Owner = this._Page;
+            mObj.ShowDialog();
+            if (mObj.IsOK)
+            {
+                string msg = GetCall("", string.Format("{0}##{1}", _NowBillNo, mObj.DelayNumber));
+                if (msg == "0") { }
+                else
                 {
-                    ShowErrorMsg(value);
+                    ShowErrorMsg(msg);
+                }
+            }
+
+        }
+        /// <summary>
+        /// 转移
+        /// </summary>
+        private void CallTransfer()
+        {
+            Transfer frmTran = new Transfer();
+            frmTran.Owner = this._Page;
+            frmTran.ShowDialog();
+            if (frmTran.IsOK)
+            {
+                string msg = GetCall("", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
+                if (msg == "0") { }
+                else
+                {
+                    ShowErrorMsg(msg);
                 }
             }
         }
-        private void CallDelay() { ShowErrorMsg(""); }
-        private void CallTransfer() { ShowErrorMsg(""); }
-        private void CallSpecall() { ShowErrorMsg(""); }
+        /// <summary>
+        /// 特呼
+        /// </summary>
+        private void CallSpecall()
+        {
+            Specall frmSpe = new Specall();
+            frmSpe.Owner = this._Page;
+            frmSpe.ShowDialog();
+            if (frmSpe.IsOK)
+            {
+                string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
+                    GlobalData.WindowNo, frmSpe.CallType, frmSpe.BillNo));
+                if (msg == "0") { }
+                else
+                {
+                    ShowErrorMsg(msg);
+                }
+            }
+        }
+        /// <summary>
+        /// 呼叫下一位	CALL	空串
+        /// </summary>
+        private void CallGetNext()
+        {
+            string value = GetCall("CALL", GlobalData.WindowNo);
+            if (value.IndexOf("error:") >= 0)
+            {
+                ShowErrorMsg(value);
+                return;
+            }
+            this.CanncelCurrentQueue(_NowBillNo);
+            this.SetCurrentQueue(value);
+            _NowBillNo = value;
 
+        }
+
+        /// <summary>
+        /// 重呼
+        /// </summary>
+        private void CallReCall()
+        {
+            string value = GetCall("RECALL", _NowBillNo);
+            if (value != "0")
+            {
+                ShowErrorMsg(value);
+            }
+        }
         /// <summary>
         /// 欢迎
         /// </summary>
         private void CallWelcome()
         {
-            using (var client = new QueueClientSoapClient())
-            {
-                string value = client.getCall("WELCOME", _NowBillNo);
+
+            string value = GetCall("WELCOME", _NowBillNo);
                 if (value != "0")
                 {
                     ShowErrorMsg(value);
                 }
-            }
+            
         }
         /// <summary>
         /// 请评价
         /// </summary>
         private void CallJudge()
         {
-            using (var client = new QueueClientSoapClient())
-            {
-                string value = client.getCall("JUDGE", _NowBillNo);
+            
+                string value = GetCall("JUDGE", _NowBillNo);
                 if (value != "0")
                 {
                     ShowErrorMsg(value);
                 }
-            }
+           
         }
         /// <summary>
         /// 暂停
         /// </summary>
         private void CallPause()
         {
-            using (var client = new QueueClientSoapClient())
-            {
-                string value = client.getCall("PAUSE", GlobalData.WindowNo);
+           
+                string value = GetCall("PAUSE", GlobalData.WindowNo);
                 if (value != "0")
                 {
                     ShowErrorMsg(value);
@@ -257,48 +428,71 @@ namespace QSoft.Core.ViewModel
 
                     _NowEmployeeStaus = EmployeeStatus.Pause;
                 }
-            }
+           
         }
         /// <summary>
         /// 恢复
         /// </summary>
         private void CallRestart()
         {
-            using (var client = new QueueClientSoapClient())
+
+            string value = GetCall("RESTART", GlobalData.WindowNo);
+            if (value != "0")
             {
-                string value = client.getCall("RESTART", GlobalData.WindowNo);
-                if (value != "0")
-                {
-                    ShowErrorMsg(value);
-                }
-                else
-                {
-                    _Page.PauseButtonTextBlock.Text = "暂停";
-                    _Page.btnPauseReStart.CommandParameter = "PAUSE";
-                    _Page.PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/pause.png", UriKind.RelativeOrAbsolute));
-                    _NowEmployeeStaus = EmployeeStatus.Normal;
-                }
+                ShowErrorMsg(value);
+            }
+            else
+            {
+                _Page.PauseButtonTextBlock.Text = "暂停";
+                _Page.btnPauseReStart.CommandParameter = "PAUSE";
+                _Page.PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/pause.png", UriKind.RelativeOrAbsolute));
+                _NowEmployeeStaus = EmployeeStatus.Normal;
             }
         }
 
-        /// <summary>
-        /// 呼叫下一位	CALL	空串
-        /// </summary>
-        private void CallGetNext()
+      
+
+
+        #endregion
+
+        #region 当前处理
+        private void SetCurrentQueue(string QhBH)
         {
-            using (var client = new QueueClientSoapClient())
+            if (QueuesInfo != null)
             {
-                string value = client.getCall("CALL", GlobalData.WindowNo);
-                if (value.IndexOf("error:") >= 0)
+                foreach (BussinessQueueOR obj in QueuesInfo)
                 {
-                    ShowErrorMsg(value);
-                    return;
+                    foreach (QueueInfoOR queObj in obj.BussQueues)
+                    {
+                        if (queObj.Billno == QhBH)
+                        {
+                            queObj.IsNowQueue = true;
+                        }
+                    }
                 }
-                _NowBillNo = value;
+            }
+        }
+        /// <summary>
+        /// 取消当前排队
+        /// </summary>
+        /// <param name="QhBH"></param>
+        private void CanncelCurrentQueue(string QhBH)
+        {
+            if (QueuesInfo != null)
+            {
+                foreach (BussinessQueueOR obj in QueuesInfo)
+                {
+                    foreach (QueueInfoOR queObj in obj.BussQueues)
+                    {
+                        if (queObj.Billno == QhBH)
+                        {
+                            queObj.IsNowQueue = false;
+                        }
+                    }
+                }
             }
         }
         #endregion
-
         #endregion
     }
 

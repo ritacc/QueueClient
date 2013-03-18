@@ -25,24 +25,19 @@ namespace QSoft
         public MainViewModel ViewModel { get; set; }
         public MainWindow()
         {
-            //var loginWindow = new LoginWindow();
-            //if (loginWindow.ShowDialog() == true)
-            //{
+            var loginWindow = new LoginWindow();
+            if (loginWindow.ShowDialog() == true)
+            {
                 InitializeComponent();
                 ViewModel = MainViewModel.Instance;
                 ViewModel.MianPage = this;
                 this.DataContext = ViewModel;
-            
-            //}
-            //else
-            //{
-            //    Application.Current.Shutdown();
-            //}
 
-                //foreach (var v in lbItem.)
-                //{
-
-                //}
+            }
+            else
+            {
+                Application.Current.Shutdown();
+            }
         }
 
         private void button1_Click(object sender, RoutedEventArgs e)

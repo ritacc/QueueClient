@@ -194,6 +194,7 @@ namespace QM.Client.Entity
 			set { _Custemclass = value; }
 		}
 
+        public bool IsNowQueue { get; set; }
 		
 		/// <summary>
 		/// 
@@ -217,6 +218,7 @@ namespace QM.Client.Entity
 		{
             Status = 0; 
             Id = Guid.NewGuid().ToString();
+            IsNowQueue = false;
 		}
 
         /// <param name="mCustemclass">客户级别</param>
@@ -234,6 +236,7 @@ namespace QM.Client.Entity
         public QueueInfoOR(string mBankNo, string mBillno, string mBussinessid,
             string mCardno, int mWaitpeoplebusssiness, int mWaitpeoplebank)//, int mCustemclass)
         {
+            IsNowQueue = false;
             Status = 0;
 
             Id = Guid.NewGuid().ToString();
@@ -244,10 +247,7 @@ namespace QM.Client.Entity
             _Waitpeoplebusssiness = mWaitpeoplebusssiness;
             _Waitpeoplebank = mWaitpeoplebank;
 
-
             _Custemclass = 0;// mCustemclass;
-
-            
             DateTime _Now = DateTime.Now;            
             // 取号时间
             Prillbilltime = _Now;

@@ -107,7 +107,7 @@
         
         <DataTemplate x:Key="myTaskTemplateChild">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <my:QhQueueInfo  Width="100" Height="50" ShowContent="{Binding Billno}"/>
+                <my:QhQueueInfo  Width="60" Height="58" IsNowQueue="{Binding IsNowQueue}"  ShowContent="{Binding Billno}"/>
             </StackPanel>            
         </DataTemplate>
         <DataTemplate x:Key="myTaskTemplate">
@@ -118,7 +118,6 @@
                         <Setter   Property="BorderBrush"   Value="LawnGreen"/>
                         <Setter Property="BorderThickness" Value="0.5"/>
                     </Style>
-                
                 </Grid.Resources>
                 <!--<Grid.Background>
                     <LinearGradientBrush EndPoint="0,1">

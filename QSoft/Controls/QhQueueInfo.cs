@@ -14,7 +14,10 @@ namespace QSoft.Controls
     {
        Grid g = new Grid();
        TextBlock txt = new TextBlock();
-       
+       /// <summary>
+       /// 当前队列
+       /// </summary>
+       Image _imgCurrent = null;
        public QhQueueInfo()
        {
            g.ColumnDefinitions.Add(new ColumnDefinition());
@@ -43,6 +46,7 @@ namespace QSoft.Controls
        }
 
        #region  属性
+
        #region ShowContent
        private static readonly DependencyProperty ShowContentProperty =
            DependencyProperty.Register("ShowContent",
@@ -61,6 +65,50 @@ namespace QSoft.Controls
            if (null != element)
            {
                element.ShowContent = e.NewValue.ToString();
+           }
+       }
+       #endregion
+
+       #region IsNowQueue
+       private static readonly DependencyProperty IsNowQueueProperty =
+           DependencyProperty.Register("IsNowQueue",
+           typeof(string), typeof(QhQueueInfo), new PropertyMetadata("", IsNowQueuePropertyChanged));
+       public bool IsNowQueue
+       {
+           set
+           {
+               if (value)
+               {
+                   if (_imgCurrent == null)
+                   {
+                       _imgCurrent = new Image();
+                       string url = "/QSoft;component/Resources/Images/arrow.png";
+                       BitmapImage bitmap = new BitmapImage(new Uri(url, UriKind.Relative));
+                       ImageSource mm = bitmap;
+                       
+                       _imgCurrent.Source = mm;
+                       _imgCurrent.SetValue(Grid.ColumnProperty, 1);
+                       g.Children.Add(_imgCurrent);
+                   }
+                   _imgCurrent.Visibility = Visibility.Visible;
+               }
+               else
+               {
+                   
+                   if (_imgCurrent != null)
+                   {
+                       _imgCurrent.Visibility = Visibility.Collapsed;
+                   }
+               }
+           }
+
+       }
+       private static void IsNowQueuePropertyChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+       {
+           var element = d as QhQueueInfo;
+           if (null != element)
+           {
+               element.IsNowQueue =Convert.ToBoolean( e.NewValue);
            }
        }
        #endregion
