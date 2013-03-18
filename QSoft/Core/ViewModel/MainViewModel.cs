@@ -12,9 +12,10 @@ using System.Windows.Threading;
 
 namespace QSoft.Core.ViewModel
 {
-    public class MainViewModel : EntityObject
+    internal class MainViewModel : EntityObject
     {
         #region 属性
+
         private static readonly MainViewModel _instance = new MainViewModel();
         public static MainViewModel Instance { get { return _instance; } }
 
@@ -38,10 +39,12 @@ namespace QSoft.Core.ViewModel
         public ObservableCollection<BussinessQueueOR> QueuesInfo { get; set; }
 
         MainWindow _Page;
+        
         /// <summary>
         /// 主页，用于切换
         /// </summary>
         public MainWindow MianPage { set { _Page = value; } }
+
         #endregion
 
         public void Clear()
@@ -185,6 +188,42 @@ namespace QSoft.Core.ViewModel
                 }
             }
             return null;
+        }
+
+        #endregion
+
+        #region 显示客户信息
+
+        private readonly Custom _empty = new Custom() { DisplayName = "暂无客户", Business = string.Empty, };
+
+        /// <summary>
+        /// 保存当前选中的客户信息
+        /// </summary>
+        private Custom _custom;
+
+        /// <summary>
+        /// 获取或设置当前客户信息
+        /// </summary>
+        public Custom Custom { get { if (null == _custom) { _custom = _empty; } return _custom; } set { _custom = value; RaisePropertyChanged("Custom"); } }
+
+        // 保存显示客户信息按钮
+        private DelegateCommand _customDetailCommand;
+
+        public DelegateCommand CustomDetailCommand
+        {
+            get
+            {
+                if (null == _customDetailCommand)
+                {
+                    _customDetailCommand = new DelegateCommand(ShowCustomInfo);
+                }
+                return _customDetailCommand;
+            }
+        }
+
+        private void ShowCustomInfo()
+        {
+            MessageBox.Show("详细信息，来自方法：" + System.Reflection.MethodInfo.GetCurrentMethod().Name);
         }
 
         #endregion

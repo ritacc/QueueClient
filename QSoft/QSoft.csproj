@@ -74,6 +74,7 @@
     <Compile Include="Controls\ColorPicker.cs" />
     <Compile Include="Controls\QhQueueInfo.cs" />
     <Compile Include="Core\Converter\BooleanToVisibilityConverter.cs" />
+    <Compile Include="Core\Model\Custom.cs" />
     <Compile Include="Core\ViewModel\LoginViewModel.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
     <Compile Include="GlobalData.cs" />
