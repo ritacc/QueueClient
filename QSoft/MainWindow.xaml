@@ -176,6 +176,9 @@
         	<RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
+        
+        
+        <!-- 最顶上Logo区域 -->
         <Border
             x:Name="TopImageBorder"
             Grid.Row="0"
@@ -185,12 +188,97 @@
                 x:Name="TopImage"
                 HorizontalAlignment="Left"/>
         </Border>
+        
+        <!-- 顶部信息 -->
         <Grid
             x:Name="TopTitleGrid"
             Grid.Row="1"
             Grid.ColumnSpan="2"
             Height="40"
-            Background="#FF336699"></Grid>
+            Background="#FF336699">
+            
+            <Button
+                x:Name="TopCustomInfoButton"
+                Height="15"
+                Width="180"
+                Margin="0,0,50,0"
+                HorizontalAlignment="Right"
+                VerticalAlignment="Top"
+                Style="{StaticResource ButtonNoStyle}">
+            	<i:Interaction.Triggers>
+            		<i:EventTrigger EventName="Click">
+            			<ei:ChangePropertyAction TargetObject="{Binding ElementName=TopCoustomInfoPopup}" PropertyName="IsOpen" Value="True"/>
+            		</i:EventTrigger>
+            	</i:Interaction.Triggers>
+                <Border
+                    Background="#95FFFFFF"
+                    CornerRadius="0,0,10,10">
+                    <Path
+                        VerticalAlignment="Top"
+                        HorizontalAlignment="Center"
+                        Fill="White"
+                        Margin="0,2,0,0"
+                        Data="M5,0 L10,5 L0,5z"/>
+                </Border>
+            </Button>
+            <Popup
+                x:Name="TopCoustomInfoPopup"
+                PlacementTarget="{Binding ElementName=TopCustomInfoButton}"
+                Placement="Bottom"
+                VerticalOffset="-15"
+				HorizontalOffset="10"
+                PopupAnimation="Slide"
+                StaysOpen="False"
+                AllowsTransparency="True"
+                VerticalAlignment="Top"
+                HorizontalAlignment="Center">
+                <Border
+                    Background="#C7E7E7E7"
+                    CornerRadius="0,0,10,10"
+                    Width="160"
+                    Height="150">
+                    <Border
+                        Background="White"
+                        Margin="15" CornerRadius="8">
+                        <StackPanel>
+                        	<TextBlock
+								Text="客户信息"
+                                FontWeight="Bold"
+								FontSize="16"
+								Margin="5,10,5,8"/>
+							<Rectangle
+								Fill="Silver"
+								SnapsToDevicePixels="True"
+								Height="1"/>
+							<TextBlock
+								Text="{Binding Custom.DisplayName, StringFormat=姓名：\{0\}}"
+								Margin="5"/>
+							<Rectangle
+								Fill="Silver"
+								SnapsToDevicePixels="True"
+								Height="1"/>
+							<TextBlock
+								Text="{Binding Custom.Business, StringFormat=办理业务：\{0\}}"
+								Margin="5"/>
+							<Rectangle
+								Fill="Silver"
+								SnapsToDevicePixels="True"
+								Height="1"/>
+							<TextBlock
+								Margin="5"
+								FontStyle="Italic">
+								<Hyperlink
+									x:Name="TopCustomInfoHyperlink"
+									Command="{Binding CustomDetailCommand}">
+									详细信息...
+								</Hyperlink>	
+							</TextBlock>
+						</StackPanel>
+                    </Border>
+                </Border>
+            </Popup>
+        </Grid>
+        
         <!---下面内容-->
         <Grid Grid.Row="2"
             Grid.Column="0" Grid.ColumnSpan="2">
@@ -456,8 +544,6 @@
                     </ListBox>                         
             </ScrollViewer>
         </Grid>
-        
-        
     </Grid>
     
 </metro:MetroWindow>

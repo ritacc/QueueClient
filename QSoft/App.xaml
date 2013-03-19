@@ -15,8 +15,19 @@
                 <ResourceDictionary Source="/MahApps.Metro;component/Styles/Accents/BaseLight.xaml" />
                 <ResourceDictionary Source="/MahApps.Metro;component/Styles/Controls.AnimatedTabControl.xaml" />
                 <!-- Metro Themes End -->
-
+                
             </ResourceDictionary.MergedDictionaries>
+
+            <!-- 没有任何样式的按钮样式 -->
+            <Style x:Key="ButtonNoStyle" TargetType="Button">
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="Button">
+                            <ContentPresenter/>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
         </ResourceDictionary>
     </Application.Resources>
 </Application>

@@ -22,7 +22,9 @@ namespace QSoft
     /// </summary>
     public partial class MainWindow : MetroWindow
     {
-        public MainViewModel ViewModel { get; set; }
+
+        internal MainViewModel ViewModel { get; set; }
+
         public MainWindow()
         {
             var loginWindow = new LoginWindow();
