@@ -65,19 +65,43 @@
       </s:complexType>
       <s:complexType name="BussinessQueueOR">
         <s:complexContent mixed="false">
-          <s:extension base="tns:BussinessBasicInfoOR">
+          <s:extension base="tns:BussinessOR">
             <s:sequence>
               <s:element minOccurs="0" maxOccurs="1" name="BussQueues" type="tns:ArrayOfQueueInfoOR" />
+              <s:element minOccurs="1" maxOccurs="1" name="QueueNumber" type="s:int" />
             </s:sequence>
           </s:extension>
         </s:complexContent>
       </s:complexType>
-      <s:complexType name="BussinessBasicInfoOR">
+      <s:complexType name="BussinessOR">
         <s:sequence>
-          <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
-          <s:element minOccurs="0" maxOccurs="1" name="EnglishName" type="s:string" />
-          <s:element minOccurs="1" maxOccurs="1" name="QueueNumber" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Englishname" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Typename" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Waittime1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Priortime1" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Waittime2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Priortime2" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Waittime3" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Priortime3" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Ticketmethod" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="Mondayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mondaytime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Tuesdayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tuesdaytime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Wednesdayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Wednesdaytime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Thurdayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Thurdaytime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Fridayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fridaytime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Saturdayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Saturdaytime" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sundayflag" type="s:boolean" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sundaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfQueueInfoOR">
@@ -88,6 +112,7 @@
       <s:complexType name="QueueInfoOR">
         <s:sequence>
           <s:element minOccurs="1" maxOccurs="1" name="IsVip" type="s:boolean" />
+          <s:element minOccurs="1" maxOccurs="1" name="ConvertTimeLen" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Bankno" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Billno" type="s:string" />

@@ -112,6 +112,53 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
         #endregion
 
         #region 呼叫接口更新数据
+       /// <summary>
+       /// 转移窗口
+       /// </summary>
+       /// <param name="obj"></param>
+       /// <returns></returns>
+       public bool UpdateTransfer(QueueInfoOR obj)
+       {
+           string sql = @"update t_queueinfo  set TransferDestWin='@TransferDestWin' where  ID='@ID' ";
+
+           sql = sql.Replace("@TransferDestWin", obj.Transferdestwin.ToString());
+           sql = sql.Replace("@ID", obj.Id);
+
+           return dbMySql.ExecuteNoQuery(sql) > 0;
+       }
+
+       /// <summary>
+       /// 两次重呼，弃号
+       /// </summary>
+       /// <param name="obj"></param>
+       /// <returns></returns>
+       public bool UpdateRecallEnd(QueueInfoOR obj)
+       {
+           obj.Status = 3;
+           string sql = @"update t_queueinfo  set status=@status where  ID='@ID' ";
+           
+           sql = sql.Replace("@status", obj.Status.ToString());
+           sql = sql.Replace("@ID", obj.Id);
+
+           return dbMySql.ExecuteNoQuery(sql) > 0;
+       }
+
+       /// <summary>
+       /// 延后
+       /// </summary>
+       /// <param name="obj"></param>
+       /// <returns></returns>
+       public bool UpdateDelayTimer(QueueInfoOR obj)
+       {
+           string sql = @"update t_queueinfo  set DelayTime=@DelayTime,status=@status where  ID='@ID' ";
+
+           sql = sql.Replace("@DelayTime", obj.Delaytime.ToString());
+           sql = sql.Replace("@status", obj.Status.ToString());
+           sql = sql.Replace("@ID", obj.Id);
+
+           return dbMySql.ExecuteNoQuery(sql) > 0;
+       }
+
 
        /// <summary>
        /// 叫号

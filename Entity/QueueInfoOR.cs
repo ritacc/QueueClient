@@ -5,8 +5,16 @@ using System.Data;
 
 namespace QM.Client.Entity
 {
-    public class QueueInfoOR
+    public class QueueInfoOR : IComparable
     {
+        public int CompareTo(Object obj)
+        {
+            QueueInfoOR other = obj as QueueInfoOR;
+            if (other.ConvertTimeLen > this.ConvertTimeLen)
+                return 0;
+            return 1;
+        }  
+
         //是否VIP、取号时间、换算后排队时间、转移窗口号、延后人数、延后时间。
         #region 扩展的
         /// <summary>
@@ -14,8 +22,16 @@ namespace QM.Client.Entity
         /// </summary>
         public bool IsVip { get; set; }
 
-        
+        /// <summary>
+        /// 转换后排队时间
+        /// 计算公式(排队到现在时间长度+ 优先时间+(...))
+        /// </summary>
+        public int ConvertTimeLen { get; set; }
 
+        /// <summary>
+        /// 重呼次数
+        /// </summary>
+        public int ReCallNumber { get; set; }
         #endregion
 
        
@@ -216,7 +232,8 @@ namespace QM.Client.Entity
 		/// </summary>
 		public QueueInfoOR()
 		{
-            Status = 0; 
+            Status = 0;
+            ReCallNumber = 0;
             Id = Guid.NewGuid().ToString();
             IsNowQueue = false;
 		}
@@ -238,6 +255,7 @@ namespace QM.Client.Entity
         {
             IsNowQueue = false;
             Status = 0;
+            ReCallNumber = 0;
 
             Id = Guid.NewGuid().ToString();
             Bankno = mBankNo;// 网点机构号

@@ -112,7 +112,7 @@ namespace QSoft.Core.ViewModel
             {
                 foreach (var mBuss in vBussQue)
                 {
-                    BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.ID);
+                    BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.Id);
                     if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
                     {
                         if (mCatchBussQue != null)
@@ -179,7 +179,7 @@ namespace QSoft.Core.ViewModel
         {
             foreach (var v in QueuesInfo)
             {
-                if (v.ID == mBussinessID)
+                if (v.Id == mBussinessID)
                 {
                     return v;
                 }
@@ -308,14 +308,16 @@ namespace QSoft.Core.ViewModel
             mObj.ShowDialog();
             if (mObj.IsOK)
             {
-                string msg = GetCall("", string.Format("{0}##{1}", _NowBillNo, mObj.DelayNumber));
-                if (msg == "0") { }
+                string msg = GetCall("DELAY", string.Format("{0}##{1}", _NowBillNo, mObj.DelayNumber));
+                if (msg == "0") {
+                    _NowBillNo = "";
+                    
+                }
                 else
                 {
                     ShowErrorMsg(msg);
                 }
             }
-
         }
         /// <summary>
         /// 转移
@@ -327,7 +329,7 @@ namespace QSoft.Core.ViewModel
             frmTran.ShowDialog();
             if (frmTran.IsOK)
             {
-                string msg = GetCall("", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
+                string msg = GetCall("TRANSFER", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
                 if (msg == "0") { }
                 else
                 {
