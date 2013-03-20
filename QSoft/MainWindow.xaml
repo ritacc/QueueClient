@@ -540,6 +540,7 @@
             <!--列表信息-->
             <ScrollViewer Grid.Column="1" Background="LightBlue">               
                     <ListBox  Background="LightBlue" x:Name="lbItem"
+                              PreviewMouseLeftButtonUp="lbItem_PreviewMouseLeftButtonUp"
          ItemTemplate="{StaticResource myTaskTemplate}"  ItemsSource="{Binding QueuesInfo}">
                     </ListBox>                         
             </ScrollViewer>

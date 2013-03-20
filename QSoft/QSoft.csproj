@@ -83,6 +83,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Compile Include="View\CustomInfoWindow.xaml.cs">
+      <DependentUpon>CustomInfoWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="View\Delay.xaml.cs">
       <DependentUpon>Delay.xaml</DependentUpon>
     </Compile>
@@ -122,6 +125,10 @@
     <Page Include="Resources\ColorPicker.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomInfoWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="View\Delay.xaml">
       <SubType>Designer</SubType>

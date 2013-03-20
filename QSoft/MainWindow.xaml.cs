@@ -14,6 +14,8 @@ using System.Windows.Shapes;
 using MahApps.Metro.Controls;
 using QSoft.View;
 using QSoft.Core.ViewModel;
+using QSoft.QueueClientServiceReference;
+using QSoft.Core.Model;
 
 namespace QSoft
 {
@@ -47,6 +49,17 @@ namespace QSoft
             ViewModel.Clear();
         }
 
-       
+        private void lbItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            if (e.OriginalSource is FrameworkElement)
+            {
+                var element = e.OriginalSource as FrameworkElement;
+                if (element.DataContext is QueueInfoOR)
+                {
+                    var queueInfo = element.DataContext as QueueInfoOR;
+                    CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.Businesses.First(c => queueInfo.Bussinessid == c.ID).Name, CustomType = "未识别", ServiceLevel = "未识别" };
+                }
+            }
+        }
     }
 }

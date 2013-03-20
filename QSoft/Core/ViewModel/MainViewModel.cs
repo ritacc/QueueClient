@@ -102,6 +102,18 @@ namespace QSoft.Core.ViewModel
                 return v;
             }
         }
+        private BussinessQueueOR[] _businesses;
+        public BussinessQueueOR[] Businesses
+        {
+            get
+            {
+                if (null == _businesses)
+                {
+                    _businesses = GetBussinessList();
+                }
+                return _businesses;
+            }
+        }
 
         /// <summary>
         /// 刷新队队信息
@@ -109,30 +121,27 @@ namespace QSoft.Core.ViewModel
         /// <param name="obj"></param>
         private void RefQueues()
         {
-            var vBussQue = GetBussinessList();
+            var Businesses = GetBussinessList();
             bool mIsChange = false;
-            if (vBussQue != null)
+            foreach (var mBuss in Businesses)
             {
-                foreach (var mBuss in vBussQue)
+                BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.ID);
+                if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
                 {
-                    BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.ID);
-                    if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
+                    if (mCatchBussQue != null)
                     {
-                        if (mCatchBussQue != null)
-                        {
-                            mCatchBussQue.BussQueues = mBuss.BussQueues;
-                        }
-                        else
-                        {
-                            this.QueuesInfo.Add(mBuss);
-                        }
-                        mIsChange = true;
+                        mCatchBussQue.BussQueues = mBuss.BussQueues;
                     }
+                    else
+                    {
+                        this.QueuesInfo.Add(mBuss);
+                    }
+                    mIsChange = true;
                 }
-                if (mIsChange)
-                {
-                    SetCurrentQueue(_NowBillNo);
-                }
+            }
+            if (mIsChange)
+            {
+                SetCurrentQueue(_NowBillNo);
             }
         }
 
