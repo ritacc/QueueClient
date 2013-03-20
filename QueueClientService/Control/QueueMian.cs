@@ -341,13 +341,6 @@ namespace QM.Client.WebService.Control
                 }
             }
             return QhQueues;
-            //List<BussinessBasicInfoOR> listQueue = new List<BussinessBasicInfoOR>();
-            //foreach (BussinessQueueOR obj in QhQueues)
-            //{
-            //    BussinessBasicInfoOR _mBasciObj = new BussinessBasicInfoOR(obj);
-            //    listQueue.Add(_mBasciObj);
-            //}
-            //return listQueue;
         }
 
         /// <summary>
@@ -454,17 +447,19 @@ namespace QM.Client.WebService.Control
             RemoveReCall(mWindowNo);
            
             QueueInfoOR mSelectQhObj=null;
+            //先处理其它窗口过来的属况,即不用排队
             foreach (BussinessQueueOR objQhQue in QhQueues)
             {
-                foreach (QueueInfoOR objQue in objQhQue.BussQueues )
+                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                 {
-                    if (objQue.Windowno == mWindowNo  && objQue.Delaynum==0 && objQue.Status==0)
+                    if (objQue.Transferdestwin == mWindowNo)
                     {
                         //objQue.Status = 1;
                         mSelectQhObj = objQue;
                     }
                 }
             }
+
             //第二次遍历过程中，转移窗口号不为空且不等于呼叫窗口号的元素略过，更新所有元素的“换算后排队时间”（
             //更新时间，并将其移到一个数组中
             if (mSelectQhObj == null)
@@ -474,15 +469,17 @@ namespace QM.Client.WebService.Control
                 {
                     foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                     {
-                        if (objQue.Status == 0 
-                            || (objQue.Status == 1 && objQue.Windowno== mWindowNo))//本窗口上次叫号
+                        if ((objQue.Status == 0 && objQue.Transferdestwin != mWindowNo)//转移窗口不能为本窗口
+                            || (objQue.Status == 1 && objQue.Windowno== mWindowNo)
+                            )//本窗口上次叫号
                         {
                             int TimeLen = GetTimeLen(objQue.Prillbilltime, DateTime.Now);
-                            objQue.ConvertTimeLen = TimeLen + GetPriorTime(TimeLen, objQhQue);
                             if (objQue.Delaytime > 0)//延后，需要减去，延后的时间
                             {
                                 TimeLen -= objQue.Delaytime;
                             }
+
+                            objQue.ConvertTimeLen = TimeLen + GetPriorTime(TimeLen, objQhQue);                            
                             mQueueList.Add(objQue);
                         }
                     }
@@ -513,59 +510,8 @@ namespace QM.Client.WebService.Control
             return "error: 没有获取到排队人员。";
         }
         
-        /// <summary>
-        /// 获取业务优先时间
-        /// </summary>
-        /// <param name="TimeLen"></param>
-        /// <param name="obj"></param>
-        /// <returns></returns>
-        private int GetPriorTime(int TimeLen,BussinessOR obj)
-        {
-            if (TimeLen > obj.Waittime3)
-            {
-                return obj.Priortime3;
-            }
-            else if (TimeLen > obj.Waittime3)
-            {
-                return obj.Priortime3;
-            }
-            else if (TimeLen > obj.Waittime3)
-            {
-                return obj.Priortime3;
-            }
-            return 0;
-        }
-        #region 移出 重呼两次的记录
-        private void RemoveReCall(string windowNo)
-        {
-            
-            List<QueueInfoOR> ListRemoveQH = new List<QueueInfoOR>();
-            foreach (BussinessQueueOR objQhQue in QhQueues)
-            {
-                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
-                {
-                    if (objQue.Status == 1 && objQue.ReCallNumber >= 2  
-                        && objQue.Windowno == windowNo)
-                    {
-                        ListRemoveQH.Add(objQue);
-                    }
-                }
-                //移出重呼两次的记录
-                if (ListRemoveQH.Count > 0)
-                {
-                    foreach (QueueInfoOR obj in ListRemoveQH)
-                    {
-                        _QueueDA.UpdateRecallEnd(obj);
-                        objQhQue.BussQueues.Remove(obj);
-                    }
-                    ListRemoveQH.Clear();
-                }
-
-            }
-
-          
-        }  
-        #endregion
+       
+        
         /// <summary>
         /// 重呼	RECALL	票号
         /// </summary>
@@ -592,7 +538,10 @@ namespace QM.Client.WebService.Control
                 if (objQH.ReCallNumber >= 3)
                 {
                     RemoveReCall(objQH.Windowno);
+                    return "1";
                 }
+                //重呼接口
+
                 return "0";
             }
             return "未知错误！";
@@ -637,7 +586,7 @@ namespace QM.Client.WebService.Control
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return string.Format("票号:{0} 不存在!",mBillNo);
-            objQH.Transferdestwin = int.Parse(targetWin);
+            objQH.Transferdestwin = targetWin;
             try
             {
                 _QueueDA.UpdateTransfer(objQH);
@@ -670,6 +619,10 @@ namespace QM.Client.WebService.Control
                 QueueInfoOR objQH = GetQueueInfo(mBillNo);
                 if (objQH == null)
                     return string.Format("票号:{0} 不存在!", mBillNo);
+                if (objQH.Status == 3)
+                    return "此单号已办结";
+                
+
                 //呼号代码
             }
             else if (mCallType == "大堂经理")
@@ -735,7 +688,60 @@ namespace QM.Client.WebService.Control
             return "0";
         }
 
-       
+        #region 呼叫辅助函数
+        /// <summary>
+        /// 获取业务优先时间
+        /// </summary>
+        /// <param name="TimeLen"></param>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        private int GetPriorTime(int TimeLen, BussinessOR obj)
+        {
+            if (TimeLen > obj.Waittime3)
+            {
+                return obj.Priortime3;
+            }
+            else if (TimeLen > obj.Waittime3)
+            {
+                return obj.Priortime3;
+            }
+            else if (TimeLen > obj.Waittime3)
+            {
+                return obj.Priortime3;
+            }
+            return 0;
+        }
+        /// <summary>
+        /// 移出 重呼两次的记录
+        /// </summary>
+        /// <param name="windowNo"></param>
+        private void RemoveReCall(string windowNo)
+        {
+            List<QueueInfoOR> ListRemoveQH = new List<QueueInfoOR>();
+            foreach (BussinessQueueOR objQhQue in QhQueues)
+            {
+                foreach (QueueInfoOR objQue in objQhQue.BussQueues)
+                {
+                    if (objQue.Status == 1 && objQue.ReCallNumber >= 2
+                        && objQue.Windowno == windowNo)
+                    {
+                        ListRemoveQH.Add(objQue);
+                    }
+                }
+                //移出重呼两次的记录
+                if (ListRemoveQH.Count > 0)
+                {
+                    foreach (QueueInfoOR obj in ListRemoveQH)
+                    {
+                        _QueueDA.UpdateRecallEnd(obj);
+                        objQhQue.BussQueues.Remove(obj);
+                    }
+                    ListRemoveQH.Clear();
+                }
+            }
+        }  
+        #endregion
+
         #endregion
 
         #region 取号

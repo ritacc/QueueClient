@@ -17,7 +17,7 @@ namespace QM.Client.DA.MySql
        public List<QueueInfoOR> selectBussinessQueues(string BussinesID)
        {
            string sql = string.Format(@"select * from t_queueinfo where BussinessId='{0}' 
-and status < 4  and prillbilltime>'{1}'  order by prillbilltime ", BussinesID,DateTime.Now.ToString("yyyy-MM-dd"));
+and status < 3  and prillbilltime>'{1}'  order by prillbilltime ", BussinesID,DateTime.Now.ToString("yyyy-MM-dd"));
 
            DataTable dt = null;
            try

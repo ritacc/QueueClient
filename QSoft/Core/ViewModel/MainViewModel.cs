@@ -255,6 +255,7 @@ namespace QSoft.Core.ViewModel
                 {
                     if (parameter != "RESTART")
                     {
+                        ShowErrorMsg("请先恢复！");
                         return;
                     }
                 }
@@ -349,8 +350,8 @@ namespace QSoft.Core.ViewModel
             {
                 string msg = GetCall("DELAY", string.Format("{0}##{1}", _NowBillNo, mObj.DelayNumber));
                 if (msg == "0") {
+                    CanncelCurrentQueue(_NowBillNo);
                     _NowBillNo = "";
-                    
                 }
                 else
                 {
@@ -369,7 +370,8 @@ namespace QSoft.Core.ViewModel
             if (frmTran.IsOK)
             {
                 string msg = GetCall("TRANSFER", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
-                if (msg == "0") { }
+                if (msg == "0") {                     
+                }
                 else
                 {
                     ShowErrorMsg(msg);
@@ -388,7 +390,12 @@ namespace QSoft.Core.ViewModel
             {
                 string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
                     GlobalData.WindowNo, frmSpe.CallType, frmSpe.BillNo));
-                if (msg == "0") { }
+                if (msg == "0") {
+                    if (frmSpe.CallType == "客户")
+                    {
+                        SetCurrentQueue(frmSpe.BillNo);
+                    }
+                }
                 else
                 {
                     ShowErrorMsg(msg);
@@ -405,11 +412,8 @@ namespace QSoft.Core.ViewModel
             {
                 ShowErrorMsg(value);
                 return;
-            }
-            this.CanncelCurrentQueue(_NowBillNo);
+            }            
             this.SetCurrentQueue(value);
-            _NowBillNo = value;
-
         }
 
         /// <summary>
@@ -418,6 +422,10 @@ namespace QSoft.Core.ViewModel
         private void CallReCall()
         {
             string value = GetCall("RECALL", _NowBillNo);
+            if (value == "1")
+            {
+                RefQueues();
+            }else
             if (value != "0")
             {
                 ShowErrorMsg(value);
@@ -507,6 +515,12 @@ namespace QSoft.Core.ViewModel
                     {
                         if (queObj.Billno == QhBH)
                         {
+                            if (_NowBillNo != QhBH)
+                            {
+                                CanncelCurrentQueue(_NowBillNo);
+                                _NowBillNo = QhBH;
+                            }
+
                             queObj.IsNowQueue = true;
                         }
                     }

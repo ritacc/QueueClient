@@ -512,6 +512,8 @@ namespace QSoft.QueueClientServiceReference {
         
         private int ConvertTimeLenField;
         
+        private int ReCallNumberField;
+        
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IdField;
         
@@ -526,7 +528,8 @@ namespace QSoft.QueueClientServiceReference {
         
         private System.DateTime PrillbilltimeField;
         
-        private int TransferdestwinField;
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TransferdestwinField;
         
         private int DelaynumField;
         
@@ -607,7 +610,20 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=2)]
+        public int ReCallNumber {
+            get {
+                return this.ReCallNumberField;
+            }
+            set {
+                if ((this.ReCallNumberField.Equals(value) != true)) {
+                    this.ReCallNumberField = value;
+                    this.RaisePropertyChanged("ReCallNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
         public string Id {
             get {
                 return this.IdField;
@@ -620,7 +636,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
         public string Bankno {
             get {
                 return this.BanknoField;
@@ -633,7 +649,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public string Billno {
             get {
                 return this.BillnoField;
@@ -646,7 +662,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string Bussinessid {
             get {
                 return this.BussinessidField;
@@ -659,7 +675,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
         public System.DateTime Prillbilltime {
             get {
                 return this.PrillbilltimeField;
@@ -672,20 +688,20 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
-        public int Transferdestwin {
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Transferdestwin {
             get {
                 return this.TransferdestwinField;
             }
             set {
-                if ((this.TransferdestwinField.Equals(value) != true)) {
+                if ((object.ReferenceEquals(this.TransferdestwinField, value) != true)) {
                     this.TransferdestwinField = value;
                     this.RaisePropertyChanged("Transferdestwin");
                 }
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=8)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
         public int Delaynum {
             get {
                 return this.DelaynumField;
@@ -698,7 +714,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
         public int Delaytime {
             get {
                 return this.DelaytimeField;
@@ -711,7 +727,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
         public System.DateTime Calltime {
             get {
                 return this.CalltimeField;
@@ -724,7 +740,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
         public System.DateTime Processtime {
             get {
                 return this.ProcesstimeField;
@@ -737,7 +753,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
         public System.DateTime Finishtime {
             get {
                 return this.FinishtimeField;
@@ -750,7 +766,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
         public string Windowno {
             get {
                 return this.WindownoField;
@@ -763,7 +779,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
         public string Employno {
             get {
                 return this.EmploynoField;
@@ -776,7 +792,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
         public string Employname {
             get {
                 return this.EmploynameField;
@@ -789,7 +805,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=17)]
         public string Cardno {
             get {
                 return this.CardnoField;
@@ -802,7 +818,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=17)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=18)]
         public int Judge {
             get {
                 return this.JudgeField;
@@ -815,7 +831,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=18)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=19)]
         public int Waitinterval {
             get {
                 return this.WaitintervalField;
@@ -828,7 +844,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=19)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=20)]
         public int Processinterval {
             get {
                 return this.ProcessintervalField;
@@ -841,7 +857,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=20)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=21)]
         public int Waitpeoplebusssiness {
             get {
                 return this.WaitpeoplebusssinessField;
@@ -854,7 +870,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=21)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=22)]
         public int Waitpeoplebank {
             get {
                 return this.WaitpeoplebankField;
@@ -867,7 +883,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=22)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
         public int Custemclass {
             get {
                 return this.CustemclassField;
@@ -880,7 +896,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
         public bool IsNowQueue {
             get {
                 return this.IsNowQueueField;
@@ -893,7 +909,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=24)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=25)]
         public string Description {
             get {
                 return this.DescriptionField;
@@ -906,7 +922,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=25)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=26)]
         public int Status {
             get {
                 return this.StatusField;
@@ -919,7 +935,7 @@ namespace QSoft.QueueClientServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=26)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=27)]
         public int UpStatus {
             get {
                 return this.UpStatusField;

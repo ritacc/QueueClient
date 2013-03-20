@@ -54,7 +54,7 @@ values (@Id, @BankNo, @BillNo, @BussinessId, @PrillBillTime, @TransferDestWin, @
 				new SqlParameter("@BillNo", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "BillNo", DataRowVersion.Default, queueInfo.Billno),
 				new SqlParameter("@BussinessId", SqlDbType.Char, 36, ParameterDirection.Input, false, 0, 0, "BussinessId", DataRowVersion.Default, queueInfo.Bussinessid),
 				new SqlParameter("@PrillBillTime", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "PrillBillTime", DataRowVersion.Default, queueInfo.Prillbilltime),
-				new SqlParameter("@TransferDestWin", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "TransferDestWin", DataRowVersion.Default, queueInfo.Transferdestwin),
+				new SqlParameter("@TransferDestWin", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "TransferDestWin", DataRowVersion.Default, queueInfo.Transferdestwin),
 				new SqlParameter("@DelayNum", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "DelayNum", DataRowVersion.Default, queueInfo.Delaynum),
 				new SqlParameter("@DelayTime", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "DelayTime", DataRowVersion.Default, queueInfo.Delaytime),
 				new SqlParameter("@CallTime", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "CallTime", DataRowVersion.Default, queueInfo.Calltime),
@@ -86,7 +86,7 @@ CustemClass = @CustemClass,  Description = @Description,  Status = @Staus where 
 			{
 				new SqlParameter("@Id", SqlDbType.Char, 36, ParameterDirection.Input, false, 0, 0, "Id", DataRowVersion.Default, queueInfo.Id),
 				new SqlParameter("@BillNo", SqlDbType.VarChar, 50, ParameterDirection.Input, false, 0, 0, "BillNo", DataRowVersion.Default, queueInfo.Billno),
-				new SqlParameter("@TransferDestWin", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "TransferDestWin", DataRowVersion.Default, queueInfo.Transferdestwin),
+				new SqlParameter("@TransferDestWin", SqlDbType.VarChar, 20, ParameterDirection.Input, false, 0, 0, "TransferDestWin", DataRowVersion.Default, queueInfo.Transferdestwin),
 				new SqlParameter("@DelayNum", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "DelayNum", DataRowVersion.Default, queueInfo.Delaynum),
 				new SqlParameter("@DelayTime", SqlDbType.Int, 4, ParameterDirection.Input, false, 0, 0, "DelayTime", DataRowVersion.Default, queueInfo.Delaytime),
 				new SqlParameter("@CallTime", SqlDbType.DateTime, 8, ParameterDirection.Input, false, 0, 0, "CallTime", DataRowVersion.Default, queueInfo.Calltime),
