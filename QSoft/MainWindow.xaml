@@ -110,45 +110,55 @@
                 <my:QhQueueInfo  Width="60" Height="58" IsNowQueue="{Binding IsNowQueue}"  ShowContent="{Binding Billno}"/>
             </StackPanel>            
         </DataTemplate>
-        <DataTemplate x:Key="myTaskTemplate">
-            <Border BorderBrush="LawnGreen" BorderThickness="0,0,0.5,0">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="125"/>
-                        <ColumnDefinition Width="*"/>
-                    </Grid.ColumnDefinitions>
-                    <Grid.RowDefinitions>
-                        <RowDefinition Height="*"/>
-                        <RowDefinition Height="1"/>
-                    </Grid.RowDefinitions>
+        <Style x:Key="myTaskStyle" TargetType="ListBoxItem">
+            <Setter Property="BorderBrush" Value="Red"/>
+            <Setter Property="BorderThickness" Value="1"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="ListBoxItem">
+                        <Border BorderBrush="LawnGreen" BorderThickness="0,0,0,0.5" SnapsToDevicePixels="False">
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="125"/>
+                                    <ColumnDefinition Width="*"/>
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="1"/>
+                                </Grid.RowDefinitions>
 
-                    <!--排队总信息-->
-                    <Grid Height="60" Width="125" Margin="1">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="60"/>
-                            <ColumnDefinition/>
-                        </Grid.ColumnDefinitions>
-                        <Grid.RowDefinitions>
-                            <RowDefinition />
-                            <RowDefinition/>
-                            <RowDefinition Height="*"/>
-                        </Grid.RowDefinitions>
-                        <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80"/>
-                        <TextBlock Grid.Row="1"  Text="等待人数："></TextBlock>
-                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
-                    </Grid>
-                    <!--排队列表-->
-                    <ListBox Grid.Column="1" ItemTemplate="{StaticResource myTaskTemplateChild}"
-                         ItemsSource="{Binding BussQueues}">
-                        <ListBox.ItemsPanel>
-                            <ItemsPanelTemplate>
-                                <WrapPanel IsItemsHost="True" />
-                            </ItemsPanelTemplate>
-                        </ListBox.ItemsPanel>
-                    </ListBox>
-                </Grid>
-            </Border>
-        </DataTemplate>
+                                <!--排队总信息-->
+                                <Grid Height="60" Width="125" Margin="1">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="60"/>
+                                        <ColumnDefinition/>
+                                    </Grid.ColumnDefinitions>
+                                    <Grid.RowDefinitions>
+                                        <RowDefinition />
+                                        <RowDefinition/>
+                                        <RowDefinition Height="*"/>
+                                    </Grid.RowDefinitions>
+                                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80"/>
+                                    <TextBlock Grid.Row="1"  Text="等待人数："></TextBlock>
+                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
+                                </Grid>
+                                <!--排队列表-->
+                                <ListBox
+                                    Grid.Column="1"
+                                    ItemTemplate="{StaticResource myTaskTemplateChild}"
+                                    ItemsSource="{Binding BussQueues}">
+                                    <ListBox.ItemsPanel>
+                                        <ItemsPanelTemplate>
+                                            <WrapPanel IsItemsHost="True" />
+                                        </ItemsPanelTemplate>
+                                    </ListBox.ItemsPanel>
+                                </ListBox>
+                            </Grid>
+                        </Border>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
     </metro:MetroWindow.Resources>
     <metro:MetroWindow.Background>
         <ImageBrush ImageSource="Resources/Images/background.jpg"/>
@@ -479,7 +489,7 @@
             <ScrollViewer Grid.Column="1" Background="LightBlue">               
                     <ListBox  Background="LightBlue" x:Name="lbItem"
                               PreviewMouseLeftButtonUp="lbItem_PreviewMouseLeftButtonUp"
-         ItemTemplate="{StaticResource myTaskTemplate}"  ItemsSource="{Binding QueuesInfo}">
+         ItemContainerStyle="{StaticResource myTaskStyle}"  ItemsSource="{Binding QueuesInfo}">
                     </ListBox>                         
             </ScrollViewer>
         </Grid>

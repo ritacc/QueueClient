@@ -57,7 +57,7 @@ namespace QSoft
                 if (element.DataContext is QueueInfoOR)
                 {
                     var queueInfo = element.DataContext as QueueInfoOR;
-                    CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.Businesses.First(c => queueInfo.Bussinessid == c.ID).Name, CustomType = "未识别", ServiceLevel = "未识别" };
+                    CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.Businesses.First(c => queueInfo.Bussinessid == c.Id).Name, CustomType = "未识别", ServiceLevel = "未识别" };
                 }
             }
         }

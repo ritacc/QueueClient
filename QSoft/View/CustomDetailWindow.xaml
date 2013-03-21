@@ -1,0 +1,9 @@
+﻿<Window x:Class="QSoft.View.CustomDetailWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:chart="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
+        Title="CustomDetailWindow" Height="300" Width="300">
+    <Grid>
+        <chart:Ch
+    </Grid>
+</Window>

@@ -121,11 +121,10 @@ namespace QSoft.Core.ViewModel
         /// <param name="obj"></param>
         private void RefQueues()
         {
-            var Businesses = GetBussinessList();
             bool mIsChange = false;
             foreach (var mBuss in Businesses)
             {
-                BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.ID);
+                BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.Id);
                 if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
                 {
                     if (mCatchBussQue != null)
