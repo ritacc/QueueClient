@@ -10,14 +10,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 
 namespace QSoft.View
 {
     /// <summary>
     /// Delay.xaml 的交互逻辑
     /// </summary>
-    public partial class Delay : MetroWindow
+    public partial class Delay : Window
     {
         public Delay()
         {

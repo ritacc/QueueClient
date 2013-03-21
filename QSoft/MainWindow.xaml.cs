@@ -11,18 +11,18 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 using QSoft.View;
 using QSoft.Core.ViewModel;
 using QSoft.QueueClientServiceReference;
 using QSoft.Core.Model;
+using CustomChromeLibrary;
 
 namespace QSoft
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : CustomChromeWindow
     {
 
         internal MainViewModel ViewModel { get; set; }

@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 using System.Collections.ObjectModel;
 
 namespace QSoft.View
@@ -18,7 +17,7 @@ namespace QSoft.View
     /// <summary>
     /// SysSetWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class SysSetWindow : MetroWindow
+    public partial class SysSetWindow : Window
     {
 
         public ObservableCollection<Student> ListStu { get; set; }
