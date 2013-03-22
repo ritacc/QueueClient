@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:metro="http://metro.mahapps.com/winfx/xaml/controls"
     xmlns:my="clr-namespace:QSoft.Controls"
-    Title="系统设置" Height="240" Width="950"
+    Title="系统设置" Height="185" Width="316"
     ShowInTaskbar="False"
     WindowStartupLocation="CenterOwner"
     ShowMaxRestoreButton="False"
@@ -11,55 +11,31 @@
     <!--<Window.Background>
         <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
     </Window.Background>-->
-    <Window.Resources>
-        <DataTemplate x:Key="myTaskTemplateChild">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <TextBlock  Background="LightBlue" Text="{Binding ID}"></TextBlock>
-            </StackPanel>
-        </DataTemplate>
-        <DataTemplate x:Key="myTaskTemplate">
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition Width="60"/>
-                        <ColumnDefinition/>
-                    </Grid.ColumnDefinitions>
-                <!--排队总信息-->
-                <Grid>
-                    <TextBlock  Text="{Binding Name}" Width="80" Background="LightBlue"/>
-                </Grid>
-                <!--排队列表-->
-                <ListBox Grid.Column="1" ItemTemplate="{StaticResource myTaskTemplateChild}"
-                         ItemsSource="{Binding ChildItems}">
-                    <ListBox.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <WrapPanel IsItemsHost="True" />
-                        </ItemsPanelTemplate>
-                    </ListBox.ItemsPanel>
-                </ListBox>
-            </Grid>
-        </DataTemplate>
-    </Window.Resources>
+  
     <Grid>
-        <!--<TextBox Name="txt" FontSize="32"> her is some reflected text</TextBox>-->
-        <Rectangle RenderTransformOrigin="1,0.5">
-            <Rectangle.Fill>
-                <VisualBrush Visual="{Binding ElementName=txt}"></VisualBrush>
-            </Rectangle.Fill>
-            <Rectangle.OpacityMask>
-                <LinearGradientBrush StartPoint="0,0" EndPoint="0,1">
-                    <GradientStop Offset="0.3" Color="Transparent" ></GradientStop>
-                    <GradientStop Offset="1" Color="#44000000"></GradientStop>
-                </LinearGradientBrush>
-            </Rectangle.OpacityMask>
-            <Rectangle.RenderTransform>
-                <ScaleTransform ScaleY="-1"></ScaleTransform>
-            </Rectangle.RenderTransform>
-            
-        </Rectangle>
-        <!--<ListBox Margin="10" Background="LightBlue" x:Name="lbItem"
-         ItemTemplate="{StaticResource myTaskTemplate}"  ItemsSource="{Binding ListStu}">
-        </ListBox>-->
-       
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="80"/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition Height="35"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <TextBlock Text="热键设置" VerticalAlignment="Center" HorizontalAlignment="Right" />
+        <TextBox Grid.Column="1" Name="txtKey"  Width="126" Height="26" KeyDown="txtKey_KeyDown"
+                 VerticalAlignment="Center" HorizontalAlignment="Left" Margin="4" IsReadOnly="True" />
+
+        <Button  x:Name="OKButton" Grid.Row="2" Grid.ColumnSpan="2"
+                HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="5,5,90,5" Height="23" Width="65" Click="OKButton_Click" IsDefault="True" Content="确定" />
+
+        <Button  x:Name="CancelButton" Grid.Row="2" Grid.ColumnSpan="2" 
+                 HorizontalAlignment="Center" VerticalAlignment="Center"
+                Margin="90,5,5,5" Height="23" Width="65" IsCancel="True" Content="取消"/>
+
     </Grid>
     
 </metro:MetroWindow>

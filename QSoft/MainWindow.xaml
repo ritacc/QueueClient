@@ -13,7 +13,7 @@
     mc:Ignorable="d" x:Class="QSoft.MainWindow" 
     
     Title="柜员叫号客户端" Height="600" Width="800"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen" Loaded="MetroWindow_Loaded">
     <metro:MetroWindow.Resources>
     	<Style x:Key="ImageButtonImageStyle" TargetType="{x:Type Image}">
     		<Setter Property="Height" Value="36"/>

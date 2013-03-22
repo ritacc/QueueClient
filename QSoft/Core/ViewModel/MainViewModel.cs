@@ -125,7 +125,7 @@ namespace QSoft.Core.ViewModel
             bool mIsChange = false;
             foreach (var mBuss in Businesses)
             {
-                BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.ID);
+                BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.Id);
                 if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
                 {
                     if (mCatchBussQue != null)
@@ -252,7 +252,12 @@ namespace QSoft.Core.ViewModel
             if (parameter == "Setting")
             {
                 SysSetWindow sysSet = new SysSetWindow();
+                sysSet.Owner = this._Page;
                 sysSet.ShowDialog();
+                if (sysSet.IsChange)
+                {
+                    this._Page.HeadHotkey(sysSet.HotKeySet);
+                }
             }
             else if (parameter == "Stop")
             {
@@ -445,26 +450,22 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallWelcome()
         {
-
             string value = GetCall("WELCOME", _NowBillNo);
-                if (value != "0")
-                {
-                    ShowErrorMsg(value);
-                }
-            
+            if (value != "0")
+            {
+                ShowErrorMsg(value);
+            }
         }
         /// <summary>
         /// 请评价
         /// </summary>
         private void CallJudge()
         {
-            
-                string value = GetCall("JUDGE", _NowBillNo);
-                if (value != "0")
-                {
-                    ShowErrorMsg(value);
-                }
-           
+            string value = GetCall("JUDGE", _NowBillNo);
+            if (value != "0")
+            {
+                ShowErrorMsg(value);
+            }
         }
         /// <summary>
         /// 暂停

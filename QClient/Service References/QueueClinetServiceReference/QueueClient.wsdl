@@ -279,6 +279,30 @@
           <s:element minOccurs="0" maxOccurs="1" name="Windowid" type="s:string" />
         </s:sequence>
       </s:complexType>
+      <s:element name="GetQhImgName">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetQhImgNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetQhImgNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetQhImgName">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="imgName" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SetQhImgNameResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SetQhImgNameResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="getLoginSoapIn">
@@ -341,6 +365,18 @@
   <wsdl:message name="GetButtonsByPageWinIdSoapOut">
     <wsdl:part name="parameters" element="tns:GetButtonsByPageWinIdResponse" />
   </wsdl:message>
+  <wsdl:message name="GetQhImgNameSoapIn">
+    <wsdl:part name="parameters" element="tns:GetQhImgName" />
+  </wsdl:message>
+  <wsdl:message name="GetQhImgNameSoapOut">
+    <wsdl:part name="parameters" element="tns:GetQhImgNameResponse" />
+  </wsdl:message>
+  <wsdl:message name="SetQhImgNameSoapIn">
+    <wsdl:part name="parameters" element="tns:SetQhImgName" />
+  </wsdl:message>
+  <wsdl:message name="SetQhImgNameSoapOut">
+    <wsdl:part name="parameters" element="tns:SetQhImgNameResponse" />
+  </wsdl:message>
   <wsdl:portType name="QueueClientSoap">
     <wsdl:operation name="getLogin">
       <wsdl:input message="tns:getLoginSoapIn" />
@@ -381,6 +417,14 @@
     <wsdl:operation name="GetButtonsByPageWinId">
       <wsdl:input message="tns:GetButtonsByPageWinIdSoapIn" />
       <wsdl:output message="tns:GetButtonsByPageWinIdSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetQhImgName">
+      <wsdl:input message="tns:GetQhImgNameSoapIn" />
+      <wsdl:output message="tns:GetQhImgNameSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SetQhImgName">
+      <wsdl:input message="tns:SetQhImgNameSoapIn" />
+      <wsdl:output message="tns:SetQhImgNameSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QueueClientSoap" type="tns:QueueClientSoap">
@@ -475,6 +519,24 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetQhImgName">
+      <soap:operation soapAction="http://www.ritacc.com/GetQhImgName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetQhImgName">
+      <soap:operation soapAction="http://www.ritacc.com/SetQhImgName" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:binding name="QueueClientSoap12" type="tns:QueueClientSoap">
     <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
@@ -561,6 +623,24 @@
     </wsdl:operation>
     <wsdl:operation name="GetButtonsByPageWinId">
       <soap12:operation soapAction="http://www.ritacc.com/GetButtonsByPageWinId" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetQhImgName">
+      <soap12:operation soapAction="http://www.ritacc.com/GetQhImgName" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SetQhImgName">
+      <soap12:operation soapAction="http://www.ritacc.com/SetQhImgName" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

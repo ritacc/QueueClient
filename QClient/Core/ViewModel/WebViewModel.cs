@@ -34,7 +34,20 @@ namespace QClient.Core.ViewModel
         #endregion
 
         #region 公共方法
+        public string GetQhImgName()
+        {
+            using (var client = new QueueClientSoapClient())
+            {
+                string imgName = client.GetQhImgName();
+                return imgName;
+            }
+        }
 
+        /// <summary>
+        /// 获取页窗口
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public PageWinOR GetPageWinById(string id)
         {
             if (_pageCahches.ContainsKey(id))
@@ -50,6 +63,11 @@ namespace QClient.Core.ViewModel
             }
         }
 
+        /// <summary>
+        /// 获取按钮，为空或页窗口ID
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public QhandyOR[] GetButtonsByPageWinId(string id)
         {
              if (_qhandyCaches.ContainsKey(id))

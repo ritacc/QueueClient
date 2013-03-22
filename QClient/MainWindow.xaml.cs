@@ -34,8 +34,26 @@ namespace QClient
         private void MainWindow_Loaded(object sender, RoutedEventArgs e)
         {
             Init();
+            InitBackImg();
         }
 
+        private void InitBackImg()
+        {
+            string imgName = WebViewModel.Instance.GetQhImgName();
+            if (string.IsNullOrEmpty(imgName))
+            {
+                imgName = "background.jpg";
+            }
+            string mPath = System.IO.Directory.GetCurrentDirectory() + "\\Resources\\Images\\" + imgName;
+            if (System.IO.File.Exists(mPath))
+            {
+                ImageBrush img = new ImageBrush()
+                {
+                    ImageSource = new BitmapImage(new Uri(mPath,UriKind.Absolute))
+                };
+                this.Background = img;
+            }
+        }
         private void Init()
         {
             //MainCanvas.Width = System.Windows.SystemParameters.PrimaryScreenWidth;
@@ -69,13 +87,13 @@ namespace QClient
                     {
                         string mCard=string.Empty;
                         string mErrorMsg=string.Empty;
-                        if(WebViewModel.Instance.QH(qhandy.LabelJobno,mCard,out mErrorMsg))
+                        if (WebViewModel.Instance.QH(qhandy.LabelJobno, mCard, out mErrorMsg))
                         {
                             //成功不处理
                             MessageBox.Show(mErrorMsg);
                         }
-                        else{
-
+                        else
+                        {
                             MessageBox.Show(mErrorMsg);
                         }
                     }
@@ -91,7 +109,6 @@ namespace QClient
                         pw.Height = mHeight;
                         pw.Name = pageWinOR.Name;
                         pw.ShowDialog();
-                        //PopupWindow.Show();
                     }
                 }
             }

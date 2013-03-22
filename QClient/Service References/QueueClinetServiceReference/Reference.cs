@@ -1796,6 +1796,14 @@ namespace QClient.QueueClinetServiceReference {
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 windowId 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetButtonsByPageWinId", ReplyAction="*")]
         QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponse GetButtonsByPageWinId(QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 GetQhImgNameResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetQhImgName", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetQhImgNameResponse GetQhImgName(QClient.QueueClinetServiceReference.GetQhImgNameRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 imgName 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/SetQhImgName", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.SetQhImgNameResponse SetQhImgName(QClient.QueueClinetServiceReference.SetQhImgNameRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2477,6 +2485,135 @@ namespace QClient.QueueClinetServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetQhImgNameRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetQhImgName", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetQhImgNameRequestBody Body;
+        
+        public GetQhImgNameRequest() {
+        }
+        
+        public GetQhImgNameRequest(QClient.QueueClinetServiceReference.GetQhImgNameRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetQhImgNameRequestBody {
+        
+        public GetQhImgNameRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetQhImgNameResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetQhImgNameResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetQhImgNameResponseBody Body;
+        
+        public GetQhImgNameResponse() {
+        }
+        
+        public GetQhImgNameResponse(QClient.QueueClinetServiceReference.GetQhImgNameResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetQhImgNameResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetQhImgNameResult;
+        
+        public GetQhImgNameResponseBody() {
+        }
+        
+        public GetQhImgNameResponseBody(string GetQhImgNameResult) {
+            this.GetQhImgNameResult = GetQhImgNameResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SetQhImgNameRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SetQhImgName", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.SetQhImgNameRequestBody Body;
+        
+        public SetQhImgNameRequest() {
+        }
+        
+        public SetQhImgNameRequest(QClient.QueueClinetServiceReference.SetQhImgNameRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class SetQhImgNameRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string imgName;
+        
+        public SetQhImgNameRequestBody() {
+        }
+        
+        public SetQhImgNameRequestBody(string imgName) {
+            this.imgName = imgName;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SetQhImgNameResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SetQhImgNameResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.SetQhImgNameResponseBody Body;
+        
+        public SetQhImgNameResponse() {
+        }
+        
+        public SetQhImgNameResponse(QClient.QueueClinetServiceReference.SetQhImgNameResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class SetQhImgNameResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string SetQhImgNameResult;
+        
+        public SetQhImgNameResponseBody() {
+        }
+        
+        public SetQhImgNameResponseBody(string SetQhImgNameResult) {
+            this.SetQhImgNameResult = SetQhImgNameResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface QueueClientSoapChannel : QClient.QueueClinetServiceReference.QueueClientSoap, System.ServiceModel.IClientChannel {
     }
@@ -2634,6 +2771,31 @@ namespace QClient.QueueClinetServiceReference {
             inValue.Body.windowId = windowId;
             QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetButtonsByPageWinId(inValue);
             return retVal.Body.GetButtonsByPageWinIdResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetQhImgNameResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetQhImgName(QClient.QueueClinetServiceReference.GetQhImgNameRequest request) {
+            return base.Channel.GetQhImgName(request);
+        }
+        
+        public string GetQhImgName() {
+            QClient.QueueClinetServiceReference.GetQhImgNameRequest inValue = new QClient.QueueClinetServiceReference.GetQhImgNameRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetQhImgNameRequestBody();
+            QClient.QueueClinetServiceReference.GetQhImgNameResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetQhImgName(inValue);
+            return retVal.Body.GetQhImgNameResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.SetQhImgNameResponse QClient.QueueClinetServiceReference.QueueClientSoap.SetQhImgName(QClient.QueueClinetServiceReference.SetQhImgNameRequest request) {
+            return base.Channel.SetQhImgName(request);
+        }
+        
+        public string SetQhImgName(string imgName) {
+            QClient.QueueClinetServiceReference.SetQhImgNameRequest inValue = new QClient.QueueClinetServiceReference.SetQhImgNameRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.SetQhImgNameRequestBody();
+            inValue.Body.imgName = imgName;
+            QClient.QueueClinetServiceReference.SetQhImgNameResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).SetQhImgName(inValue);
+            return retVal.Body.SetQhImgNameResult;
         }
     }
 }

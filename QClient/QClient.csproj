@@ -68,6 +68,9 @@
     <Compile Include="Control\ENLableControl.cs" />
     <Compile Include="Control\TagControl.cs" />
     <Compile Include="Core\ViewModel\WebViewModel.cs" />
+    <Compile Include="frmImgSet.xaml.cs">
+      <DependentUpon>frmImgSet.xaml</DependentUpon>
+    </Compile>
     <Compile Include="PopupWindow.xaml.cs">
       <DependentUpon>PopupWindow.xaml</DependentUpon>
     </Compile>
@@ -76,6 +79,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
     </Compile>
+    <Page Include="frmImgSet.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -164,6 +171,7 @@
   <ItemGroup>
     <Resource Include="Resources\Images\background.jpg" />
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

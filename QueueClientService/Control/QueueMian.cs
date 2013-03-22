@@ -825,5 +825,36 @@ namespace QM.Client.WebService.Control
 
         #endregion
 
+        #region 取号图片
+        /// <summary>
+        /// 查询图片配置
+        /// </summary>
+        /// <returns></returns>
+        public string GetQhImgName()
+        {
+            QhImgSetDA _da = new QhImgSetDA();
+            return _da.selectQhImg();
+        }
+
+        /// <summary>
+        /// 添加或修改图片配置
+        /// </summary>
+        /// <param name="mImgName"></param>
+        /// <returns></returns>
+        public string UpdateImgSet(string mImgName)
+        {
+            QhImgSetDA _da = new QhImgSetDA();
+            try
+            {
+                _da.UpdateImg(mImgName);
+            }
+            catch (Exception ex)
+            {
+                return ex.Message;
+            }
+            return "0";
+        }
+        #endregion
+
     }
 }

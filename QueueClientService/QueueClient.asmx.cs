@@ -161,5 +161,20 @@ namespace QM.Client.WebService
         {
             return _qClientDA.GetButtonsByPageWinId(windowId);
         }
+
+        #region 取号图片处理
+        [WebMethod]
+        public string GetQhImgName()
+        {
+            return Instanse().GetQhImgName();
+        }
+
+        [WebMethod]
+        public string SetQhImgName(string imgName)
+        {
+            return Instanse().UpdateImgSet(imgName);
+
+        }
+        #endregion
     }
 }
