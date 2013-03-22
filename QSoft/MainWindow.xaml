@@ -1,7 +1,7 @@
-﻿<chorme:CustomChromeWindow
+﻿<Window
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:chorme="clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary"
+    xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
     xmlns:converter="clr-namespace:QSoft.Core.Converter"
     xmlns:vm="clr-namespace:QSoft.Core.ViewModel"
     xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
@@ -9,156 +9,163 @@
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:my="clr-namespace:QSoft.Controls"
-    
     mc:Ignorable="d" x:Class="QSoft.MainWindow" 
-    
     Title="柜员叫号客户端" Height="600" Width="800"
-    WindowStartupLocation="CenterScreen">
+    WindowStartupLocation="CenterScreen"
+    Style="{StaticResource ChromeWindowStyle}">
+    <shell:WindowChrome.WindowChrome>
+        <shell:WindowChrome
+            ResizeBorderThickness="6"
+            CaptionHeight="20"
+            CornerRadius="5"
+            GlassFrameThickness="0">
+        </shell:WindowChrome>
+    </shell:WindowChrome.WindowChrome>
     <Window.Resources>
-    	<Style x:Key="ImageButtonImageStyle" TargetType="{x:Type Image}">
-    		<Setter Property="Height" Value="36"/>
-    		<Setter Property="Width" Value="36"/>
-    		<Setter Property="HorizontalAlignment" Value="Center"/>
-    	</Style>
-    	<Style x:Key="ImageButtonTextBlockStyle" TargetType="{x:Type TextBlock}">
-    		<Setter Property="VerticalAlignment" Value="Center"/>
-    		<Setter Property="HorizontalAlignment" Value="Center"/>
-    		<Setter Property="Foreground" Value="#FF333333"/>
-    		<Setter Property="Width"  Value="50"/>
-    		<Setter Property="TextTrimming" Value="CharacterEllipsis"/>
-    		<Setter Property="TextAlignment" Value="Center"/>
-    	</Style>
-    	<Style x:Key="ImageButtonStyle" TargetType="{x:Type Button}">
-    		<Setter Property="Margin" Value="3"/>
-    		<Setter Property="Background" Value="Transparent"/>
-    		<Setter Property="BorderBrush" Value="Transparent"/>
-    		<Setter Property="VerticalAlignment" Value="Center"/>
-    		<Setter Property="HorizontalAlignment" Value="Center"/>
-    		<Setter Property="Template">
-    			<Setter.Value>
-    				<ControlTemplate TargetType="{x:Type Button}">
-    					<Border
+            <Style x:Key="ImageButtonImageStyle" TargetType="{x:Type Image}">
+                <Setter Property="Height" Value="36"/>
+                <Setter Property="Width" Value="36"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="ImageButtonTextBlockStyle" TargetType="{x:Type TextBlock}">
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Foreground" Value="#FF333333"/>
+                <Setter Property="Width"  Value="50"/>
+                <Setter Property="TextTrimming" Value="CharacterEllipsis"/>
+                <Setter Property="TextAlignment" Value="Center"/>
+            </Style>
+            <Style x:Key="ImageButtonStyle" TargetType="{x:Type Button}">
+                <Setter Property="Margin" Value="3"/>
+                <Setter Property="Background" Value="Transparent"/>
+                <Setter Property="BorderBrush" Value="Transparent"/>
+                <Setter Property="VerticalAlignment" Value="Center"/>
+                <Setter Property="HorizontalAlignment" Value="Center"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="{x:Type Button}">
+                            <Border
     						Background="{TemplateBinding Background}"
     						BorderBrush="{TemplateBinding BorderBrush}"
     						BorderThickness="1"
     						CornerRadius="3">
-    						<ContentPresenter Margin="5"/>
-    					</Border>
-    					<ControlTemplate.Triggers>
-    						<Trigger Property="IsMouseOver" Value="True">
-    							<Setter Property="Background" Value="#95F5357C"/>
-    							<Setter Property="BorderBrush" Value="#FCFFDD9E"/>
-    						</Trigger>
-    						<Trigger Property="IsPressed" Value="True">
-    							<Setter Property="RenderTransform">
-    								<Setter.Value>
-    									<TranslateTransform X="1" Y="1"/>
-    								</Setter.Value>
-    							</Setter>
-    						</Trigger>
-    					</ControlTemplate.Triggers>
-    				</ControlTemplate>
-    			</Setter.Value>
-    		</Setter>
-    	</Style>
-    	<Storyboard x:Key="CollapseStoryboard">
-    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsGrid">
-    			<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Hidden}"/>
-    		</ObjectAnimationUsingKeyFrames>
-    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VerticalToolsTitleBorder">
-    			<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}"/>
-    		</ObjectAnimationUsingKeyFrames>
-    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsTitleBorder">
-    			<DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Hidden}"/>
-    		</ObjectAnimationUsingKeyFrames>
-    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftBorder">
-    			<EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-206"/>
-    		</DoubleAnimationUsingKeyFrames>
-    	</Storyboard>
-    	<Storyboard x:Key="ExplandStoryboard">
-    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsGrid">
-    			<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-    		</ObjectAnimationUsingKeyFrames>
-    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VerticalToolsTitleBorder">
-    			<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
-    		</ObjectAnimationUsingKeyFrames>
-    		<ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsTitleBorder">
-    			<DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
-    		</ObjectAnimationUsingKeyFrames>
-    		<DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftBorder">
-    			<SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
-    		</DoubleAnimationUsingKeyFrames>
-    	</Storyboard>
-        
-        <!--队列-->
-        <Style TargetType="ListBox">
-            <Setter Property="Background" Value="LightBlue" />
-            <Setter Property="BorderThickness" Value="0"/>
-        </Style>
-        <Style TargetType="{x:Type ListBoxItem}">
-            <Style.Resources>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
-                <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black"/>
-            </Style.Resources>
-            <Setter Property="Margin" Value="0.5" />
-        </Style>
-        
-        <DataTemplate x:Key="myTaskTemplateChild">
-            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <my:QhQueueInfo  Width="60" Height="58" IsNowQueue="{Binding IsNowQueue}"  ShowContent="{Binding Billno}"/>
-            </StackPanel>            
-        </DataTemplate>
-        <Style x:Key="myTaskStyle" TargetType="ListBoxItem">
-            <Setter Property="BorderBrush" Value="Red"/>
-            <Setter Property="BorderThickness" Value="1"/>
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="ListBoxItem">
-                        <Border BorderBrush="LawnGreen" BorderThickness="0,0,0,0.5" SnapsToDevicePixels="False">
-                            <Grid>
-                                <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="125"/>
-                                    <ColumnDefinition Width="*"/>
-                                </Grid.ColumnDefinitions>
-                                <Grid.RowDefinitions>
-                                    <RowDefinition Height="*"/>
-                                    <RowDefinition Height="1"/>
-                                </Grid.RowDefinitions>
+                                <ContentPresenter Margin="5"/>
+                            </Border>
+                            <ControlTemplate.Triggers>
+                                <Trigger Property="IsMouseOver" Value="True">
+                                    <Setter Property="Background" Value="#95F5357C"/>
+                                    <Setter Property="BorderBrush" Value="#FCFFDD9E"/>
+                                </Trigger>
+                                <Trigger Property="IsPressed" Value="True">
+                                    <Setter Property="RenderTransform">
+                                        <Setter.Value>
+                                            <TranslateTransform X="1" Y="1"/>
+                                        </Setter.Value>
+                                    </Setter>
+                                </Trigger>
+                            </ControlTemplate.Triggers>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
+            <Storyboard x:Key="CollapseStoryboard">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsGrid">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VerticalToolsTitleBorder">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsTitleBorder">
+                    <DiscreteObjectKeyFrame KeyTime="0:0:0.4" Value="{x:Static Visibility.Hidden}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftBorder">
+                    <EasingDoubleKeyFrame KeyTime="0:0:0.4" Value="-206"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
+            <Storyboard x:Key="ExplandStoryboard">
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsGrid">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="VerticalToolsTitleBorder">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Collapsed}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <ObjectAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.Visibility)" Storyboard.TargetName="ToolsTitleBorder">
+                    <DiscreteObjectKeyFrame KeyTime="0" Value="{x:Static Visibility.Visible}"/>
+                </ObjectAnimationUsingKeyFrames>
+                <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(UIElement.RenderTransform).(TransformGroup.Children)[3].(TranslateTransform.X)" Storyboard.TargetName="LeftBorder">
+                    <SplineDoubleKeyFrame KeyTime="0:0:0.4" Value="0"/>
+                </DoubleAnimationUsingKeyFrames>
+            </Storyboard>
 
-                                <!--排队总信息-->
-                                <Grid Height="60" Width="125" Margin="1">
+            <!--队列-->
+            <Style TargetType="ListBox">
+                <Setter Property="Background" Value="LightBlue" />
+                <Setter Property="BorderThickness" Value="0"/>
+            </Style>
+            <Style TargetType="{x:Type ListBoxItem}">
+                <Style.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="LightBlue"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="LightBlue"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="Black"/>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlTextBrushKey}" Color="Black"/>
+                </Style.Resources>
+                <Setter Property="Margin" Value="0.5" />
+            </Style>
+
+            <DataTemplate x:Key="myTaskTemplateChild">
+                <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                    <my:QhQueueInfo  Width="60" Height="58" IsNowQueue="{Binding IsNowQueue}"  ShowContent="{Binding Billno}"/>
+                </StackPanel>
+            </DataTemplate>
+            <Style x:Key="myTaskStyle" TargetType="ListBoxItem">
+                <Setter Property="BorderBrush" Value="Red"/>
+                <Setter Property="BorderThickness" Value="1"/>
+                <Setter Property="Template">
+                    <Setter.Value>
+                        <ControlTemplate TargetType="ListBoxItem">
+                            <Border BorderBrush="LawnGreen" BorderThickness="0,0,0,0.5" SnapsToDevicePixels="False">
+                                <Grid>
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="60"/>
-                                        <ColumnDefinition/>
+                                        <ColumnDefinition Width="125"/>
+                                        <ColumnDefinition Width="*"/>
                                     </Grid.ColumnDefinitions>
                                     <Grid.RowDefinitions>
-                                        <RowDefinition />
-                                        <RowDefinition/>
                                         <RowDefinition Height="*"/>
+                                        <RowDefinition Height="1"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80"/>
-                                    <TextBlock Grid.Row="1"  Text="等待人数："></TextBlock>
-                                    <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
-                                </Grid>
-                                <!--排队列表-->
-                                <ListBox
+
+                                    <!--排队总信息-->
+                                    <Grid Height="60" Width="125" Margin="1">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="60"/>
+                                            <ColumnDefinition/>
+                                        </Grid.ColumnDefinitions>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition />
+                                            <RowDefinition/>
+                                            <RowDefinition Height="*"/>
+                                        </Grid.RowDefinitions>
+                                        <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80"/>
+                                        <TextBlock Grid.Row="1"  Text="等待人数："></TextBlock>
+                                        <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
+                                    </Grid>
+                                    <!--排队列表-->
+                                    <ListBox
                                     Grid.Column="1"
                                     ItemTemplate="{StaticResource myTaskTemplateChild}"
                                     ItemsSource="{Binding BussQueues}">
-                                    <ListBox.ItemsPanel>
-                                        <ItemsPanelTemplate>
-                                            <WrapPanel IsItemsHost="True" />
-                                        </ItemsPanelTemplate>
-                                    </ListBox.ItemsPanel>
-                                </ListBox>
-                            </Grid>
-                        </Border>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
-        </Style>
+                                        <ListBox.ItemsPanel>
+                                            <ItemsPanelTemplate>
+                                                <WrapPanel IsItemsHost="True" />
+                                            </ItemsPanelTemplate>
+                                        </ListBox.ItemsPanel>
+                                    </ListBox>
+                                </Grid>
+                            </Border>
+                        </ControlTemplate>
+                    </Setter.Value>
+                </Setter>
+            </Style>
     </Window.Resources>
     <Window.Background>
         <ImageBrush ImageSource="Resources/Images/background.jpg"/>
@@ -173,8 +180,7 @@
         	<RowDefinition Height="Auto"/>
             <RowDefinition/>
         </Grid.RowDefinitions>
-        
-        
+
         <!-- 最顶上Logo区域 -->
         <Border
             x:Name="TopImageBorder"
@@ -495,4 +501,4 @@
         </Grid>
     </Grid>
     
-</chorme:CustomChromeWindow>
+</Window>

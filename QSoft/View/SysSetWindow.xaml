@@ -6,7 +6,8 @@
     Title="系统设置" Height="240" Width="950"
     ShowInTaskbar="False"
     WindowStartupLocation="CenterOwner"
-    ResizeMode="NoResize">
+    ResizeMode="NoResize"
+    Style="{StaticResource ChromeWindowStyle}">
     <!--<Window.Background>
         <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
     </Window.Background>-->

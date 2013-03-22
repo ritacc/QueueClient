@@ -15,14 +15,13 @@ using QSoft.View;
 using QSoft.Core.ViewModel;
 using QSoft.QueueClientServiceReference;
 using QSoft.Core.Model;
-using CustomChromeLibrary;
 
 namespace QSoft
 {
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : CustomChromeWindow
+    public partial class MainWindow : Window
     {
 
         internal MainViewModel ViewModel { get; set; }
@@ -58,6 +57,7 @@ namespace QSoft
                 {
                     var queueInfo = element.DataContext as QueueInfoOR;
                     CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.Businesses.First(c => queueInfo.Bussinessid == c.Id).Name, CustomType = "未识别", ServiceLevel = "未识别" };
+                    CustomInfoWindow.Instance.WindowState = WindowState.Normal;
                 }
             }
         }

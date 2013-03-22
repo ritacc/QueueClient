@@ -4,7 +4,8 @@
         Title="客户信息" Height="230" Width="300"
         WindowStartupLocation="CenterOwner"
         ShowInTaskbar="False"
-        ResizeMode="NoResize">
+        ResizeMode="CanMinimize"
+        Style="{StaticResource ChromeWindowStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition/>

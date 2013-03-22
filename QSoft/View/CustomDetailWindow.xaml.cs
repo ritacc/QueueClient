@@ -34,6 +34,11 @@ namespace QSoft.View
             yield return new Asset("理财", 100000d);
             yield return new Asset("借记卡", 4999d);
         }
+
+        private void PieChartLayout_Loaded(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 
     public class Asset
