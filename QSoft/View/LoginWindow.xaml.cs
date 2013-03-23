@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 using System.Configuration;
 using QSoft.Core.ViewModel;
 
@@ -19,7 +18,7 @@ namespace QSoft.View
     /// <summary>
     /// LoginWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class LoginWindow : MetroWindow
+    public partial class LoginWindow : Window
     {
         public LoginWindow()
         {

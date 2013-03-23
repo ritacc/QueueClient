@@ -39,10 +39,12 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
-    <Reference Include="MahApps.Metro">
-      <HintPath>Ref\MahApps.Metro.dll</HintPath>
-    </Reference>
+    <Reference Include="CustomChromeLibrary, Version=1.0.0.0, Culture=neutral, PublicKeyToken=null" />
     <Reference Include="Microsoft.Expression.Interactions" />
+    <Reference Include="Microsoft.Windows.Shell, Version=3.0.1.0, Culture=neutral, processorArchitecture=x86">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>Ref\Microsoft.Windows.Shell.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.configuration" />
     <Reference Include="System.Data" />
@@ -50,6 +52,7 @@
     <Reference Include="System.Runtime.Serialization" />
     <Reference Include="System.ServiceModel" />
     <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Windows.Input.Manipulations" />
     <Reference Include="System.Windows.Interactivity, Version=4.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>Ref\System.Windows.Interactivity.dll</HintPath>
@@ -71,8 +74,31 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="Controls\CaptionButton.cs" />
+    <Compile Include="Controls\CloseButton.cs" />
     <Compile Include="Controls\ColorPicker.cs" />
+    <Compile Include="Controls\HelpButton.cs" />
+    <Compile Include="Controls\MaximizeButton.cs" />
+    <Compile Include="Controls\MinimizeButton.cs" />
     <Compile Include="Controls\QhQueueInfo.cs" />
+    <Compile Include="Controls\ScottLogic\BaseWPFHelpers.cs" />
+    <Compile Include="Controls\ScottLogic\PieChart\ColourConverter.cs" />
+    <Compile Include="Controls\ScottLogic\PieChart\IColorSelector.cs" />
+    <Compile Include="Controls\ScottLogic\PieChart\IndexedColourSelector.cs" />
+    <Compile Include="Controls\ScottLogic\PieChart\Legend.xaml.cs">
+      <DependentUpon>Legend.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScottLogic\PieChart\LegendConverter.cs" />
+    <Compile Include="Controls\ScottLogic\PieChart\PieChartLayout.xaml.cs">
+      <DependentUpon>PieChartLayout.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScottLogic\PieChart\PiePlotter.xaml.cs">
+      <DependentUpon>PiePlotter.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Controls\ScottLogic\Shapes\PiePiece.cs" />
+    <Compile Include="Controls\ScottLogic\Util\FormattingConverter.cs" />
+    <Compile Include="Controls\ScottLogic\Util\Utils.cs" />
+    <Compile Include="Controls\WindowIcon.cs" />
     <Compile Include="Core\Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Core\Model\Custom.cs" />
     <Compile Include="Core\Uitl\HotKey.cs" />
@@ -83,6 +109,9 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="View\CustomDetailWindow.xaml.cs">
+      <DependentUpon>CustomDetailWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="View\CustomInfoWindow.xaml.cs">
       <DependentUpon>CustomInfoWindow.xaml</DependentUpon>
@@ -102,6 +131,18 @@
     <Compile Include="View\Transfer.xaml.cs">
       <DependentUpon>Transfer.xaml</DependentUpon>
     </Compile>
+    <Page Include="Controls\ScottLogic\PieChart\Legend.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScottLogic\PieChart\PieChartLayout.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Controls\ScottLogic\PieChart\PiePlotter.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -124,6 +165,10 @@
       <SubType>Code</SubType>
     </Compile>
     <Page Include="Resources\ColorPicker.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="View\CustomDetailWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -245,6 +290,18 @@
   <ItemGroup>
     <Resource Include="Resources\Images\arrow.png" />
     <Resource Include="Resources\Images\person.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ref\CustomChromeLibrary.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Ref\Microsoft.Windows.Shell.dll" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Resources\Images\close.png" />
+    <Resource Include="Resources\Images\maximize.png" />
+    <Resource Include="Resources\Images\minimize.jpg" />
+    <Resource Include="Resources\Images\restore.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

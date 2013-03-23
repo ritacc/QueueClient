@@ -10,14 +10,13 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 
 namespace QSoft.View
 {
     /// <summary>
     /// Specall.xaml 的交互逻辑
     /// </summary>
-    public partial class Specall : MetroWindow
+    public partial class Specall : Window
     {
         public Specall()
         {

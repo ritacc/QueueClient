@@ -2,9 +2,9 @@
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         Title="客户信息" Height="230" Width="300"
-        WindowStartupLocation="CenterOwner"
-        ShowInTaskbar="False"
-        ResizeMode="NoResize">
+        WindowStartupLocation="CenterOwner" 
+        ResizeMode="NoResize"
+        Style="{StaticResource ChromeWindowStyle}">
     <Grid>
         <Grid.RowDefinitions>
             <RowDefinition Height="10"/>

@@ -121,7 +121,6 @@ namespace QSoft.Core.ViewModel
         /// <param name="obj"></param>
         private void RefQueues()
         {
-            var Businesses = GetBussinessList();
             bool mIsChange = false;
             foreach (var mBuss in Businesses)
             {
@@ -232,7 +231,10 @@ namespace QSoft.Core.ViewModel
 
         private void ShowCustomInfo()
         {
-            MessageBox.Show("详细信息，来自方法：" + System.Reflection.MethodInfo.GetCurrentMethod().Name);
+            //MessageBox.Show("详细信息，来自方法：" + System.Reflection.MethodInfo.GetCurrentMethod().Name);
+            CustomDetailWindow window = new CustomDetailWindow();
+            window.Owner = Application.Current.MainWindow;
+            window.ShowDialog();
         }
 
         #endregion

@@ -3,12 +3,16 @@ using System.Configuration;
 using System.Linq;
 using System.Windows;
 using System.Windows.Input;
-using MahApps.Metro.Controls;
 using QSoft.Core.Model;
 using QSoft.Core.Uitl;
+using System.Windows.Media;
+using System.Windows.Media.Imaging;
+using System.Windows.Navigation;
+using System.Windows.Shapes;
+using QSoft.View;
 using QSoft.Core.ViewModel;
 using QSoft.QueueClientServiceReference;
-using QSoft.View;
+
 
 
 
@@ -17,7 +21,7 @@ namespace QSoft
     /// <summary>
     /// MainWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class MainWindow : MetroWindow
+    public partial class MainWindow : Window
     {
 
         internal MainViewModel ViewModel { get; set; }
@@ -53,6 +57,8 @@ namespace QSoft
                 {
                     var queueInfo = element.DataContext as QueueInfoOR;
                     CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.Businesses.First(c => queueInfo.Bussinessid == c.Id).Name, CustomType = "未识别", ServiceLevel = "未识别" };
+                    CustomInfoWindow.Instance.WindowState = WindowState.Normal;
+
                 }
             }
         }

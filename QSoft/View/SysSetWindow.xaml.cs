@@ -10,7 +10,6 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
-using MahApps.Metro.Controls;
 using System.Collections.ObjectModel;
 using QSoft.Core.Uitl;
 using System.Windows.Interop;
@@ -21,7 +20,7 @@ namespace QSoft.View
     /// <summary>
     /// SysSetWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class SysSetWindow : MetroWindow
+    public partial class SysSetWindow : Window
     {
         //初使化Key
         string InitHotKey = string.Empty;
