@@ -28,14 +28,22 @@ namespace QM.Client.DA.MySql
         /// </summary>
         public string GetInsertSql(WindowOR window)
         {
-            string sql = @"insert into t_Window (Id,Name,Role,SoundDev,Description,OrgBH)
-values ('@Id','@Name','@Role',SoundDev,'@Description','@OrgBH')";
+            string sql = @"insert into t_Window (Id,Name,SoundDev,Description,OrgBH,
+Role,JCA2,JCA3,JCA4,JCA5,JCA6,JCA7)
+values ('@Id','@Name',SoundDev,'@Description','@OrgBH',
+'@Role','@JCA2','@JCA3','@JCA4','@JCA5','@JCA6','@JCA7')";
             sql = sql.Replace("@Id", window.Id);	//
             sql = sql.Replace("@Name", window.Name);	//窗口名称
-            sql = sql.Replace("@Role", window.Role);	//业务角色
             sql = sql.Replace("@SoundDev", window.Sounddev.ToString());	//声音设备
             sql = sql.Replace("@Description", window.Description);	//描述
             sql = sql.Replace("@OrgBH", window.Orgbh);	//机构
+            sql = sql.Replace("@Role", window.Role);	//周一柜台角色
+            sql = sql.Replace("@JCA2", window.Jca2);	//周二柜台角色
+            sql = sql.Replace("@JCA3", window.Jca3);	//周三柜台角色
+            sql = sql.Replace("@JCA4", window.Jca4);	//周四柜台角色
+            sql = sql.Replace("@JCA5", window.Jca5);	//周五柜台角色
+            sql = sql.Replace("@JCA6", window.Jca6);	//周六柜台角色
+            sql = sql.Replace("@JCA7", window.Jca7);	//周日柜台角色
 
             return sql;
         }
@@ -43,7 +51,11 @@ values ('@Id','@Name','@Role',SoundDev,'@Description','@OrgBH')";
 
         public WindowOR SelectWindowByNo(string windowNo)
         {
-            string sql =string.Format( "select * from t_Window where Name='{0}' ",windowNo);
+            string sql = string.Format(@"select fjq.Address fjqAddress,pjq.Address pjqAddress
+,tp.Address tpAddress,w.* from t_window w
+left join t_device fjq on w.name=fjq.WindowNo and fjq.DeviceTypeID=1
+left join t_device pjq on w.name=pjq.WindowNo and pjq.DeviceTypeID=3
+left join t_device tp on w.name=tp.WindowNo and tp.DeviceTypeID=2 where w.Name='{0}' ", windowNo);
             DataTable dt = dbMySql.ExecuteQuery(sql);
 
             if (dt == null)
@@ -55,7 +67,12 @@ values ('@Id','@Name','@Role',SoundDev,'@Description','@OrgBH')";
 
         public List<WindowOR> SelectWindows()
         {
-            string sql = "select * from t_Window order by name";
+            string sql = @"select fjq.Address fjqAddress,pjq.Address pjqAddress
+,tp.Address tpAddress,w.* from t_window w
+left join t_device fjq on w.name=fjq.WindowNo and fjq.DeviceTypeID=1
+left join t_device pjq on w.name=pjq.WindowNo and pjq.DeviceTypeID=3
+left join t_device tp on w.name=tp.WindowNo and tp.DeviceTypeID=2 
+order by name";
             DataTable dt = dbMySql.ExecuteQuery(sql);
 
             if (dt == null)
@@ -63,11 +80,13 @@ values ('@Id','@Name','@Role',SoundDev,'@Description','@OrgBH')";
             List<WindowOR> listWindow = new List<WindowOR>();
             foreach (DataRow dr in dt.Rows)
             {
-                listWindow.Add( new WindowOR(dt.Rows[0]));
+                listWindow.Add( new WindowOR(dr));
             }
             return listWindow;
 
         }
+
+        
 
     }
 }

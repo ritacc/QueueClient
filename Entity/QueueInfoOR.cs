@@ -32,6 +32,16 @@ namespace QM.Client.Entity
         /// 重呼次数
         /// </summary>
         public int ReCallNumber { get; set; }
+
+        /// <summary>
+        /// 延后时间
+        /// </summary>
+        public DateTime DelayDateTime{get;set;}
+
+        /// <summary>
+        /// Vip优先时间
+        /// </summary>
+        public int VipFirstTime { get; set; }
         #endregion
 
        
@@ -250,7 +260,7 @@ namespace QM.Client.Entity
         /// <param name="mWaitpeoplebusssiness">队列等待人数</param>
         /// <param name="mWaitpeoplebank">银行(网点等待人数量)</param>
        
-        public QueueInfoOR(string mBankNo, string mBillno, string mBussinessid,
+        public  QueueInfoOR(string mBankNo, string mBillno, string mBussinessid,
             string mCardno, int mWaitpeoplebusssiness, int mWaitpeoplebank)//, int mCustemclass)
         {
             IsNowQueue = false;
@@ -288,7 +298,7 @@ namespace QM.Client.Entity
             // 柜员姓名
             _Employname = "";
             // 评价结果
-            _Judge = 0;
+            _Judge = 1;
             // 等待时长(秒)
             _Waitinterval = 0;
             // 办理时长(秒)

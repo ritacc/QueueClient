@@ -62,7 +62,7 @@ namespace ServerInstall
 
             string iniPath = Common.GetStartPath("ServerConfig.ini");
             _Ini = new IniFile(iniPath);
-         GlobalOR.ServerExeName = _Ini.ReadString("Path", "InstallProgramName", "ReceiveTrapManagem.exe");
+            GlobalOR.ServerExeName = _Ini.ReadString("Path", "InstallProgramName", "ReceiveTrapManagem.exe");
         }
         
         private void FrmMain_Load(object sender, EventArgs e)

@@ -3,6 +3,8 @@ using System.Collections.Generic;
 using System.Windows.Forms;
 using System.Configuration;
 using System.Web.Configuration;
+using System.IO;
+using ritacc.ServerAdmin;
 
 namespace ServerInstall
 {
@@ -43,6 +45,27 @@ namespace ServerInstall
 
         //    frmDataParaSet frm = new frmDataParaSet();
         //    Application.Run(frm);
+        //}
+
+
+        //[STAThread]
+        //static void Main(String[] args)
+        //{
+        //   //启动
+        //    if (!File.Exists(Common.GetStartPath("ServerConfig.ini")))
+        //    {
+        //        return;
+        //    }
+        //    IniFile _Ini;
+        //    string iniPath = Common.GetStartPath("ServerConfig.ini");
+        //    _Ini = new IniFile(iniPath);
+        //    GlobalOR.ServerExeName = _Ini.ReadString("Path", "InstallProgramName", "ReceiveTrapManagem.exe");
+
+        //    if (!ServerControl.GetServerNameByFile(GlobalOR.ServerExeName, out GlobalOR.ServerName))
+        //    {
+        //        return;
+        //    }
+        //    ServerControl.StartService(GlobalOR.ServerName);
         //}
     }
 }

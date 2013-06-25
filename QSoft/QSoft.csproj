@@ -105,6 +105,11 @@
     <Compile Include="Core\ViewModel\LoginViewModel.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
     <Compile Include="GlobalData.cs" />
+    <Compile Include="Service References\HDServiceReference\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Service References\QueueClientServiceReference\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -221,7 +226,11 @@
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
     <AppDesigner Include="Properties\" />
+    <None Include="Service References\HDServiceReference\Controller.wsdl" />
     <None Include="Service References\QueueClientServiceReference\QSoft.QueueClientServiceReference.BussinessQueueOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\QueueClientServiceReference\QSoft.QueueClientServiceReference.EmployeeOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\QueueClientServiceReference\QSoft.QueueClientServiceReference.PageWinOR.datasource">
@@ -230,12 +239,16 @@
     <None Include="Service References\QueueClientServiceReference\QSoft.QueueClientServiceReference.QhandyOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
+    <None Include="Service References\QueueClientServiceReference\QSoft.QueueClientServiceReference.SysParamConfigOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Service References\QueueClientServiceReference\QueueClient.wsdl" />
   </ItemGroup>
   <ItemGroup>
     <WCFMetadata Include="Service References\" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Service References\HDServiceReference\" />
     <WCFMetadataStorage Include="Service References\QueueClientServiceReference\" />
   </ItemGroup>
   <ItemGroup>
@@ -302,6 +315,21 @@
     <Resource Include="Resources\Images\maximize.png" />
     <Resource Include="Resources\Images\minimize.jpg" />
     <Resource Include="Resources\Images\restore.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HDServiceReference\Controller.disco" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HDServiceReference\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HDServiceReference\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Service References\HDServiceReference\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

@@ -4,7 +4,7 @@
     xmlns:chorme="clr-namespace:CustomChromeLibrary;assembly=CustomChromeLibrary"
     xmlns:shell="http://schemas.microsoft.com/winfx/2006/xaml/presentation/shell"
     Title="登陆" Height="240" Width="350"
-    ShowInTaskbar="False" 
+    ShowInTaskbar="True" 
     WindowStartupLocation="CenterScreen"
     ResizeMode="NoResize"
     Style="{StaticResource ChromeWindowStyle}">

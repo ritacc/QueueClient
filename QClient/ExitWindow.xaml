@@ -1,0 +1,54 @@
+﻿<Window x:Class="QClient.ExitWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        WindowStyle="None" WindowStartupLocation="CenterOwner"  
+        Title="ExitWindow" Height="210" Width="184">
+    <Window.Background>
+        <ImageBrush ImageSource="./Resources/Images/background.jpg"/>
+    </Window.Background>
+    <Window.Resources>
+        <ResourceDictionary x:Key="ButtomKey">
+            <ResourceDictionary.MergedDictionaries>
+                <ResourceDictionary  Source="Style/Buttom.xaml"/>
+            </ResourceDictionary.MergedDictionaries>
+        </ResourceDictionary>
+    </Window.Resources>
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+            <RowDefinition/>
+        </Grid.RowDefinitions>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+            <ColumnDefinition/>
+        </Grid.ColumnDefinitions>
+
+        <PasswordBox Grid.ColumnSpan="2"  Name="txtValue"
+                VerticalAlignment="Center"  HorizontalAlignment="Left" Margin="8" Width="100" Height="24">
+        </PasswordBox>
+        <Button Grid.Row="0" Grid.Column="2" Content="删除"  Style="{StaticResource buttomNumber}" 
+            Height="24" Click="btnDelete_Click" />
+        
+        <Button Grid.Row="1" Grid.Column="0" Content="7"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+        <Button Grid.Row="1" Grid.Column="1" Content="8"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+        <Button Grid.Row="1" Grid.Column="2" Content="9"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+
+        <Button Grid.Row="2" Grid.Column="0" Content="4"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+        <Button Grid.Row="2" Grid.Column="1" Content="5"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+        <Button Grid.Row="2" Grid.Column="2" Content="6"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+
+        <Button Grid.Row="3" Grid.Column="0" Content="1"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+        <Button Grid.Row="3" Grid.Column="1" Content="2"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+        <Button Grid.Row="3" Grid.Column="2" Content="3"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+
+        <Button Grid.Row="4" Grid.Column="0" Content="0"  Style="{StaticResource buttomNumber}"  Click="btnButtom_Click" />
+
+        <Button Grid.Row="4" Grid.Column="1" Content="确定"  Style="{StaticResource buttomNumber}"  Click="btnOK_Click" />
+        <Button Grid.Row="4" Grid.Column="2" Content="取消"  Style="{StaticResource buttomNumber}"  Click="btnCanncel_Click" />
+
+    </Grid>
+</Window>

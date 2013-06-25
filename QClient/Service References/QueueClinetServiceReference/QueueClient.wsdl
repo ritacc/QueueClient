@@ -102,6 +102,7 @@
           <s:element minOccurs="0" maxOccurs="1" name="Sundaytime" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Prefix" type="s:string" />
         </s:sequence>
       </s:complexType>
       <s:complexType name="ArrayOfQueueInfoOR">
@@ -114,6 +115,8 @@
           <s:element minOccurs="1" maxOccurs="1" name="IsVip" type="s:boolean" />
           <s:element minOccurs="1" maxOccurs="1" name="ConvertTimeLen" type="s:int" />
           <s:element minOccurs="1" maxOccurs="1" name="ReCallNumber" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="DelayDateTime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="VipFirstTime" type="s:int" />
           <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Bankno" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="Billno" type="s:string" />
@@ -141,6 +144,20 @@
           <s:element minOccurs="1" maxOccurs="1" name="UpStatus" type="s:int" />
         </s:sequence>
       </s:complexType>
+      <s:element name="getQueuesByWindow">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="windowID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="getQueuesByWindowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="getQueuesByWindowResult" type="tns:ArrayOfBussinessQueueOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="getBussinessInfo">
         <s:complexType>
           <s:sequence>
@@ -279,30 +296,210 @@
           <s:element minOccurs="0" maxOccurs="1" name="Windowid" type="s:string" />
         </s:sequence>
       </s:complexType>
-      <s:element name="GetQhImgName">
+      <s:element name="GetEmployeeInfo">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="userID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetEmployeeInfoResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetEmployeeInfoResult" type="tns:EmployeeOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="EmployeeOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Employno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Pwd" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Employtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Highrole" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Lowrole" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="GetSysParamConfigOR">
         <s:complexType />
       </s:element>
-      <s:element name="GetQhImgNameResponse">
+      <s:element name="GetSysParamConfigORResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="GetQhImgNameResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="GetSysParamConfigORResult" type="tns:SysParamConfigOR" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SetQhImgName">
+      <s:complexType name="SysParamConfigOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Popswiptime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Contickettime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Cartickettime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Calllimittime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Curshowtime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Windowinfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mainwindowinfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Backgroundsound" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Firstsound" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Secondsound" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Thirdsound" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Callvolumn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Backgroundvolumn" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Vipcardinfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Othercardinfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Invalidcardinfo" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="ValidCardCode" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="ValidationCard">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="imgName" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="mCard" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="SetQhImgNameResponse">
+      <s:element name="ValidationCardResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="SetQhImgNameResult" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="ValidationCardResult" type="s:boolean" />
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetAllDevices">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetAllDevicesResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetAllDevicesResult" type="tns:ArrayOfDeviceOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfDeviceOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="DeviceOR" nillable="true" type="tns:DeviceOR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="DeviceOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Devicetypeid" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Windowno" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Windowtype" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Devicemodel" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Hostaddr" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Address" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="StatusShow" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Updatetime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="Createtime" type="s:dateTime" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="UpdateDeviceSatus">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="ID" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="Status" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateDeviceSatusResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="UpdateDeviceSatusResult" type="s:boolean" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientValue">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="strKey" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetClientValueResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetClientValueResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateImgPassword">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="newimgname" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="newpwd" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="UpdateImgPasswordResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="UpdateImgPasswordResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="SelectShutdownTime">
+        <s:complexType />
+      </s:element>
+      <s:element name="SelectShutdownTimeResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectShutdownTimeResult" type="tns:ShutdownTimeOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ShutdownTimeOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Mondaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Tuesdaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Wednesdaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Thurdaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Fridaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Saturdaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Sundaytime" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
+        </s:sequence>
+      </s:complexType>
+      <s:element name="SelectAllWindow">
+        <s:complexType />
+      </s:element>
+      <s:element name="SelectAllWindowResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="SelectAllWindowResult" type="tns:ArrayOfWindowOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ArrayOfWindowOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="unbounded" name="WindowOR" nillable="true" type="tns:WindowOR" />
+        </s:sequence>
+      </s:complexType>
+      <s:complexType name="WindowOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="Id" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Name" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="Sounddev" type="s:int" />
+          <s:element minOccurs="0" maxOccurs="1" name="Description" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Orgbh" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Role" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jca2" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jca3" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jca4" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jca5" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jca6" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="Jca7" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="pjqAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="fjqAddress" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tpAddress" type="s:string" />
+        </s:sequence>
+      </s:complexType>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="getLoginSoapIn">
@@ -328,6 +525,12 @@
   </wsdl:message>
   <wsdl:message name="getQueueSoapOut">
     <wsdl:part name="parameters" element="tns:getQueueResponse" />
+  </wsdl:message>
+  <wsdl:message name="getQueuesByWindowSoapIn">
+    <wsdl:part name="parameters" element="tns:getQueuesByWindow" />
+  </wsdl:message>
+  <wsdl:message name="getQueuesByWindowSoapOut">
+    <wsdl:part name="parameters" element="tns:getQueuesByWindowResponse" />
   </wsdl:message>
   <wsdl:message name="getBussinessInfoSoapIn">
     <wsdl:part name="parameters" element="tns:getBussinessInfo" />
@@ -365,17 +568,59 @@
   <wsdl:message name="GetButtonsByPageWinIdSoapOut">
     <wsdl:part name="parameters" element="tns:GetButtonsByPageWinIdResponse" />
   </wsdl:message>
-  <wsdl:message name="GetQhImgNameSoapIn">
-    <wsdl:part name="parameters" element="tns:GetQhImgName" />
+  <wsdl:message name="GetEmployeeInfoSoapIn">
+    <wsdl:part name="parameters" element="tns:GetEmployeeInfo" />
   </wsdl:message>
-  <wsdl:message name="GetQhImgNameSoapOut">
-    <wsdl:part name="parameters" element="tns:GetQhImgNameResponse" />
+  <wsdl:message name="GetEmployeeInfoSoapOut">
+    <wsdl:part name="parameters" element="tns:GetEmployeeInfoResponse" />
   </wsdl:message>
-  <wsdl:message name="SetQhImgNameSoapIn">
-    <wsdl:part name="parameters" element="tns:SetQhImgName" />
+  <wsdl:message name="GetSysParamConfigORSoapIn">
+    <wsdl:part name="parameters" element="tns:GetSysParamConfigOR" />
   </wsdl:message>
-  <wsdl:message name="SetQhImgNameSoapOut">
-    <wsdl:part name="parameters" element="tns:SetQhImgNameResponse" />
+  <wsdl:message name="GetSysParamConfigORSoapOut">
+    <wsdl:part name="parameters" element="tns:GetSysParamConfigORResponse" />
+  </wsdl:message>
+  <wsdl:message name="ValidationCardSoapIn">
+    <wsdl:part name="parameters" element="tns:ValidationCard" />
+  </wsdl:message>
+  <wsdl:message name="ValidationCardSoapOut">
+    <wsdl:part name="parameters" element="tns:ValidationCardResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDevicesSoapIn">
+    <wsdl:part name="parameters" element="tns:GetAllDevices" />
+  </wsdl:message>
+  <wsdl:message name="GetAllDevicesSoapOut">
+    <wsdl:part name="parameters" element="tns:GetAllDevicesResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceSatusSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateDeviceSatus" />
+  </wsdl:message>
+  <wsdl:message name="UpdateDeviceSatusSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateDeviceSatusResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetClientValueSoapIn">
+    <wsdl:part name="parameters" element="tns:GetClientValue" />
+  </wsdl:message>
+  <wsdl:message name="GetClientValueSoapOut">
+    <wsdl:part name="parameters" element="tns:GetClientValueResponse" />
+  </wsdl:message>
+  <wsdl:message name="UpdateImgPasswordSoapIn">
+    <wsdl:part name="parameters" element="tns:UpdateImgPassword" />
+  </wsdl:message>
+  <wsdl:message name="UpdateImgPasswordSoapOut">
+    <wsdl:part name="parameters" element="tns:UpdateImgPasswordResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectShutdownTimeSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectShutdownTime" />
+  </wsdl:message>
+  <wsdl:message name="SelectShutdownTimeSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectShutdownTimeResponse" />
+  </wsdl:message>
+  <wsdl:message name="SelectAllWindowSoapIn">
+    <wsdl:part name="parameters" element="tns:SelectAllWindow" />
+  </wsdl:message>
+  <wsdl:message name="SelectAllWindowSoapOut">
+    <wsdl:part name="parameters" element="tns:SelectAllWindowResponse" />
   </wsdl:message>
   <wsdl:portType name="QueueClientSoap">
     <wsdl:operation name="getLogin">
@@ -393,6 +638,10 @@
     <wsdl:operation name="getQueue">
       <wsdl:input message="tns:getQueueSoapIn" />
       <wsdl:output message="tns:getQueueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="getQueuesByWindow">
+      <wsdl:input message="tns:getQueuesByWindowSoapIn" />
+      <wsdl:output message="tns:getQueuesByWindowSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="getBussinessInfo">
       <wsdl:input message="tns:getBussinessInfoSoapIn" />
@@ -418,13 +667,41 @@
       <wsdl:input message="tns:GetButtonsByPageWinIdSoapIn" />
       <wsdl:output message="tns:GetButtonsByPageWinIdSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="GetQhImgName">
-      <wsdl:input message="tns:GetQhImgNameSoapIn" />
-      <wsdl:output message="tns:GetQhImgNameSoapOut" />
+    <wsdl:operation name="GetEmployeeInfo">
+      <wsdl:input message="tns:GetEmployeeInfoSoapIn" />
+      <wsdl:output message="tns:GetEmployeeInfoSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="SetQhImgName">
-      <wsdl:input message="tns:SetQhImgNameSoapIn" />
-      <wsdl:output message="tns:SetQhImgNameSoapOut" />
+    <wsdl:operation name="GetSysParamConfigOR">
+      <wsdl:input message="tns:GetSysParamConfigORSoapIn" />
+      <wsdl:output message="tns:GetSysParamConfigORSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="ValidationCard">
+      <wsdl:input message="tns:ValidationCardSoapIn" />
+      <wsdl:output message="tns:ValidationCardSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDevices">
+      <wsdl:input message="tns:GetAllDevicesSoapIn" />
+      <wsdl:output message="tns:GetAllDevicesSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceSatus">
+      <wsdl:input message="tns:UpdateDeviceSatusSoapIn" />
+      <wsdl:output message="tns:UpdateDeviceSatusSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetClientValue">
+      <wsdl:input message="tns:GetClientValueSoapIn" />
+      <wsdl:output message="tns:GetClientValueSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateImgPassword">
+      <wsdl:input message="tns:UpdateImgPasswordSoapIn" />
+      <wsdl:output message="tns:UpdateImgPasswordSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectShutdownTime">
+      <wsdl:input message="tns:SelectShutdownTimeSoapIn" />
+      <wsdl:output message="tns:SelectShutdownTimeSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllWindow">
+      <wsdl:input message="tns:SelectAllWindowSoapIn" />
+      <wsdl:output message="tns:SelectAllWindowSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="QueueClientSoap" type="tns:QueueClientSoap">
@@ -458,6 +735,15 @@
     </wsdl:operation>
     <wsdl:operation name="getQueue">
       <soap:operation soapAction="http://www.ritacc.com/getQueue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQueuesByWindow">
+      <soap:operation soapAction="http://www.ritacc.com/getQueuesByWindow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -519,8 +805,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetQhImgName">
-      <soap:operation soapAction="http://www.ritacc.com/GetQhImgName" style="document" />
+    <wsdl:operation name="GetEmployeeInfo">
+      <soap:operation soapAction="http://www.ritacc.com/GetEmployeeInfo" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -528,8 +814,71 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetQhImgName">
-      <soap:operation soapAction="http://www.ritacc.com/SetQhImgName" style="document" />
+    <wsdl:operation name="GetSysParamConfigOR">
+      <soap:operation soapAction="http://www.ritacc.com/GetSysParamConfigOR" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidationCard">
+      <soap:operation soapAction="http://www.ritacc.com/ValidationCard" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDevices">
+      <soap:operation soapAction="http://www.ritacc.com/GetAllDevices" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceSatus">
+      <soap:operation soapAction="http://www.ritacc.com/UpdateDeviceSatus" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientValue">
+      <soap:operation soapAction="http://www.ritacc.com/GetClientValue" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateImgPassword">
+      <soap:operation soapAction="http://www.ritacc.com/UpdateImgPassword" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectShutdownTime">
+      <soap:operation soapAction="http://www.ritacc.com/SelectShutdownTime" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllWindow">
+      <soap:operation soapAction="http://www.ritacc.com/SelectAllWindow" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -569,6 +918,15 @@
     </wsdl:operation>
     <wsdl:operation name="getQueue">
       <soap12:operation soapAction="http://www.ritacc.com/getQueue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="getQueuesByWindow">
+      <soap12:operation soapAction="http://www.ritacc.com/getQueuesByWindow" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -630,8 +988,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="GetQhImgName">
-      <soap12:operation soapAction="http://www.ritacc.com/GetQhImgName" style="document" />
+    <wsdl:operation name="GetEmployeeInfo">
+      <soap12:operation soapAction="http://www.ritacc.com/GetEmployeeInfo" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -639,8 +997,71 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="SetQhImgName">
-      <soap12:operation soapAction="http://www.ritacc.com/SetQhImgName" style="document" />
+    <wsdl:operation name="GetSysParamConfigOR">
+      <soap12:operation soapAction="http://www.ritacc.com/GetSysParamConfigOR" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="ValidationCard">
+      <soap12:operation soapAction="http://www.ritacc.com/ValidationCard" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetAllDevices">
+      <soap12:operation soapAction="http://www.ritacc.com/GetAllDevices" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateDeviceSatus">
+      <soap12:operation soapAction="http://www.ritacc.com/UpdateDeviceSatus" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetClientValue">
+      <soap12:operation soapAction="http://www.ritacc.com/GetClientValue" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateImgPassword">
+      <soap12:operation soapAction="http://www.ritacc.com/UpdateImgPassword" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectShutdownTime">
+      <soap12:operation soapAction="http://www.ritacc.com/SelectShutdownTime" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="SelectAllWindow">
+      <soap12:operation soapAction="http://www.ritacc.com/SelectAllWindow" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

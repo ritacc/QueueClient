@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using QSoft.QueueClientServiceReference;
+using System.ServiceModel;
 
 namespace QSoft.Core.ViewModel
 {
@@ -16,13 +17,28 @@ namespace QSoft.Core.ViewModel
             errorMsg = string.Empty;
             using (var client = new QueueClientSoapClient())
             {
-                string msg = client.getLogin(userid, password, GlobalData.WindowNo);
-                if (msg != "0")
+                try
                 {
-                    errorMsg = msg;
+                    string msg = client.getLogin(userid, password, GlobalData.WindowNo);
+                    if (msg != "0")
+                    {
+                        errorMsg = msg;
+                        return false;
+                    }
+                }
+                catch (EndpointNotFoundException exEnd)
+                {
+                    errorMsg = "配置Web服务不存在！";
                     return false;
                 }
+                catch (Exception ex)
+                {
+                    errorMsg = "登录失败！";
+                    return false;
+                }
+                EmployeeOR obj = client.GetEmployeeInfo(userid);
                 GlobalData.UserID = userid.Trim();
+                GlobalData.UserName = obj.Name;
             }
             return true;
         }

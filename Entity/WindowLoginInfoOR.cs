@@ -43,7 +43,7 @@ namespace QM.Client.Entity
 
 		private string _Employno;
 		/// <summary>
-		/// 
+		///
 		/// </summary>
 		public string Employno
 		{
@@ -80,6 +80,16 @@ namespace QM.Client.Entity
 			get { return _Alerttime; }
 			set { _Alerttime = value; }
 		}
+
+        /// <summary>
+        /// 获取数据时间
+        /// </summary>
+        public DateTime GetDataTime { get; set; }
+
+        /// <summary>
+        /// 当前用户可办理的业务
+        /// </summary>
+        public List<BussinessRoleONOR> BussinessRoleOn { get; set; }
 
 		/// <summary>
 		/// windowlogininfo构造函数

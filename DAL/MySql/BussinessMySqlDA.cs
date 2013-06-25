@@ -68,13 +68,13 @@ PriorTime1, WaitTime2, PriorTime2, WaitTime3, PriorTime3,
 TicketMethod, MondayFlag, MondayTime, TuesdayFlag, TuesdayTime, 
 WednesdayFlag, WednesdayTime, ThurdayFlag, ThurdayTime, FridayFlag,
 FridayTime, SaturdayFlag, SaturdayTime, SundayFlag, SundayTime,
-Description, OrgBH) 
+Description, OrgBH,prefix) 
 values ('@Id', '@Name', '@EnglishName', '@TypeName', @WaitTime1,
 @PriorTime1, @WaitTime2,@PriorTime2, @WaitTime3, @PriorTime3, 
 @TicketMethod, @MondayFlag, '@MondayTime', @TuesdayFlag, '@TuesdayTime', 
 @WednesdayFlag, '@WednesdayTime', @ThurdayFlag, '@ThurdayTime', @FridayFlag, 
 '@FridayTime', @SaturdayFlag, '@SaturdayTime', @SundayFlag, '@SundayTime', 
-'@Description', '@OrgBH')");
+'@Description', '@OrgBH','@prefix')");
 
             sql = sql.Replace("@Id", bussiness.Id);
             sql = sql.Replace("@Name", bussiness.Name);
@@ -103,7 +103,7 @@ values ('@Id', '@Name', '@EnglishName', '@TypeName', @WaitTime1,
             sql = sql.Replace("@SundayTime", bussiness.Sundaytime);
             sql = sql.Replace("@Description", bussiness.Description);
             sql = sql.Replace("@OrgBH", bussiness.Orgbh);
-
+            sql = sql.Replace("@prefix", bussiness.Prefix);
             return sql;
         }
         #endregion

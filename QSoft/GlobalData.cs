@@ -16,5 +16,6 @@ namespace QSoft
        /// 登录的用户编号
        /// </summary>
        public static string UserID { get; set; }
+       public static string UserName { get; set; }
     }
 }

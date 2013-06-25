@@ -28,6 +28,7 @@ namespace QM.Client.Entity
             set { _Name = value; }
         }
 
+
         private string _Employno;
         /// <summary>
         /// 柜员编号
@@ -36,6 +37,16 @@ namespace QM.Client.Entity
         {
             get { return _Employno; }
             set { _Employno = value; }
+        }
+
+        private string _Pwd;
+        /// <summary>
+        /// 密码
+        /// </summary>
+        public string Pwd
+        {
+            get { return _Pwd; }
+            set { _Pwd = value; }
         }
 
         private string _Employtype;
@@ -107,6 +118,7 @@ namespace QM.Client.Entity
             _Name = row["Name"].ToString().Trim();
             // 柜员编号
             _Employno = row["EmployNo"].ToString().Trim();
+            _Pwd = row["pwd"].ToString().Trim();
             // 外键，关联到表t_EmployType中
             _Employtype = row["EmployType"].ToString().Trim();
             // 默认不设置，以窗口角色为准	外键，关联到表t_BussinessRole中。表示高柜业务角色

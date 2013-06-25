@@ -95,6 +95,12 @@ namespace QM.Client.WebService
         {
             return Instanse().getQueue();
         }
+        [WebMethod]
+        public List<BussinessQueueOR> getQueuesByWindow(string windowID)
+        {
+            return Instanse().getQueuesByWindow(windowID);
+        }
+        
 
         /// <summary>
         /// 4、	获取队列详细信息
@@ -161,20 +167,76 @@ namespace QM.Client.WebService
         {
             return _qClientDA.GetButtonsByPageWinId(windowId);
         }
-
-        #region 取号图片处理
+        #region 其它设置
         [WebMethod]
-        public string GetQhImgName()
+        public EmployeeOR GetEmployeeInfo(string userID)
         {
-            return Instanse().GetQhImgName();
+            return Instanse().GetEmployeeInfo(userID);
         }
 
+        /// <summary>
+        /// 获取系统参数
+        /// </summary>
+        /// <returns></returns>
         [WebMethod]
-        public string SetQhImgName(string imgName)
+        public SysParamConfigOR GetSysParamConfigOR()
         {
-            return Instanse().UpdateImgSet(imgName);
-
+           return new SysParaMySqlDA().SelectConfigORByWdbh();
+        }
+        /// <summary>
+        /// 验证，卡号是否有效
+        /// </summary>
+        /// <param name="mCard"></param>
+        /// <returns></returns>
+        [WebMethod]
+        public bool ValidationCard(string mCard)
+        {
+            return Instanse().ValidationCard(mCard);
         }
         #endregion
+
+        [WebMethod]
+        public List<DeviceOR> GetAllDevices()
+        {
+            return Instanse().GetAllDevices();
+        }
+
+        [WebMethod]
+        public bool UpdateDeviceSatus(string ID, int Status)
+        {
+            return Instanse().UpdateDeviceSatus(ID, Status);
+        }
+
+
+
+        #region QClient调用
+        #region 取号图片处理
+        [WebMethod]
+        public string GetClientValue(string strKey)
+        {
+            return Instanse().GetClientValue(strKey);
+        }
+
+        [WebMethod]
+        public string UpdateImgPassword(string newimgname, string newpwd)
+        {
+            return Instanse().UpdateImgPassword( newimgname,  newpwd);
+        }
+        #endregion
+
+        [WebMethod]
+        public ShutdownTimeOR SelectShutdownTime()
+        {
+            return new ShutdownTimeMySqlDA().SelectShutdownTime();
+        }
+
+        [WebMethod]
+        public List<WindowOR> SelectAllWindow()
+        {
+            return new WindowMySqlDA().SelectWindows();
+        }
+
+        #endregion
+
     }
 }

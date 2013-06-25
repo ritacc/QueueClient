@@ -10,7 +10,20 @@ namespace QM.Client.DA.MySql
     {
         public EmployeeOR SelectAEmployeeLogin(string userID, string pwd)
         {
-            string sql =string.Format( "select * from t_Employee where EmployNo='{0}' ",userID);
+            string sql =string.Format( "select * from t_Employee where EmployNo='{0}' and pwd='{1}' "
+                ,userID,pwd);
+            DataTable dt = dbMySql.ExecuteQuery(sql);
+
+            if (dt == null)
+                return null;
+            if (dt.Rows.Count > 0)
+                return new EmployeeOR(dt.Rows[0]);
+            return null;
+        }
+        public EmployeeOR SelectAEmployee(string userID)
+        {
+            string sql = string.Format("select * from t_Employee where EmployNo='{0}'"
+                , userID);
             DataTable dt = dbMySql.ExecuteQuery(sql);
 
             if (dt == null)
@@ -40,13 +53,14 @@ namespace QM.Client.DA.MySql
         /// </summary>
         public string GetInsertSql(EmployeeOR employee)
         {
-            string sql = @"insert into t_Employee (Id,Name,EmployNo,EmployType,HighRole,
+            string sql = @"insert into t_Employee (Id,Name,EmployNo,pwd,EmployType,HighRole,
 LowRole,Description,OrgBH)
-values ('@Id','@Name','@EmployNo','@EmployType','@HighRole',
+values ('@Id','@Name','@EmployNo','@pwd','@EmployType','@HighRole',
 '@LowRole','@Description','@OrgBH')";
             sql = sql.Replace("@Id", employee.Id);	//
             sql = sql.Replace("@Name", employee.Name);	//姓名
             sql = sql.Replace("@EmployNo", employee.Employno);	//柜员编号
+            sql = sql.Replace("@pwd", employee.Pwd);	//密码
             sql = sql.Replace("@EmployType", employee.Employtype);	//外键，关联到表t_EmployType中
             sql = sql.Replace("@HighRole", employee.Highrole);	//默认不设置，以窗口角色为准	外键，关联到表t_BussinessRole中。表示高柜业务角色
             sql = sql.Replace("@LowRole", employee.Lowrole);	//默认不设置，以窗口角色为准	外键，关联到表t_BussinessRole中。表示低柜业务角色

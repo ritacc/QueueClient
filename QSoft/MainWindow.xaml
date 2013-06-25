@@ -12,7 +12,7 @@
     mc:Ignorable="d" x:Class="QSoft.MainWindow" 
     Title="柜员叫号客户端" Height="600" Width="800"
     WindowStartupLocation="CenterScreen"
-    Style="{StaticResource ChromeWindowStyle}">
+    Style="{StaticResource ChromeWindowStyle}" Closed="Window_Closed">
     <shell:WindowChrome.WindowChrome>
         <shell:WindowChrome
             ResizeBorderThickness="6"
@@ -114,7 +114,7 @@
 
         <DataTemplate x:Key="myTaskTemplateChild">
             <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
-                <my:QhQueueInfo  Width="60" Height="58" IsNowQueue="{Binding IsNowQueue}"  ShowContent="{Binding Billno}"/>
+                <my:QhQueueInfo  Width="90" Height="58" IsNowQueue="{Binding IsNowQueue}"  ShowContent="{Binding Billno}"/>
             </StackPanel>
         </DataTemplate>
         <Style x:Key="myTaskStyle" TargetType="ListBoxItem">
@@ -135,7 +135,7 @@
                                 </Grid.RowDefinitions>
 
                                 <!--排队总信息-->
-                                <Grid Height="60" Width="125" Margin="1">
+                                <Grid Height="60" Width="145" Margin="3">
                                     <Grid.ColumnDefinitions>
                                         <ColumnDefinition Width="60"/>
                                         <ColumnDefinition/>
@@ -145,7 +145,7 @@
                                         <RowDefinition/>
                                         <RowDefinition Height="*"/>
                                     </Grid.RowDefinitions>
-                                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="80"/>
+                                    <TextBlock  HorizontalAlignment="Left" Grid.ColumnSpan="2" Text="{Binding Name}" Width="100"/>
                                     <TextBlock Grid.Row="1"  Text="等待人数："></TextBlock>
                                     <TextBlock Grid.Row="1" Grid.Column="1" Text="{Binding QueueNumber}"></TextBlock>
                                 </Grid>

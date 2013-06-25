@@ -128,6 +128,9 @@ namespace QClient.QueueClinetServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string OrgbhField;
         
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PrefixField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -489,6 +492,19 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=27)]
+        public string Prefix {
+            get {
+                return this.PrefixField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PrefixField, value) != true)) {
+                    this.PrefixField = value;
+                    this.RaisePropertyChanged("Prefix");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -513,6 +529,10 @@ namespace QClient.QueueClinetServiceReference {
         private int ConvertTimeLenField;
         
         private int ReCallNumberField;
+        
+        private System.DateTime DelayDateTimeField;
+        
+        private int VipFirstTimeField;
         
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string IdField;
@@ -623,7 +643,33 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=3)]
+        public System.DateTime DelayDateTime {
+            get {
+                return this.DelayDateTimeField;
+            }
+            set {
+                if ((this.DelayDateTimeField.Equals(value) != true)) {
+                    this.DelayDateTimeField = value;
+                    this.RaisePropertyChanged("DelayDateTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=4)]
+        public int VipFirstTime {
+            get {
+                return this.VipFirstTimeField;
+            }
+            set {
+                if ((this.VipFirstTimeField.Equals(value) != true)) {
+                    this.VipFirstTimeField = value;
+                    this.RaisePropertyChanged("VipFirstTime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
         public string Id {
             get {
                 return this.IdField;
@@ -636,7 +682,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
         public string Bankno {
             get {
                 return this.BanknoField;
@@ -649,7 +695,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
         public string Billno {
             get {
                 return this.BillnoField;
@@ -662,7 +708,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
         public string Bussinessid {
             get {
                 return this.BussinessidField;
@@ -675,7 +721,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
         public System.DateTime Prillbilltime {
             get {
                 return this.PrillbilltimeField;
@@ -688,7 +734,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
         public string Transferdestwin {
             get {
                 return this.TransferdestwinField;
@@ -701,7 +747,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
         public int Delaynum {
             get {
                 return this.DelaynumField;
@@ -714,7 +760,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
         public int Delaytime {
             get {
                 return this.DelaytimeField;
@@ -727,7 +773,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
         public System.DateTime Calltime {
             get {
                 return this.CalltimeField;
@@ -740,7 +786,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=14)]
         public System.DateTime Processtime {
             get {
                 return this.ProcesstimeField;
@@ -753,7 +799,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=13)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=15)]
         public System.DateTime Finishtime {
             get {
                 return this.FinishtimeField;
@@ -766,7 +812,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
         public string Windowno {
             get {
                 return this.WindownoField;
@@ -779,7 +825,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=17)]
         public string Employno {
             get {
                 return this.EmploynoField;
@@ -792,7 +838,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=18)]
         public string Employname {
             get {
                 return this.EmploynameField;
@@ -805,7 +851,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=17)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=19)]
         public string Cardno {
             get {
                 return this.CardnoField;
@@ -818,7 +864,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=18)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=20)]
         public int Judge {
             get {
                 return this.JudgeField;
@@ -831,7 +877,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=19)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=21)]
         public int Waitinterval {
             get {
                 return this.WaitintervalField;
@@ -844,7 +890,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=20)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=22)]
         public int Processinterval {
             get {
                 return this.ProcessintervalField;
@@ -857,7 +903,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=21)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
         public int Waitpeoplebusssiness {
             get {
                 return this.WaitpeoplebusssinessField;
@@ -870,7 +916,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=22)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
         public int Waitpeoplebank {
             get {
                 return this.WaitpeoplebankField;
@@ -883,7 +929,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=23)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=25)]
         public int Custemclass {
             get {
                 return this.CustemclassField;
@@ -896,7 +942,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=24)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=26)]
         public bool IsNowQueue {
             get {
                 return this.IsNowQueueField;
@@ -909,7 +955,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=25)]
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=27)]
         public string Description {
             get {
                 return this.DescriptionField;
@@ -922,7 +968,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=26)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=28)]
         public int Status {
             get {
                 return this.StatusField;
@@ -935,7 +981,7 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
-        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=27)]
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=29)]
         public int UpStatus {
             get {
                 return this.UpStatusField;
@@ -1753,6 +1799,1138 @@ namespace QClient.QueueClinetServiceReference {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="EmployeeOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class EmployeeOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmploynoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PwdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string EmploytypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HighroleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string LowroleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrgbhField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Employno {
+            get {
+                return this.EmploynoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmploynoField, value) != true)) {
+                    this.EmploynoField = value;
+                    this.RaisePropertyChanged("Employno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Pwd {
+            get {
+                return this.PwdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PwdField, value) != true)) {
+                    this.PwdField = value;
+                    this.RaisePropertyChanged("Pwd");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Employtype {
+            get {
+                return this.EmploytypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.EmploytypeField, value) != true)) {
+                    this.EmploytypeField = value;
+                    this.RaisePropertyChanged("Employtype");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string Highrole {
+            get {
+                return this.HighroleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HighroleField, value) != true)) {
+                    this.HighroleField = value;
+                    this.RaisePropertyChanged("Highrole");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string Lowrole {
+            get {
+                return this.LowroleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.LowroleField, value) != true)) {
+                    this.LowroleField = value;
+                    this.RaisePropertyChanged("Lowrole");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Orgbh {
+            get {
+                return this.OrgbhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrgbhField, value) != true)) {
+                    this.OrgbhField = value;
+                    this.RaisePropertyChanged("Orgbh");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="SysParamConfigOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class SysParamConfigOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string PopswiptimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ContickettimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CartickettimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CalllimittimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CurshowtimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WindowinfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MainwindowinfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BackgroundsoundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FirstsoundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SecondsoundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ThirdsoundField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string CallvolumnField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string BackgroundvolumnField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string VipcardinfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OthercardinfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string InvalidcardinfoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValidCardCodeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Popswiptime {
+            get {
+                return this.PopswiptimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.PopswiptimeField, value) != true)) {
+                    this.PopswiptimeField = value;
+                    this.RaisePropertyChanged("Popswiptime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string Contickettime {
+            get {
+                return this.ContickettimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ContickettimeField, value) != true)) {
+                    this.ContickettimeField = value;
+                    this.RaisePropertyChanged("Contickettime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Cartickettime {
+            get {
+                return this.CartickettimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CartickettimeField, value) != true)) {
+                    this.CartickettimeField = value;
+                    this.RaisePropertyChanged("Cartickettime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Calllimittime {
+            get {
+                return this.CalllimittimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CalllimittimeField, value) != true)) {
+                    this.CalllimittimeField = value;
+                    this.RaisePropertyChanged("Calllimittime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Curshowtime {
+            get {
+                return this.CurshowtimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CurshowtimeField, value) != true)) {
+                    this.CurshowtimeField = value;
+                    this.RaisePropertyChanged("Curshowtime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string Windowinfo {
+            get {
+                return this.WindowinfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WindowinfoField, value) != true)) {
+                    this.WindowinfoField = value;
+                    this.RaisePropertyChanged("Windowinfo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string Mainwindowinfo {
+            get {
+                return this.MainwindowinfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MainwindowinfoField, value) != true)) {
+                    this.MainwindowinfoField = value;
+                    this.RaisePropertyChanged("Mainwindowinfo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string Backgroundsound {
+            get {
+                return this.BackgroundsoundField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BackgroundsoundField, value) != true)) {
+                    this.BackgroundsoundField = value;
+                    this.RaisePropertyChanged("Backgroundsound");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Firstsound {
+            get {
+                return this.FirstsoundField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FirstsoundField, value) != true)) {
+                    this.FirstsoundField = value;
+                    this.RaisePropertyChanged("Firstsound");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string Secondsound {
+            get {
+                return this.SecondsoundField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SecondsoundField, value) != true)) {
+                    this.SecondsoundField = value;
+                    this.RaisePropertyChanged("Secondsound");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        public string Thirdsound {
+            get {
+                return this.ThirdsoundField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ThirdsoundField, value) != true)) {
+                    this.ThirdsoundField = value;
+                    this.RaisePropertyChanged("Thirdsound");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        public string Callvolumn {
+            get {
+                return this.CallvolumnField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.CallvolumnField, value) != true)) {
+                    this.CallvolumnField = value;
+                    this.RaisePropertyChanged("Callvolumn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string Backgroundvolumn {
+            get {
+                return this.BackgroundvolumnField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.BackgroundvolumnField, value) != true)) {
+                    this.BackgroundvolumnField = value;
+                    this.RaisePropertyChanged("Backgroundvolumn");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        public string Vipcardinfo {
+            get {
+                return this.VipcardinfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.VipcardinfoField, value) != true)) {
+                    this.VipcardinfoField = value;
+                    this.RaisePropertyChanged("Vipcardinfo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string Othercardinfo {
+            get {
+                return this.OthercardinfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OthercardinfoField, value) != true)) {
+                    this.OthercardinfoField = value;
+                    this.RaisePropertyChanged("Othercardinfo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=15)]
+        public string Invalidcardinfo {
+            get {
+                return this.InvalidcardinfoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.InvalidcardinfoField, value) != true)) {
+                    this.InvalidcardinfoField = value;
+                    this.RaisePropertyChanged("Invalidcardinfo");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=16)]
+        public string ValidCardCode {
+            get {
+                return this.ValidCardCodeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValidCardCodeField, value) != true)) {
+                    this.ValidCardCodeField = value;
+                    this.RaisePropertyChanged("ValidCardCode");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="DeviceOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class DeviceOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        private int DevicetypeidField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WindownoField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WindowtypeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DevicemodelField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string HostaddrField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string AddressField;
+        
+        private int StatusField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string StatusShowField;
+        
+        private System.DateTime UpdatetimeField;
+        
+        private System.DateTime CreatetimeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=1)]
+        public int Devicetypeid {
+            get {
+                return this.DevicetypeidField;
+            }
+            set {
+                if ((this.DevicetypeidField.Equals(value) != true)) {
+                    this.DevicetypeidField = value;
+                    this.RaisePropertyChanged("Devicetypeid");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=2)]
+        public string Windowno {
+            get {
+                return this.WindownoField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WindownoField, value) != true)) {
+                    this.WindownoField = value;
+                    this.RaisePropertyChanged("Windowno");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Windowtype {
+            get {
+                return this.WindowtypeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WindowtypeField, value) != true)) {
+                    this.WindowtypeField = value;
+                    this.RaisePropertyChanged("Windowtype");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Devicemodel {
+            get {
+                return this.DevicemodelField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DevicemodelField, value) != true)) {
+                    this.DevicemodelField = value;
+                    this.RaisePropertyChanged("Devicemodel");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string Hostaddr {
+            get {
+                return this.HostaddrField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.HostaddrField, value) != true)) {
+                    this.HostaddrField = value;
+                    this.RaisePropertyChanged("Hostaddr");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string Address {
+            get {
+                return this.AddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.AddressField, value) != true)) {
+                    this.AddressField = value;
+                    this.RaisePropertyChanged("Address");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public int Status {
+            get {
+                return this.StatusField;
+            }
+            set {
+                if ((this.StatusField.Equals(value) != true)) {
+                    this.StatusField = value;
+                    this.RaisePropertyChanged("Status");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string StatusShow {
+            get {
+                return this.StatusShowField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.StatusShowField, value) != true)) {
+                    this.StatusShowField = value;
+                    this.RaisePropertyChanged("StatusShow");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=9)]
+        public System.DateTime Updatetime {
+            get {
+                return this.UpdatetimeField;
+            }
+            set {
+                if ((this.UpdatetimeField.Equals(value) != true)) {
+                    this.UpdatetimeField = value;
+                    this.RaisePropertyChanged("Updatetime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=10)]
+        public System.DateTime Createtime {
+            get {
+                return this.CreatetimeField;
+            }
+            set {
+                if ((this.CreatetimeField.Equals(value) != true)) {
+                    this.CreatetimeField = value;
+                    this.RaisePropertyChanged("Createtime");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ShutdownTimeOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class ShutdownTimeOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string MondaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string TuesdaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string WednesdaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ThurdaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string FridaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SaturdaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string SundaytimeField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrgbhField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Mondaytime {
+            get {
+                return this.MondaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.MondaytimeField, value) != true)) {
+                    this.MondaytimeField = value;
+                    this.RaisePropertyChanged("Mondaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Tuesdaytime {
+            get {
+                return this.TuesdaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.TuesdaytimeField, value) != true)) {
+                    this.TuesdaytimeField = value;
+                    this.RaisePropertyChanged("Tuesdaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Wednesdaytime {
+            get {
+                return this.WednesdaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.WednesdaytimeField, value) != true)) {
+                    this.WednesdaytimeField = value;
+                    this.RaisePropertyChanged("Wednesdaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Thurdaytime {
+            get {
+                return this.ThurdaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ThurdaytimeField, value) != true)) {
+                    this.ThurdaytimeField = value;
+                    this.RaisePropertyChanged("Thurdaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string Fridaytime {
+            get {
+                return this.FridaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.FridaytimeField, value) != true)) {
+                    this.FridaytimeField = value;
+                    this.RaisePropertyChanged("Fridaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string Saturdaytime {
+            get {
+                return this.SaturdaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SaturdaytimeField, value) != true)) {
+                    this.SaturdaytimeField = value;
+                    this.RaisePropertyChanged("Saturdaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string Sundaytime {
+            get {
+                return this.SundaytimeField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.SundaytimeField, value) != true)) {
+                    this.SundaytimeField = value;
+                    this.RaisePropertyChanged("Sundaytime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string Orgbh {
+            get {
+                return this.OrgbhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrgbhField, value) != true)) {
+                    this.OrgbhField = value;
+                    this.RaisePropertyChanged("Orgbh");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="WindowOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class WindowOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string IdField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string NameField;
+        
+        private int SounddevField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string DescriptionField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string OrgbhField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string RoleField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Jca2Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Jca3Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Jca4Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Jca5Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Jca6Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string Jca7Field;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string pjqAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string fjqAddressField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tpAddressField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Id {
+            get {
+                return this.IdField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.IdField, value) != true)) {
+                    this.IdField = value;
+                    this.RaisePropertyChanged("Id");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Name {
+            get {
+                return this.NameField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.NameField, value) != true)) {
+                    this.NameField = value;
+                    this.RaisePropertyChanged("Name");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true)]
+        public int Sounddev {
+            get {
+                return this.SounddevField;
+            }
+            set {
+                if ((this.SounddevField.Equals(value) != true)) {
+                    this.SounddevField = value;
+                    this.RaisePropertyChanged("Sounddev");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=3)]
+        public string Description {
+            get {
+                return this.DescriptionField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.DescriptionField, value) != true)) {
+                    this.DescriptionField = value;
+                    this.RaisePropertyChanged("Description");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=4)]
+        public string Orgbh {
+            get {
+                return this.OrgbhField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.OrgbhField, value) != true)) {
+                    this.OrgbhField = value;
+                    this.RaisePropertyChanged("Orgbh");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string Role {
+            get {
+                return this.RoleField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.RoleField, value) != true)) {
+                    this.RoleField = value;
+                    this.RaisePropertyChanged("Role");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string Jca2 {
+            get {
+                return this.Jca2Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jca2Field, value) != true)) {
+                    this.Jca2Field = value;
+                    this.RaisePropertyChanged("Jca2");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=7)]
+        public string Jca3 {
+            get {
+                return this.Jca3Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jca3Field, value) != true)) {
+                    this.Jca3Field = value;
+                    this.RaisePropertyChanged("Jca3");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=8)]
+        public string Jca4 {
+            get {
+                return this.Jca4Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jca4Field, value) != true)) {
+                    this.Jca4Field = value;
+                    this.RaisePropertyChanged("Jca4");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=9)]
+        public string Jca5 {
+            get {
+                return this.Jca5Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jca5Field, value) != true)) {
+                    this.Jca5Field = value;
+                    this.RaisePropertyChanged("Jca5");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=10)]
+        public string Jca6 {
+            get {
+                return this.Jca6Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jca6Field, value) != true)) {
+                    this.Jca6Field = value;
+                    this.RaisePropertyChanged("Jca6");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=11)]
+        public string Jca7 {
+            get {
+                return this.Jca7Field;
+            }
+            set {
+                if ((object.ReferenceEquals(this.Jca7Field, value) != true)) {
+                    this.Jca7Field = value;
+                    this.RaisePropertyChanged("Jca7");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=12)]
+        public string pjqAddress {
+            get {
+                return this.pjqAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.pjqAddressField, value) != true)) {
+                    this.pjqAddressField = value;
+                    this.RaisePropertyChanged("pjqAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=13)]
+        public string fjqAddress {
+            get {
+                return this.fjqAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.fjqAddressField, value) != true)) {
+                    this.fjqAddressField = value;
+                    this.RaisePropertyChanged("fjqAddress");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=14)]
+        public string tpAddress {
+            get {
+                return this.tpAddressField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tpAddressField, value) != true)) {
+                    this.tpAddressField = value;
+                    this.RaisePropertyChanged("tpAddress");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.ritacc.com/", ConfigurationName="QueueClinetServiceReference.QueueClientSoap")]
     public interface QueueClientSoap {
@@ -1772,6 +2950,10 @@ namespace QClient.QueueClinetServiceReference {
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 getQueueResult 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getQueue", ReplyAction="*")]
         QClient.QueueClinetServiceReference.getQueueResponse getQueue(QClient.QueueClinetServiceReference.getQueueRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 windowID 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getQueuesByWindow", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.getQueuesByWindowResponse getQueuesByWindow(QClient.QueueClinetServiceReference.getQueuesByWindowRequest request);
         
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 BussinessID 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getBussinessInfo", ReplyAction="*")]
@@ -1797,13 +2979,41 @@ namespace QClient.QueueClinetServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetButtonsByPageWinId", ReplyAction="*")]
         QClient.QueueClinetServiceReference.GetButtonsByPageWinIdResponse GetButtonsByPageWinId(QClient.QueueClinetServiceReference.GetButtonsByPageWinIdRequest request);
         
-        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 GetQhImgNameResult 以后生成的消息协定未标记为 nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetQhImgName", ReplyAction="*")]
-        QClient.QueueClinetServiceReference.GetQhImgNameResponse GetQhImgName(QClient.QueueClinetServiceReference.GetQhImgNameRequest request);
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 userID 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetEmployeeInfo", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetEmployeeInfoResponse GetEmployeeInfo(QClient.QueueClinetServiceReference.GetEmployeeInfoRequest request);
         
-        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 imgName 以后生成的消息协定未标记为 nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/SetQhImgName", ReplyAction="*")]
-        QClient.QueueClinetServiceReference.SetQhImgNameResponse SetQhImgName(QClient.QueueClinetServiceReference.SetQhImgNameRequest request);
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 GetSysParamConfigORResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetSysParamConfigOR", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetSysParamConfigORResponse GetSysParamConfigOR(QClient.QueueClinetServiceReference.GetSysParamConfigORRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 mCard 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/ValidationCard", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.ValidationCardResponse ValidationCard(QClient.QueueClinetServiceReference.ValidationCardRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 GetAllDevicesResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetAllDevices", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetAllDevicesResponse GetAllDevices(QClient.QueueClinetServiceReference.GetAllDevicesRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 ID 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/UpdateDeviceSatus", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.UpdateDeviceSatusResponse UpdateDeviceSatus(QClient.QueueClinetServiceReference.UpdateDeviceSatusRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 strKey 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetClientValue", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetClientValueResponse GetClientValue(QClient.QueueClinetServiceReference.GetClientValueRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 newimgname 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/UpdateImgPassword", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.UpdateImgPasswordResponse UpdateImgPassword(QClient.QueueClinetServiceReference.UpdateImgPasswordRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 SelectShutdownTimeResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/SelectShutdownTime", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.SelectShutdownTimeResponse SelectShutdownTime(QClient.QueueClinetServiceReference.SelectShutdownTimeRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 SelectAllWindowResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/SelectAllWindow", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.SelectAllWindowResponse SelectAllWindow(QClient.QueueClinetServiceReference.SelectAllWindowRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -2084,6 +3294,74 @@ namespace QClient.QueueClinetServiceReference {
         
         public getQueueResponseBody(QClient.QueueClinetServiceReference.BussinessQueueOR[] getQueueResult) {
             this.getQueueResult = getQueueResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getQueuesByWindowRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getQueuesByWindow", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.getQueuesByWindowRequestBody Body;
+        
+        public getQueuesByWindowRequest() {
+        }
+        
+        public getQueuesByWindowRequest(QClient.QueueClinetServiceReference.getQueuesByWindowRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getQueuesByWindowRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string windowID;
+        
+        public getQueuesByWindowRequestBody() {
+        }
+        
+        public getQueuesByWindowRequestBody(string windowID) {
+            this.windowID = windowID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class getQueuesByWindowResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="getQueuesByWindowResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.getQueuesByWindowResponseBody Body;
+        
+        public getQueuesByWindowResponse() {
+        }
+        
+        public getQueuesByWindowResponse(QClient.QueueClinetServiceReference.getQueuesByWindowResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class getQueuesByWindowResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.BussinessQueueOR[] getQueuesByWindowResult;
+        
+        public getQueuesByWindowResponseBody() {
+        }
+        
+        public getQueuesByWindowResponseBody(QClient.QueueClinetServiceReference.BussinessQueueOR[] getQueuesByWindowResult) {
+            this.getQueuesByWindowResult = getQueuesByWindowResult;
         }
     }
     
@@ -2489,15 +3767,83 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetQhImgNameRequest {
+    public partial class GetEmployeeInfoRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetQhImgName", Namespace="http://www.ritacc.com/", Order=0)]
-        public QClient.QueueClinetServiceReference.GetQhImgNameRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetEmployeeInfo", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetEmployeeInfoRequestBody Body;
         
-        public GetQhImgNameRequest() {
+        public GetEmployeeInfoRequest() {
         }
         
-        public GetQhImgNameRequest(QClient.QueueClinetServiceReference.GetQhImgNameRequestBody Body) {
+        public GetEmployeeInfoRequest(QClient.QueueClinetServiceReference.GetEmployeeInfoRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetEmployeeInfoRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string userID;
+        
+        public GetEmployeeInfoRequestBody() {
+        }
+        
+        public GetEmployeeInfoRequestBody(string userID) {
+            this.userID = userID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetEmployeeInfoResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetEmployeeInfoResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetEmployeeInfoResponseBody Body;
+        
+        public GetEmployeeInfoResponse() {
+        }
+        
+        public GetEmployeeInfoResponse(QClient.QueueClinetServiceReference.GetEmployeeInfoResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetEmployeeInfoResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.EmployeeOR GetEmployeeInfoResult;
+        
+        public GetEmployeeInfoResponseBody() {
+        }
+        
+        public GetEmployeeInfoResponseBody(QClient.QueueClinetServiceReference.EmployeeOR GetEmployeeInfoResult) {
+            this.GetEmployeeInfoResult = GetEmployeeInfoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetSysParamConfigORRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSysParamConfigOR", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetSysParamConfigORRequestBody Body;
+        
+        public GetSysParamConfigORRequest() {
+        }
+        
+        public GetSysParamConfigORRequest(QClient.QueueClinetServiceReference.GetSysParamConfigORRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -2506,9 +3852,9 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute()]
-    public partial class GetQhImgNameRequestBody {
+    public partial class GetSysParamConfigORRequestBody {
         
-        public GetQhImgNameRequestBody() {
+        public GetSysParamConfigORRequestBody() {
         }
     }
     
@@ -2516,15 +3862,15 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class GetQhImgNameResponse {
+    public partial class GetSysParamConfigORResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetQhImgNameResponse", Namespace="http://www.ritacc.com/", Order=0)]
-        public QClient.QueueClinetServiceReference.GetQhImgNameResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetSysParamConfigORResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetSysParamConfigORResponseBody Body;
         
-        public GetQhImgNameResponse() {
+        public GetSysParamConfigORResponse() {
         }
         
-        public GetQhImgNameResponse(QClient.QueueClinetServiceReference.GetQhImgNameResponseBody Body) {
+        public GetSysParamConfigORResponse(QClient.QueueClinetServiceReference.GetSysParamConfigORResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -2533,16 +3879,16 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
-    public partial class GetQhImgNameResponseBody {
+    public partial class GetSysParamConfigORResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string GetQhImgNameResult;
+        public QClient.QueueClinetServiceReference.SysParamConfigOR GetSysParamConfigORResult;
         
-        public GetQhImgNameResponseBody() {
+        public GetSysParamConfigORResponseBody() {
         }
         
-        public GetQhImgNameResponseBody(string GetQhImgNameResult) {
-            this.GetQhImgNameResult = GetQhImgNameResult;
+        public GetSysParamConfigORResponseBody(QClient.QueueClinetServiceReference.SysParamConfigOR GetSysParamConfigORResult) {
+            this.GetSysParamConfigORResult = GetSysParamConfigORResult;
         }
     }
     
@@ -2550,15 +3896,15 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class SetQhImgNameRequest {
+    public partial class ValidationCardRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="SetQhImgName", Namespace="http://www.ritacc.com/", Order=0)]
-        public QClient.QueueClinetServiceReference.SetQhImgNameRequestBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidationCard", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.ValidationCardRequestBody Body;
         
-        public SetQhImgNameRequest() {
+        public ValidationCardRequest() {
         }
         
-        public SetQhImgNameRequest(QClient.QueueClinetServiceReference.SetQhImgNameRequestBody Body) {
+        public ValidationCardRequest(QClient.QueueClinetServiceReference.ValidationCardRequestBody Body) {
             this.Body = Body;
         }
     }
@@ -2567,16 +3913,16 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
-    public partial class SetQhImgNameRequestBody {
+    public partial class ValidationCardRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string imgName;
+        public string mCard;
         
-        public SetQhImgNameRequestBody() {
+        public ValidationCardRequestBody() {
         }
         
-        public SetQhImgNameRequestBody(string imgName) {
-            this.imgName = imgName;
+        public ValidationCardRequestBody(string mCard) {
+            this.mCard = mCard;
         }
     }
     
@@ -2584,15 +3930,15 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
-    public partial class SetQhImgNameResponse {
+    public partial class ValidationCardResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="SetQhImgNameResponse", Namespace="http://www.ritacc.com/", Order=0)]
-        public QClient.QueueClinetServiceReference.SetQhImgNameResponseBody Body;
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="ValidationCardResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.ValidationCardResponseBody Body;
         
-        public SetQhImgNameResponse() {
+        public ValidationCardResponse() {
         }
         
-        public SetQhImgNameResponse(QClient.QueueClinetServiceReference.SetQhImgNameResponseBody Body) {
+        public ValidationCardResponse(QClient.QueueClinetServiceReference.ValidationCardResponseBody Body) {
             this.Body = Body;
         }
     }
@@ -2601,16 +3947,411 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
-    public partial class SetQhImgNameResponseBody {
+    public partial class ValidationCardResponseBody {
         
-        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string SetQhImgNameResult;
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool ValidationCardResult;
         
-        public SetQhImgNameResponseBody() {
+        public ValidationCardResponseBody() {
         }
         
-        public SetQhImgNameResponseBody(string SetQhImgNameResult) {
-            this.SetQhImgNameResult = SetQhImgNameResult;
+        public ValidationCardResponseBody(bool ValidationCardResult) {
+            this.ValidationCardResult = ValidationCardResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAllDevicesRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAllDevices", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetAllDevicesRequestBody Body;
+        
+        public GetAllDevicesRequest() {
+        }
+        
+        public GetAllDevicesRequest(QClient.QueueClinetServiceReference.GetAllDevicesRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetAllDevicesRequestBody {
+        
+        public GetAllDevicesRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetAllDevicesResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetAllDevicesResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetAllDevicesResponseBody Body;
+        
+        public GetAllDevicesResponse() {
+        }
+        
+        public GetAllDevicesResponse(QClient.QueueClinetServiceReference.GetAllDevicesResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetAllDevicesResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.DeviceOR[] GetAllDevicesResult;
+        
+        public GetAllDevicesResponseBody() {
+        }
+        
+        public GetAllDevicesResponseBody(QClient.QueueClinetServiceReference.DeviceOR[] GetAllDevicesResult) {
+            this.GetAllDevicesResult = GetAllDevicesResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateDeviceSatusRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateDeviceSatus", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.UpdateDeviceSatusRequestBody Body;
+        
+        public UpdateDeviceSatusRequest() {
+        }
+        
+        public UpdateDeviceSatusRequest(QClient.QueueClinetServiceReference.UpdateDeviceSatusRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class UpdateDeviceSatusRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string ID;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int Status;
+        
+        public UpdateDeviceSatusRequestBody() {
+        }
+        
+        public UpdateDeviceSatusRequestBody(string ID, int Status) {
+            this.ID = ID;
+            this.Status = Status;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateDeviceSatusResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateDeviceSatusResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.UpdateDeviceSatusResponseBody Body;
+        
+        public UpdateDeviceSatusResponse() {
+        }
+        
+        public UpdateDeviceSatusResponse(QClient.QueueClinetServiceReference.UpdateDeviceSatusResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class UpdateDeviceSatusResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public bool UpdateDeviceSatusResult;
+        
+        public UpdateDeviceSatusResponseBody() {
+        }
+        
+        public UpdateDeviceSatusResponseBody(bool UpdateDeviceSatusResult) {
+            this.UpdateDeviceSatusResult = UpdateDeviceSatusResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetClientValueRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetClientValue", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetClientValueRequestBody Body;
+        
+        public GetClientValueRequest() {
+        }
+        
+        public GetClientValueRequest(QClient.QueueClinetServiceReference.GetClientValueRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetClientValueRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string strKey;
+        
+        public GetClientValueRequestBody() {
+        }
+        
+        public GetClientValueRequestBody(string strKey) {
+            this.strKey = strKey;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetClientValueResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetClientValueResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetClientValueResponseBody Body;
+        
+        public GetClientValueResponse() {
+        }
+        
+        public GetClientValueResponse(QClient.QueueClinetServiceReference.GetClientValueResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetClientValueResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string GetClientValueResult;
+        
+        public GetClientValueResponseBody() {
+        }
+        
+        public GetClientValueResponseBody(string GetClientValueResult) {
+            this.GetClientValueResult = GetClientValueResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateImgPasswordRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateImgPassword", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.UpdateImgPasswordRequestBody Body;
+        
+        public UpdateImgPasswordRequest() {
+        }
+        
+        public UpdateImgPasswordRequest(QClient.QueueClinetServiceReference.UpdateImgPasswordRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class UpdateImgPasswordRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string newimgname;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string newpwd;
+        
+        public UpdateImgPasswordRequestBody() {
+        }
+        
+        public UpdateImgPasswordRequestBody(string newimgname, string newpwd) {
+            this.newimgname = newimgname;
+            this.newpwd = newpwd;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdateImgPasswordResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdateImgPasswordResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.UpdateImgPasswordResponseBody Body;
+        
+        public UpdateImgPasswordResponse() {
+        }
+        
+        public UpdateImgPasswordResponse(QClient.QueueClinetServiceReference.UpdateImgPasswordResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class UpdateImgPasswordResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string UpdateImgPasswordResult;
+        
+        public UpdateImgPasswordResponseBody() {
+        }
+        
+        public UpdateImgPasswordResponseBody(string UpdateImgPasswordResult) {
+            this.UpdateImgPasswordResult = UpdateImgPasswordResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SelectShutdownTimeRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SelectShutdownTime", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.SelectShutdownTimeRequestBody Body;
+        
+        public SelectShutdownTimeRequest() {
+        }
+        
+        public SelectShutdownTimeRequest(QClient.QueueClinetServiceReference.SelectShutdownTimeRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SelectShutdownTimeRequestBody {
+        
+        public SelectShutdownTimeRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SelectShutdownTimeResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SelectShutdownTimeResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.SelectShutdownTimeResponseBody Body;
+        
+        public SelectShutdownTimeResponse() {
+        }
+        
+        public SelectShutdownTimeResponse(QClient.QueueClinetServiceReference.SelectShutdownTimeResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class SelectShutdownTimeResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.ShutdownTimeOR SelectShutdownTimeResult;
+        
+        public SelectShutdownTimeResponseBody() {
+        }
+        
+        public SelectShutdownTimeResponseBody(QClient.QueueClinetServiceReference.ShutdownTimeOR SelectShutdownTimeResult) {
+            this.SelectShutdownTimeResult = SelectShutdownTimeResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SelectAllWindowRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SelectAllWindow", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.SelectAllWindowRequestBody Body;
+        
+        public SelectAllWindowRequest() {
+        }
+        
+        public SelectAllWindowRequest(QClient.QueueClinetServiceReference.SelectAllWindowRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class SelectAllWindowRequestBody {
+        
+        public SelectAllWindowRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class SelectAllWindowResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="SelectAllWindowResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.SelectAllWindowResponseBody Body;
+        
+        public SelectAllWindowResponse() {
+        }
+        
+        public SelectAllWindowResponse(QClient.QueueClinetServiceReference.SelectAllWindowResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class SelectAllWindowResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.WindowOR[] SelectAllWindowResult;
+        
+        public SelectAllWindowResponseBody() {
+        }
+        
+        public SelectAllWindowResponseBody(QClient.QueueClinetServiceReference.WindowOR[] SelectAllWindowResult) {
+            this.SelectAllWindowResult = SelectAllWindowResult;
         }
     }
     
@@ -2697,6 +4438,19 @@ namespace QClient.QueueClinetServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.getQueuesByWindowResponse QClient.QueueClinetServiceReference.QueueClientSoap.getQueuesByWindow(QClient.QueueClinetServiceReference.getQueuesByWindowRequest request) {
+            return base.Channel.getQueuesByWindow(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.BussinessQueueOR[] getQueuesByWindow(string windowID) {
+            QClient.QueueClinetServiceReference.getQueuesByWindowRequest inValue = new QClient.QueueClinetServiceReference.getQueuesByWindowRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.getQueuesByWindowRequestBody();
+            inValue.Body.windowID = windowID;
+            QClient.QueueClinetServiceReference.getQueuesByWindowResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).getQueuesByWindow(inValue);
+            return retVal.Body.getQueuesByWindowResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         QClient.QueueClinetServiceReference.getBussinessInfoResponse QClient.QueueClinetServiceReference.QueueClientSoap.getBussinessInfo(QClient.QueueClinetServiceReference.getBussinessInfoRequest request) {
             return base.Channel.getBussinessInfo(request);
         }
@@ -2774,28 +4528,118 @@ namespace QClient.QueueClinetServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        QClient.QueueClinetServiceReference.GetQhImgNameResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetQhImgName(QClient.QueueClinetServiceReference.GetQhImgNameRequest request) {
-            return base.Channel.GetQhImgName(request);
+        QClient.QueueClinetServiceReference.GetEmployeeInfoResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetEmployeeInfo(QClient.QueueClinetServiceReference.GetEmployeeInfoRequest request) {
+            return base.Channel.GetEmployeeInfo(request);
         }
         
-        public string GetQhImgName() {
-            QClient.QueueClinetServiceReference.GetQhImgNameRequest inValue = new QClient.QueueClinetServiceReference.GetQhImgNameRequest();
-            inValue.Body = new QClient.QueueClinetServiceReference.GetQhImgNameRequestBody();
-            QClient.QueueClinetServiceReference.GetQhImgNameResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetQhImgName(inValue);
-            return retVal.Body.GetQhImgNameResult;
+        public QClient.QueueClinetServiceReference.EmployeeOR GetEmployeeInfo(string userID) {
+            QClient.QueueClinetServiceReference.GetEmployeeInfoRequest inValue = new QClient.QueueClinetServiceReference.GetEmployeeInfoRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetEmployeeInfoRequestBody();
+            inValue.Body.userID = userID;
+            QClient.QueueClinetServiceReference.GetEmployeeInfoResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetEmployeeInfo(inValue);
+            return retVal.Body.GetEmployeeInfoResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        QClient.QueueClinetServiceReference.SetQhImgNameResponse QClient.QueueClinetServiceReference.QueueClientSoap.SetQhImgName(QClient.QueueClinetServiceReference.SetQhImgNameRequest request) {
-            return base.Channel.SetQhImgName(request);
+        QClient.QueueClinetServiceReference.GetSysParamConfigORResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetSysParamConfigOR(QClient.QueueClinetServiceReference.GetSysParamConfigORRequest request) {
+            return base.Channel.GetSysParamConfigOR(request);
         }
         
-        public string SetQhImgName(string imgName) {
-            QClient.QueueClinetServiceReference.SetQhImgNameRequest inValue = new QClient.QueueClinetServiceReference.SetQhImgNameRequest();
-            inValue.Body = new QClient.QueueClinetServiceReference.SetQhImgNameRequestBody();
-            inValue.Body.imgName = imgName;
-            QClient.QueueClinetServiceReference.SetQhImgNameResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).SetQhImgName(inValue);
-            return retVal.Body.SetQhImgNameResult;
+        public QClient.QueueClinetServiceReference.SysParamConfigOR GetSysParamConfigOR() {
+            QClient.QueueClinetServiceReference.GetSysParamConfigORRequest inValue = new QClient.QueueClinetServiceReference.GetSysParamConfigORRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetSysParamConfigORRequestBody();
+            QClient.QueueClinetServiceReference.GetSysParamConfigORResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetSysParamConfigOR(inValue);
+            return retVal.Body.GetSysParamConfigORResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.ValidationCardResponse QClient.QueueClinetServiceReference.QueueClientSoap.ValidationCard(QClient.QueueClinetServiceReference.ValidationCardRequest request) {
+            return base.Channel.ValidationCard(request);
+        }
+        
+        public bool ValidationCard(string mCard) {
+            QClient.QueueClinetServiceReference.ValidationCardRequest inValue = new QClient.QueueClinetServiceReference.ValidationCardRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.ValidationCardRequestBody();
+            inValue.Body.mCard = mCard;
+            QClient.QueueClinetServiceReference.ValidationCardResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).ValidationCard(inValue);
+            return retVal.Body.ValidationCardResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetAllDevicesResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetAllDevices(QClient.QueueClinetServiceReference.GetAllDevicesRequest request) {
+            return base.Channel.GetAllDevices(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.DeviceOR[] GetAllDevices() {
+            QClient.QueueClinetServiceReference.GetAllDevicesRequest inValue = new QClient.QueueClinetServiceReference.GetAllDevicesRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetAllDevicesRequestBody();
+            QClient.QueueClinetServiceReference.GetAllDevicesResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetAllDevices(inValue);
+            return retVal.Body.GetAllDevicesResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.UpdateDeviceSatusResponse QClient.QueueClinetServiceReference.QueueClientSoap.UpdateDeviceSatus(QClient.QueueClinetServiceReference.UpdateDeviceSatusRequest request) {
+            return base.Channel.UpdateDeviceSatus(request);
+        }
+        
+        public bool UpdateDeviceSatus(string ID, int Status) {
+            QClient.QueueClinetServiceReference.UpdateDeviceSatusRequest inValue = new QClient.QueueClinetServiceReference.UpdateDeviceSatusRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.UpdateDeviceSatusRequestBody();
+            inValue.Body.ID = ID;
+            inValue.Body.Status = Status;
+            QClient.QueueClinetServiceReference.UpdateDeviceSatusResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).UpdateDeviceSatus(inValue);
+            return retVal.Body.UpdateDeviceSatusResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetClientValueResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetClientValue(QClient.QueueClinetServiceReference.GetClientValueRequest request) {
+            return base.Channel.GetClientValue(request);
+        }
+        
+        public string GetClientValue(string strKey) {
+            QClient.QueueClinetServiceReference.GetClientValueRequest inValue = new QClient.QueueClinetServiceReference.GetClientValueRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetClientValueRequestBody();
+            inValue.Body.strKey = strKey;
+            QClient.QueueClinetServiceReference.GetClientValueResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetClientValue(inValue);
+            return retVal.Body.GetClientValueResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.UpdateImgPasswordResponse QClient.QueueClinetServiceReference.QueueClientSoap.UpdateImgPassword(QClient.QueueClinetServiceReference.UpdateImgPasswordRequest request) {
+            return base.Channel.UpdateImgPassword(request);
+        }
+        
+        public string UpdateImgPassword(string newimgname, string newpwd) {
+            QClient.QueueClinetServiceReference.UpdateImgPasswordRequest inValue = new QClient.QueueClinetServiceReference.UpdateImgPasswordRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.UpdateImgPasswordRequestBody();
+            inValue.Body.newimgname = newimgname;
+            inValue.Body.newpwd = newpwd;
+            QClient.QueueClinetServiceReference.UpdateImgPasswordResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).UpdateImgPassword(inValue);
+            return retVal.Body.UpdateImgPasswordResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.SelectShutdownTimeResponse QClient.QueueClinetServiceReference.QueueClientSoap.SelectShutdownTime(QClient.QueueClinetServiceReference.SelectShutdownTimeRequest request) {
+            return base.Channel.SelectShutdownTime(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.ShutdownTimeOR SelectShutdownTime() {
+            QClient.QueueClinetServiceReference.SelectShutdownTimeRequest inValue = new QClient.QueueClinetServiceReference.SelectShutdownTimeRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.SelectShutdownTimeRequestBody();
+            QClient.QueueClinetServiceReference.SelectShutdownTimeResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).SelectShutdownTime(inValue);
+            return retVal.Body.SelectShutdownTimeResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.SelectAllWindowResponse QClient.QueueClinetServiceReference.QueueClientSoap.SelectAllWindow(QClient.QueueClinetServiceReference.SelectAllWindowRequest request) {
+            return base.Channel.SelectAllWindow(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.WindowOR[] SelectAllWindow() {
+            QClient.QueueClinetServiceReference.SelectAllWindowRequest inValue = new QClient.QueueClinetServiceReference.SelectAllWindowRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.SelectAllWindowRequestBody();
+            QClient.QueueClinetServiceReference.SelectAllWindowResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).SelectAllWindow(inValue);
+            return retVal.Body.SelectAllWindowResult;
         }
     }
 }

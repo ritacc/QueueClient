@@ -18,7 +18,7 @@ namespace QM.Client.UpdateDB
         /// 网点编号: 从配置文件中读取
         /// </summary>
         public string BankNo { get; set; }
-
+        
         public BankOR BankInfo { get; set; }
 
         /// <summary>
@@ -428,7 +428,7 @@ namespace QM.Client.UpdateDB
                 WriteMsg("0000", "开始更新“参数设置”", true);
 
                 SysParaMSSqlDA mssqlSysP = new SysParaMSSqlDA();
-                List<SysParaOR> listSysP = mssqlSysP.selectSysParaData(OrgbhWhereSelf);
+                List<SysParaOR> listSysP = mssqlSysP.selectSysParaData(OrgbhWhereSelf, BankInfo.Orgbh);
                 WriteMsg("0000", string.Format("查询到 SysPara 数量：{0}条", listSysP.Count));
 
                 SysParaMySqlDA mysqlSysP = new SysParaMySqlDA();

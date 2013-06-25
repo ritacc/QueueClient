@@ -2,11 +2,62 @@
 using System.Collections.Generic;
 using System.Text;
 using QM.Client.Entity;
+using System.Data;
 
 namespace QM.Client.DA.MySql
 {
     public class BussinessRoleMySqlDA : DALBase
     {
+        public List<BussinessRoleOR> selectAllRole()
+        {
+            string sql = "select * from t_BussinessRole";
+
+            DataTable dt = null;
+            try
+            {
+                dt = dbMySql.ExecuteQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (dt == null)
+            {
+                return null;
+            }
+            List<BussinessRoleOR> listBuss = new List<BussinessRoleOR>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                BussinessRoleOR obj = new BussinessRoleOR(dr);
+                listBuss.Add(obj);
+            }
+            return listBuss;
+        }
+        public List<BussinessRoleOnBussOR> selectAllBussinessRoleOnBuss()
+        {
+            string sql = "select * from t_BussinessRole";
+
+            DataTable dt = null;
+            try
+            {
+                dt = dbMySql.ExecuteQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (dt == null)
+            {
+                return null;
+            }
+            List<BussinessRoleOnBussOR> listBuss = new List<BussinessRoleOnBussOR>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                BussinessRoleOnBussOR obj = new BussinessRoleOnBussOR(dr);
+                listBuss.Add(obj);
+            }
+            return listBuss;
+        }
         #region 更新
         public void UpdateBussinessRole(List<BussinessRoleOR> listbussinessRole)
         {

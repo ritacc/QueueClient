@@ -28,5 +28,38 @@ namespace QM.Client.WebService.Control
             }
             return string.Format("({0})", strWhere);
         }
+
+        /// <summary>
+        /// 验证，银行卡是否 P配
+        /// </summary>
+        /// <param name="CardNo"></param>
+        /// <param name="validation"></param>
+        /// <returns></returns>
+        public static bool CardViald(string CardNo, string validation)
+        {
+            if (CardNo.IndexOf(validation) == 0)
+            {
+                return true;
+            }
+            return false;
+        }
+
+
+        ///// <summary>
+        ///// 获取文件安全路径
+        ///// </summary>
+        ///// <param name="path"></param>
+        ///// <returns></returns>
+        //public static string GetSafeFilePath(string path)
+        //{
+            
+        //    // 如果只有文件名, 打开文件对话框会影响当前默认目录, 所以需要试探下
+        //    if (!path.Contains("\\"))
+        //    {
+        //        return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
+        //    }
+        //    return path;
+        //}
+
     }
 }

@@ -14,8 +14,6 @@ using QSoft.Core.ViewModel;
 using QSoft.QueueClientServiceReference;
 
 
-
-
 namespace QSoft
 {
     /// <summary>
@@ -35,7 +33,8 @@ namespace QSoft
                 ViewModel = MainViewModel.Instance;
                 ViewModel.MianPage = this;
                 this.DataContext = ViewModel;
-
+                this.Loaded += new RoutedEventHandler(MetroWindow_Loaded);
+                this.Title = string.Format("{0}-柜员：{1}-窗口：{2}",this.Title, GlobalData.UserName, GlobalData.WindowNo);
             }
             else
             {
@@ -43,10 +42,10 @@ namespace QSoft
             }
         }
 
-        private void button1_Click(object sender, RoutedEventArgs e)
-        {
-            ViewModel.Clear();
-        }
+        //private void button1_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ViewModel.Clear();
+        //}
 
         private void lbItem_PreviewMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
         {
@@ -56,7 +55,7 @@ namespace QSoft
                 if (element.DataContext is QueueInfoOR)
                 {
                     var queueInfo = element.DataContext as QueueInfoOR;
-                    CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.Businesses.First(c => queueInfo.Bussinessid == c.Id).Name, CustomType = "未识别", ServiceLevel = "未识别" };
+                    CustomInfoWindow.Instance.DataContext = new Custom() { DisplayName = "未识别", Business = MainViewModel.Instance.QueuesInfo.First(c => queueInfo.Bussinessid == c.Id).Name, CustomType = "未识别", ServiceLevel = "未识别" };
                     CustomInfoWindow.Instance.WindowState = WindowState.Normal;
 
                 }
@@ -66,7 +65,14 @@ namespace QSoft
         private void MetroWindow_Loaded(object sender, RoutedEventArgs e)
         {
             string strHotkey = ConfigurationManager.AppSettings["HotKey"];
-            HeadHotkey(strHotkey);
+            try
+            {
+                HeadHotkey(strHotkey);
+            }
+            catch (Exception ex)
+            {
+                ShowErrorMsg(ex.Message);
+            }
         }
 
         #region 热键处理
@@ -86,7 +92,7 @@ namespace QSoft
                         if (!"shift ctrl alt".Contains(keyarr[i].ToLower()))
                         {
                             Console.WriteLine("错误的热键！");
-                            return;                           
+                            return;
                         }
                         if (i == 0)
                             control = GetControlKey(keyarr[i]);
@@ -141,6 +147,29 @@ namespace QSoft
                 this.Show();
                 this.mShowStatus = ShowStaus.Show;
             }
+        }
+        #endregion
+
+        private void Window_Closed(object sender, EventArgs e)
+        {
+            using (var client = new QueueClientSoapClient())
+            {
+                string msg = client.endService(GlobalData.UserID, GlobalData.WindowNo);
+                if (msg == "0")
+                {
+                    Application.Current.Shutdown();
+                }
+                //else
+                //{
+                //    ShowErrorMsg(msg);
+                //}
+            }
+        }
+
+        #region 公共方法
+        private void ShowErrorMsg(string msg)
+        {
+            MessageBox.Show(msg, "出错啦!", MessageBoxButton.OK, MessageBoxImage.Error);
         }
         #endregion
     }

@@ -18,7 +18,7 @@ namespace QClient
         protected override void OnStartup(StartupEventArgs e)
         {
             // 设置日志类
-            LoggerFactory.SetLoggerInstance(typeof(WriteFileLogger));
+            //LoggerFactory.SetLoggerInstance(typeof(WriteFileLogger));
 
             base.OnStartup(e);
         }

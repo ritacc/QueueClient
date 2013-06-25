@@ -58,6 +58,12 @@ namespace QM.Client.UpdateDB
             rtbMsg.AppendText("\r\n");
         }
 
+        private void button1_Click(object sender, EventArgs e)
+        {
+            QueueinfoControl _DA=new QueueinfoControl();
+            _DA.UpQueueData();
+        }
+
        
     }
 }

@@ -8,9 +8,9 @@
     WindowStartupLocation="CenterOwner"
     ResizeMode="NoResize"
     Style="{StaticResource ChromeWindowStyle}" ShowActivated="True">
-    <!--<Window.Background>
+    <Window.Background>
         <ImageBrush ImageSource="../Resources/Images/background.jpg"/>
-    </Window.Background>-->
+    </Window.Background>
   
     <Grid>
         <Grid.ColumnDefinitions>

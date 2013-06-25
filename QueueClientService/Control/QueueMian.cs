@@ -6,6 +6,7 @@ using QM.Client.DA.MySql;
 using QM.Client.Entity;
 using System.Collections;
 using System.Configuration;
+using System.Linq;
 
 namespace QM.Client.WebService.Control
 {
@@ -42,6 +43,14 @@ namespace QM.Client.WebService.Control
         /// 获取窗口
         /// </summary>
         List<WindowOR> ListWindows = new List<WindowOR>();
+
+        //Vip卡处理
+        VipCardHeadle VipCardHeadObj;
+
+        //业务角色处理
+        BussinessRoleHeadle BussRoleObj;
+
+        SysParamConfigOR _SysparaConfigObj;
         #endregion
 
         #region 登录函数
@@ -98,9 +107,11 @@ namespace QM.Client.WebService.Control
         public QueueMian()
         {
             InitBankNo();
+            //Vip优先时间处理类
+            VipCardHeadObj = new VipCardHeadle();
+            VipCardHeadObj.Init();
 
             List<BussinessOR> ListBuss=new List<BussinessOR>();//所有业务
-           
             //查询 所有的业务队列
             ListBuss = _busDA.selectAllBussiness();
 
@@ -110,10 +121,14 @@ namespace QM.Client.WebService.Control
             {
                 BussinessQueueOR bussQue = new BussinessQueueOR();
                 bussQue.Init(obj);
-                //bussQue.ID = obj.Id;
-                //bussQue.Name = obj.Name;
-                //bussQue.EnglishName = obj.Englishname;
                 bussQue.BussQueues = _QueueDA.selectBussinessQueues(obj.Id);//获取此队列未办结的取号记录
+                foreach (QueueInfoOR qhObj in bussQue.BussQueues)
+                {
+                    if (!string.IsNullOrEmpty(qhObj.Cardno))
+                    {
+                        qhObj.VipFirstTime = VipCardHeadObj.GetFirstTime(qhObj.Cardno);
+                    }
+                }
                 QhQueues.Add(bussQue);
             }
 
@@ -122,6 +137,13 @@ namespace QM.Client.WebService.Control
 
             //获取窗口
            ListWindows = new WindowMySqlDA().SelectWindows();
+
+            //业务角色处理
+           BussRoleObj = new BussinessRoleHeadle();
+           BussRoleObj.Init();
+
+            //参数设置
+            _SysparaConfigObj= new SysParaMySqlDA().SelectConfigORByWdbh();
         }
 
         /// <summary>
@@ -146,12 +168,12 @@ namespace QM.Client.WebService.Control
             EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployeeLogin(userid, password);
             if (_empOR == null)
             {
-                return "error:用户名或密码错误";//用户名或密码错误
+                return "用户名或密码错误";//用户名或密码错误
             }
             WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(windowid);
             if (_winOR == null)
             {
-                return string.Format("error:窗口号：{0}不存在", windowid);//此窗口已登录
+                return string.Format("窗口号：{0}不存在", windowid);//此窗口已登录
             }
 
             WindowLoginInfoOR _Log = GetLoginLog(userid, windowid);
@@ -159,29 +181,23 @@ namespace QM.Client.WebService.Control
             {
                 //在内存中查询用户是否已经登录
                 WindowLoginInfoOR _LoginRecordEmp = GetLoginLogByEmployeeNo(userid);
-                if (_LoginRecordEmp != null)
+                if (_LoginRecordEmp != null && isHaveLoginInfo(_LoginRecordEmp))
                 {
-                    return "error:用户已经登录";//用户已经登录
+                    return string.Format("用户:{0}已经登录",userid);//用户已经登录
                 }
 
                 WindowLoginInfoOR _LoginRecordWin = GetLoginLogByWindowNo(windowid);
-                if (_LoginRecordWin != null)
+                if (_LoginRecordWin != null && isHaveLoginInfo(_LoginRecordWin))
                 {
-                    return string.Format("error:此窗口号：{0}已登录",windowid);//此窗口已登录
+                    return string.Format("此窗口号：{0}已登录",windowid);//此窗口已登录
                 }
             }
             else
             {
-                //int TimeLen = GetTimeLen(_Log.Logintime, DateTime.Now);
-                //if (TimeLen < 300)
-                //{
-                //    return "error:已登录。";
-                //}
-                //else//更新上次记录为结束
-                //{
-                    _Log.Status = 1;
-                    _WindowLoginDA.UpdateLoginStatus(_Log);
-                //}
+                if(isHaveLoginInfo(_Log))
+                {
+                    return string.Format("用户:{0},窗口号：{1}已经登录", userid, windowid);
+                }
             }
 
             try
@@ -192,6 +208,7 @@ namespace QM.Client.WebService.Control
                 _Login.Employno = _empOR.Employno;
                 _Login.Alerttime = _Login.Logintime = DateTime.Now;
                 _Login.Status = 0;
+                _Login.BussinessRoleOn = BussRoleObj.GetBussinessRoleOn(_empOR, _winOR);
                 _WindowLoginDA.InsertLoginWindowInfo(_Login);//写入数据库
 
                 ListWindowLogins.Add(_Login);
@@ -201,6 +218,18 @@ namespace QM.Client.WebService.Control
                 return ex.Message; //写入数据库出错。
             }
             return "0";
+        }
+        private bool isHaveLoginInfo(WindowLoginInfoOR _Log)
+        {
+            int timeLen = GetTimeLen(_Log.GetDataTime, DateTime.Now);
+            if (timeLen > 60)
+            {
+                _Log.Status = 1;
+                _WindowLoginDA.UpdateLoginStatus(_Log);
+                ListWindowLogins.Remove(_Log);
+                return false;
+            }
+            return true;
         }
 
         public string endService(string userid, string windowid)
@@ -344,6 +373,36 @@ namespace QM.Client.WebService.Control
         }
 
         /// <summary>
+        /// 获取所有业务队业,根据用户登录窗口处理它们可以办理的队列
+        /// </summary>
+        /// <returns></returns>
+        public List<BussinessQueueOR> getQueuesByWindow(string windowID)
+        {
+           WindowLoginInfoOR _loginWin= GetLoginLogByWindowNo(windowID);
+           if (_loginWin == null)
+               return null;
+           _loginWin.GetDataTime = DateTime.Now;
+           List<BussinessQueueOR> list = new List<BussinessQueueOR>();
+            if (QhQueues != null)
+            {
+                foreach (var v in QhQueues)
+                {
+                    if (BussRoleObj.BussinessIsEnableHeadle(_loginWin.BussinessRoleOn, v.Id,ListWindowLogins))
+                    {
+                        BussinessQueueOR obj = new BussinessQueueOR();
+                        obj.Init(v);
+                        obj.InitNumber();
+                        obj.BussQueues = v.GetCurrentQueues(windowID);
+                        //v.InitNumber();
+                        list.Add(obj);
+                    }
+                }
+            }
+            return list;
+        }
+
+
+        /// <summary>
         /// 4、	获取队列详细信息
         /// 返回本业务所有的排队票号信息，各票号之间以分号隔开
         /// </summary>
@@ -362,6 +421,13 @@ namespace QM.Client.WebService.Control
                 strBillList += string.Format("{0};", obj.Billno);
             }
             return strBillList;
+        }
+
+        public EmployeeOR GetEmployeeInfo(string userID)
+        {
+            EmployeeMySqlDA _empDA = new EmployeeMySqlDA();
+            EmployeeOR obj = _empDA.SelectAEmployee(userID);
+            return obj;
         }
 
         #region 5呼叫接口
@@ -424,7 +490,6 @@ namespace QM.Client.WebService.Control
                     strReturnValue = CallRestart(value);
                     break;
             }
-
             return strReturnValue;
         }
         
@@ -444,22 +509,29 @@ namespace QM.Client.WebService.Control
             //据呼叫的窗口号遍历每一个队列，找出延后人数为0的取出作为结果，若不存在，则进行第二次遍历
             
             //移出重呼两次的取号
-            RemoveReCall(mWindowNo);
+            RemovePre(mWindowNo);
            
             QueueInfoOR mSelectQhObj=null;
             //先处理其它窗口过来的属况,即不用排队
+            List<QueueInfoOR> mQueueTranseferList = new List<QueueInfoOR>();//转移排队列表
             foreach (BussinessQueueOR objQhQue in QhQueues)
             {
                 foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                 {
-                    if (objQue.Transferdestwin == mWindowNo)
+                    if (objQue.Transferdestwin == mWindowNo && objQue.Status <= 1)
                     {
                         //objQue.Status = 1;
-                        mSelectQhObj = objQue;
+                        mQueueTranseferList.Add(objQue);
                     }
                 }
             }
-
+            var vf = from ft in mQueueTranseferList orderby ft.Prillbilltime ascending select ft;
+            if (vf.Count() > 0)
+            {
+                mQueueTranseferList = vf.ToList();
+                mSelectQhObj = mQueueTranseferList[0];
+            }
+           
             //第二次遍历过程中，转移窗口号不为空且不等于呼叫窗口号的元素略过，更新所有元素的“换算后排队时间”（
             //更新时间，并将其移到一个数组中
             if (mSelectQhObj == null)
@@ -467,24 +539,47 @@ namespace QM.Client.WebService.Control
                 List<QueueInfoOR> mQueueList = new List<QueueInfoOR>();//排队列表
                 foreach (BussinessQueueOR objQhQue in QhQueues)
                 {
-                    foreach (QueueInfoOR objQue in objQhQue.BussQueues)
+                    if (BussRoleObj.BussinessIsEnableHeadle(_winLogin.BussinessRoleOn, objQhQue.Id
+                        ,ListWindowLogins))//判断此队列是否可以，办理
                     {
-                        if ((objQue.Status == 0 && objQue.Transferdestwin != mWindowNo)//转移窗口不能为本窗口
-                            || (objQue.Status == 1 && objQue.Windowno== mWindowNo)
-                            )//本窗口上次叫号
+                        foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                         {
-                            int TimeLen = GetTimeLen(objQue.Prillbilltime, DateTime.Now);
-                            if (objQue.Delaytime > 0)//延后，需要减去，延后的时间
+                            if (objQue.Status == 0 && objQue.Transferdestwin == "")//转移窗口不能为本窗口
+                            //|| (objQue.Status == 1 && objQue.Windowno== mWindowNo)
+                            //)//本窗口上次叫号
                             {
-                                TimeLen -= objQue.Delaytime;
-                            }
+                                int TimeLen = GetTimeLen(objQue.Prillbilltime, DateTime.Now);
+                                if (objQue.Delaytime > 0)
+                                {
+                                    int DelayToNowTimeLen = GetTimeLen(objQue.DelayDateTime, DateTime.Now);
 
-                            objQue.ConvertTimeLen = TimeLen + GetPriorTime(TimeLen, objQhQue);                            
-                            mQueueList.Add(objQue);
+                                    if (DelayToNowTimeLen < objQue.Delaytime)//如果延后时间未到，不参与排队取号
+                                    {
+                                        continue;
+                                    }
+                                }
+                                Console.WriteLine("", objQue.VipFirstTime);
+                                //根据角色增加优先时间
+                                objQue.ConvertTimeLen = TimeLen
+                                    + GetPriorTime(TimeLen, objQhQue)   //业务队列优先时间
+                                    + objQue.VipFirstTime               //Vip优先时间
+                                    + BussRoleObj.GetRoleFirstTimeLent(_winLogin.BussinessRoleOn, 
+                                    objQue.Bussinessid)//处理,角色优先时间
+                                    ;
+                                mQueueList.Add(objQue);
+                            }
                         }
                     }
                 }
-                mQueueList.Sort();
+                var v= from f in mQueueList orderby f.ConvertTimeLen descending select f;
+                mQueueList=v.ToList();// mQueueList.OrderBy(a => a.ConvertTimeLen  descending).ToList();
+                string msg = string.Empty;
+                foreach (QueueInfoOR obj in mQueueList)
+                {
+                    msg = obj.Billno;
+                    //Console.WriteLine(msg);
+                }
+
                 if (mQueueList.Count > 0)
                     mSelectQhObj = mQueueList[0];
 
@@ -535,13 +630,8 @@ namespace QM.Client.WebService.Control
             else if (objQH.Status == 1)//正确的重呼
             {
                 objQH.ReCallNumber++;
-                if (objQH.ReCallNumber >= 3)
-                {
-                    RemoveReCall(objQH.Windowno);
-                    return "1";
-                }
-                //重呼接口
 
+                //重呼硬件接口
                 return "0";
             }
             return "未知错误！";
@@ -556,13 +646,14 @@ namespace QM.Client.WebService.Control
             int mindex = mparam.IndexOf("##");
             if (mindex <= 0)
                 return "error:参数错误！";
+
             string mBillNo = mparam.Substring(0, mindex);
             string TimeLen = mparam.Substring(mindex + 2);
 
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return string.Format("票号:{0} 的记录不存在!", mBillNo);
-
+            objQH.DelayDateTime = DateTime.Now;
             objQH.Delaytime = Convert.ToInt32(TimeLen) * 60;
             objQH.Status = 0;
             _QueueDA.UpdateDelayTimer(objQH);
@@ -579,14 +670,30 @@ namespace QM.Client.WebService.Control
             //票号##目标窗口号
             int mindex = mparam.IndexOf("##");
             if (mindex <= 0)
-                return "error:参数错误！";
+                return "参数错误！";
             string mBillNo = mparam.Substring(0, mindex);
             string targetWin = mparam.Substring(mindex + 2);
 
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return string.Format("票号:{0} 不存在!",mBillNo);
+            
+            WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(targetWin);
+            if (_winOR == null)
+            {
+                return string.Format("目标窗口：{0} 不存在", targetWin);//此窗口已登录
+            }
+            if (targetWin == objQH.Windowno)
+            {
+                return string.Format("您当前窗口为：{0},请输入其它窗口！",objQH.Windowno);
+            }
+            
+
             objQH.Transferdestwin = targetWin;
+            objQH.Employno = "";
+            objQH.Employname = "";
+            objQH.Status = 1;
+            objQH.Windowno = "";
             try
             {
                 _QueueDA.UpdateTransfer(objQH);
@@ -621,8 +728,6 @@ namespace QM.Client.WebService.Control
                     return string.Format("票号:{0} 不存在!", mBillNo);
                 if (objQH.Status == 3)
                     return "此单号已办结";
-                
-
                 //呼号代码
             }
             else if (mCallType == "大堂经理")
@@ -675,6 +780,10 @@ namespace QM.Client.WebService.Control
                 objQH.Finishtime = DateTime.Now;
                 objQH.Processinterval = GetTimeLen(objQH.Processtime, objQH.Finishtime);
                 _QueueDA.UpdateCallJudge(objQH);
+                //调用硬件:
+                //请评价
+                //HDDA.Instance.PJ(
+
                 //移出此号码
                 foreach (BussinessQueueOR objQhQue in QhQueues)
                 {
@@ -701,29 +810,28 @@ namespace QM.Client.WebService.Control
             {
                 return obj.Priortime3;
             }
-            else if (TimeLen > obj.Waittime3)
+            else if (TimeLen > obj.Waittime2)
             {
-                return obj.Priortime3;
+                return obj.Priortime2;
             }
-            else if (TimeLen > obj.Waittime3)
+            else if (TimeLen > obj.Waittime1)
             {
-                return obj.Priortime3;
+                return obj.Priortime1;
             }
             return 0;
         }
         /// <summary>
-        /// 移出 重呼两次的记录
+        /// 移出上一下
         /// </summary>
         /// <param name="windowNo"></param>
-        private void RemoveReCall(string windowNo)
+        private void RemovePre(string windowNo)
         {
             List<QueueInfoOR> ListRemoveQH = new List<QueueInfoOR>();
             foreach (BussinessQueueOR objQhQue in QhQueues)
             {
                 foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                 {
-                    if (objQue.Status == 1 && objQue.ReCallNumber >= 2
-                        && objQue.Windowno == windowNo)
+                    if (objQue.Status == 1  && objQue.Windowno == windowNo)
                     {
                         ListRemoveQH.Add(objQue);
                     }
@@ -733,54 +841,68 @@ namespace QM.Client.WebService.Control
                 {
                     foreach (QueueInfoOR obj in ListRemoveQH)
                     {
+                        obj.Status = 3;
                         _QueueDA.UpdateRecallEnd(obj);
                         objQhQue.BussQueues.Remove(obj);
                     }
                     ListRemoveQH.Clear();
                 }
             }
-        }  
+        }
         #endregion
 
         #endregion
 
         #region 取号
         /// <summary>
-        /// 取号，差返回票号
+        /// 取号，返回票号
         /// </summary>
         /// <param name="bussinessID"></param>
         /// <param name="mCardno"></param>
         /// <returns></returns>
-        public string QH(string bussinessID, string mCardno)
+        public string QH(string mbussinessID, string mCardno)
         {
-            BussinessQueueOR _CurentBuss=GetBussiness(bussinessID);
+            BussinessQueueOR _CurentBuss = GetBussiness(mbussinessID);
             if (_CurentBuss == null)
             {
                 throw new Exception("获取业务队列失败！，无法取号。");
             }
+            //这里需要处理：取号类型（直接，刷卡、直接刷卡） 办理时间
+            string mErrorMsg = string.Empty;
+            if (!CheckBussinessTime(_CurentBuss,out mErrorMsg))
+            {
+                return mErrorMsg;
+            }
             try
             {
-                string _BillNo = GetBillNo();
+                string _BillNo = _CurentBuss.Prefix + GetBillNo(mbussinessID);
 
                 int mWaitpeoplebusssiness = 0;
                 int mWaitpeoplebank = 0;
                 //int mCustemclass = 0;
-                GetWaitPeople(bussinessID, out  mWaitpeoplebusssiness, out mWaitpeoplebank);
+                GetWaitPeople(mbussinessID, out  mWaitpeoplebusssiness, out mWaitpeoplebank);
 
-                QueueInfoOR _qhOR = new QueueInfoOR(BankNo, _BillNo, bussinessID, mCardno
+                QueueInfoOR _qhOR = new QueueInfoOR(BankNo, _BillNo, mbussinessID, mCardno
                     , mWaitpeoplebusssiness, mWaitpeoplebank);//初使化取号
+                _qhOR.VipFirstTime = 0;
+                //处理vip优先时间
+                if (!string.IsNullOrEmpty(mCardno))
+                {
+                    _qhOR.VipFirstTime = VipCardHeadObj.GetFirstTime(mCardno);
+                }
                 _QueueDA.QH(_qhOR);//将取号插入到数据库
-
+                
                 //插入到当前队列
                 _CurentBuss.BussQueues.Add(_qhOR);
-                return _BillNo;
+
+                //票号#业务名称#当前业务人数#当前网点人数
+                return string.Format("{0}#{1}#{2}#{3}", _BillNo, _CurentBuss.Name,mWaitpeoplebusssiness,mWaitpeoplebank);
             }
             catch (Exception ex)
             {
                 return ex.Message;
             }
         }
-        
         
         /// <summary>
         /// 获取排队人数
@@ -816,13 +938,174 @@ namespace QM.Client.WebService.Control
         /// 获取票号
         /// </summary>
         /// <returns></returns>
-        private string GetBillNo()
+        private string GetBillNo(string bussinessID)
         {
-           int QueNumber= _QueueDA.GetQueueNumber();
-           int nowNumber = QueNumber + 1;
-           return nowNumber.ToString().PadLeft(4, '0');
+            int QueNumber = _QueueDA.GetQueueNumber(bussinessID);
+            int nowNumber = QueNumber + 1;
+            return nowNumber.ToString().PadLeft(4, '0');
         }
 
+        /// <summary>
+        /// 验证卡，有效性
+        /// </summary>
+        /// <param name="mCard"></param>
+        /// <returns></returns>
+        public bool ValidationCard(string mCard)
+        {
+            string mValidCardCode = _SysparaConfigObj.ValidCardCode;
+            if (string.IsNullOrEmpty(mValidCardCode)
+                || string.IsNullOrEmpty(mCard))
+            {
+                return true;
+            }
+            if (mValidCardCode.IndexOf(';') >= 0)
+            {
+                string[] arr = mValidCardCode.Split(';');
+                foreach (string str in arr)
+                {
+                    if (str.Trim() == "")
+                        continue;
+                    if (Common.CardViald(mCard, str))
+                        return true;
+                }
+            }
+            else
+            {
+                if (Common.CardViald(mCard, mValidCardCode))
+                    return true;
+            }
+            return false;
+        }
+
+        #region 时间验证
+        /// <summary>
+        /// 判断当前时间是否可以办理
+        /// </summary>
+        /// <returns></returns>
+        private bool CheckBussinessTime(BussinessQueueOR _buss, out string mErrorMsg)
+        {
+            bool isEnable = false;
+            string headTime = string.Empty;
+            string WeekShow = "";
+            switch (DateTime.Now.DayOfWeek)
+            {
+                case DayOfWeek.Monday://星期一
+                    isEnable = _buss.Mondayflag;
+                    headTime = _buss.Mondaytime;
+                    WeekShow = "星期一";
+                    break;
+                case DayOfWeek.Tuesday:
+                    isEnable = _buss.Tuesdayflag;
+                    headTime = _buss.Tuesdaytime;
+                    WeekShow = "星期二";
+                    break;
+                case DayOfWeek.Wednesday:
+                    isEnable = _buss.Wednesdayflag;
+                    headTime = _buss.Wednesdaytime;
+                    WeekShow = "星期三";
+                    break;
+                case DayOfWeek.Thursday:
+                    isEnable = _buss.Thurdayflag;
+                    headTime = _buss.Thurdaytime;
+                    WeekShow = "星期四";
+                    break;
+                case DayOfWeek.Friday:
+                    isEnable = _buss.Fridayflag;
+                    headTime = _buss.Fridaytime;
+                    WeekShow = "星期五";
+                    break;
+                case DayOfWeek.Saturday:
+                    isEnable = _buss.Saturdayflag;
+                    headTime = _buss.Saturdaytime;
+                    WeekShow = "星期六";
+                    break;
+                case DayOfWeek.Sunday:
+                    isEnable = _buss.Sundayflag;
+                    headTime = _buss.Sundaytime;
+                    WeekShow = "星期日";
+                    break;
+            }
+            mErrorMsg = "";
+            if (!isEnable)
+            {
+                mErrorMsg = string.Format("Error:业务：{1},{0}不能办理。", _buss.Name, WeekShow);
+                return false;
+            }
+            //判断时间判断
+            if (string.IsNullOrEmpty(headTime))
+                return true;
+            string[] timeArr=headTime.Split(';');
+
+            if (timeArr.Length >= 3)
+            {
+                if (string.IsNullOrEmpty(timeArr[0]) && string.IsNullOrEmpty(timeArr[1]))
+                    return true;
+
+                if (!VaildTime(timeArr[0], timeArr[1], out  mErrorMsg))
+                {
+                    return false;
+                }
+                
+            }
+            return true;
+        }
+
+        private bool VaildTime(string strTime1, string strTime2, out string mErrorMsg)
+        {
+            DateTime dtStart, dtEnd, dtZW;
+            string useTime = string.Empty;
+            string strSXW = "上午";
+            dtZW = CombinTime("12", "30");
+            if (DateTime.Now < dtZW)
+            {
+                useTime = strTime1;
+            }
+            else
+            {
+                useTime = strTime2;
+                strSXW = "下午";
+            }
+
+            mErrorMsg = "";
+            if (string.IsNullOrEmpty(useTime))
+                return true;
+
+            if (strTime1.Length == 4)
+            {
+                dtStart = CombinTime(useTime.Substring(0, 2),
+                    useTime.Substring(2, 2));
+                if (dtStart > DateTime.Now)
+                {
+                    return true;
+                }
+                mErrorMsg = string.Format("Error:{0}开始办理时间{1}:{2}", strSXW, useTime.Substring(0, 2),
+                    useTime.Substring(2, 2));
+            }
+            else if (useTime.Length == 8)
+            {
+                dtStart = CombinTime(useTime.Substring(0, 2),
+                     useTime.Substring(2, 2));
+                dtEnd = CombinTime(useTime.Substring(4, 2),
+                     useTime.Substring(6, 2));
+
+                if (DateTime.Now>dtStart && DateTime.Now < dtEnd)
+                    return true;
+                mErrorMsg = string.Format("Error: {0}开始办理时间{1}:{2}到{3}:{4}", strSXW, useTime.Substring(0, 2), useTime.Substring(2, 2)
+                    , useTime.Substring(4, 2),useTime.Substring(6, 2));
+            }
+            return false;
+        }
+
+        private DateTime CombinTime(string hh,string mm)
+        {
+            return Convert.ToDateTime(
+                string.Format("{0} {1}:{2}:00",DateTime.Now.ToString("yyyy-MM-dd")
+                , hh, mm));
+        }
+
+
+
+        #endregion
         #endregion
 
         #region 取号图片
@@ -830,10 +1113,10 @@ namespace QM.Client.WebService.Control
         /// 查询图片配置
         /// </summary>
         /// <returns></returns>
-        public string GetQhImgName()
+        public string GetClientValue(string strKey)
         {
             QhImgSetDA _da = new QhImgSetDA();
-            return _da.selectQhImg();
+            return _da.GetValue(strKey);
         }
 
         /// <summary>
@@ -841,12 +1124,12 @@ namespace QM.Client.WebService.Control
         /// </summary>
         /// <param name="mImgName"></param>
         /// <returns></returns>
-        public string UpdateImgSet(string mImgName)
+        public string UpdateImgPassword(string mImgName, string newpwd)
         {
             QhImgSetDA _da = new QhImgSetDA();
             try
             {
-                _da.UpdateImg(mImgName);
+                _da.UpdateImgPassword(mImgName, newpwd);
             }
             catch (Exception ex)
             {
@@ -854,6 +1137,30 @@ namespace QM.Client.WebService.Control
             }
             return "0";
         }
+        #endregion
+
+        #region 设备处理
+        /// <summary>
+        /// 查询所有设备
+        /// </summary>
+        /// <returns></returns>
+        public List<DeviceOR> GetAllDevices()
+        {
+            return new DeviceDAMySql().SelectAllDevices();
+        }
+
+
+        /// <summary>
+        /// 更新设备状态
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
+        public bool UpdateDeviceSatus(string ID, int Status)
+        {
+            return new DeviceDAMySql().UpdateDeviceStatus(ID, Status);
+        }
+
         #endregion
 
     }

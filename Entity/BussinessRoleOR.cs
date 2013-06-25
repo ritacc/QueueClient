@@ -5,6 +5,13 @@ using System.Data;
 
 namespace QM.Client.Entity
 {
+
+    public class BussinessRoleOnBussOR : BussinessRoleOR
+    {
+        public BussinessRoleOnBussOR(DataRow dr) : base(dr) { }
+
+        public List<BussinessRoleONOR> BussRoleOnList { get; set; }
+    }
     /// <summary>
     /// 
     /// </summary>

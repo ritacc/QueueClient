@@ -47,6 +47,9 @@
     <Compile Include="BussinessQueueOR.cs" />
     <Compile Include="BussinessRoleONOR.cs" />
     <Compile Include="BussinessRoleOR.cs" />
+    <Compile Include="DeviceOR.cs" />
+    <Compile Include="DeviceOREx.cs" />
+    <Compile Include="DeviceType_Info.cs" />
     <Compile Include="EmployeeOR.cs" />
     <Compile Include="EmployTypeOR.cs" />
     <Compile Include="NearbyInfoOR.cs" />
@@ -56,6 +59,7 @@
     <Compile Include="QueueInfoOR.cs" />
     <Compile Include="ShutdownTimeOR.cs" />
     <Compile Include="SmsPeopleOR.cs" />
+    <Compile Include="SysParamConfigOR.cs" />
     <Compile Include="SysParaOR.cs" />
     <Compile Include="VIPCardKeyOR.cs" />
     <Compile Include="VipCardTypeOR.cs" />

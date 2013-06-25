@@ -3,6 +3,7 @@ using System.ComponentModel;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
+using System.Diagnostics;
 
 namespace QClient.Core.Util
 {
@@ -52,6 +53,14 @@ namespace QClient.Core.Util
                 return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
             }
             return path;
+        }
+
+        public static string GetStartpath()
+        {
+            string mPath= System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            if (!mPath.EndsWith("\\"))
+                mPath += "\\";
+            return mPath;
         }
 
         ///// <summary>

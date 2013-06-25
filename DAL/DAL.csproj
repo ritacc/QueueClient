@@ -58,6 +58,7 @@
     <Compile Include="MySql\BussinessMySqlDA.cs" />
     <Compile Include="MySql\BussinessRoleMySqlDA.cs" />
     <Compile Include="MySql\BussinessRoleONMySqlDA.cs" />
+    <Compile Include="MySql\DeviceDAMySql.cs" />
     <Compile Include="MySql\EmployeeMySqlDA.cs" />
     <Compile Include="MySql\EmployTypeMySqlDA.cs" />
     <Compile Include="MySql\NearbyInfoMySqlDA.cs" />

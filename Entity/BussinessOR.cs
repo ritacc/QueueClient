@@ -281,6 +281,11 @@ namespace QM.Client.Entity
 			set { _Orgbh = value; }
 		}
 
+        /// <summary>
+        /// 前缀
+        /// </summary>
+        public string Prefix { get; set; }
+
 		/// <summary>
 		/// Bussiness构造函数
 		/// </summary>
@@ -370,6 +375,8 @@ namespace QM.Client.Entity
 			_Description = row["Description"].ToString().Trim();
 			// 机构编号
 			_Orgbh = row["OrgBH"].ToString().Trim();
+            //前缀
+            Prefix = row["prefix"].ToString().Trim();
 		}
     }
 }

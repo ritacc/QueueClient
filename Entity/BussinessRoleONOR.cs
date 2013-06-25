@@ -51,6 +51,8 @@ namespace QM.Client.Entity
 			set { _Backuppriortimes = value; }
 		}
 
+        public bool IsBackupPrio { get; set; }
+
 		/// <summary>
 		/// BussinessRoleON构造函数
 		/// </summary>
@@ -69,9 +71,14 @@ namespace QM.Client.Entity
 			// 业务类型
 			_Bussinessid = row["BussinessId"].ToString().Trim();
 			// 主队列优先时间
+            if (row["PriorTimes"] != DBNull.Value)
 			_Priortimes = Convert.ToInt32(row["PriorTimes"]);
 			// 备用队列优先时间
-			_Backuppriortimes = Convert.ToInt32(row["BackupPriorTimes"]);
+            if (row["BackupPriorTimes"] != DBNull.Value)
+                _Backuppriortimes = Convert.ToInt32(row["BackupPriorTimes"]);
+            //是否备用队列
+            if (row["IsBackupPrio"] != DBNull.Value)
+                IsBackupPrio = Convert.ToBoolean(row["IsBackupPrio"]);
 		}
     }
 }

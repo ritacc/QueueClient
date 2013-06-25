@@ -4,6 +4,7 @@ using System.Linq;
 using System.Text;
 using QClient.Core.Model;
 using QClient.QueueClinetServiceReference;
+using System.Windows;
 
 namespace QClient.Core.ViewModel
 {
@@ -38,7 +39,7 @@ namespace QClient.Core.ViewModel
         {
             using (var client = new QueueClientSoapClient())
             {
-                string imgName = client.GetQhImgName();
+                string imgName = client.GetClientValue("");
                 return imgName;
             }
         }
@@ -55,11 +56,18 @@ namespace QClient.Core.ViewModel
                 return _pageCahches[id];
             }
 
-            using (var client = new QueueClientSoapClient())
+            try
             {
-                var result = client.GetPageWinById(id);
-                _pageCahches.Add(id, result);
-                return result;
+                using (var client = new QueueClientSoapClient())
+                {
+                    var result = client.GetPageWinById(id);
+                    _pageCahches.Add(id, result);
+                    return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                throw new Exception("获取数据出错啦，可能出现原因：Webservice未启动，或配置错误！\r\n详细信息：" + ex.Message); 
             }
         }
 
@@ -100,19 +108,119 @@ namespace QClient.Core.ViewModel
                     errorMsg = "没有配置业务队列不能取号！";
                     return false;
                 }
+
                 var result = client.BussinessQH(_qhjobNo, mCard);
-                if (result.IndexOf("error:") >= 0)//有错
+
+                if (result.ToLower().IndexOf("error:") >= 0)//有错
                 {
                     errorMsg = result;
                     return false;
                 }
+
+                ImgSetViewModel.Instance.PrintSlip(result);
+
                 //取号成功： result票号
                 errorMsg = result;
                 //打印票号
                 return true;
             }
+        }
 
+        public BussinessQueueOR[] GetQueues()
+        {
+            using (var client = new QueueClientSoapClient())
+            {
+               BussinessQueueOR[] list= client.getQueue();
+               return list;
+            }
         }
         #endregion
+        public int GetTimeLen(DateTime Start, DateTime EndTime)
+        {
+            int TimeLen = 0;
+            TimeSpan t = EndTime - Start;
+            TimeLen = (t.Hours * 60 * 60) + t.Minutes * 60 + t.Seconds;
+            return TimeLen;
+        }
+        public void ShowErrorMsg(string msg)
+        {
+            MessageBox.Show(msg, "出错啦!", MessageBoxButton.OK, MessageBoxImage.Error);
+        }
+
+        DateTime LastGetTime = DateTime.Now.AddMinutes(-10);
+        public void ButtomQH(FrameworkElement element, Window Owener, int Contickettime, BussinessQueueOR _CureentObj)
+        {
+
+            if (element.DataContext is QhandyOR)
+            {
+                
+
+                var qhandy = element.DataContext as QhandyOR;
+                if (!qhandy.Buttomtype)
+                {
+                    //连续取号限制
+                    int TimeLen = GetTimeLen(LastGetTime, DateTime.Now);
+
+                    if (TimeLen < Contickettime && Contickettime > 0)
+                    {
+                        ShowErrorMsg(string.Format("连续取号最短时间间隔不能小于：{0}秒。", Contickettime));
+                        return;
+                    }
+                    LastGetTime = DateTime.Now;
+
+                    //BussinessQueueOR _CureentObj = GetBussinessByID(qhandy.LabelJobno);
+                    if (_CureentObj == null)
+                    {
+                        ShowErrorMsg("无法获取按钮业务类型。");
+                        return;
+                    }
+                    string mCard = string.Empty;
+                    if (_CureentObj.Ticketmethod != 2)
+                    {
+                        CreditCardWindow ccw = null;
+                        if (_CureentObj.Ticketmethod == 1)
+                        {
+                            ccw = new CreditCardWindow(TickModth.SK);
+                        }
+                        else
+                        {
+                            ccw = new CreditCardWindow();
+                        }
+                        ccw.Owner = Owener;
+                        ccw.ShowDialog();
+                        if (!ccw.IsOK)
+                        {
+                            return;
+                        }
+                        mCard = ccw.CardNo;
+                    }
+
+                    string mErrorMsg = string.Empty;
+                    if (WebViewModel.Instance.QH(qhandy.LabelJobno, mCard, out mErrorMsg))
+                    {
+                        //成功不处理
+                       // MessageBox.Show(mErrorMsg);
+                    }
+                    else
+                    {
+                        //MessageBox.Show(mErrorMsg);
+                    }
+                }
+                else
+                {
+                    var pageWinOR = WebViewModel.Instance.GetPageWinById(qhandy.Windowonid);
+                    PopupWindow pw = new PopupWindow(pageWinOR);
+                    pw.Owner = Application.Current.MainWindow;
+
+                    double mWidht = pageWinOR.Width < 300 ? 300 : pageWinOR.Width;
+                    double mHeight = pageWinOR.Height < 300 ? 300 : pageWinOR.Height;
+                    pw.Width = mWidht;
+                    pw.Height = mHeight;
+                    pw.Name = pageWinOR.Name;
+                    pw.ShowDialog();
+                }
+            }
+
+        }
     }
 }

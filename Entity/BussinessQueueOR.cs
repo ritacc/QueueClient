@@ -93,7 +93,11 @@ namespace QM.Client.Entity
             this.Description = obj.Description;
             // 机构编号
             this.Orgbh = obj.Orgbh;
+            //前缀
+            this.Prefix = obj.Prefix;
         }
+
+
 
         public void InitNumber()
         {
@@ -105,16 +109,32 @@ namespace QM.Client.Entity
             int qhNumber = 0;
             foreach (var v in BussQueues)
             {
-                if (v.Status == 0)
+                if (v.Status <= 1)
                     qhNumber++;
             }
             this.QueueNumber = qhNumber;
         }
 
+
+        public List<QueueInfoOR> GetCurrentQueues(string WindowNo)
+        {
+            if (BussQueues == null)
+                return null;
+
+            List<QueueInfoOR> list = new List<QueueInfoOR>();
+            foreach (QueueInfoOR obj in BussQueues)
+            {
+                if (obj.Status == 0 || obj.Windowno == WindowNo)
+                    list.Add(obj);
+            }
+            return list;
+        }
         //public BussinessQueueOR(DataRow dr)
         //{
         //    ID = dr["id"].ToString();
         //    Name = dr["name"].ToString();
         //}
+
+        
     }
 }

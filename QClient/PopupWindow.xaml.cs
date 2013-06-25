@@ -19,20 +19,12 @@ namespace QClient
     /// <summary>
     /// PopupWindow.xaml 的交互逻辑
     /// </summary>
-    public partial class PopupWindow : MetroWindow
+    public partial class PopupWindow : Window
     {
         private readonly ButtomAdmin _buttonAdmin = new ButtomAdmin();
         private readonly PageWinOR _pageWinOR;
         public PageWinOR PageWinOR { get { return _pageWinOR; } }
-
-        //public static void Show(string id)
-        //{
-        //    var pageWinOR = WebViewModel.Instance.GetPageWinById(id);
-        //    var window = new PopupWindow(pageWinOR);
-        //    window.Owner = Application.Current.MainWindow;
-        //    window.ShowDialog();
-        //}
-
+        
         public PopupWindow(PageWinOR pageWinOR)
         {
             if (null == pageWinOR)
@@ -71,7 +63,12 @@ namespace QClient
                 var bc = _buttonAdmin.AddAButtom(mbc);
             }
         }
+        private void ShowErrorMsg(string errmsg)
+        {
+            MessageBox.Show(errmsg, "出错啦！");
+        }
 
+        DateTime LastGetTime = DateTime.Now;
         protected override void OnMouseDown(MouseButtonEventArgs e)
         {
             if (e.OriginalSource is FrameworkElement)
@@ -80,33 +77,13 @@ namespace QClient
                 if (element.DataContext is QhandyOR)
                 {
                     var qhandy = element.DataContext as QhandyOR;
+                    int Contickettime = Convert.ToInt32(MainWindow._SysParaConfigObj.Contickettime);
+                    BussinessQueueOR _CureentObj = null;
                     if (!qhandy.Buttomtype)
                     {
-                        string mCard = string.Empty;
-                        string mErrorMsg = string.Empty;
-                        if (WebViewModel.Instance.QH(qhandy.LabelJobno, mCard, out mErrorMsg))
-                        {
-                            //成功不处理
-                            this.Close();
-                        }
-                        else
-                        {
-
-                            MessageBox.Show(mErrorMsg);
-                        }
+                        _CureentObj = MainWindow._Instance.GetBussinessByID(qhandy.LabelJobno);
                     }
-                    else
-                    {
-                        var pageWinOR = WebViewModel.Instance.GetPageWinById(qhandy.Windowonid);
-                        PopupWindow pw = new PopupWindow(pageWinOR);
-                        pw.Owner = Application.Current.MainWindow;
-
-                        double mWidht = pageWinOR.Width < 300 ? 300 : pageWinOR.Width;
-                        double mHeight = pageWinOR.Height < 300 ? 300 : pageWinOR.Height;
-                        pw.Width = mWidht;
-                        pw.Height = mHeight;
-                        pw.ShowDialog();
-                    }
+                    WebViewModel.Instance.ButtomQH(element, this, Contickettime, _CureentObj);  
                 }
             }
         }

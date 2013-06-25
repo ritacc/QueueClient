@@ -102,10 +102,11 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
        /// 获取网点今天排除人数。
        /// </summary>
        /// <returns></returns>
-       public int GetQueueNumber()
+       public int GetQueueNumber(string bussinessID)
        {
-           string sql = string.Format("select count(*) from t_queueinfo where PrillBillTime > '{0} 00:00:00' and PrillBillTime < '{0} 23:59:59'",
-               DateTime.Now.ToString("yyyy-MM-dd"));
+           string sql = string.Format(@"select count(*) from t_queueinfo 
+where PrillBillTime > '{0} 00:00:00' and PrillBillTime < '{0} 23:59:59' and bussinessid='{1}'",
+               DateTime.Now.ToString("yyyy-MM-dd"), bussinessID);
 
            return Convert.ToInt32(dbMySql.ExecuteScalar(sql));
        }
@@ -119,10 +120,12 @@ values ('@Id', '@BankNo', '@BillNo', '@BussinessId', '@PrillBillTime',
        /// <returns></returns>
        public bool UpdateTransfer(QueueInfoOR obj)
        {
-           string sql = @"update t_queueinfo  set TransferDestWin='@TransferDestWin' where  ID='@ID' ";
+           string sql = @"update t_queueinfo  set TransferDestWin='@TransferDestWin',Employno=''
+,Employname='',Windowno='',Status=@Status where  ID='@ID' ";
 
            sql = sql.Replace("@TransferDestWin", obj.Transferdestwin.ToString());
            sql = sql.Replace("@ID", obj.Id);
+           sql = sql.Replace("@status", obj.Status.ToString());
 
            return dbMySql.ExecuteNoQuery(sql) > 0;
        }

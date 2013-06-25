@@ -45,25 +45,28 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         public MainWindow MianPage { set { _Page = value; } }
 
+        SysParamConfigOR _SysParaConfigObj;
         #endregion
 
-        public void Clear()
-        {
-            QueuesInfo[1].BussQueues=null;
-        }
+       
 
         #region 构造函数
 
         private MainViewModel()
         {
             _command = new DelegateCommand<string>(Excute);//, CanExcute);
+            //
+            using (var client = new QueueClientSoapClient())
+            {
+                _SysParaConfigObj = client.GetSysParamConfigOR();
+            }
 
             InitData();
 
             //刷新队列
             //定时更新值
             DispatcherTimer timer = new DispatcherTimer();
-            timer.Interval = new TimeSpan(0, 0, 10);
+            timer.Interval = new TimeSpan(0, 0, 5);
             timer.Tick += new EventHandler(timer_Tick);
             timer.Start();
         }
@@ -98,22 +101,11 @@ namespace QSoft.Core.ViewModel
         {
             using (var client = new QueueClientSoapClient())
             {
-                var v = client.getQueue();
+                var v = client.getQueuesByWindow(GlobalData.WindowNo);
                 return v;
             }
         }
-        private BussinessQueueOR[] _businesses;
-        public BussinessQueueOR[] Businesses
-        {
-            get
-            {
-                if (null == _businesses)
-                {
-                    _businesses = GetBussinessList();
-                }
-                return _businesses;
-            }
-        }
+     
 
         /// <summary>
         /// 刷新队队信息
@@ -122,26 +114,76 @@ namespace QSoft.Core.ViewModel
         private void RefQueues()
         {
             bool mIsChange = false;
-            foreach (var mBuss in Businesses)
+            BussinessQueueOR[] vBusiness=null;
+            try
             {
-                BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.Id);
-                if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
+                vBusiness = GetBussinessList();
+            }
+            catch (Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+                return;
+            }
+            //Console.WriteLine("查询到队列：{0},缓存队列：{1}", vBusiness.Count(), QueuesInfo.Count);
+            //移出
+            if (vBusiness != null && vBusiness.Count() > 0)
+            {
+                List<BussinessQueueOR> listDelete = new List<BussinessQueueOR>();
+                foreach (BussinessQueueOR obj in QueuesInfo)
                 {
+                    if (!BussinessIsExists(obj.Id, vBusiness))
+                    {
+                        listDelete.Add(obj);
+                    }
+                }
+                if (listDelete.Count > 0)
+                {
+                    foreach (BussinessQueueOR obj in listDelete)
+                    {
+                        if (!IsCurrentBussiness(obj.Id))//应办理队列已不能办理，并切不是当前队列，就移出
+                        {
+                            QueuesInfo.Remove(obj);
+                        }
+                    }
+                }
+
+
+                //处理修改信息
+                foreach (var mBuss in vBusiness)
+                {
+                    BussinessQueueOR mCatchBussQue = GetBussinessQueueOR(mBuss.Id);
                     if (mCatchBussQue != null)
                     {
-                        mCatchBussQue.BussQueues = mBuss.BussQueues;
+                        if (isChange(mBuss.BussQueues, mCatchBussQue.BussQueues))
+                        {
+                            mCatchBussQue.QueueNumber = mBuss.QueueNumber;
+                            mCatchBussQue.BussQueues = mBuss.BussQueues;
+                            mIsChange = true;
+                        }
                     }
                     else
                     {
                         this.QueuesInfo.Add(mBuss);
                     }
-                    mIsChange = true;
+                }
+                if (mIsChange)
+                {
+                    SetCurrentQueue(_NowBillNo);
+                    Console.WriteLine("参数修改");
                 }
             }
-            if (mIsChange)
+        }
+
+        private bool BussinessIsExists(string id, BussinessQueueOR[] list)
+        {
+            foreach (var v in list)
             {
-                SetCurrentQueue(_NowBillNo);
+                if (v.Id == id)
+                {
+                    return true;
+                }
             }
+            return false;
         }
 
         /// <summary>
@@ -156,11 +198,12 @@ namespace QSoft.Core.ViewModel
                 return false;
             else if (list1 == null || list1 == null)//两者不同
                 return true;
+            else if (list1.Count() == 0 && list2.Count() == 0)
+                return false;
             else if (list1.Count() != list2.Count())//两者不同
                 return true;
             else
             {
-                
                 foreach (var v in list1)
                 {
                     if (!IsExists(v.Billno, list2))//list1 的无素在list2中不存在
@@ -169,7 +212,6 @@ namespace QSoft.Core.ViewModel
                     }
                 }
             }
-
             return false;
         }
 
@@ -386,7 +428,9 @@ namespace QSoft.Core.ViewModel
             if (frmTran.IsOK)
             {
                 string msg = GetCall("TRANSFER", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
-                if (msg == "0") {                     
+                if (msg == "0") {
+                    CanncelCurrentQueue(_NowBillNo);
+                    _NowBillNo = "";
                 }
                 else
                 {
@@ -418,30 +462,41 @@ namespace QSoft.Core.ViewModel
                 }
             }
         }
+
+        DateTime lastCallTime = DateTime.Now;
         /// <summary>
         /// 呼叫下一位	CALL	空串
         /// </summary>
         private void CallGetNext()
         {
+            int TimeLen = GetTimeLen(lastCallTime, DateTime.Now);
+            int Calllimittime = Convert.ToInt32(_SysParaConfigObj.Calllimittime);
+            if (TimeLen < Calllimittime && Calllimittime > 0)
+            {
+                ShowErrorMsg(string.Format("叫号时间间隔不能小于：{0}秒。", _SysParaConfigObj.Calllimittime));
+                return;
+            }
             string value = GetCall("CALL", GlobalData.WindowNo);
+            RefQueues();
             if (value.IndexOf("error:") >= 0)
             {
                 ShowErrorMsg(value);
                 return;
-            }            
+            }
+            lastCallTime = DateTime.Now;
             this.SetCurrentQueue(value);
         }
-
+        //Calllimittime
         /// <summary>
         /// 重呼
         /// </summary>
         private void CallReCall()
         {
             string value = GetCall("RECALL", _NowBillNo);
-            if (value == "1")
-            {
-                RefQueues();
-            }else
+            //if (value == "1")
+            //{
+            //    RefQueues();
+            //}else
             if (value != "0")
             {
                 ShowErrorMsg(value);
@@ -467,6 +522,10 @@ namespace QSoft.Core.ViewModel
             if (value != "0")
             {
                 ShowErrorMsg(value);
+            }
+            else
+            {
+                RefQueues();
             }
         }
         /// <summary>
@@ -517,6 +576,32 @@ namespace QSoft.Core.ViewModel
         #endregion
 
         #region 当前处理
+        /// <summary>
+        /// 是否是：当前队列
+        /// </summary>
+        /// <param name="BussinessID"></param>
+        /// <returns></returns>
+        private bool IsCurrentBussiness(string BussinessID)
+        {
+            if (QueuesInfo != null)
+            {
+                foreach (BussinessQueueOR obj in QueuesInfo)
+                {
+                    if (obj.Id == BussinessID)
+                    {
+                        foreach (QueueInfoOR queObj in obj.BussQueues)
+                        {
+                            if (queObj.Billno == _NowBillNo)
+                            {
+                                return true;
+                            }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
         private void SetCurrentQueue(string QhBH)
         {
             if (QueuesInfo != null)
@@ -529,6 +614,9 @@ namespace QSoft.Core.ViewModel
                         {
                             if (_NowBillNo != QhBH)
                             {
+                                _empty.DisplayName = QhBH;
+                                _empty.Business = obj.Name;
+
                                 CanncelCurrentQueue(_NowBillNo);
                                 _NowBillNo = QhBH;
                             }
@@ -561,6 +649,13 @@ namespace QSoft.Core.ViewModel
         }
         #endregion
         #endregion
+        private int GetTimeLen(DateTime Start, DateTime EndTime)
+        {
+            int TimeLen = 0;
+            TimeSpan t = EndTime - Start;
+            TimeLen = (t.Hours * 60 * 60) + t.Minutes * 60 + t.Seconds;
+            return TimeLen;
+        }
     }
 
     /// <summary>

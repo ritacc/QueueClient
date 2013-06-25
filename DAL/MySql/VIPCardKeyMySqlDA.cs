@@ -2,11 +2,38 @@
 using System.Collections.Generic;
 using System.Text;
 using QM.Client.Entity;
+using System.Data;
 
 namespace QM.Client.DA.MySql
 {
     public class VIPCardKeyMySqlDA : DALBase
     {
+        public List<VIPCardKeyOR> selectAllVipCard()
+        {
+            string sql = "select * from t_VIPCardKey";
+
+            DataTable dt = null;
+            try
+            {
+                dt = dbMySql.ExecuteQuery(sql);
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            if (dt == null)
+            {
+                return null;
+            }
+            List<VIPCardKeyOR> listBuss = new List<VIPCardKeyOR>();
+            foreach (DataRow dr in dt.Rows)
+            {
+                VIPCardKeyOR obj = new VIPCardKeyOR(dr);
+                listBuss.Add(obj);
+            }
+            return listBuss;
+        }
+
         #region 更新
         public void UpdateVIPCardKey(List<VIPCardKeyOR> listvIPCardKey)
         {

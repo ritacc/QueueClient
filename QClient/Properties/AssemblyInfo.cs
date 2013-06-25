@@ -10,7 +10,7 @@ using System.Windows;
 [assembly: AssemblyTitle("QClient")]
 [assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Dell")]
+[assembly: AssemblyCompany("ritacc")]
 [assembly: AssemblyProduct("QClient")]
 [assembly: AssemblyCopyright("Copyright © Dell 2013")]
 [assembly: AssemblyTrademark("")]

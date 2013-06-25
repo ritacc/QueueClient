@@ -25,34 +25,6 @@ namespace QM.Client.UpdateDB
         }
 
         /// <summary>
-        /// 写入异常信息\字符串
-        /// </summary>
-        /// <param name="ErrorCode"></param>
-        /// <param name="FileText"></param>
-        public static void writLog(string ErrorCode, string FileText)
-        {
-            try
-            {
-                string path = string.Format("{0}{1}log.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
-                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-                StreamWriter sw = new StreamWriter(fs);
-
-                sw.BaseStream.Seek(0, SeekOrigin.End);
-                sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, FileText));
-                sw.Flush();
-                sw.Dispose();
-                fs.Dispose();
-            }
-            catch
-            {
-            }
-        }
-
-       
-
-        
-
-        /// <summary>
         /// 获取启动目录下，指定文件夹的路径，并以\结束
         /// </summary>
         /// <param name="FolderName"></param>
@@ -79,6 +51,33 @@ namespace QM.Client.UpdateDB
             }
         }
 
+
+        /// <summary>
+        /// 写入异常信息\字符串
+        /// </summary>
+        /// <param name="ErrorCode"></param>
+        /// <param name="FileText"></param>
+        public static void writLog(string ErrorCode, string FileText)
+        {
+            writeMsgLog(ErrorCode, FileText);
+            //try
+            //{
+            //    string path = string.Format("{0}{1}log.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
+            //    FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            //    StreamWriter sw = new StreamWriter(fs);
+
+            //    sw.BaseStream.Seek(0, SeekOrigin.End);
+            //    sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, FileText));
+            //    sw.Flush();
+            //    sw.Dispose();
+            //    fs.Dispose();
+            //}
+            //catch
+            //{
+            //}
+        }
+
+
         /// <summary>
         /// 写入异常信息，Exception
         /// </summary>
@@ -86,24 +85,26 @@ namespace QM.Client.UpdateDB
         /// <param name="ex"></param>
         public static void writLog(string ErrorCode, Exception ex)
         {
-            try
-            {
-                //string path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "log.txt");
-                string path = string.Format("{0}{1}log.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
-                FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
-                StreamWriter sw = new StreamWriter(fs);
-                sw.BaseStream.Seek(0, SeekOrigin.End);
-                sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, ex.Message));// ex.StackTrace));
-                sw.Flush();
-                sw.Dispose();
-                fs.Dispose();
-            }
-            catch
-            {
-            }
+            writeMsgLog(ErrorCode, ex.Message);
+            //try
+            //{
+            //    //string path = System.IO.Path.Combine(System.AppDomain.CurrentDomain.BaseDirectory, "log.txt");
+            //    string path = string.Format("{0}{1}log.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
+            //    FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+            //    StreamWriter sw = new StreamWriter(fs);
+            //    sw.BaseStream.Seek(0, SeekOrigin.End);
+            //    sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, ex.Message));// ex.StackTrace));
+            //    sw.Flush();
+            //    sw.Dispose();
+            //    fs.Dispose();
+            //}
+            //catch
+            //{
+            //}
         }
 
         #endregion
+
 
 
         /// <summary>
@@ -115,13 +116,14 @@ namespace QM.Client.UpdateDB
         {
             try
             {
-                string path = string.Format("{0}log{1}Msg.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
+                string path = string.Format("{0}log{1}log.txt", LogPath, DateTime.Now.ToString("yyyy-MM-dd"));
                 FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
                 StreamWriter sw = new StreamWriter(fs);
                 
                 sw.BaseStream.Seek(0, SeekOrigin.End);
                 if (isAddLine)
                 {
+                    sw.WriteLine();
                     sw.WriteLine();
                     sw.WriteLine();
                 }
