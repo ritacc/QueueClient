@@ -2999,6 +2999,10 @@ namespace QClient.QueueClinetServiceReference {
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/UpdateDeviceSatus", ReplyAction="*")]
         QClient.QueueClinetServiceReference.UpdateDeviceSatusResponse UpdateDeviceSatus(QClient.QueueClinetServiceReference.UpdateDeviceSatusRequest request);
         
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 BillNo 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/UpdatePJ", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.UpdatePJResponse UpdatePJ(QClient.QueueClinetServiceReference.UpdatePJRequest request);
+        
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 strKey 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetClientValue", ReplyAction="*")]
         QClient.QueueClinetServiceReference.GetClientValueResponse GetClientValue(QClient.QueueClinetServiceReference.GetClientValueRequest request);
@@ -4097,6 +4101,78 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdatePJRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdatePJ", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.UpdatePJRequestBody Body;
+        
+        public UpdatePJRequest() {
+        }
+        
+        public UpdatePJRequest(QClient.QueueClinetServiceReference.UpdatePJRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class UpdatePJRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string BillNo;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=1)]
+        public int PJ;
+        
+        public UpdatePJRequestBody() {
+        }
+        
+        public UpdatePJRequestBody(string BillNo, int PJ) {
+            this.BillNo = BillNo;
+            this.PJ = PJ;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class UpdatePJResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="UpdatePJResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.UpdatePJResponseBody Body;
+        
+        public UpdatePJResponse() {
+        }
+        
+        public UpdatePJResponse(QClient.QueueClinetServiceReference.UpdatePJResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class UpdatePJResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string UpdatePJResult;
+        
+        public UpdatePJResponseBody() {
+        }
+        
+        public UpdatePJResponseBody(string UpdatePJResult) {
+            this.UpdatePJResult = UpdatePJResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetClientValueRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetClientValue", Namespace="http://www.ritacc.com/", Order=0)]
@@ -4589,6 +4665,20 @@ namespace QClient.QueueClinetServiceReference {
             inValue.Body.Status = Status;
             QClient.QueueClinetServiceReference.UpdateDeviceSatusResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).UpdateDeviceSatus(inValue);
             return retVal.Body.UpdateDeviceSatusResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.UpdatePJResponse QClient.QueueClinetServiceReference.QueueClientSoap.UpdatePJ(QClient.QueueClinetServiceReference.UpdatePJRequest request) {
+            return base.Channel.UpdatePJ(request);
+        }
+        
+        public string UpdatePJ(string BillNo, int PJ) {
+            QClient.QueueClinetServiceReference.UpdatePJRequest inValue = new QClient.QueueClinetServiceReference.UpdatePJRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.UpdatePJRequestBody();
+            inValue.Body.BillNo = BillNo;
+            inValue.Body.PJ = PJ;
+            QClient.QueueClinetServiceReference.UpdatePJResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).UpdatePJ(inValue);
+            return retVal.Body.UpdatePJResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

@@ -569,10 +569,6 @@ namespace QSoft.Core.ViewModel
                 _NowEmployeeStaus = EmployeeStatus.Normal;
             }
         }
-
-      
-
-
         #endregion
 
         #region 当前处理

@@ -29,7 +29,6 @@ namespace QClient
             InitializeComponent();
             IsOK = false;
 
-            
             ShowMsg = "请刷卡…";
 
             int popTimeLent = Convert.ToInt32(MainWindow._SysParaConfigObj.Popswiptime);

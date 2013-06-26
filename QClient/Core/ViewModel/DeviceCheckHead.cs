@@ -66,7 +66,7 @@ namespace QClient.Core.ViewModel
             thStatus.Start();
 
 			Thread thInit = new Thread(InitDevice);
-			thStatus.Start();
+            thInit.Start();
 
 		}
 
@@ -75,6 +75,7 @@ namespace QClient.Core.ViewModel
 			foreach (WindowOR win in listWin)
 			{
 				//win.tpAddress
+                Thread.Sleep(2000);
 			}
 		}
 
@@ -100,6 +101,7 @@ namespace QClient.Core.ViewModel
                     }
                 }
                 Thread.Sleep(StatusCheckTimeLen);
+                ErrorLog.WriteTestLog("DeviceStatusHead", "");
             } while (true);
         }
         #endregion
@@ -155,10 +157,16 @@ namespace QClient.Core.ViewModel
 		/// </summary>
 		public int loginStatus { get; set; }
 
+        /// <summary>
+        /// 是否工作
+        /// </summary>
+        protected bool isWork = false;
+
 		public void CheckMsg()
 		{
 			try
 			{
+                ErrorLog.WriteTestLog("***************CheckMsg:开始执行：****************************", Window.Name);
 				do
 				{
 					Thread.Sleep(_SleapLen);
@@ -167,6 +175,7 @@ namespace QClient.Core.ViewModel
 						string Msg = DeviceCheckHead.Instance.GetHDClient().GetDeviceMSG(
                             DeviceType.DeviceType_FJQ, Window.fjqAddress, _TimeOut);
 
+                        ErrorLog.WriteTestLog("#CheckMsg#", Msg);
 						if (!string.IsNullOrEmpty(Msg))
 						{
 							MsgDo(Msg);
@@ -176,6 +185,7 @@ namespace QClient.Core.ViewModel
 					{
 						ErrorLog.WriteLog("PJQHead#Msg", ex.Message);
 					}
+                    
 				} while (true);
 			}
 			catch (Exception ex)
@@ -203,43 +213,102 @@ namespace QClient.Core.ViewModel
 					Login(msgArr[2]);
 					break;
 				case "CALLER_NEXT":
-					CallGetNext();
+                    if (isWork)
+                    {
+                        CallGetNext();
+                    }
 					break;
 				case "CALLER_RECALL"://重新呼叫
-					CallReCall();
+                    if (isWork)
+                    {
+                        CallReCall();
+                    }
 					break;
 				case "CALLER_PAUSE"://暂停服务
-					CallPause();
+                    if (isWork)
+                    {
+                        CallPause();
+                    }
 					break;
-				case "CALLER_RESUME_SERVICE"://恢复服务
-					CallRestart();
-					break;
-				case "CALLER_TRANSFER"://目标柜台号
-					break;
-				case "CALLER_TRANSFER2"://目标业务队列   /******zcs: 当前没有实现*****/
-					break;
-				case "CALLER_SEARCH"://查询未受理客户数
-					break;
-				case "CALLER_OUT"://柜员退出
-					StopServer();
-					break;
-				case "CALLER_APPOINT"://叫指定号码，号码由柜员按键输入
-					break;
-				case "CALLER_START"://服务开始
-					break;
-				case "CALLER_CLOSE"://服务结束
-					StopServer();					
-					break;
-				case "CALLER_SPECIAL"://特呼编号（数字）
-					CALLER_SPECIAL(msgArr[2]);
-					break;
-				case "CALLER_DELAY"://当前办理号码延迟办理，号码再次进入排队队列
-					break;
-				case "EVA_MSG"://1：好2：中3：差4： 未评价
-					break;
+                case "CALLER_RESUME_SERVICE"://恢复服务
+                    CallRestart();
+                    break;
+                case "CALLER_TRANSFER"://目标柜台号
+                    if (isWork)
+                    {
+                        CallTransfer(msgArr[2]);
+                    }
+                    break;
+                case "CALLER_TRANSFER2"://目标业务队列   /******zcs: 当前没有实现*****/
+                    break;
+                case "CALLER_SEARCH"://查询未受理客户数
+                    break;
+                case "CALLER_OUT"://柜员退出
+                    StopServer();
+                    break;
+                case "CALLER_APPOINT"://叫指定号码，号码由柜员按键输入
+                    break;
+                case "CALLER_START"://服务开始
+                    break;
+                case "CALLER_CLOSE"://服务结束
+                    StopServer();
+                    break;
+                case "CALLER_SPECIAL"://特呼编号（数字）
+                    if (isWork)
+                    {
+                        Specall("客户", msgArr[2]);
+                    }
+                    break;
+                case "CALLER_DELAY"://当前办理号码延迟办理，号码再次进入排队队列
+                    if (isWork)
+                    {
+                        CallDelay(msgArr[2]);
+                    }
+                    break;
+                case "EVA_MSG"://1：好2：中3：差4： 未评价
+                    if (isWork)
+                    {
+                        PJ(msgArr[2]);
+                    }
+                    break;
 			}
 		}
 
+
+        /// <summary>
+        /// 转移
+        /// </summary>
+        private void CallTransfer(string windowNumber)
+        {
+                string msg = GetCall("TRANSFER", string.Format("{0}##{1}", _NowBillNo, windowNumber));
+                if (msg == "0")
+                {
+                    
+                    _NowBillNo = "";
+                }
+                else
+                {
+                    ShowErrorMsg(msg);
+                }
+            
+        }
+
+        /// <summary>
+        /// 延后
+        /// </summary>
+        /// <param name="DelayNumber">延后分钟</param>
+        private void CallDelay(string DelayNumber)
+        {
+            string msg = GetCall("DELAY", string.Format("{0}##{1}", _NowBillNo, DelayNumber));
+            if (msg == "0")
+            {
+                _NowBillNo = "";
+            }
+            else
+            {
+                ShowErrorMsg(msg);
+            }
+        }
 
 		public void Login(string data)
 		{
@@ -255,7 +324,6 @@ namespace QClient.Core.ViewModel
 			}
 			else if (loginStatus == 2)
 			{
-				
 				string password = data;
 
 				string loginmsg = DeviceCheckHead.Instance.GetQueueClient().getLogin(UserID, password, Window.Name);
@@ -267,6 +335,8 @@ namespace QClient.Core.ViewModel
 					, 0, 0, 0, "");
 					loginStatus = 1;
 					UserID = "";
+
+                    isWork = false;
 				}
 				else//成功
 				{
@@ -275,6 +345,7 @@ namespace QClient.Core.ViewModel
 						, 0	//login：登录是否成功，showtype为2时有效。0（成功），1（失败）
 						, 0, 0, 0, "");
 					loginStatus = 3;
+                    isWork = true;
 				}
 			}
 		}
@@ -311,39 +382,74 @@ namespace QClient.Core.ViewModel
 			}
 		}
 
-	
+       
 		public void CALLER_SPECIAL(string Number)
 		{
 			switch (Number)
 			{
 				case "1"://大堂经理
+                    Specall("大堂经理", _NowBillNo);
 					break;
 				case "2"://业务顾问
+                    Specall("业务顾问", _NowBillNo);
 					break;
 				case "3"://保安
+                    Specall("保安", _NowBillNo);
 					break;
 				case "4"://	您好，欢迎光临
 					SPECIAL_PJQ(1);
 					break;
 				case "5"://请评价
+                    PreBillNo = _NowBillNo;
+                    _NowBillNo = "";
 					SPECIAL_PJQ(2);
 					break;
-				case "6"://谢谢，再见
+				case "6"://谢谢，再见        =>评介器直接评价?
 					break;
 				case "7"://一米线
 					SPECIAL_PJQ(3);
 					break;
 			}
-/*
-1.	大堂经理
-2.	
-3.	
-4.	您好，欢迎光临
-5.	
-6.	谢谢，再见
-7.	一米线
-* */
 		}
+
+        private void Specall(string CallType,string mBillNo)
+        {
+            string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
+                    Window.Name, CallType, mBillNo));
+            if (msg == "0")
+            {
+                if (CallType == "客户")
+                {
+                    _NowBillNo = mBillNo;
+                }
+            }
+            else
+            {
+                ShowErrorMsg(msg);
+            }
+        }
+
+        /// <summary>
+        /// 上一个排队号码
+        /// </summary>
+        private string PreBillNo { get; set; }
+        private void PJ(string pjVal)
+        {
+            if (string.IsNullOrEmpty(PreBillNo))
+                return;
+            int pjS=0;
+
+            if (int.TryParse(pjVal, out pjS))
+            {
+                DeviceCheckHead.Instance.GetQueueClient().UpdatePJ(PreBillNo, pjS);
+            }
+            else
+            {
+                ErrorLog.WriteLog("PJQHead#PJ", pjVal);
+            }
+            PreBillNo = "";
+        }
+
 
 		/// <summary>
 		/// 评价器，特呼
@@ -430,6 +536,7 @@ namespace QClient.Core.ViewModel
             string value = GetCall("PAUSE", Window.Name);
 			if (value != "0")
 			{
+                isWork = false;
 				ShowErrorMsg(value);
 				return;
 			}
@@ -441,11 +548,18 @@ namespace QClient.Core.ViewModel
         /// </summary>
 		private void CallRestart()
 		{
+            if (loginStatus != 3)
+            {
+                ShowErrorMsg("未登录：");
+                return;
+            }
 			string value = GetCall("RESTART", Window.Name);
 			if (value != "0")
 			{
 				ShowErrorMsg(value);
+                return;
 			}
+            isWork = true;
 		}
 
 		/// <summary>

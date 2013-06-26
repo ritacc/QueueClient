@@ -738,6 +738,14 @@ namespace QM.Client.WebService.Control
             {
 
             }
+            else if (mCallType == "保安")
+            {
+
+            }
+            else if (mCallType == "业务顾问")
+            {
+
+            }
             return "0";
         }
 

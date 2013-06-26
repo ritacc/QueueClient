@@ -124,7 +124,7 @@ namespace QClient.Core.ViewModel
           }
           catch (Exception ex)
           {
-              ErrorLog.WriteLog("ReadCard:", ex.Message);
+              ErrorLog.WriteLog("ImgSetViewModel#ReadCard:", ex.Message);
           }
           return "";
       }

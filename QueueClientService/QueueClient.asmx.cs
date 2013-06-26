@@ -201,13 +201,23 @@ namespace QM.Client.WebService
             return Instanse().GetAllDevices();
         }
 
+        /// <summary>
+        /// 更新设备状态
+        /// </summary>
+        /// <param name="ID"></param>
+        /// <param name="Status"></param>
+        /// <returns></returns>
         [WebMethod]
         public bool UpdateDeviceSatus(string ID, int Status)
         {
             return Instanse().UpdateDeviceSatus(ID, Status);
         }
 
-
+        [WebMethod]
+        public string UpdatePJ(string BillNo, int PJ)
+        {
+            return "0";
+        }
 
         #region QClient调用
         #region 取号图片处理
