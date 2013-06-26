@@ -14,6 +14,7 @@ namespace QClient.Core.ViewModel
 		private static readonly DeviceCheckHead _instance = new DeviceCheckHead();
 		public static DeviceCheckHead Instance { get { return _instance; } }
 
+		public List<WindowOR> listWin { get; set; }
 		public ControllerSoapClient GetHDClient()
 		{
 			return new ControllerSoapClient();
@@ -35,21 +36,27 @@ namespace QClient.Core.ViewModel
             {
                 DeviceList.Add(obj);
             }
-			                
-            WindowOR[] listWin =client.SelectAllWindow();
-            			
-            if (listWin != null && listWin.Length > 0)
+
+			WindowOR[] ArrWin = client.SelectAllWindow();
+			listWin = new List<WindowOR>();
+			if (ArrWin != null && ArrWin.Length > 0)
 			{
-                //开线程处理，评价器的消息
-                foreach (WindowOR obj in listWin)
+				foreach (WindowOR _win in ArrWin)
 				{
-                    PJQHead pjq = new PJQHead();
-                    pjq.Window = obj;
-                    Thread th = new Thread(pjq.CheckMsg);
-                    th.Start();
+					listWin.Add(_win);
 				}
 			}
-			else
+
+			//开线程处理，评价器的消息
+			foreach (WindowOR obj in listWin)
+			{
+				PJQHead pjq = new PJQHead();
+				pjq.Window = obj;
+				Thread th = new Thread(pjq.CheckMsg);
+				th.Start();
+			}
+
+			if(listWin.Count==0)
 			{
                 ErrorLog.WriteLog("DeviceCheckHead#listWin.Count", "没有定义窗口。");
 			}
@@ -58,6 +65,17 @@ namespace QClient.Core.ViewModel
             Thread thStatus = new Thread(DeviceStatusHead);
             thStatus.Start();
 
+			Thread thInit = new Thread(InitDevice);
+			thStatus.Start();
+
+		}
+
+		private void InitDevice()
+		{
+			foreach (WindowOR win in listWin)
+			{
+				//win.tpAddress
+			}
 		}
 
         #region 设备状态更新
@@ -86,7 +104,7 @@ namespace QClient.Core.ViewModel
         }
         #endregion
 
-        private int SysConverHDType(int type)
+        public static int SysConverHDType(int type)
         {
             switch (type)
             {
@@ -132,6 +150,10 @@ namespace QClient.Core.ViewModel
 			}
 		}
 
+		/// <summary>
+		/// 登录状态  1未登录,2登录中(输入了用户名),3登录成功。
+		/// </summary>
+		public int loginStatus { get; set; }
 
 		public void CheckMsg()
 		{
@@ -178,10 +200,10 @@ namespace QClient.Core.ViewModel
 			switch (msgArr[1])
 			{
 				case "CALLER_LOGIN":
-
+					Login(msgArr[2]);
 					break;
 				case "CALLER_NEXT":
-
+					CallGetNext();
 					break;
 				case "CALLER_RECALL"://重新呼叫
 					CallReCall();
@@ -194,7 +216,7 @@ namespace QClient.Core.ViewModel
 					break;
 				case "CALLER_TRANSFER"://目标柜台号
 					break;
-				case "CALLER_TRANSFER2"://目标业务队列   /******当前没有实现*****/
+				case "CALLER_TRANSFER2"://目标业务队列   /******zcs: 当前没有实现*****/
 					break;
 				case "CALLER_SEARCH"://查询未受理客户数
 					break;
@@ -206,7 +228,7 @@ namespace QClient.Core.ViewModel
 				case "CALLER_START"://服务开始
 					break;
 				case "CALLER_CLOSE"://服务结束
-					StopServer();
+					StopServer();					
 					break;
 				case "CALLER_SPECIAL"://特呼编号（数字）
 					CALLER_SPECIAL(msgArr[2]);
@@ -218,6 +240,78 @@ namespace QClient.Core.ViewModel
 			}
 		}
 
+
+		public void Login(string data)
+		{
+			if (loginStatus == 1)
+			{
+				UserID = data;
+				//记录柜员号
+				loginStatus = 2;
+				DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(6, Window.fjqAddress
+					, "m1", "", 0, ""
+					, 0, 0, 0, 0
+					, "请输入密码：");
+			}
+			else if (loginStatus == 2)
+			{
+				
+				string password = data;
+
+				string loginmsg = DeviceCheckHead.Instance.GetQueueClient().getLogin(UserID, password, Window.Name);
+				if (loginmsg != "0")//失败
+				{
+					DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(2, Window.fjqAddress
+					, "m1", "", 0, ""
+					, 1	//login：登录是否成功，showtype为2时有效。0（成功），1（失败）
+					, 0, 0, 0, "");
+					loginStatus = 1;
+					UserID = "";
+				}
+				else//成功
+				{
+					DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(2, Window.fjqAddress
+						, "m1", "", 0, ""
+						, 0	//login：登录是否成功，showtype为2时有效。0（成功），1（失败）
+						, 0, 0, 0, "");
+					loginStatus = 3;
+				}
+			}
+		}
+
+		/// <summary>
+		/// 结束服务
+		/// </summary>
+		private void StopServer()
+		{
+			if (loginStatus == 1)
+			{
+				DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(3, Window.fjqAddress
+					, "m1", "", 0, ""
+					, 0
+					, 1		//logout：登出是否成功，showtype为3时有效。0（成功），1（失败）
+					, 0, 0, "");
+			}
+			string msg = DeviceCheckHead.Instance.GetQueueClient().endService(UserID, Window.Name);
+			if (msg == "0")
+			{
+				DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(3, Window.fjqAddress
+					, "m1", "", 0, ""
+					, 0
+					, 0		//logout：登出是否成功，showtype为3时有效。0（成功），1（失败）
+					, 0, 0, "");
+			}
+			else
+			{
+				DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(6, Window.fjqAddress
+					, "m1", "", 0, ""
+					, 0, 0, 0, 0
+					, msg);
+				//ShowErrorMsg(msg);
+			}
+		}
+
+	
 		public void CALLER_SPECIAL(string Number)
 		{
 			switch (Number)
@@ -229,12 +323,15 @@ namespace QClient.Core.ViewModel
 				case "3"://保安
 					break;
 				case "4"://	您好，欢迎光临
+					SPECIAL_PJQ(1);
 					break;
 				case "5"://请评价
+					SPECIAL_PJQ(2);
 					break;
 				case "6"://谢谢，再见
 					break;
 				case "7"://一米线
+					SPECIAL_PJQ(3);
 					break;
 			}
 /*
@@ -248,29 +345,88 @@ namespace QClient.Core.ViewModel
 * */
 		}
 
+		/// <summary>
+		/// 评价器，特呼
+		/// </summary>
+		public void SPECIAL_PJQ(int playType)
+		{
+		  string val=	DeviceCheckHead.Instance.GetHDClient().PlayEvaluateSound(playType, Window.pjqAddress);
+		  if (val != "0")
+			  ShowErrorMsg(val);
+		}
+
+		#region 公共函数
 		private void ShowErrorMsg(string msg)
 		{
 			//MessageBox.Show(msg, "出错啦!", MessageBoxButton.OK, MessageBoxImage.Error);
+			DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(6, Window.fjqAddress
+					, "m1", "", 0, ""
+					, 0, 0, 0, 0
+					, msg);
 		}
+		private int GetTimeLen(DateTime Start, DateTime EndTime)
+		{
+			int TimeLen = 0;
+			TimeSpan t = EndTime - Start;
+			TimeLen = (t.Hours * 60 * 60) + t.Minutes * 60 + t.Seconds;
+			return TimeLen;
+		}
+		#endregion
 
 		#region Werservice接口
+
+		#region 呼叫
+		protected int Calllimittime = 5;
+
+		DateTime lastCallTime = DateTime.Now;
+		/// <summary>
+		/// 呼叫下一位	CALL	空串
+		/// </summary>
+		private void CallGetNext()
+		{
+			int TimeLen = GetTimeLen(lastCallTime, DateTime.Now);
+			if (TimeLen < Calllimittime && Calllimittime > 0)
+			{
+				ShowErrorMsg(string.Format("叫号时间间隔不能小于：{0}秒。", Calllimittime));
+				return;
+			}
+			string value = GetCall("CALL", Window.Name);
+			if (value.IndexOf("error:") >= 0)
+			{
+				ShowErrorMsg(value);
+				return;
+			}
+			else
+			{
+				lastCallTime = DateTime.Now;
+				_NowBillNo = value;
+			}
+		}
+
 		/// <summary>
 		/// 重呼
 		/// </summary>
 		private void CallReCall()
 		{
+			if (string.IsNullOrEmpty(_NowBillNo))
+			{
+				ShowErrorMsg("请叫号：");
+				return;
+			}
 			string value = GetCall("RECALL", _NowBillNo);
 			if (value != "0")
 			{
 				ShowErrorMsg(value);
 			}
 		}
+		#endregion
+
+		
 		 /// <summary>
         /// 暂停
         /// </summary>
 		private void CallPause()
 		{
-
             string value = GetCall("PAUSE", Window.Name);
 			if (value != "0")
 			{
@@ -306,20 +462,7 @@ namespace QClient.Core.ViewModel
 				return value;
 			}
 		}
-		/// <summary>
-		/// 结束服务
-		/// </summary>
-		private void StopServer()
-		{
-            string msg = DeviceCheckHead.Instance.GetQueueClient().endService(UserID, Window.Name);
-			if (msg == "0")
-			{
-			}
-			else
-			{
-				ShowErrorMsg(msg);
-			}
-		}
+		
 		#endregion
 	}
 
