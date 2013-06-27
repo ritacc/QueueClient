@@ -36,7 +36,6 @@ namespace QM.Client.WebService.Control
         /// 网点机构号
         /// </summary>
         public string BankNo { get; set; }
-
         List<WindowLoginInfoOR> ListWindowLogins = new List<WindowLoginInfoOR>();
 
         /// <summary>
@@ -144,7 +143,12 @@ namespace QM.Client.WebService.Control
 
             //参数设置
             _SysparaConfigObj= new SysParaMySqlDA().SelectConfigORByWdbh();
+
+            //读取config.xml文件
+            _Config = new ReadXmlConfig().Read();
         }
+
+        private ConfigOR _Config = null;
 
         /// <summary>
         /// 从配置文件获取，网点编号OrgNo
@@ -210,8 +214,9 @@ namespace QM.Client.WebService.Control
                 _Login.Status = 0;
                 _Login.BussinessRoleOn = BussRoleObj.GetBussinessRoleOn(_empOR, _winOR);
                 _WindowLoginDA.InsertLoginWindowInfo(_Login);//写入数据库
-
                 ListWindowLogins.Add(_Login);
+                
+
             }
             catch (Exception ex)
             {
@@ -717,7 +722,7 @@ namespace QM.Client.WebService.Control
             if(strArr.Length != 3)
                 return "参数错误";
 
-            string mWindowNo = strArr[0];//窗口号
+            string mWindowNo = strArr[0].PadLeft(2,'0');//窗口号
             string mCallType = strArr[1];//呼叫类型
             string mBillNo = strArr[2];//票号
 
@@ -745,6 +750,15 @@ namespace QM.Client.WebService.Control
             else if (mCallType == "业务顾问")
             {
 
+            }
+            else if (mCallType == "一米线")//参数三为，窗口号
+            {
+              WindowOR mWin=  GetAWindow(mWindowNo);
+              if (mWin == null)
+              {
+                  return "窗口号不存在！";
+              }
+              HDDA.Instance.SPECIAL_PJQ(7, mWin.pjqAddress);
             }
             return "0";
         }

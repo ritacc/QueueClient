@@ -121,6 +121,9 @@ namespace QClient.Core.ViewModel
         }
 	}
 
+    /// <summary>
+    /// 评价器处理
+    /// </summary>
 	public class PJQHead
 	{
 		//public string Address { get; set; }
@@ -397,20 +400,45 @@ namespace QClient.Core.ViewModel
                     Specall("保安", _NowBillNo);
 					break;
 				case "4"://	您好，欢迎光临
-					SPECIAL_PJQ(1);
+                    CallWelcome();
 					break;
 				case "5"://请评价
                     PreBillNo = _NowBillNo;
                     _NowBillNo = "";
-					SPECIAL_PJQ(2);
+                    CallJudge();
 					break;
 				case "6"://谢谢，再见        =>评介器直接评价?
 					break;
 				case "7"://一米线
-					SPECIAL_PJQ(3);
+					//SPECIAL_PJQ(3);
+                    Specall("一米线", "");
 					break;
 			}
 		}
+
+        /// <summary>
+        /// 请评价
+        /// </summary>
+        private void CallJudge()
+        {
+            string value = GetCall("JUDGE", _NowBillNo);
+            if (value != "0")
+            {
+                ShowErrorMsg(value);
+            }
+        }
+
+        /// <summary>
+        /// 欢迎
+        /// </summary>
+        private void CallWelcome()
+        {
+            string value = GetCall("WELCOME", _NowBillNo);
+            if (value != "0")
+            {
+                ShowErrorMsg(value);
+            }
+        }
 
         private void Specall(string CallType,string mBillNo)
         {
@@ -450,16 +478,6 @@ namespace QClient.Core.ViewModel
             PreBillNo = "";
         }
 
-
-		/// <summary>
-		/// 评价器，特呼
-		/// </summary>
-		public void SPECIAL_PJQ(int playType)
-		{
-		  string val=	DeviceCheckHead.Instance.GetHDClient().PlayEvaluateSound(playType, Window.pjqAddress);
-		  if (val != "0")
-			  ShowErrorMsg(val);
-		}
 
 		#region 公共函数
 		private void ShowErrorMsg(string msg)

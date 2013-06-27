@@ -44,22 +44,21 @@ namespace QM.Client.WebService.Control
             return false;
         }
 
+        public static string _StartPath = string.Empty;
 
         ///// <summary>
         ///// 获取文件安全路径
         ///// </summary>
         ///// <param name="path"></param>
         ///// <returns></returns>
-        //public static string GetSafeFilePath(string path)
-        //{
-            
-        //    // 如果只有文件名, 打开文件对话框会影响当前默认目录, 所以需要试探下
-        //    if (!path.Contains("\\"))
-        //    {
-        //        return Path.Combine(AppDomain.CurrentDomain.BaseDirectory, path);
-        //    }
-        //    return path;
-        //}
+        public static string GetPath()
+        {
+
+            // 如果只有文件名, 打开文件对话框会影响当前默认目录, 所以需要试探下
+            if (!_StartPath.EndsWith("\\"))
+                _StartPath += "\\";
+            return _StartPath;
+        }
 
     }
 }

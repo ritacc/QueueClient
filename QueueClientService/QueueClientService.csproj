@@ -54,10 +54,11 @@
   <ItemGroup>
     <Compile Include="Control\BussinessRoleHeadle.cs" />
     <Compile Include="Control\Common.cs" />
+    <Compile Include="Control\ConfigOR.cs" />
     <Compile Include="Control\ErrorLog.cs" />
-    <Compile Include="Control\HDClient.cs" />
     <Compile Include="Control\HDDA.cs" />
     <Compile Include="Control\QueueMian.cs" />
+    <Compile Include="Control\ReadXmlConfig.cs" />
     <Compile Include="Control\VipCardHeadle.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="QueueClient.asmx.cs">
@@ -71,6 +72,8 @@
     </Compile>
   </ItemGroup>
   <ItemGroup>
+    <Content Include="config.xml" />
+    <Content Include="Control\msg.txt" />
     <Content Include="QueueClient.asmx" />
     <None Include="Service References\HD\Controller.disco" />
     <None Include="Service References\HD\configuration91.svcinfo" />

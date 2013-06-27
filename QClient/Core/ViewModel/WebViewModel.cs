@@ -150,11 +150,8 @@ namespace QClient.Core.ViewModel
         DateTime LastGetTime = DateTime.Now.AddMinutes(-10);
         public void ButtomQH(FrameworkElement element, Window Owener, int Contickettime, BussinessQueueOR _CureentObj)
         {
-
             if (element.DataContext is QhandyOR)
             {
-                
-
                 var qhandy = element.DataContext as QhandyOR;
                 if (!qhandy.Buttomtype)
                 {

@@ -513,6 +513,7 @@ namespace QSoft.Core.ViewModel
                 ShowErrorMsg(value);
             }
         }
+
         /// <summary>
         /// 请评价
         /// </summary>
