@@ -9,4 +9,6 @@
 	<zhp_4_adv></zhp_4_adv>
 	<zhp_5_adv></zhp_5_adv>
 	<zhp_8_adv></zhp_8_adv>
+	<!--音量-->
+	<volume>5</volume>
 </root>

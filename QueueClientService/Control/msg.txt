@@ -7,7 +7,7 @@
 
 PlayEvaluateSound，palyType=2。
 评价器播放完这个之后，客户就可以评价了
-排队机-谢潇宇 22:31:52 
+
 也就是说，在调用完PlayEvaluateSound之后，马上调用GetDeviceMSG来获取评价的信息
 
 

@@ -209,6 +209,15 @@ Processinterval=@Processinterval  where ID='@ID' ";
            return dbMySql.ExecuteNoQuery(sql) > 0;
        }
 
+	   public bool UpdateCallJudge(string id,int pjresult)
+	   {
+		   string sql = @"update t_queueinfo  set status=3,FinishTime=now(),
+Processinterval=@Processinterval  where ID='@ID' ";
+		   sql = sql.Replace("@Processinterval", pjresult.ToString());
+		   sql = sql.Replace("@ID", id);
+		   return dbMySql.ExecuteNoQuery(sql) > 0;
+	   }
+
         #endregion
 
         #region 数据同步

@@ -217,8 +217,14 @@ namespace QM.Client.WebService
         [WebMethod]
         public string UpdatePJ(string BillNo, int PJ)
         {
+			
             return "0";
         }
+
+		public ConfigOR GetXMLConfig()
+		{
+			Instanse().GetXMLConfig();
+		}
 
         #region QClient调用
         #region 取号图片处理

@@ -177,7 +177,7 @@ namespace QM.Client.WebService.Control
             WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(windowid);
             if (_winOR == null)
             {
-                return string.Format("窗口号：{0}不存在", windowid);//此窗口已登录
+                return string.Format("窗口号：{0}不存在", windowid);
             }
 
             WindowLoginInfoOR _Log = GetLoginLog(userid, windowid);
@@ -581,16 +581,14 @@ namespace QM.Client.WebService.Control
                 string msg = string.Empty;
                 foreach (QueueInfoOR obj in mQueueList)
                 {
-                    msg = obj.Billno;
-                    //Console.WriteLine(msg);
+                    msg = obj.Billno;                  
                 }
 
                 if (mQueueList.Count > 0)
                     mSelectQhObj = mQueueList[0];
 
                 mQueueList.Clear();
-            }
-           
+            }           
 
             if (mSelectQhObj != null)
             {
@@ -602,15 +600,30 @@ namespace QM.Client.WebService.Control
                 mSelectQhObj.Employno = _winLogin.Employno;
                 mSelectQhObj.Employname = _winLogin.Employname;
 
-                _QueueDA.UpdateCall(mSelectQhObj);
+                
                 //调查用硬件接口，呼叫
-                return mSelectQhObj.Billno;
-            }
+				string content = _Config.tp_8_show.Replace("*", mSelectQhObj.Billno)
+					.Replace("#", mWindowNo);
 
+				int mWidth = (_Config.tp_8_show.Length - 2) * 16
+					+ (mSelectQhObj.Billno.Length + mWindowNo.Length) * 8;
+
+				string result = HDDA.Instance.ShowTpMsg(_windOR.tpAddress, content, mWidth);//显示条屏信息
+				if (result == "0")
+				{
+					HDDA.Instance.PlayBill(mSelectQhObj.Billno, mWindowNo, _Config.volume);
+
+					_QueueDA.UpdateCall(mSelectQhObj);
+					return mSelectQhObj.Billno;
+				}
+				else
+				{
+					return string.Format("error:{0}", result);					
+				}
+            }
             return "error: 没有获取到排队人员。";
         }
-        
-       
+               
         
         /// <summary>
         /// 重呼	RECALL	票号
@@ -635,9 +648,28 @@ namespace QM.Client.WebService.Control
             else if (objQH.Status == 1)//正确的重呼
             {
                 objQH.ReCallNumber++;
-
                 //重呼硬件接口
-                return "0";
+				string mWindowNo = objQH.Windowno;
+				WindowOR mwinOR = GetAWindow(mWindowNo);
+				if (mwinOR == null)
+				{
+					return "窗口不存在！";
+				}
+
+				string content = _Config.tp_8_show.Replace("*", mBillNo)
+					.Replace("#", mWindowNo);
+
+				int mWidth = (_Config.tp_8_show.Length - 2) * 16
+					+ (mBillNo.Length + mWindowNo.Length) * 8;
+
+				string result = HDDA.Instance.ShowTpMsg(mwinOR.tpAddress, content, mWidth);
+				if (result == "0")
+				{
+					HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume);
+				}
+				return result;
+
+                //return "0";
             }
             return "未知错误！";
         }
@@ -682,8 +714,8 @@ namespace QM.Client.WebService.Control
             QueueInfoOR objQH = GetQueueInfo(mBillNo);
             if (objQH == null)
                 return string.Format("票号:{0} 不存在!",mBillNo);
-            
-            WindowOR _winOR = new WindowMySqlDA().SelectWindowByNo(targetWin);
+
+			WindowOR _winOR = GetAWindow(targetWin);
             if (_winOR == null)
             {
                 return string.Format("目标窗口：{0} 不存在", targetWin);//此窗口已登录
@@ -726,30 +758,49 @@ namespace QM.Client.WebService.Control
             string mCallType = strArr[1];//呼叫类型
             string mBillNo = strArr[2];//票号
 
-            if (mCallType == "客户")
-            {
-                QueueInfoOR objQH = GetQueueInfo(mBillNo);
-                if (objQH == null)
-                    return string.Format("票号:{0} 不存在!", mBillNo);
-                if (objQH.Status == 3)
-                    return "此单号已办结";
-                //呼号代码
-            }
+			if (mCallType == "客户")
+			{
+				QueueInfoOR objQH = GetQueueInfo(mBillNo);
+				if (objQH == null)
+					return string.Format("票号:{0} 不存在!", mBillNo);
+				if (objQH.Status == 3)
+				{
+					return "此单号已办结";
+				}
+
+				WindowOR mwinOR = GetAWindow(mWindowNo);
+				if (mwinOR == null)
+					return "窗口不存在！";
+
+				string content = _Config.tp_8_show.Replace("*", mBillNo)
+					.Replace("#", mWindowNo);
+
+				int mWidth = (_Config.tp_8_show.Length - 2) * 16
+					+ (mBillNo.Length + mWindowNo.Length) * 8;
+
+				string result = HDDA.Instance.ShowTpMsg(mwinOR.tpAddress, content, mWidth);
+				if (result == "0")
+				{
+					HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume);
+				}
+				return result;
+				//呼号代码
+			}
             else if (mCallType == "大堂经理")
             {
-
+				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
             }
             else if (mCallType == "客户经理")
             {
-
+				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
             }
             else if (mCallType == "保安")
             {
-
+				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
             }
             else if (mCallType == "业务顾问")
             {
-
+				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
             }
             else if (mCallType == "一米线")//参数三为，窗口号
             {
@@ -758,7 +809,7 @@ namespace QM.Client.WebService.Control
               {
                   return "窗口号不存在！";
               }
-              HDDA.Instance.SPECIAL_PJQ(7, mWin.pjqAddress);
+              HDDA.Instance.SPECIAL_PJQ(3, mWin.pjqAddress);
             }
             return "0";
         }
@@ -776,10 +827,17 @@ namespace QM.Client.WebService.Control
 
             try
             {
+				WindowOR _winOR = GetAWindow(objQH.Windowno);
+				if (_winOR == null)
+				{
+					return string.Format("窗口：{0} 不存在", objQH.Windowno);
+				}
+				HDDA.Instance.SPECIAL_PJQ(1, _winOR.pjqAddress);
+
                 objQH.Status = 2;
                 objQH.Processtime = DateTime.Now;
                 objQH.Waitinterval = GetTimeLen(objQH.Prillbilltime, DateTime.Now);
-                _QueueDA.UpdateWelcome(objQH);
+                _QueueDA.UpdateWelcome(objQH);				
             }
             catch (Exception ex)
             {
@@ -804,7 +862,12 @@ namespace QM.Client.WebService.Control
                 _QueueDA.UpdateCallJudge(objQH);
                 //调用硬件:
                 //请评价
-                //HDDA.Instance.PJ(
+				WindowOR _winOR = GetAWindow(objQH.Windowno);
+				if (_winOR == null)
+				{
+					return string.Format("窗口：{0} 不存在", objQH.Windowno);
+				}
+				HDDA.Instance.PJ(_winOR.pjqAddress, mBillNo,objQH.Id);
 
                 //移出此号码
                 foreach (BussinessQueueOR objQhQue in QhQueues)
@@ -1184,6 +1247,15 @@ namespace QM.Client.WebService.Control
         }
 
         #endregion
+
+		/// <summary>
+		/// 返回配置文件，实体
+		/// </summary>
+		/// <returns></returns>
+		public ConfigOR GetXMLConfig()
+		{
+			return _Config;
+		}
 
     }
 }

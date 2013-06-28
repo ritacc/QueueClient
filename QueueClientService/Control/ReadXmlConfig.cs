@@ -59,6 +59,18 @@ namespace QM.Client.WebService.Control
                      case "zhp_8_adv":
                          config.zhp_8_adv = xe.InnerText;
                          break;
+
+					 case "volume":
+						 int itemp = 5;
+						 if(int.TryParse(xe.InnerText,out itemp))
+						 {
+							 config.volume= itemp;
+						 }
+						 else
+						 {
+							 config.volume=7;
+						 }
+						 break;
                  }
              }
             return config;

@@ -17,5 +17,7 @@ namespace QM.Client.WebService.Control
         public string zhp_4_adv { get; set; }
         public string zhp_5_adv { get; set; }
         public string zhp_8_adv { get; set; }
+
+		public int volume { get; set; }
     }
 }
