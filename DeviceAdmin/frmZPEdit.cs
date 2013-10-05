@@ -45,6 +45,9 @@ namespace QM.Client.DeviceAdmin
                 txtDevicemodel.Text = m_devi.Devicemodel;//
                 txtHostaddr.Text = m_devi.Hostaddr;//
                 txtAddress.Text = m_devi.Address;//
+                txtColNumber.Text = m_devi.ColNumber.HasValue ? m_devi.ColNumber.Value.ToString() : "";
+                txtRowNumber.Text = m_devi.RowNumber.HasValue ? m_devi.RowNumber.Value.ToString() : "";
+                
             }
             catch (Exception e)
             {
@@ -67,7 +70,8 @@ namespace QM.Client.DeviceAdmin
             m_devi.Devicemodel = txtDevicemodel.Text;//
             m_devi.Hostaddr = txtHostaddr.Text;//
             m_devi.Address = txtAddress.Text;//
-
+            m_devi.RowNumber = Convert.ToInt32(txtRowNumber.Text);
+            m_devi.ColNumber = Convert.ToInt32(txtColNumber.Text);
             return m_devi;
         }
 
@@ -82,9 +86,26 @@ namespace QM.Client.DeviceAdmin
             if (txtAddress.Text == "")
             {
                 ShowMsg("请输入地址!");
+                return;
             }
-            DeviceOR sg = SetValue();
+            if (txtRowNumber.Text == "")
+            {
+                ShowMsg("请输入行数!");
+                return;
+            }
+            if (txtColNumber.Text == "")
+            {
+                ShowMsg("请输入行字数。");
+                return;
+            }
+            int Test = 0;
+            if (!int.TryParse(txtRowNumber.Text, out Test) || !int.TryParse(txtColNumber.Text, out Test))
+            {
+                ShowMsg("输入行数或行字数不正确。");
+                return;
+            }
 
+            DeviceOR sg = SetValue();
             try
             {
                 if (opType == "add")

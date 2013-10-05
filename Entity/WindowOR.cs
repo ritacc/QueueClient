@@ -154,6 +154,9 @@ namespace QM.Client.Entity
         /// </summary>
         public string tpAddress { get; set; }
 
+        public int? RowNumber { get; set; }
+        public int? ColNumber { get; set; }
+
         /// <summary>
         /// Window构造函数
         /// </summary>
@@ -188,6 +191,16 @@ namespace QM.Client.Entity
             pjqAddress = row["pjqAddress"].ToString().Trim();
             fjqAddress = row["fjqAddress"].ToString().Trim();
             tpAddress = row["tpAddress"].ToString().Trim();
+
+            if (row["rowNumber"].ToString() != "")
+            {
+                RowNumber = Convert.ToInt32(row["rowNumber"].ToString());
+            }
+
+            if (row["ColNumber"].ToString() != "")
+            {
+                ColNumber = Convert.ToInt32(row["ColNumber"].ToString());
+            }
         }
     }
 }

@@ -13,6 +13,7 @@ using System.Windows.Shapes;
 using QClient.Core.ViewModel;
 using QClient.QueueClinetServiceReference;
 using MahApps.Metro.Controls;
+using System.Threading;
 
 namespace QClient
 {
@@ -49,7 +50,7 @@ namespace QClient
         {
             LoadButton(_pageWinOR.Id);
         }
-
+        Thread thRefB;
         private void LoadButton(string windowId)
         {
             MainCanvas.Children.Clear();
@@ -62,6 +63,9 @@ namespace QClient
                 mbc.ButtomOR = qhandy;
                 var bc = _buttonAdmin.AddAButtom(mbc);
             }
+            thRefB = new Thread(_buttonAdmin.RefButtomWaitNumber);
+            thRefB.IsBackground = true;
+            thRefB.Start();
         }
         private void ShowErrorMsg(string errmsg)
         {
@@ -85,6 +89,15 @@ namespace QClient
                     }
                     WebViewModel.Instance.ButtomQH(element, this, Contickettime, _CureentObj);  
                 }
+            }
+        }
+
+        private void MainCanvas_Unloaded(object sender, RoutedEventArgs e)
+        {
+            _buttonAdmin.StopRef = true;
+            if (thRefB != null)
+            {
+                thRefB.Abort();
             }
         }
 

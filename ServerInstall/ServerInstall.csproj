@@ -102,6 +102,7 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <Compile Include="SaveConfig.cs" />
     <EmbeddedResource Include="FrimServiceStart.resx">
       <DependentUpon>FrimServiceStart.cs</DependentUpon>
     </EmbeddedResource>

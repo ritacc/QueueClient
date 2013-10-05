@@ -172,6 +172,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetBussinessWiatUser">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="BussinessID" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="GetBussinessWiatUserResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="GetBussinessWiatUserResult" type="s:int" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
       <s:element name="getCall">
         <s:complexType>
           <s:sequence>
@@ -396,6 +410,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="StatusShow" type="s:string" />
           <s:element minOccurs="1" maxOccurs="1" name="Updatetime" type="s:dateTime" />
           <s:element minOccurs="1" maxOccurs="1" name="Createtime" type="s:dateTime" />
+          <s:element minOccurs="1" maxOccurs="1" name="RowNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ColNumber" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
       <s:element name="UpdateDeviceSatus">
@@ -428,6 +444,28 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="GetXMLConfig">
+        <s:complexType />
+      </s:element>
+      <s:element name="GetXMLConfigResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="GetXMLConfigResult" type="tns:ConfigOR" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:complexType name="ConfigOR">
+        <s:sequence>
+          <s:element minOccurs="0" maxOccurs="1" name="tp_4_adv" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tp_5_adv" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tp_8_adv" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="tp_8_show" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="zhp_4_adv" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="zhp_5_adv" type="s:string" />
+          <s:element minOccurs="0" maxOccurs="1" name="zhp_8_adv" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="volume" type="s:int" />
+        </s:sequence>
+      </s:complexType>
       <s:element name="GetClientValue">
         <s:complexType>
           <s:sequence>
@@ -513,6 +551,8 @@
           <s:element minOccurs="0" maxOccurs="1" name="pjqAddress" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="fjqAddress" type="s:string" />
           <s:element minOccurs="0" maxOccurs="1" name="tpAddress" type="s:string" />
+          <s:element minOccurs="1" maxOccurs="1" name="RowNumber" nillable="true" type="s:int" />
+          <s:element minOccurs="1" maxOccurs="1" name="ColNumber" nillable="true" type="s:int" />
         </s:sequence>
       </s:complexType>
     </s:schema>
@@ -552,6 +592,12 @@
   </wsdl:message>
   <wsdl:message name="getBussinessInfoSoapOut">
     <wsdl:part name="parameters" element="tns:getBussinessInfoResponse" />
+  </wsdl:message>
+  <wsdl:message name="GetBussinessWiatUserSoapIn">
+    <wsdl:part name="parameters" element="tns:GetBussinessWiatUser" />
+  </wsdl:message>
+  <wsdl:message name="GetBussinessWiatUserSoapOut">
+    <wsdl:part name="parameters" element="tns:GetBussinessWiatUserResponse" />
   </wsdl:message>
   <wsdl:message name="getCallSoapIn">
     <wsdl:part name="parameters" element="tns:getCall" />
@@ -619,6 +665,12 @@
   <wsdl:message name="UpdatePJSoapOut">
     <wsdl:part name="parameters" element="tns:UpdatePJResponse" />
   </wsdl:message>
+  <wsdl:message name="GetXMLConfigSoapIn">
+    <wsdl:part name="parameters" element="tns:GetXMLConfig" />
+  </wsdl:message>
+  <wsdl:message name="GetXMLConfigSoapOut">
+    <wsdl:part name="parameters" element="tns:GetXMLConfigResponse" />
+  </wsdl:message>
   <wsdl:message name="GetClientValueSoapIn">
     <wsdl:part name="parameters" element="tns:GetClientValue" />
   </wsdl:message>
@@ -668,6 +720,10 @@
       <wsdl:input message="tns:getBussinessInfoSoapIn" />
       <wsdl:output message="tns:getBussinessInfoSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="GetBussinessWiatUser">
+      <wsdl:input message="tns:GetBussinessWiatUserSoapIn" />
+      <wsdl:output message="tns:GetBussinessWiatUserSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="getCall">
       <wsdl:input message="tns:getCallSoapIn" />
       <wsdl:output message="tns:getCallSoapOut" />
@@ -711,6 +767,10 @@
     <wsdl:operation name="UpdatePJ">
       <wsdl:input message="tns:UpdatePJSoapIn" />
       <wsdl:output message="tns:UpdatePJSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="GetXMLConfig">
+      <wsdl:input message="tns:GetXMLConfigSoapIn" />
+      <wsdl:output message="tns:GetXMLConfigSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="GetClientValue">
       <wsdl:input message="tns:GetClientValueSoapIn" />
@@ -778,6 +838,15 @@
     </wsdl:operation>
     <wsdl:operation name="getBussinessInfo">
       <soap:operation soapAction="http://www.ritacc.com/getBussinessInfo" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBussinessWiatUser">
+      <soap:operation soapAction="http://www.ritacc.com/GetBussinessWiatUser" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -884,6 +953,15 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="GetXMLConfig">
+      <soap:operation soapAction="http://www.ritacc.com/GetXMLConfig" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
     <wsdl:operation name="GetClientValue">
       <soap:operation soapAction="http://www.ritacc.com/GetClientValue" style="document" />
       <wsdl:input>
@@ -970,6 +1048,15 @@
     </wsdl:operation>
     <wsdl:operation name="getBussinessInfo">
       <soap12:operation soapAction="http://www.ritacc.com/getBussinessInfo" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBussinessWiatUser">
+      <soap12:operation soapAction="http://www.ritacc.com/GetBussinessWiatUser" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -1069,6 +1156,15 @@
     </wsdl:operation>
     <wsdl:operation name="UpdatePJ">
       <soap12:operation soapAction="http://www.ritacc.com/UpdatePJ" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetXMLConfig">
+      <soap12:operation soapAction="http://www.ritacc.com/GetXMLConfig" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

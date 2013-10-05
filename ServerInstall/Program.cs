@@ -13,39 +13,39 @@ namespace ServerInstall
         /// <summary>
         /// 应用程序的主入口点。
         /// </summary>
-        [STAThread]
-        static void Main(String[] args)
-        {
-            OpType mop = OpType.Install;
-            //if (args.Length > 0)
-            //{
-            //    if (args[0] == "UnInstall")
-            //    {
-            //        mop = OpType.UnInstall;
-            //    }
-            //}
-
-            //mop = OpType.UnInstall;
-
-            Application.EnableVisualStyles();
-            Application.SetCompatibleTextRenderingDefault(false);
-
-            FrmMain frm = new FrmMain();
-            frm.MOpType = mop;
-
-            Application.Run(frm);
-            //Application.Run(new FrmDatabaseset());
-        }
-
         //[STAThread]
         //static void Main(String[] args)
-        //{           
+        //{
+        //    OpType mop = OpType.Install;
+        //    //if (args.Length > 0)
+        //    //{
+        //    //    if (args[0] == "UnInstall")
+        //    //    {
+        //    //        mop = OpType.UnInstall;
+        //    //    }
+        //    //}
+
+        //    //mop = OpType.UnInstall;
+
         //    Application.EnableVisualStyles();
         //    Application.SetCompatibleTextRenderingDefault(false);
 
-        //    frmDataParaSet frm = new frmDataParaSet();
+        //    FrmMain frm = new FrmMain();
+        //    frm.MOpType = mop;
+
         //    Application.Run(frm);
+        //    //Application.Run(new FrmDatabaseset());
         //}
+
+        [STAThread]
+        static void Main(String[] args)
+        {
+            Application.EnableVisualStyles();
+            Application.SetCompatibleTextRenderingDefault(false);
+
+            frmDataParaSet frm = new frmDataParaSet();
+            Application.Run(frm);
+        }
 
 
         //[STAThread]

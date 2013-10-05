@@ -37,48 +37,51 @@
             this.btnTPAlter = new System.Windows.Forms.Button();
             this.btnTPAdd = new System.Windows.Forms.Button();
             this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.tabPage4 = new System.Windows.Forms.TabPage();
-            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.windownoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.windowtypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.devicemodelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.hostaddrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.deviceORBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.gvFJQ = new System.Windows.Forms.DataGridView();
             this.dataGridViewTextBoxColumn1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.btnFJQDelete = new System.Windows.Forms.Button();
+            this.btnFJQAlter = new System.Windows.Forms.Button();
+            this.btnFJQAdd = new System.Windows.Forms.Button();
+            this.tabPage3 = new System.Windows.Forms.TabPage();
+            this.gvPJQ = new System.Windows.Forms.DataGridView();
+            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.btnPJQDelete = new System.Windows.Forms.Button();
+            this.btnPJQAlter = new System.Windows.Forms.Button();
+            this.btnPJQAdd = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.gvZP = new System.Windows.Forms.DataGridView();
+            this.panel4 = new System.Windows.Forms.Panel();
+            this.btnZPDelete = new System.Windows.Forms.Button();
+            this.btnZPAlter = new System.Windows.Forms.Button();
+            this.btnZPADD = new System.Windows.Forms.Button();
+            this.deviceORBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.dataGridViewTextBoxColumn2 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn3 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn4 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn5 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn6 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn7 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.btnFJQDelete = new System.Windows.Forms.Button();
-            this.btnFJQAlter = new System.Windows.Forms.Button();
-            this.btnFJQAdd = new System.Windows.Forms.Button();
-            this.gvPJQ = new System.Windows.Forms.DataGridView();
-            this.dataGridViewTextBoxColumn8 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn9 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn10 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn11 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn12 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn13 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn14 = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.btnPJQDelete = new System.Windows.Forms.Button();
-            this.btnPJQAlter = new System.Windows.Forms.Button();
-            this.btnPJQAdd = new System.Windows.Forms.Button();
-            this.gvZP = new System.Windows.Forms.DataGridView();
-            this.panel4 = new System.Windows.Forms.Panel();
-            this.btnZPDelete = new System.Windows.Forms.Button();
-            this.btnZPAlter = new System.Windows.Forms.Button();
-            this.btnZPADD = new System.Windows.Forms.Button();
+            this.Column1 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.windownoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.addressDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.windowtypeDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.ColNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.devicemodelDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.hostaddrDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.statusDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn15 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn17 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn19 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dataGridViewTextBoxColumn16 = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.RowNumber = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn20 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.dataGridViewTextBoxColumn21 = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.tabControl1.SuspendLayout();
@@ -86,15 +89,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTP)).BeginInit();
             this.panel1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            this.tabPage3.SuspendLayout();
-            this.tabPage4.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.deviceORBindingSource)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFJQ)).BeginInit();
             this.panel2.SuspendLayout();
+            this.tabPage3.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvPJQ)).BeginInit();
             this.panel3.SuspendLayout();
+            this.tabPage4.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.gvZP)).BeginInit();
             this.panel4.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.deviceORBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -135,6 +138,7 @@
             this.windownoDataGridViewTextBoxColumn,
             this.addressDataGridViewTextBoxColumn,
             this.windowtypeDataGridViewTextBoxColumn,
+            this.ColNumber,
             this.devicemodelDataGridViewTextBoxColumn,
             this.hostaddrDataGridViewTextBoxColumn,
             this.statusDataGridViewTextBoxColumn});
@@ -202,82 +206,6 @@
             this.tabPage2.Text = "呼叫器";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
-            // tabPage3
-            // 
-            this.tabPage3.Controls.Add(this.gvPJQ);
-            this.tabPage3.Controls.Add(this.panel3);
-            this.tabPage3.Location = new System.Drawing.Point(4, 21);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(913, 574);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "评价器";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // tabPage4
-            // 
-            this.tabPage4.Controls.Add(this.gvZP);
-            this.tabPage4.Controls.Add(this.panel4);
-            this.tabPage4.Location = new System.Drawing.Point(4, 21);
-            this.tabPage4.Name = "tabPage4";
-            this.tabPage4.Size = new System.Drawing.Size(913, 574);
-            this.tabPage4.TabIndex = 3;
-            this.tabPage4.Text = "主屏";
-            this.tabPage4.UseVisualStyleBackColor = true;
-            // 
-            // Column1
-            // 
-            this.Column1.DataPropertyName = "Id";
-            this.Column1.HeaderText = "ID";
-            this.Column1.Name = "Column1";
-            this.Column1.ReadOnly = true;
-            this.Column1.Visible = false;
-            // 
-            // windownoDataGridViewTextBoxColumn
-            // 
-            this.windownoDataGridViewTextBoxColumn.DataPropertyName = "Windowno";
-            this.windownoDataGridViewTextBoxColumn.HeaderText = "柜台号码";
-            this.windownoDataGridViewTextBoxColumn.Name = "windownoDataGridViewTextBoxColumn";
-            this.windownoDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // addressDataGridViewTextBoxColumn
-            // 
-            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
-            this.addressDataGridViewTextBoxColumn.HeaderText = "地址";
-            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
-            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // windowtypeDataGridViewTextBoxColumn
-            // 
-            this.windowtypeDataGridViewTextBoxColumn.DataPropertyName = "Windowtype";
-            this.windowtypeDataGridViewTextBoxColumn.HeaderText = "柜台类型";
-            this.windowtypeDataGridViewTextBoxColumn.Name = "windowtypeDataGridViewTextBoxColumn";
-            this.windowtypeDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // devicemodelDataGridViewTextBoxColumn
-            // 
-            this.devicemodelDataGridViewTextBoxColumn.DataPropertyName = "Devicemodel";
-            this.devicemodelDataGridViewTextBoxColumn.HeaderText = "设备型号";
-            this.devicemodelDataGridViewTextBoxColumn.Name = "devicemodelDataGridViewTextBoxColumn";
-            this.devicemodelDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // hostaddrDataGridViewTextBoxColumn
-            // 
-            this.hostaddrDataGridViewTextBoxColumn.DataPropertyName = "Hostaddr";
-            this.hostaddrDataGridViewTextBoxColumn.HeaderText = "设备主机地址";
-            this.hostaddrDataGridViewTextBoxColumn.Name = "hostaddrDataGridViewTextBoxColumn";
-            this.hostaddrDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // statusDataGridViewTextBoxColumn
-            // 
-            this.statusDataGridViewTextBoxColumn.DataPropertyName = "StatusShow";
-            this.statusDataGridViewTextBoxColumn.HeaderText = "状态";
-            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
-            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
-            // 
-            // deviceORBindingSource
-            // 
-            this.deviceORBindingSource.DataSource = typeof(QM.Client.Entity.DeviceOR);
-            // 
             // gvFJQ
             // 
             this.gvFJQ.AllowUserToAddRows = false;
@@ -312,48 +240,6 @@
             this.dataGridViewTextBoxColumn1.Name = "dataGridViewTextBoxColumn1";
             this.dataGridViewTextBoxColumn1.ReadOnly = true;
             this.dataGridViewTextBoxColumn1.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn2
-            // 
-            this.dataGridViewTextBoxColumn2.DataPropertyName = "Windowno";
-            this.dataGridViewTextBoxColumn2.HeaderText = "柜台号码";
-            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
-            this.dataGridViewTextBoxColumn2.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn3
-            // 
-            this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
-            this.dataGridViewTextBoxColumn3.HeaderText = "地址";
-            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
-            this.dataGridViewTextBoxColumn3.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn4
-            // 
-            this.dataGridViewTextBoxColumn4.DataPropertyName = "Windowtype";
-            this.dataGridViewTextBoxColumn4.HeaderText = "柜台类型";
-            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
-            this.dataGridViewTextBoxColumn4.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn5
-            // 
-            this.dataGridViewTextBoxColumn5.DataPropertyName = "Devicemodel";
-            this.dataGridViewTextBoxColumn5.HeaderText = "设备型号";
-            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
-            this.dataGridViewTextBoxColumn5.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn6
-            // 
-            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hostaddr";
-            this.dataGridViewTextBoxColumn6.HeaderText = "设备主机地址";
-            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
-            this.dataGridViewTextBoxColumn6.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn7
-            // 
-            this.dataGridViewTextBoxColumn7.DataPropertyName = "StatusShow";
-            this.dataGridViewTextBoxColumn7.HeaderText = "状态";
-            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
-            this.dataGridViewTextBoxColumn7.ReadOnly = true;
             // 
             // panel2
             // 
@@ -396,6 +282,17 @@
             this.btnFJQAdd.UseVisualStyleBackColor = true;
             this.btnFJQAdd.Click += new System.EventHandler(this.btnFJQAdd_Click);
             // 
+            // tabPage3
+            // 
+            this.tabPage3.Controls.Add(this.gvPJQ);
+            this.tabPage3.Controls.Add(this.panel3);
+            this.tabPage3.Location = new System.Drawing.Point(4, 21);
+            this.tabPage3.Name = "tabPage3";
+            this.tabPage3.Size = new System.Drawing.Size(913, 574);
+            this.tabPage3.TabIndex = 2;
+            this.tabPage3.Text = "评价器";
+            this.tabPage3.UseVisualStyleBackColor = true;
+            // 
             // gvPJQ
             // 
             this.gvPJQ.AllowUserToAddRows = false;
@@ -430,48 +327,6 @@
             this.dataGridViewTextBoxColumn8.Name = "dataGridViewTextBoxColumn8";
             this.dataGridViewTextBoxColumn8.ReadOnly = true;
             this.dataGridViewTextBoxColumn8.Visible = false;
-            // 
-            // dataGridViewTextBoxColumn9
-            // 
-            this.dataGridViewTextBoxColumn9.DataPropertyName = "Windowno";
-            this.dataGridViewTextBoxColumn9.HeaderText = "柜台号码";
-            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
-            this.dataGridViewTextBoxColumn9.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn10
-            // 
-            this.dataGridViewTextBoxColumn10.DataPropertyName = "Address";
-            this.dataGridViewTextBoxColumn10.HeaderText = "地址";
-            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
-            this.dataGridViewTextBoxColumn10.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn11
-            // 
-            this.dataGridViewTextBoxColumn11.DataPropertyName = "Windowtype";
-            this.dataGridViewTextBoxColumn11.HeaderText = "柜台类型";
-            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
-            this.dataGridViewTextBoxColumn11.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn12
-            // 
-            this.dataGridViewTextBoxColumn12.DataPropertyName = "Devicemodel";
-            this.dataGridViewTextBoxColumn12.HeaderText = "设备型号";
-            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
-            this.dataGridViewTextBoxColumn12.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn13
-            // 
-            this.dataGridViewTextBoxColumn13.DataPropertyName = "Hostaddr";
-            this.dataGridViewTextBoxColumn13.HeaderText = "设备主机地址";
-            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
-            this.dataGridViewTextBoxColumn13.ReadOnly = true;
-            // 
-            // dataGridViewTextBoxColumn14
-            // 
-            this.dataGridViewTextBoxColumn14.DataPropertyName = "StatusShow";
-            this.dataGridViewTextBoxColumn14.HeaderText = "状态";
-            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
-            this.dataGridViewTextBoxColumn14.ReadOnly = true;
             // 
             // panel3
             // 
@@ -514,6 +369,17 @@
             this.btnPJQAdd.UseVisualStyleBackColor = true;
             this.btnPJQAdd.Click += new System.EventHandler(this.btnPJQAdd_Click);
             // 
+            // tabPage4
+            // 
+            this.tabPage4.Controls.Add(this.gvZP);
+            this.tabPage4.Controls.Add(this.panel4);
+            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(913, 574);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "主屏";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
             // gvZP
             // 
             this.gvZP.AllowUserToAddRows = false;
@@ -526,6 +392,8 @@
             this.dataGridViewTextBoxColumn15,
             this.dataGridViewTextBoxColumn17,
             this.dataGridViewTextBoxColumn19,
+            this.dataGridViewTextBoxColumn16,
+            this.RowNumber,
             this.dataGridViewTextBoxColumn20,
             this.dataGridViewTextBoxColumn21});
             this.gvZP.DataSource = this.deviceORBindingSource;
@@ -580,6 +448,151 @@
             this.btnZPADD.UseVisualStyleBackColor = true;
             this.btnZPADD.Click += new System.EventHandler(this.btnZPADD_Click);
             // 
+            // deviceORBindingSource
+            // 
+            this.deviceORBindingSource.DataSource = typeof(QM.Client.Entity.DeviceOR);
+            // 
+            // dataGridViewTextBoxColumn2
+            // 
+            this.dataGridViewTextBoxColumn2.DataPropertyName = "Windowno";
+            this.dataGridViewTextBoxColumn2.HeaderText = "柜台号码";
+            this.dataGridViewTextBoxColumn2.Name = "dataGridViewTextBoxColumn2";
+            this.dataGridViewTextBoxColumn2.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn3
+            // 
+            this.dataGridViewTextBoxColumn3.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn3.HeaderText = "地址";
+            this.dataGridViewTextBoxColumn3.Name = "dataGridViewTextBoxColumn3";
+            this.dataGridViewTextBoxColumn3.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn4
+            // 
+            this.dataGridViewTextBoxColumn4.DataPropertyName = "Windowtype";
+            this.dataGridViewTextBoxColumn4.HeaderText = "柜台类型";
+            this.dataGridViewTextBoxColumn4.Name = "dataGridViewTextBoxColumn4";
+            this.dataGridViewTextBoxColumn4.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn5
+            // 
+            this.dataGridViewTextBoxColumn5.DataPropertyName = "Devicemodel";
+            this.dataGridViewTextBoxColumn5.HeaderText = "设备型号";
+            this.dataGridViewTextBoxColumn5.Name = "dataGridViewTextBoxColumn5";
+            this.dataGridViewTextBoxColumn5.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn6
+            // 
+            this.dataGridViewTextBoxColumn6.DataPropertyName = "Hostaddr";
+            this.dataGridViewTextBoxColumn6.HeaderText = "设备主机地址";
+            this.dataGridViewTextBoxColumn6.Name = "dataGridViewTextBoxColumn6";
+            this.dataGridViewTextBoxColumn6.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn7
+            // 
+            this.dataGridViewTextBoxColumn7.DataPropertyName = "StatusShow";
+            this.dataGridViewTextBoxColumn7.HeaderText = "状态";
+            this.dataGridViewTextBoxColumn7.Name = "dataGridViewTextBoxColumn7";
+            this.dataGridViewTextBoxColumn7.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn9
+            // 
+            this.dataGridViewTextBoxColumn9.DataPropertyName = "Windowno";
+            this.dataGridViewTextBoxColumn9.HeaderText = "柜台号码";
+            this.dataGridViewTextBoxColumn9.Name = "dataGridViewTextBoxColumn9";
+            this.dataGridViewTextBoxColumn9.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn10
+            // 
+            this.dataGridViewTextBoxColumn10.DataPropertyName = "Address";
+            this.dataGridViewTextBoxColumn10.HeaderText = "地址";
+            this.dataGridViewTextBoxColumn10.Name = "dataGridViewTextBoxColumn10";
+            this.dataGridViewTextBoxColumn10.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn11
+            // 
+            this.dataGridViewTextBoxColumn11.DataPropertyName = "Windowtype";
+            this.dataGridViewTextBoxColumn11.HeaderText = "柜台类型";
+            this.dataGridViewTextBoxColumn11.Name = "dataGridViewTextBoxColumn11";
+            this.dataGridViewTextBoxColumn11.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn12
+            // 
+            this.dataGridViewTextBoxColumn12.DataPropertyName = "Devicemodel";
+            this.dataGridViewTextBoxColumn12.HeaderText = "设备型号";
+            this.dataGridViewTextBoxColumn12.Name = "dataGridViewTextBoxColumn12";
+            this.dataGridViewTextBoxColumn12.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn13
+            // 
+            this.dataGridViewTextBoxColumn13.DataPropertyName = "Hostaddr";
+            this.dataGridViewTextBoxColumn13.HeaderText = "设备主机地址";
+            this.dataGridViewTextBoxColumn13.Name = "dataGridViewTextBoxColumn13";
+            this.dataGridViewTextBoxColumn13.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn14
+            // 
+            this.dataGridViewTextBoxColumn14.DataPropertyName = "StatusShow";
+            this.dataGridViewTextBoxColumn14.HeaderText = "状态";
+            this.dataGridViewTextBoxColumn14.Name = "dataGridViewTextBoxColumn14";
+            this.dataGridViewTextBoxColumn14.ReadOnly = true;
+            // 
+            // Column1
+            // 
+            this.Column1.DataPropertyName = "Id";
+            this.Column1.HeaderText = "ID";
+            this.Column1.Name = "Column1";
+            this.Column1.ReadOnly = true;
+            this.Column1.Visible = false;
+            // 
+            // windownoDataGridViewTextBoxColumn
+            // 
+            this.windownoDataGridViewTextBoxColumn.DataPropertyName = "Windowno";
+            this.windownoDataGridViewTextBoxColumn.HeaderText = "柜台号码";
+            this.windownoDataGridViewTextBoxColumn.Name = "windownoDataGridViewTextBoxColumn";
+            this.windownoDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // addressDataGridViewTextBoxColumn
+            // 
+            this.addressDataGridViewTextBoxColumn.DataPropertyName = "Address";
+            this.addressDataGridViewTextBoxColumn.HeaderText = "地址";
+            this.addressDataGridViewTextBoxColumn.Name = "addressDataGridViewTextBoxColumn";
+            this.addressDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // windowtypeDataGridViewTextBoxColumn
+            // 
+            this.windowtypeDataGridViewTextBoxColumn.DataPropertyName = "Windowtype";
+            this.windowtypeDataGridViewTextBoxColumn.HeaderText = "柜台类型";
+            this.windowtypeDataGridViewTextBoxColumn.Name = "windowtypeDataGridViewTextBoxColumn";
+            this.windowtypeDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // ColNumber
+            // 
+            this.ColNumber.DataPropertyName = "ColNumber";
+            this.ColNumber.HeaderText = "行字数";
+            this.ColNumber.Name = "ColNumber";
+            this.ColNumber.ReadOnly = true;
+            // 
+            // devicemodelDataGridViewTextBoxColumn
+            // 
+            this.devicemodelDataGridViewTextBoxColumn.DataPropertyName = "Devicemodel";
+            this.devicemodelDataGridViewTextBoxColumn.HeaderText = "设备型号";
+            this.devicemodelDataGridViewTextBoxColumn.Name = "devicemodelDataGridViewTextBoxColumn";
+            this.devicemodelDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // hostaddrDataGridViewTextBoxColumn
+            // 
+            this.hostaddrDataGridViewTextBoxColumn.DataPropertyName = "Hostaddr";
+            this.hostaddrDataGridViewTextBoxColumn.HeaderText = "设备主机地址";
+            this.hostaddrDataGridViewTextBoxColumn.Name = "hostaddrDataGridViewTextBoxColumn";
+            this.hostaddrDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
+            // statusDataGridViewTextBoxColumn
+            // 
+            this.statusDataGridViewTextBoxColumn.DataPropertyName = "StatusShow";
+            this.statusDataGridViewTextBoxColumn.HeaderText = "状态";
+            this.statusDataGridViewTextBoxColumn.Name = "statusDataGridViewTextBoxColumn";
+            this.statusDataGridViewTextBoxColumn.ReadOnly = true;
+            // 
             // dataGridViewTextBoxColumn15
             // 
             this.dataGridViewTextBoxColumn15.DataPropertyName = "Id";
@@ -601,6 +614,20 @@
             this.dataGridViewTextBoxColumn19.HeaderText = "设备型号";
             this.dataGridViewTextBoxColumn19.Name = "dataGridViewTextBoxColumn19";
             this.dataGridViewTextBoxColumn19.ReadOnly = true;
+            // 
+            // dataGridViewTextBoxColumn16
+            // 
+            this.dataGridViewTextBoxColumn16.DataPropertyName = "ColNumber";
+            this.dataGridViewTextBoxColumn16.HeaderText = "行字数";
+            this.dataGridViewTextBoxColumn16.Name = "dataGridViewTextBoxColumn16";
+            this.dataGridViewTextBoxColumn16.ReadOnly = true;
+            // 
+            // RowNumber
+            // 
+            this.RowNumber.DataPropertyName = "RowNumber";
+            this.RowNumber.HeaderText = "行数";
+            this.RowNumber.Name = "RowNumber";
+            this.RowNumber.ReadOnly = true;
             // 
             // dataGridViewTextBoxColumn20
             // 
@@ -631,15 +658,15 @@
             ((System.ComponentModel.ISupportInitialize)(this.gvTP)).EndInit();
             this.panel1.ResumeLayout(false);
             this.tabPage2.ResumeLayout(false);
-            this.tabPage3.ResumeLayout(false);
-            this.tabPage4.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.deviceORBindingSource)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.gvFJQ)).EndInit();
             this.panel2.ResumeLayout(false);
+            this.tabPage3.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvPJQ)).EndInit();
             this.panel3.ResumeLayout(false);
+            this.tabPage4.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.gvZP)).EndInit();
             this.panel4.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.deviceORBindingSource)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -657,13 +684,6 @@
         private System.Windows.Forms.Button btnTPAdd;
         private System.Windows.Forms.TabPage tabPage4;
         private System.Windows.Forms.BindingSource deviceORBindingSource;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
-        private System.Windows.Forms.DataGridViewTextBoxColumn windownoDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn windowtypeDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn devicemodelDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn hostaddrDataGridViewTextBoxColumn;
-        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridView gvFJQ;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn1;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn2;
@@ -693,9 +713,19 @@
         private System.Windows.Forms.Button btnZPDelete;
         private System.Windows.Forms.Button btnZPAlter;
         private System.Windows.Forms.Button btnZPADD;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Column1;
+        private System.Windows.Forms.DataGridViewTextBoxColumn windownoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn addressDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn windowtypeDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn ColNumber;
+        private System.Windows.Forms.DataGridViewTextBoxColumn devicemodelDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn hostaddrDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn statusDataGridViewTextBoxColumn;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn15;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn17;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn19;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn16;
+        private System.Windows.Forms.DataGridViewTextBoxColumn RowNumber;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn20;
         private System.Windows.Forms.DataGridViewTextBoxColumn dataGridViewTextBoxColumn21;
     }

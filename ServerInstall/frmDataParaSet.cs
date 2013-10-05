@@ -93,34 +93,40 @@ namespace ServerInstall
                 string strMSSqlCon = getMSSqlCon();
                 string strMySql = GetMySqlCon();
 
-                //更新服务配置文件
-                string path = Common.GetStartPath(GlobalOR.ServerExeName + ".config");
-                ExeConfigurationFileMap map = new ExeConfigurationFileMap();
-                map.ExeConfigFilename = path;
+                ////更新服务配置文件
+                //string path = Common.GetStartPath(GlobalOR.ServerExeName + ".config");
+                //ExeConfigurationFileMap map = new ExeConfigurationFileMap();
+                //map.ExeConfigFilename = path;
 
-                Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
-                //实例化mssql
-                config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString = strMSSqlCon;
-                config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString = strMySql;
+                //Configuration config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+                ////实例化mssql
+                //config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString = strMSSqlCon;
+                //config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString = strMySql;
 
-                config.AppSettings.Settings["Bankno"].Value = txtBankno.Text;
-                config.AppSettings.Settings["QueueUpTimeLen"].Value = txtQueueUpTimeLen.Text;
-                config.AppSettings.Settings["ParaDownTime"].Value = cbUpTimelen.Text;
-                config.Save();
-                //更新参数配置文件
+                //config.AppSettings.Settings["Bankno"].Value = txtBankno.Text;
+                //config.AppSettings.Settings["QueueUpTimeLen"].Value = txtQueueUpTimeLen.Text;
+                //config.AppSettings.Settings["ParaDownTime"].Value = cbUpTimelen.Text;
+                //config.Save();
+                ////更新参数配置文件
 
-                //Winform更新数据
-                path = Common.GetStartPath("UpdateFrm.exe" + ".config");
-                map.ExeConfigFilename = path;
-                config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
-                //实例化mssql
-                config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString = strMSSqlCon;
-                config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString = strMySql;
+                ////Winform更新数据
+                //path = Common.GetStartPath("UpdateFrm.exe" + ".config");
+                //map.ExeConfigFilename = path;
+                //config = ConfigurationManager.OpenMappedExeConfiguration(map, ConfigurationUserLevel.None);
+                ////实例化mssql
+                //config.ConnectionStrings.ConnectionStrings["Queue"].ConnectionString = strMSSqlCon;
+                //config.ConnectionStrings.ConnectionStrings["MySql"].ConnectionString = strMySql;
 
-                config.AppSettings.Settings["Bankno"].Value = txtBankno.Text;
-                config.AppSettings.Settings["QueueUpTimeLen"].Value = txtQueueUpTimeLen.Text;
-                config.AppSettings.Settings["ParaDownTime"].Value = cbUpTimelen.Text;
-                config.Save();
+                //config.AppSettings.Settings["Bankno"].Value = txtBankno.Text;
+                //config.AppSettings.Settings["QueueUpTimeLen"].Value = txtQueueUpTimeLen.Text;
+                //config.AppSettings.Settings["ParaDownTime"].Value = cbUpTimelen.Text;
+                //config.Save();
+
+                
+                //保存配置信息
+                new SaveConfig().SaveConfigInfo(strMSSqlCon, strMySql,
+                    txtBankno.Text, txtQueueUpTimeLen.Text, cbUpTimelen.Text);
+
             }
             catch (Exception ex)
             {

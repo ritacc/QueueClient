@@ -12,44 +12,64 @@ namespace QClient.Core.Uitl.Logger
         protected static string GetFilePath()
         {
             string strTime = DateTime.Now.ToString("yyyyMMdd");
-            return string.Format("{0}log{1}.txt", Common.GetStartpath(), strTime);
+            return string.Format("{0}log\\log{1}.txt", Common.GetStartpath(), strTime);
         }
-
+        public static object objLog = new object();
         public static void WriteLog(string ErrorCode,string msg)
         {
-            string path = GetFilePath();
+            try
+            {
+                lock (objLog)
+                {
+                    string path = GetFilePath();
+                    FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                    StreamWriter sw = new StreamWriter(fs);
+                    sw.BaseStream.Seek(0, SeekOrigin.End);
+                    sw.WriteLine(string.Format("时间：{0} ,ErrorCode:{1},{2}",System.DateTime.Now, ErrorCode,  msg));
+                    sw.Flush();
 
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                    sw.Close();
+                    sw.Dispose();
+                    fs.Close();
+                    fs.Dispose();
+                }
+            }
+            catch
+            {
 
-            
-            StreamWriter sw = new StreamWriter(fs);
-
-            sw.BaseStream.Seek(0, SeekOrigin.End);
-            sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, msg));
-            sw.Flush();
-            sw.Dispose();
-            fs.Dispose();
+            }
         }
 
         protected static string GetTestFilePath()
         {
             string strTime = DateTime.Now.ToString("yyyyMMdd");
-            return string.Format("{0}testlog{1}.txt", Common.GetStartpath(), strTime);
+            return string.Format("{0}log\\testlog{1}.txt", Common.GetStartpath(), strTime);
         }
+        public static object TestLog = new object();
         public static void WriteTestLog(string ErrorCode, string msg)
         {
-            string path = GetTestFilePath();
+            try
+            {
+                lock (TestLog)
+                {
+                    string path = GetTestFilePath();
+                    FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
 
-            FileStream fs = new FileStream(path, FileMode.OpenOrCreate, FileAccess.Write);
+                    StreamWriter sw = new StreamWriter(fs);
+                    sw.BaseStream.Seek(0, SeekOrigin.End);
+                    sw.WriteLine(string.Format("时间：{0},ErrorCode:{1} ;{2}",System.DateTime.Now, ErrorCode,  msg));
+                    sw.Flush();
+                    sw.Close();
+                    sw.Dispose();
 
+                    fs.Close();
+                    fs.Dispose();
+                }
+            }
+            catch
+            {
 
-            StreamWriter sw = new StreamWriter(fs);
-
-            sw.BaseStream.Seek(0, SeekOrigin.End);
-            sw.WriteLine(string.Format("ErrorCode:{0} ;时间：{1},{2}", ErrorCode, System.DateTime.Now, msg));
-            sw.Flush();
-            sw.Dispose();
-            fs.Dispose();
+            }
         }
     }
 }

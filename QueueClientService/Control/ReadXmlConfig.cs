@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.IO;
 using System.Xml;
+using QM.Client.Entity;
 
 namespace QM.Client.WebService.Control
 {
@@ -32,45 +33,49 @@ namespace QM.Client.WebService.Control
              ConfigOR config = new ConfigOR();
              foreach (XmlNode xn in nodeList)
              {
-                 XmlElement xe = (XmlElement)xn;
-
-                 switch (xe.Name)
+                 if (xn is XmlElement)
                  {
-                     case "tp_4_adv":
-                         config.tp_4_adv = xe.InnerText;
-                         break;
-                     case "tp_5_adv":
-                         config.tp_5_adv = xe.InnerText;
-                         break;
-                     case "tp_8_adv":
-                         config.tp_8_adv = xe.InnerText;
-                         break;
+                     XmlElement xe = (XmlElement)xn;
 
-                     case "tp_8_show":
-                         config.tp_8_show = xe.InnerText;
-                         break;
+                     switch (xe.Name)
+                     {
+                         case "tp_4_adv":
+                             config.tp_4_adv = xe.InnerText;
+                             break;
+                         case "tp_5_adv":
+                             config.tp_5_adv = xe.InnerText;
+                             break;
+                         case "tp_8_adv":
+                             config.tp_8_adv = xe.InnerText;
+                             break;
 
-                     case "zhp_4_adv":
-                         config.zhp_4_adv = xe.InnerText;
-                         break;
-                     case "zhp_5_adv":
-                         config.zhp_5_adv = xe.InnerText;
-                         break;
-                     case "zhp_8_adv":
-                         config.zhp_8_adv = xe.InnerText;
-                         break;
+                         case "tp_8_show":
+                             config.tp_8_show = xe.InnerText;
+                             break;
 
-					 case "volume":
-						 int itemp = 5;
-						 if(int.TryParse(xe.InnerText,out itemp))
-						 {
-							 config.volume= itemp;
-						 }
-						 else
-						 {
-							 config.volume=7;
-						 }
-						 break;
+                         case "zhp_4_adv":
+                             config.zhp_4_adv = xe.InnerText;
+                             break;
+                         case "zhp_5_adv":
+                             config.zhp_5_adv = xe.InnerText;
+                             break;
+                         case "zhp_8_adv":
+                             config.zhp_8_adv = xe.InnerText;
+                             break;
+
+                         case "volume":
+                             int itemp = 5;
+                             if (int.TryParse(xe.InnerText, out itemp))
+                             {
+                                 config.volume = itemp;
+                             }
+                             else
+                             {
+                                 config.volume = 7;
+                             }
+                             break;
+                     }
+
                  }
              }
             return config;

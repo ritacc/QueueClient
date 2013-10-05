@@ -136,25 +136,28 @@ namespace QM.Client.WebService.Control
         public bool BussinessIsEnableHeadle(List<BussinessRoleONOR> list, string bussinessID
             , List<WindowLoginInfoOR> ListWindowLogins)
         {
-            foreach (BussinessRoleONOR obj in list)
+            if (list != null)
             {
-                if (obj.Bussinessid == bussinessID)
+                foreach (BussinessRoleONOR obj in list)
                 {
-                    if (obj.IsBackupPrio)  //备用队列
+                    if (obj.Bussinessid == bussinessID)
                     {
-                        //检查，备用队列，是否有用户可以办理
-                        if (CheckBackupPrio(obj.Bussinessid, ListWindowLogins))
+                        if (obj.IsBackupPrio)  //备用队列
                         {
-                            return false;
+                            //检查，备用队列，是否有用户可以办理
+                            if (CheckBackupPrio(obj.Bussinessid, ListWindowLogins))
+                            {
+                                return false;
+                            }
+                            else
+                            {
+                                return true;
+                            }
                         }
                         else
                         {
                             return true;
                         }
-                    }
-                    else
-                    {
-                        return true;
                     }
                 }
             }

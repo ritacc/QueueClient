@@ -45,6 +45,12 @@
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.label9 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.txtColNumber = new System.Windows.Forms.TextBox();
+            this.label11 = new System.Windows.Forms.Label();
+            this.pnTP = new System.Windows.Forms.Panel();
+            this.label12 = new System.Windows.Forms.Label();
+            this.pnTP.SuspendLayout();
             this.SuspendLayout();
             // 
             // label1
@@ -144,7 +150,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(115, 218);
+            this.btnSave.Location = new System.Drawing.Point(111, 254);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(47, 23);
             this.btnSave.TabIndex = 6;
@@ -154,7 +160,7 @@
             // 
             // btnCanncel
             // 
-            this.btnCanncel.Location = new System.Drawing.Point(187, 218);
+            this.btnCanncel.Location = new System.Drawing.Point(183, 254);
             this.btnCanncel.Name = "btnCanncel";
             this.btnCanncel.Size = new System.Drawing.Size(51, 23);
             this.btnCanncel.TabIndex = 7;
@@ -200,11 +206,60 @@
             this.label9.TabIndex = 16;
             this.label9.Text = "*";
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(158, 10);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(17, 12);
+            this.label10.TabIndex = 41;
+            this.label10.Text = "字";
+            // 
+            // txtColNumber
+            // 
+            this.txtColNumber.Location = new System.Drawing.Point(56, 4);
+            this.txtColNumber.MaxLength = 10;
+            this.txtColNumber.Name = "txtColNumber";
+            this.txtColNumber.Size = new System.Drawing.Size(98, 21);
+            this.txtColNumber.TabIndex = 39;
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.Location = new System.Drawing.Point(15, 10);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(41, 12);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "每行：";
+            // 
+            // pnTP
+            // 
+            this.pnTP.Controls.Add(this.label12);
+            this.pnTP.Controls.Add(this.txtColNumber);
+            this.pnTP.Controls.Add(this.label10);
+            this.pnTP.Controls.Add(this.label11);
+            this.pnTP.Location = new System.Drawing.Point(60, 186);
+            this.pnTP.Name = "pnTP";
+            this.pnTP.Size = new System.Drawing.Size(200, 34);
+            this.pnTP.TabIndex = 42;
+            this.pnTP.Visible = false;
+            // 
+            // label12
+            // 
+            this.label12.AutoSize = true;
+            this.label12.ForeColor = System.Drawing.Color.Red;
+            this.label12.Location = new System.Drawing.Point(176, 10);
+            this.label12.Name = "label12";
+            this.label12.Size = new System.Drawing.Size(11, 12);
+            this.label12.TabIndex = 43;
+            this.label12.Text = "*";
+            // 
             // frmDeviceEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(402, 245);
+            this.ClientSize = new System.Drawing.Size(402, 289);
+            this.Controls.Add(this.pnTP);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.label8);
             this.Controls.Add(this.txtTypeName);
@@ -228,6 +283,8 @@
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterParent;
             this.Text = "条屏管理";
             this.Load += new System.EventHandler(this.frmTPEdit_Load);
+            this.pnTP.ResumeLayout(false);
+            this.pnTP.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -252,5 +309,10 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.TextBox txtColNumber;
+        private System.Windows.Forms.Label label11;
+        private System.Windows.Forms.Panel pnTP;
+        private System.Windows.Forms.Label label12;
     }
 }

@@ -40,6 +40,13 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txtDevicemodel = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
+            this.txtColNumber = new System.Windows.Forms.TextBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtRowNumber = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label8 = new System.Windows.Forms.Label();
+            this.label10 = new System.Windows.Forms.Label();
+            this.label11 = new System.Windows.Forms.Label();
             this.SuspendLayout();
             // 
             // label9
@@ -72,7 +79,7 @@
             // 
             // btnCanncel
             // 
-            this.btnCanncel.Location = new System.Drawing.Point(182, 174);
+            this.btnCanncel.Location = new System.Drawing.Point(182, 220);
             this.btnCanncel.Name = "btnCanncel";
             this.btnCanncel.Size = new System.Drawing.Size(51, 23);
             this.btnCanncel.TabIndex = 27;
@@ -82,7 +89,7 @@
             // 
             // btnSave
             // 
-            this.btnSave.Location = new System.Drawing.Point(110, 174);
+            this.btnSave.Location = new System.Drawing.Point(110, 220);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(47, 23);
             this.btnSave.TabIndex = 26;
@@ -148,11 +155,81 @@
             this.label3.TabIndex = 22;
             this.label3.Text = "设备型号：";
             // 
+            // txtColNumber
+            // 
+            this.txtColNumber.Location = new System.Drawing.Point(112, 148);
+            this.txtColNumber.MaxLength = 10;
+            this.txtColNumber.Name = "txtColNumber";
+            this.txtColNumber.Size = new System.Drawing.Size(98, 21);
+            this.txtColNumber.TabIndex = 34;
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(73, 154);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(41, 12);
+            this.label1.TabIndex = 35;
+            this.label1.Text = "每行：";
+            // 
+            // txtRowNumber
+            // 
+            this.txtRowNumber.Location = new System.Drawing.Point(112, 175);
+            this.txtRowNumber.MaxLength = 10;
+            this.txtRowNumber.Name = "txtRowNumber";
+            this.txtRowNumber.Size = new System.Drawing.Size(98, 21);
+            this.txtRowNumber.TabIndex = 36;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(73, 181);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(41, 12);
+            this.label2.TabIndex = 37;
+            this.label2.Text = "行数：";
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(216, 154);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(17, 12);
+            this.label8.TabIndex = 38;
+            this.label8.Text = "字";
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.ForeColor = System.Drawing.Color.Red;
+            this.label10.Location = new System.Drawing.Point(239, 154);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(11, 12);
+            this.label10.TabIndex = 39;
+            this.label10.Text = "*";
+            // 
+            // label11
+            // 
+            this.label11.AutoSize = true;
+            this.label11.ForeColor = System.Drawing.Color.Red;
+            this.label11.Location = new System.Drawing.Point(216, 178);
+            this.label11.Name = "label11";
+            this.label11.Size = new System.Drawing.Size(11, 12);
+            this.label11.TabIndex = 40;
+            this.label11.Text = "*";
+            // 
             // frmZPEdit
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(387, 210);
+            this.ClientSize = new System.Drawing.Size(387, 256);
+            this.Controls.Add(this.label11);
+            this.Controls.Add(this.label10);
+            this.Controls.Add(this.label8);
+            this.Controls.Add(this.txtRowNumber);
+            this.Controls.Add(this.label2);
+            this.Controls.Add(this.txtColNumber);
+            this.Controls.Add(this.label1);
             this.Controls.Add(this.label9);
             this.Controls.Add(this.txtTypeName);
             this.Controls.Add(this.label7);
@@ -190,5 +267,12 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txtDevicemodel;
         private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtColNumber;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtRowNumber;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.Label label11;
     }
 }

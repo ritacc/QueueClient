@@ -17,15 +17,18 @@ namespace QClient.Core.ViewModel
 		public List<WindowOR> listWin { get; set; }
 		public ControllerSoapClient GetHDClient()
 		{
-			return new ControllerSoapClient();
+            ControllerSoapClient HDClient=new ControllerSoapClient();
+            return HDClient;
 		}
 
 		public QueueClientSoapClient GetQueueClient()
 		{
-			return new QueueClientSoapClient();
+            QueueClientSoapClient CClient = new QueueClientSoapClient();
+            return CClient;
 		}
 
 		public List<DeviceOR> DeviceList { get; set; }
+        protected ConfigOR _Config { get; set; }
 		public void HDMain()
 		{
             DeviceList = new List<DeviceOR>();
@@ -51,8 +54,10 @@ namespace QClient.Core.ViewModel
 			foreach (WindowOR obj in listWin)
 			{
 				PJQHead pjq = new PJQHead();
+
 				pjq.Window = obj;
 				Thread th = new Thread(pjq.CheckMsg);
+                th.IsBackground = true;
 				th.Start();
 			}
 
@@ -61,22 +66,111 @@ namespace QClient.Core.ViewModel
                 ErrorLog.WriteLog("DeviceCheckHead#listWin.Count", "没有定义窗口。");
 			}
 
+            //获取Xml配置信息
+            _Config = GetQueueClient().GetXMLConfig();
+            try
+            {
+                InitDevice();
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.WriteLog("DeviceCheckHead#InitDevice", ex.Message);
+            }
+
             //处理设备状态
             Thread thStatus = new Thread(DeviceStatusHead);
+            thStatus.IsBackground = true;
             thStatus.Start();
 
-			Thread thInit = new Thread(InitDevice);
-            thInit.Start();
-
+            //初使化TP
+            //if (_Config != null)
+            //{
+            //    Thread thInit = new Thread(InitDevice);
+            //    thInit.Start();
+            //}
+           
 		}
 
 		private void InitDevice()
 		{
+            //条屏、评价器
 			foreach (WindowOR win in listWin)
 			{
 				//win.tpAddress
                 Thread.Sleep(2000);
+                string result = string.Empty;
+                if (!string.IsNullOrEmpty(win.pjqAddress))
+                {
+                    result = GetHDClient().ShowScreenMSG(1,
+                          2,
+                          win.tpAddress,
+                          16 * (_Config.tp_8_adv.Length),
+                          16,
+                          "",
+                          "",
+                          _Config.tp_8_adv);
+                    if (result == "0")
+                    {
+                        //ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                        //    string.Format("窗口屏初使化  成功  ：窗口名：{0},地址：{1},结果:{2}",win.Name, win.tpAddress,result));
+                    }
+                    else
+                    {
+                        ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                            string.Format("窗口屏初使化  出错  ：窗口名：{0},地址：{1},结果:{2}", win.Name, win.tpAddress, result));
+                    }
+                }
+
+                //评价器
+                if (!string.IsNullOrEmpty(win.pjqAddress))
+                {
+                    result = GetHDClient().PlayCallerSound(win.pjqAddress);
+                    if (result == "0")
+                    {
+                        //ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                        //    string.Format("评价器初使化  成功  ：窗口名：{0},评价器地址：{1},结果:{2}", win.Name, win.pjqAddress, result));
+                    }
+                    else
+                    {
+                        ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                            string.Format("评价器初使化  出错  ：窗口名：{0},评价器地址：{1},结果:{2}", win.Name, win.pjqAddress, result));
+                    }
+                }
 			}
+
+            //综合屏
+            if (DeviceList != null)
+            {
+                foreach (DeviceOR _dev in DeviceList)
+                {
+                    if (_dev.Devicetypeid == DeviceType.DeviceType_ZP)
+                    {
+                        
+                        string result = string.Empty;
+
+                        result = GetHDClient().ShowScreenMSG(2,//屏幕类型。1（窗口屏），2（综合屏）
+                          2,
+                          _dev.Address,
+                          16 * _dev.ColNumber.Value,
+                          16 * _dev.RowNumber.Value,
+                          "",
+                          "",
+                          _Config.zhp_8_adv);
+                        
+                        if (result == "0")
+                        {
+                            ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                                string.Format("综合屏初使化  成功  ：地址：{0} 结果:{1}", _dev.Address, result));
+                        }
+                        else
+                        {
+                            ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                                string.Format("综合屏初使化  出错  ：地址：{0} 结果:{1}", _dev.Address, result));
+                        }
+                    }
+                }
+            }
+
 		}
 
         #region 设备状态更新
@@ -90,7 +184,10 @@ namespace QClient.Core.ViewModel
                     try
                     {
                         int iStatus = 1;
+                        ErrorLog.WriteLog("GetDeviceStatus：", obj.Address);
                         string Result = GetHDClient().GetDeviceStatus(SysConverHDType(obj.Devicetypeid), obj.Address, 0, 0, 10);
+                        ErrorLog.WriteLog("GetDeviceStatus：_Result", Result);
+
                         if (Result != "0")
                             iStatus = 0;
                         this.GetQueueClient().UpdateDeviceSatus(obj.Id, iStatus);
@@ -125,9 +222,14 @@ namespace QClient.Core.ViewModel
     /// 评价器处理
     /// </summary>
 	public class PJQHead
-	{
+    {
+        public PJQHead()
+        {
+            loginStatus = 1;
+        }
+      
 		//public string Address { get; set; }
-		private int _SleapLen = 900;
+		private int _SleapLen = 50;
 		private int _TimeOut = 10;//读取消息超时，时间
 
 		private string _NowBillNo = string.Empty;
@@ -150,8 +252,8 @@ namespace QClient.Core.ViewModel
 			get {return _SleapLen;}
 			set
 			{
-				if (_SleapLen < 500)
-					_SleapLen = 500;
+				if (_SleapLen < 10)
+					_SleapLen = 10;
 			}
 		}
 
@@ -164,32 +266,44 @@ namespace QClient.Core.ViewModel
         /// 是否工作
         /// </summary>
         protected bool isWork = false;
-
+       
 		public void CheckMsg()
 		{
 			try
 			{
                 ErrorLog.WriteTestLog("***************CheckMsg:开始执行：****************************", Window.Name);
-				do
-				{
-					Thread.Sleep(_SleapLen);
-					try
-					{
-						string Msg = DeviceCheckHead.Instance.GetHDClient().GetDeviceMSG(
-                            DeviceType.DeviceType_FJQ, Window.fjqAddress, _TimeOut);
+                if (!string.IsNullOrEmpty(Window.fjqAddress))
+                {
+                    try
+                    {
+                        DeviceCheckHead.Instance.GetHDClient().InitDevice(1, Window.fjqAddress);
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorLog.WriteLog("PJQHead#Msg", ex.Message);
+                    }
+                    do
+                    {
+                        Thread.Sleep(_SleapLen);
+                        try
+                        {
+                            ErrorLog.WriteTestLog("#CheckMsg#", "GetDeviceMSG Address" + Window.fjqAddress);
+                            string Msg = DeviceCheckHead.Instance.GetHDClient().GetDeviceMSG(
+                                DeviceType.DeviceType_FJQ, Window.fjqAddress, _TimeOut);
 
-                        ErrorLog.WriteTestLog("#CheckMsg#", Msg);
-						if (!string.IsNullOrEmpty(Msg))
-						{
-							MsgDo(Msg);
-						}
-					}
-					catch (Exception ex)
-					{
-						ErrorLog.WriteLog("PJQHead#Msg", ex.Message);
-					}
-                    
-				} while (true);
+                            ErrorLog.WriteTestLog("#CheckMsg#", Msg);
+                            if (!string.IsNullOrEmpty(Msg))
+                            {
+                                MsgDo(Msg);
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            ErrorLog.WriteLog("PJQHead#Msg", ex.Message);
+                        }
+
+                    } while (true);
+                }
 			}
 			catch (Exception ex)
 			{
@@ -210,9 +324,17 @@ namespace QClient.Core.ViewModel
 				ErrorLog.WriteLog("PJQHead#ErrorMsg", Msg);
 				return;
 			}
+            if (string.IsNullOrEmpty(msgArr[1]))
+            {
+                return;
+            }
 			switch (msgArr[1])
 			{
 				case "CALLER_LOGIN":
+                    if (loginStatus == 3 || loginStatus == 0)
+                    {
+                        loginStatus = 1;
+                    }
 					Login(msgArr[2]);
 					break;
 				case "CALLER_NEXT":
@@ -220,17 +342,29 @@ namespace QClient.Core.ViewModel
                     {
                         CallGetNext();
                     }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
+                    }
 					break;
 				case "CALLER_RECALL"://重新呼叫
                     if (isWork)
                     {
                         CallReCall();
                     }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
+                    }
 					break;
 				case "CALLER_PAUSE"://暂停服务
                     if (isWork)
                     {
                         CallPause();
+                    }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
                     }
 					break;
                 case "CALLER_RESUME_SERVICE"://恢复服务
@@ -240,6 +374,10 @@ namespace QClient.Core.ViewModel
                     if (isWork)
                     {
                         CallTransfer(msgArr[2]);
+                    }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
                     }
                     break;
                 case "CALLER_TRANSFER2"://目标业务队列   /******zcs: 当前没有实现*****/
@@ -259,7 +397,11 @@ namespace QClient.Core.ViewModel
                 case "CALLER_SPECIAL"://特呼编号（数字）
                     if (isWork)
                     {
-                        Specall("客户", msgArr[2]);
+                        CALLER_SPECIAL(msgArr[2]);
+                    }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
                     }
                     break;
                 case "CALLER_DELAY"://当前办理号码延迟办理，号码再次进入排队队列
@@ -267,11 +409,19 @@ namespace QClient.Core.ViewModel
                     {
                         CallDelay(msgArr[2]);
                     }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
+                    }
                     break;
                 case "EVA_MSG"://1：好2：中3：差4： 未评价
                     if (isWork)
                     {
                         PJ(msgArr[2]);
+                    }
+                    else
+                    {
+                        ShowErrorMsg("未登录！");
                     }
                     break;
 			}
@@ -380,7 +530,7 @@ namespace QClient.Core.ViewModel
 				DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(6, Window.fjqAddress
 					, "m1", "", 0, ""
 					, 0, 0, 0, 0
-					, msg);
+					, msg.ToLower().Replace("error:",""));
 				//ShowErrorMsg(msg);
 			}
 		}
@@ -421,7 +571,7 @@ namespace QClient.Core.ViewModel
         /// </summary>
         private void CallJudge()
         {
-            string value = GetCall("JUDGE", _NowBillNo);
+            string value = GetCall("JUDGE", PreBillNo);
             if (value != "0")
             {
                 ShowErrorMsg(value);
@@ -441,20 +591,21 @@ namespace QClient.Core.ViewModel
         }
 
         private void Specall(string CallType,string mBillNo)
-        {
-            string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
-                    Window.Name, CallType, mBillNo));
-            if (msg == "0")
-            {
-                if (CallType == "客户")
+        {           
+                string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
+                        Window.Name, CallType, mBillNo));
+                if (msg == "0")
                 {
-                    _NowBillNo = mBillNo;
+                    if (CallType == "客户")
+                    {
+                        _NowBillNo = mBillNo;
+                    }
                 }
-            }
-            else
-            {
-                ShowErrorMsg(msg);
-            }
+                else
+                {
+                    ShowErrorMsg(msg);
+                }
+           
         }
 
         /// <summary>
@@ -486,7 +637,7 @@ namespace QClient.Core.ViewModel
 			DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(6, Window.fjqAddress
 					, "m1", "", 0, ""
 					, 0, 0, 0, 0
-					, msg);
+                    , msg.ToLower().Replace("error:", ""));
 		}
 		private int GetTimeLen(DateTime Start, DateTime EndTime)
 		{
@@ -511,10 +662,14 @@ namespace QClient.Core.ViewModel
 			int TimeLen = GetTimeLen(lastCallTime, DateTime.Now);
 			if (TimeLen < Calllimittime && Calllimittime > 0)
 			{
-				ShowErrorMsg(string.Format("叫号时间间隔不能小于：{0}秒。", Calllimittime));
+				ShowErrorMsg(string.Format("叫号间隔应小于：{0}秒。", Calllimittime));
 				return;
 			}
+            _NowBillNo = "";
 			string value = GetCall("CALL", Window.Name);
+
+            ErrorLog.WriteTestLog("CallGetNext:", value);
+
 			if (value.IndexOf("error:") >= 0)
 			{
 				ShowErrorMsg(value);
@@ -524,6 +679,7 @@ namespace QClient.Core.ViewModel
 			{
 				lastCallTime = DateTime.Now;
 				_NowBillNo = value;
+                ShowErrorMsg(_NowBillNo);
 			}
 		}
 
@@ -538,6 +694,7 @@ namespace QClient.Core.ViewModel
 				return;
 			}
 			string value = GetCall("RECALL", _NowBillNo);
+            ErrorLog.WriteTestLog("RECALL:", value);
 			if (value != "0")
 			{
 				ShowErrorMsg(value);
@@ -552,6 +709,7 @@ namespace QClient.Core.ViewModel
 		private void CallPause()
 		{
             string value = GetCall("PAUSE", Window.Name);
+            ErrorLog.WriteTestLog("PAUSE:", value);
 			if (value != "0")
 			{
                 isWork = false;
@@ -572,6 +730,7 @@ namespace QClient.Core.ViewModel
                 return;
             }
 			string value = GetCall("RESTART", Window.Name);
+            ErrorLog.WriteTestLog("RESTART:", value);
 			if (value != "0")
 			{
 				ShowErrorMsg(value);
@@ -601,9 +760,21 @@ namespace QClient.Core.ViewModel
 
 	public class DeviceType
 	{
+        /// <summary>
+        /// 呼叫器
+        /// </summary>
 		public const int DeviceType_FJQ = 1;
+        /// <summary>
+        /// 条屏
+        /// </summary>
 		public const int DeviceType_TP = 2;
+        /// <summary>
+        /// 评价器
+        /// </summary>
 		public const int DeviceType_PJQ = 3;
+        /// <summary>
+        /// 主屏
+        /// </summary>
 		public const int DeviceType_ZP = 4;
 	}
 	 

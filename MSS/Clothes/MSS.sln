@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSS", "ClothesMain\MSS.csproj", "{D7D5D545-7A67-4343-963B-98360230E341}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "MSSClass", "SellingClothesClass\MSSClass.csproj", "{B3A91347-3326-483A-8A76-7F11868144AC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{D7D5D545-7A67-4343-963B-98360230E341}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D7D5D545-7A67-4343-963B-98360230E341}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D7D5D545-7A67-4343-963B-98360230E341}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D7D5D545-7A67-4343-963B-98360230E341}.Release|Any CPU.Build.0 = Release|Any CPU
+		{B3A91347-3326-483A-8A76-7F11868144AC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{B3A91347-3326-483A-8A76-7F11868144AC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{B3A91347-3326-483A-8A76-7F11868144AC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{B3A91347-3326-483A-8A76-7F11868144AC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

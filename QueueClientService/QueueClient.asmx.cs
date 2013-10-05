@@ -29,8 +29,8 @@ namespace QM.Client.WebService
                 {
                     if (_QueueMain == null)
                     {
-                        _QueueMain = new QueueMian();
                         Common._StartPath = Server.MapPath("");
+                        _QueueMain = new QueueMian();
                     }
                 }
             }
@@ -123,6 +123,18 @@ namespace QM.Client.WebService
             }
             return strBillList;
         }
+
+        /// <summary>
+        /// 根据业务获取-业务等待人数
+        /// </summary>
+        /// <param name="BussinessID"></param>
+        /// <returns></returns>
+         [WebMethod]
+         public int GetBussinessWiatUser(string BussinessID)
+         {
+             return Instanse().GetBussinessWiatUser(BussinessID);
+         }
+
         
         /// <summary>
         ///5 呼叫接口
@@ -221,10 +233,11 @@ namespace QM.Client.WebService
             return "0";
         }
 
-		public ConfigOR GetXMLConfig()
-		{
-			Instanse().GetXMLConfig();
-		}
+        [WebMethod]
+        public ConfigOR GetXMLConfig()
+        {
+            return Instanse().GetXMLConfig();
+        }
 
         #region QClient调用
         #region 取号图片处理

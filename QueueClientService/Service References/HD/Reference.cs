@@ -54,6 +54,10 @@ namespace QM.Client.WebService.HD {
         // CODEGEN: 命名空间 http://ContollerWebService.com/ 的元素名称 devAddr 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://ContollerWebService.com/GetDeviceMSG", ReplyAction="*")]
         QM.Client.WebService.HD.GetDeviceMSGResponse GetDeviceMSG(QM.Client.WebService.HD.GetDeviceMSGRequest request);
+        
+        // CODEGEN: 命名空间 http://ContollerWebService.com/ 的元素名称 devAddr 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://ContollerWebService.com/InitDevice", ReplyAction="*")]
+        QM.Client.WebService.HD.InitDeviceResponse InitDevice(QM.Client.WebService.HD.InitDeviceRequest request);
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
@@ -242,15 +246,23 @@ namespace QM.Client.WebService.HD {
         [System.Runtime.Serialization.DataMemberAttribute(Order=4)]
         public int volume;
         
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=5)]
+        public string customerNO;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=6)]
+        public string windowNO;
+        
         public PlaySpeakerSoundRequestBody() {
         }
         
-        public PlaySpeakerSoundRequestBody(int playType, string contentCN, string contentEN, string playSequence, int volume) {
+        public PlaySpeakerSoundRequestBody(int playType, string contentCN, string contentEN, string playSequence, int volume, string customerNO, string windowNO) {
             this.playType = playType;
             this.contentCN = contentCN;
             this.contentEN = contentEN;
             this.playSequence = playSequence;
             this.volume = volume;
+            this.customerNO = customerNO;
+            this.windowNO = windowNO;
         }
     }
     
@@ -868,6 +880,78 @@ namespace QM.Client.WebService.HD {
         }
     }
     
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class InitDeviceRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="InitDevice", Namespace="http://ContollerWebService.com/", Order=0)]
+        public QM.Client.WebService.HD.InitDeviceRequestBody Body;
+        
+        public InitDeviceRequest() {
+        }
+        
+        public InitDeviceRequest(QM.Client.WebService.HD.InitDeviceRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://ContollerWebService.com/")]
+    public partial class InitDeviceRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int devType;
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=1)]
+        public string devAddr;
+        
+        public InitDeviceRequestBody() {
+        }
+        
+        public InitDeviceRequestBody(int devType, string devAddr) {
+            this.devType = devType;
+            this.devAddr = devAddr;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class InitDeviceResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="InitDeviceResponse", Namespace="http://ContollerWebService.com/", Order=0)]
+        public QM.Client.WebService.HD.InitDeviceResponseBody Body;
+        
+        public InitDeviceResponse() {
+        }
+        
+        public InitDeviceResponse(QM.Client.WebService.HD.InitDeviceResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://ContollerWebService.com/")]
+    public partial class InitDeviceResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string InitDeviceResult;
+        
+        public InitDeviceResponseBody() {
+        }
+        
+        public InitDeviceResponseBody(string InitDeviceResult) {
+            this.InitDeviceResult = InitDeviceResult;
+        }
+    }
+    
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     public interface ControllerSoapChannel : QM.Client.WebService.HD.ControllerSoap, System.ServiceModel.IClientChannel {
     }
@@ -929,7 +1013,7 @@ namespace QM.Client.WebService.HD {
             return base.Channel.PlaySpeakerSound(request);
         }
         
-        public string PlaySpeakerSound(int playType, string contentCN, string contentEN, string playSequence, int volume) {
+        public string PlaySpeakerSound(int playType, string contentCN, string contentEN, string playSequence, int volume, string customerNO, string windowNO) {
             QM.Client.WebService.HD.PlaySpeakerSoundRequest inValue = new QM.Client.WebService.HD.PlaySpeakerSoundRequest();
             inValue.Body = new QM.Client.WebService.HD.PlaySpeakerSoundRequestBody();
             inValue.Body.playType = playType;
@@ -937,6 +1021,8 @@ namespace QM.Client.WebService.HD {
             inValue.Body.contentEN = contentEN;
             inValue.Body.playSequence = playSequence;
             inValue.Body.volume = volume;
+            inValue.Body.customerNO = customerNO;
+            inValue.Body.windowNO = windowNO;
             QM.Client.WebService.HD.PlaySpeakerSoundResponse retVal = ((QM.Client.WebService.HD.ControllerSoap)(this)).PlaySpeakerSound(inValue);
             return retVal.Body.PlaySpeakerSoundResult;
         }
@@ -1056,6 +1142,20 @@ namespace QM.Client.WebService.HD {
             inValue.Body.timeout = timeout;
             QM.Client.WebService.HD.GetDeviceMSGResponse retVal = ((QM.Client.WebService.HD.ControllerSoap)(this)).GetDeviceMSG(inValue);
             return retVal.Body.GetDeviceMSGResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QM.Client.WebService.HD.InitDeviceResponse QM.Client.WebService.HD.ControllerSoap.InitDevice(QM.Client.WebService.HD.InitDeviceRequest request) {
+            return base.Channel.InitDevice(request);
+        }
+        
+        public string InitDevice(int devType, string devAddr) {
+            QM.Client.WebService.HD.InitDeviceRequest inValue = new QM.Client.WebService.HD.InitDeviceRequest();
+            inValue.Body = new QM.Client.WebService.HD.InitDeviceRequestBody();
+            inValue.Body.devType = devType;
+            inValue.Body.devAddr = devAddr;
+            QM.Client.WebService.HD.InitDeviceResponse retVal = ((QM.Client.WebService.HD.ControllerSoap)(this)).InitDevice(inValue);
+            return retVal.Body.InitDeviceResult;
         }
     }
 }

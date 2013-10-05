@@ -2,13 +2,13 @@
 <root>
 	<tp_4_adv></tp_4_adv>
 	<tp_5_adv></tp_5_adv>
-	<tp_8_adv></tp_8_adv>
+	<tp_8_adv>201309窗口屏广告</tp_8_adv>
 
 	<tp_8_show>请*号到#窗口</tp_8_show>
 
 	<zhp_4_adv></zhp_4_adv>
 	<zhp_5_adv></zhp_5_adv>
-	<zhp_8_adv></zhp_8_adv>
+	<zhp_8_adv>综合屏广告</zhp_8_adv>
 	<!--音量-->
 	<volume>5</volume>
 </root>

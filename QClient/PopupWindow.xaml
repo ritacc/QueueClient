@@ -12,6 +12,6 @@
 
     <Border>
         <Canvas
-            x:Name="MainCanvas"/>
+            x:Name="MainCanvas" Unloaded="MainCanvas_Unloaded" />
     </Border>
 </Window >

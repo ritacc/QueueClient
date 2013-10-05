@@ -84,6 +84,6 @@
         
     </Window.Resources>
     <Grid>
-        
+        <Button Content="Button" Height="23" HorizontalAlignment="Left" Margin="54,59,0,0" Name="button1" VerticalAlignment="Top" Width="75" Click="button1_Click" />
     </Grid>
 </Window>

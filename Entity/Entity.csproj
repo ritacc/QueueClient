@@ -47,6 +47,7 @@
     <Compile Include="BussinessQueueOR.cs" />
     <Compile Include="BussinessRoleONOR.cs" />
     <Compile Include="BussinessRoleOR.cs" />
+    <Compile Include="ConfigOR.cs" />
     <Compile Include="DeviceOR.cs" />
     <Compile Include="DeviceOREx.cs" />
     <Compile Include="DeviceType_Info.cs" />

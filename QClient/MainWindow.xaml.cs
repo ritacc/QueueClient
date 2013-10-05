@@ -92,7 +92,8 @@ namespace QClient
         /// 退出密码
         /// </summary>
         public string Userpsw { get; set; }
-
+        Thread thHDandPJQ;
+        DeviceCheckHead _HDHead;
         private bool Init()
         {
             try
@@ -122,7 +123,10 @@ namespace QClient
                     ShutDownInit();
                 }
                 //处理、硬件信息
-                Thread thHDandPJQ = new Thread(new DeviceCheckHead().HDMain);
+                _HDHead=new DeviceCheckHead();
+
+                thHDandPJQ = new Thread(_HDHead.HDMain);
+                thHDandPJQ.IsBackground = true;
                 thHDandPJQ.Start();
             }
             catch (EndpointNotFoundException exEnd)
@@ -186,8 +190,8 @@ namespace QClient
                     && DateTime.Now.Minute == Convert.ToInt32(mm))
                 {
                     //关机
-                    Thread th = new Thread(ShutDown);
-                    th.Start();
+                    //Thread th = new Thread(ShutDown);
+                    //th.Start();
                 }
             }
         }
@@ -195,19 +199,19 @@ namespace QClient
         [DllImport("user32")]
         public static extern long ExitWindowsEx(long uFlags, long dwReserved);
 
-        long dwReserved;
+        long dwReserved=0;
         const int SHUTDOWN = 1;
         const int REBOOT = 2;
         const int LOGOFF = 0;
  
-        private void ShutDown()
-        {
-            for (int i = 0; i < 3; i++)
-            {
-             MainWindow.ExitWindowsEx(SHUTDOWN, dwReserved);
-                Thread.Sleep(5000);
-            }
-        }
+        //private void ShutDown()
+        //{
+        //    for (int i = 0; i < 3; i++)
+        //    {
+        //        MainWindow.ExitWindowsEx(SHUTDOWN, dwReserved);
+        //        Thread.Sleep(5000);
+        //    }
+        //}
         #endregion
         private void LoadButton(string windowId)
         {
@@ -232,6 +236,10 @@ namespace QClient
                 var bc = _buttonAdmin.AddAButtom(mbc);
             }
 
+            Thread thRefB = new Thread(_buttonAdmin.RefButtomWaitNumber);
+            thRefB.IsBackground = true;
+            thRefB.Start();
+
             //处理退出
             this.MouseLeftButtonUp += new MouseButtonEventHandler(rc_MouseLeftButtonUp);
         }
@@ -252,7 +260,7 @@ namespace QClient
                 if (ClickNumber >= 2)
                 {
                     //测试代码，关机
-                    ShutDown();
+                    //ShutDown();
 
                     ClickNumber = 0;
                     ExitWindow ew = new ExitWindow();
@@ -297,6 +305,12 @@ namespace QClient
                     WebViewModel.Instance.ButtomQH(element, this, Contickettime, _CureentObj);
                 }
             }
+        }
+
+        private void Window_Closing(object sender, System.ComponentModel.CancelEventArgs e)
+        {
+            if (thHDandPJQ != null)
+                thHDandPJQ.Abort();
         }
     }
 }

@@ -147,6 +147,9 @@ namespace QM.Client.Entity
             }
         }
 
+        public int? RowNumber { get; set; }
+        public int? ColNumber { get; set; }
+
         /// <summary>
         /// device构造函数
         /// </summary>
@@ -182,6 +185,15 @@ namespace QM.Client.Entity
             // 
             _Createtime = Convert.ToDateTime(row["CreateTime"]);
 
+            if (row["rowNumber"].ToString() != "")
+            {
+                RowNumber = Convert.ToInt32(row["rowNumber"].ToString());
+            }
+
+            if (row["ColNumber"].ToString() != "")
+            {
+                ColNumber = Convert.ToInt32(row["ColNumber"].ToString());
+            }
             //StatusShow = row["StatusShow"].ToString();
 
         }

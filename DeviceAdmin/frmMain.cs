@@ -22,7 +22,7 @@ namespace QM.Client.DeviceAdmin
 
         private void btnTPAdd_Click(object sender, EventArgs e)
         {
-            frmDeviceEdit frm = new frmDeviceEdit();
+            frmDeviceEdit frm = new frmDeviceEdit(true);
             frm.Devicetypeid = DeviceType.DeviceType_TP;
             frm.Owner = this;
             frm.opType = "add";
@@ -42,7 +42,7 @@ namespace QM.Client.DeviceAdmin
             }
             DataGridViewRow gvr = gvTP.SelectedRows[0];
 
-             frmDeviceEdit frm = new frmDeviceEdit();
+             frmDeviceEdit frm = new frmDeviceEdit(true);
             frm.Devicetypeid = DeviceType.DeviceType_TP;
             frm.Owner = this;
             frm.DeviceID = gvr.Cells[0].Value.ToString();

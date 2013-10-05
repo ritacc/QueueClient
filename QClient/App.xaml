@@ -5,6 +5,8 @@
              xmlns:controls="clr-namespace:QClient.Controls.WindowCom"
             StartupUri="MainWindow.xaml"
             ShutdownMode="OnMainWindowClose">
+    <!--StartupUri="MainWindow.xaml"-->
+    <!--StartupUri="Test.xaml"-->
     <!--
     StartupUri="MainWindow.xaml"
     StartupUri="frmImgSet.xaml"

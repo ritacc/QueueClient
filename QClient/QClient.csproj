@@ -69,6 +69,7 @@
     <Compile Include="Control\ControlBase.cs" />
     <Compile Include="Control\ENLableControl.cs" />
     <Compile Include="Control\MyButtom.cs" />
+    <Compile Include="Control\RefButtomText.cs" />
     <Compile Include="Control\TagControl.cs" />
     <Compile Include="Control\WindowCom\CaptionButton.cs" />
     <Compile Include="Control\WindowCom\CloseButton.cs" />
@@ -189,6 +190,9 @@
     <AppDesigner Include="Properties\" />
     <None Include="Service References\HD\Controller.wsdl" />
     <None Include="Service References\QueueClinetServiceReference\QClient.QueueClinetServiceReference.BussinessQueueOR.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Service References\QueueClinetServiceReference\QClient.QueueClinetServiceReference.ConfigOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Service References\QueueClinetServiceReference\QClient.QueueClinetServiceReference.DeviceOR.datasource">

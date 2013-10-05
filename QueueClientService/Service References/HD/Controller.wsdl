@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <wsdl:definitions xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://ContollerWebService.com/" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://ContollerWebService.com/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
-  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;&lt;font size='3'&gt;定义了一系列排队机控制器的接口&lt;/font&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：当硬件发生改变，例如串口并口拔开，需要在IIS的对此服务进行应用程序回收，或者重启此服务&lt;/font&gt;&lt;/b&gt;</wsdl:documentation>
+  <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;&lt;font size='3'&gt;定义了一系列排队机控制器的接口&lt;/font&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：当硬件发生改变，例如串口并口拔开，需要在IIS的对此服务进行应用程序回收，或者重启此服务，应用程序池不能用DefaultAppPool，应当新建一个。QT*.dll需要放到C:/Windows/System32文件夹下&lt;/font&gt;&lt;/b&gt;</wsdl:documentation>
   <wsdl:types>
     <s:schema elementFormDefault="qualified" targetNamespace="http://ContollerWebService.com/">
       <s:element name="ReadCardData">
@@ -42,6 +42,8 @@
             <s:element minOccurs="0" maxOccurs="1" name="contentEN" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="playSequence" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="volume" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowNO" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -176,6 +178,21 @@
           </s:sequence>
         </s:complexType>
       </s:element>
+      <s:element name="InitDevice">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="1" maxOccurs="1" name="devType" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="devAddr" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="InitDeviceResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="InitDeviceResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
     </s:schema>
   </wsdl:types>
   <wsdl:message name="ReadCardDataSoapIn">
@@ -238,6 +255,12 @@
   <wsdl:message name="GetDeviceMSGSoapOut">
     <wsdl:part name="parameters" element="tns:GetDeviceMSGResponse" />
   </wsdl:message>
+  <wsdl:message name="InitDeviceSoapIn">
+    <wsdl:part name="parameters" element="tns:InitDevice" />
+  </wsdl:message>
+  <wsdl:message name="InitDeviceSoapOut">
+    <wsdl:part name="parameters" element="tns:InitDeviceResponse" />
+  </wsdl:message>
   <wsdl:portType name="ControllerSoap">
     <wsdl:operation name="ReadCardData">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;读取卡的数据&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：1（银行卡），2（二代证）&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; track：指定磁道，1（两个磁道都返回，结果以##隔开），2（返回磁道2），3（返回磁道3）&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; timeout：阻塞的时间，单位为秒&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; 若读取成功，则返回读取的数据；否则返回空串。返回结果格式为：银行卡（卡号#账号）,二代证（姓名#性别#民族#出生年月#住址#身份证号码#签发机关#有效期始#有效期终）</wsdl:documentation>
@@ -250,7 +273,7 @@
       <wsdl:output message="tns:PrintSlipSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="PlaySpeakerSound">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;音箱播放声音&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; playType：播放类型。1（只播放主音箱），2（只播放无线音箱），3（主音箱和无线音箱都播放）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentCN：中文播放内容。例如“请;A;0;0;1;号顾客到;1;号;窗口;”其中，所有以分号隔开的文字对应到播放文件，如“请;”对应“请.wav”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentEN：英文播放内容。例如“customer;A;0;0;1;please come to;window;1;”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; playSequence：播放顺序，以分号隔开多个语种。1（提示音），2（普通话），3（英语），4（粤语）。例如“1;2;3;4;”表示先播提示音，然后播普通话，然后播英语，然后播粤语&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; volume：播放音量，范围是0~9&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）&lt;br/&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：如果遇到声音无法播放，可能是由于路径名称过长造成的，请使用简写的文件名重试&lt;/font&gt;</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;音箱播放声音&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; playType：播放类型。1（只播放主音箱），2（只播放无线音箱），3（主音箱和无线音箱都播放）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentCN：中文播放内容。例如“请;A;0;0;1;号顾客到;1;号;窗口;”其中，所有以分号隔开的文字对应到播放文件，如“请;”对应“请.wav”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentEN：英文播放内容。例如“customer;A;0;0;1;please come to;window;1;”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; playSequence：播放顺序，以分号隔开多个语种。1（提示音），2（普通话），3（英语），4（粤语）。例如“1;2;3;4;”表示先播提示音，然后播普通话，然后播英语，然后播粤语&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; volume：播放音量，范围是0~9&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; customerNO：顾客号。该参数仅当playType为2或3的时候有效&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; windowNO：窗口号。该参数仅当playType为2或3的时候有效&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）&lt;br/&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：如果遇到声音无法播放，可能是由于路径名称过长造成的，请使用简写的文件名重试。例如英文的please come to可能需要用缩写p_c_t&lt;/font&gt;</wsdl:documentation>
       <wsdl:input message="tns:PlaySpeakerSoundSoapIn" />
       <wsdl:output message="tns:PlaySpeakerSoundSoapOut" />
     </wsdl:operation>
@@ -288,6 +311,11 @@
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;获取设备消息&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：设备类型，1（呼叫器），2（评价器）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：设备硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; timeout：阻塞的时间，单位为秒&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; 获取的值。设备地址|指令|数据。例如，COM1,9600,025|EAV_MSG|3</wsdl:documentation>
       <wsdl:input message="tns:GetDeviceMSGSoapIn" />
       <wsdl:output message="tns:GetDeviceMSGSoapOut" />
+    </wsdl:operation>
+    <wsdl:operation name="InitDevice">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;初始化设备&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：设备类型，1（呼叫器），2（评价器）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：设备硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; timeout：阻塞的时间，单位为秒&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（初始化成功），其他值（初始化失败）</wsdl:documentation>
+      <wsdl:input message="tns:InitDeviceSoapIn" />
+      <wsdl:output message="tns:InitDeviceSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ControllerSoap" type="tns:ControllerSoap">
@@ -375,6 +403,15 @@
     </wsdl:operation>
     <wsdl:operation name="GetDeviceMSG">
       <soap:operation soapAction="http://ContollerWebService.com/GetDeviceMSG" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InitDevice">
+      <soap:operation soapAction="http://ContollerWebService.com/InitDevice" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -475,9 +512,18 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
+    <wsdl:operation name="InitDevice">
+      <soap12:operation soapAction="http://ContollerWebService.com/InitDevice" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
   </wsdl:binding>
   <wsdl:service name="Controller">
-    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;&lt;font size='3'&gt;定义了一系列排队机控制器的接口&lt;/font&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：当硬件发生改变，例如串口并口拔开，需要在IIS的对此服务进行应用程序回收，或者重启此服务&lt;/font&gt;&lt;/b&gt;</wsdl:documentation>
+    <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;b&gt;&lt;font size='3'&gt;定义了一系列排队机控制器的接口&lt;/font&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：当硬件发生改变，例如串口并口拔开，需要在IIS的对此服务进行应用程序回收，或者重启此服务，应用程序池不能用DefaultAppPool，应当新建一个。QT*.dll需要放到C:/Windows/System32文件夹下&lt;/font&gt;&lt;/b&gt;</wsdl:documentation>
     <wsdl:port name="ControllerSoap" binding="tns:ControllerSoap">
       <soap:address location="http://localhost:6565/Controller.asmx" />
     </wsdl:port>

@@ -10,6 +10,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using QClinet.Core.Util;
 using QClient.Core.Util;
+using System.Windows.Threading;
+using System.Threading;
 
 
 namespace QClient
@@ -55,7 +57,14 @@ namespace QClient
             _Content.Children.Add(tb);
 
         }
-
+        public void SetText(string Content)
+        {
+            this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
+                (ThreadStart)delegate()
+            {
+                tb.Text = Content;
+            });
+        }
         public void SetTextInfo()
         {
             if (this.Tag != null)

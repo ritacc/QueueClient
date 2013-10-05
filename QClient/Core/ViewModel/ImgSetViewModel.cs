@@ -9,6 +9,7 @@ using System.ServiceModel;
 using QClient.QueueClinetServiceReference;
 using QClient.HD;
 using QClient.Core.Uitl.Logger;
+using System.Windows;
 
 namespace QClient.Core.ViewModel
 {
@@ -80,12 +81,12 @@ namespace QClient.Core.ViewModel
 
       private QueueClientSoapClient GetClient()
       {
-         
           BasicHttpBinding binding = new BasicHttpBinding();
           binding.MaxReceivedMessageSize = 2147483647;
           binding.MaxBufferSize = 2147483647;
           EndpointAddress address = new EndpointAddress(this.ConfigUrl);
           return new QueueClientSoapClient(binding, address);
+          //return new QueueClientSoapClient();
       }
 
       private ControllerSoapClient GetHDClient()
@@ -95,7 +96,8 @@ namespace QClient.Core.ViewModel
           binding.MaxBufferSize = 2147483647;
           EndpointAddress address = new EndpointAddress(this.GetHDURL());
           return new ControllerSoapClient(binding, address);
-          
+          //ControllerSoapClient HDClient = new ControllerSoapClient();
+          //return HDClient;
       }
 
       public string GetImgSetPath()
@@ -105,7 +107,6 @@ namespace QClient.Core.ViewModel
       public string GetPwd()
       {
           return GetClient().GetClientValue("pwd");
-
       }
 
       public string SetImgPathPassword(string Path, string newPwd)
@@ -136,18 +137,30 @@ namespace QClient.Core.ViewModel
           {
               return false;
           }
-          string[] arr = mBillNo.Split('#');
-          if (arr.Length >= 4)
+          try
           {
+              string[] arr = mBillNo.Split('#');
+              if (arr.Length >= 4)
+              {
+                  //Branch=#Number=MA098#BusinessType=个人现金#Count=108#TipMsg2=#Time=2010-3-26 22:31:22#Birthday=##
+                  string Content = "Branch=#Number=<#PH>#BusinessType=<#bussNmae>#Count=<#WaitUserLen>#TipMsg2=#Time=<#Time>#Birthday=##";
+                  Content = Content.Replace("<#PH>", arr[0])
+                        .Replace("<#bussNmae>", arr[1])
+                        .Replace("<#WaitUserLen>", arr[3])
+                        .Replace("<#Time>", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
 
-              string Content = "Branch=#Number=<#PH>#BusinessType=<#bussNmae>#Count=<#WaitUserLen>#TipMsg2=#Time=<#Time>#Birthday=##";
-              Content.Replace("<#PH>", arr[0])
-                  .Replace("Time", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"))
-                  .Replace("<#bussNmae>", arr[1])
-              .Replace("<#WaitUserLen>", arr[3]);
 
+                  ControllerSoapClient HDClient = new ControllerSoapClient();
+                  string msg = HDClient.PrintSlip("Branch=#Number=GR0005#BusinessType=个人外汇G#Count=4#TipMsg2=#Time=2013-08-18 22:31:29#Birthday=##", 12);
+                  MessageBox.Show(msg);
 
-              string msg = GetHDClient().PrintSlip(Content, 3);
+                  //string msg = GetHDClient().PrintSlip(Content, 3);
+              }
+          }
+          catch (Exception ex)
+          {
+              ErrorLog.WriteLog("PrintSlip#ex", ex.Message);
+              return false;
           }
           return true;
       }

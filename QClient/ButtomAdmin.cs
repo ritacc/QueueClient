@@ -11,6 +11,8 @@ using System.Windows.Media.Animation;
 using System.Windows.Shapes;
 using System.Collections.ObjectModel;
 using QClient.QueueClinetServiceReference;
+using System.Threading;
+using System.Windows.Threading;
 
 namespace QClient
 {
@@ -96,6 +98,7 @@ namespace QClient
         }
 
         public Canvas CBottom { get; set; }
+        public bool StopRef { get; set; }
 
         double lableWidth = 200;
         double lableHeight = 50;
@@ -114,6 +117,9 @@ namespace QClient
         /// <returns></returns>
         public BottomKJ AddAButtom(ButtomControl mbc)
         {
+            StopRef = false;
+            RefButtomText BtnOR = new RefButtomText();
+            
             BottomKJ bc = new BottomKJ();
             bc.Width = lableWidth;
             bc.Height = lableHeight;
@@ -122,27 +128,87 @@ namespace QClient
             bc.SetValue(Canvas.LeftProperty, Convert.ToDouble(mbc.ButtomOR.LabelLeft));
             bc.SetValue(Canvas.TopProperty, Convert.ToDouble(mbc.ButtomOR.LabelTop));
             bc.SetTextInfo();
-                    CBottom.Children.Add(bc);
+            //string mName = "kj" + mbc.ID;
+            //bc.Name = mName;
+            CBottom.Children.Add(bc);
+            BtnOR.BtnKJ = bc;
 
             ENLableControl bc1 = new ENLableControl();
             bc1.Width = EnLableWidth;
             bc1.Height = EnLableHeight;
             bc1.Tag = mbc;
+            //mbc.ButtomOR
+            //mName = "en" + mbc.ID;
+            //bc.Name = mName;
             bc1.SetTextInfo();
             bc1.SetValue(Canvas.LeftProperty, Convert.ToDouble(mbc.ButtomOR.EnlabelLeftoffset));
             bc1.SetValue(Canvas.TopProperty, Convert.ToDouble(mbc.ButtomOR.EnlabelTopoffset));
         
             CBottom.Children.Add(bc1);
+            BtnOR.BtnEn = bc1;
 
             TagControl tab = new TagControl();
             tab.Width = TagWidth;
             tab.Height = TagHeight;
             tab.Tag = mbc;
+            
+            //mName = "tag" + mbc.ID;
+            //tab.Name = mName;
             tab.SetTextInfo();
             tab.SetValue(Canvas.LeftProperty, Convert.ToDouble(mbc.ButtomOR.TagLeftoffset));
             tab.SetValue(Canvas.TopProperty, Convert.ToDouble(mbc.ButtomOR.TagTopoffset));
             CBottom.Children.Add(tab);
+            
+            BtnOR.BtnTag = tab;
+            BtnOR.QHOR = mbc.ButtomOR;
+
+            ListQH.Add(BtnOR);
+
             return bc;
+        }
+
+        List<RefButtomText> ListQH = new List<RefButtomText>();
+        public void RefButtomWaitNumber()
+        {
+            var client = new QueueClientSoapClient();
+            do
+            {
+                if (StopRef)
+                    return;
+
+                foreach (RefButtomText obj in ListQH)
+                {
+                    if (obj.QHOR.LabelCaption.IndexOf("#wait") > 0 || obj.QHOR.EnlabelCaption.IndexOf("#wait") > 0 || obj.QHOR.TagCaption.IndexOf("#wait") > 0)
+                    {
+                        int UserNum = 0;
+                        if (!string.IsNullOrEmpty(obj.QHOR.LabelJobno))
+                        {
+                            UserNum = client.GetBussinessWiatUser(obj.QHOR.LabelJobno);
+                        }
+                        else
+                        {
+                            UserNum = 0;
+                        }
+
+                        if (obj.BtnKJ != null)
+                        {
+                            obj.BtnKJ.SetText(obj.QHOR.LabelCaption.Replace("#wait", UserNum.ToString()));
+                        }
+
+                        if (obj.BtnEn != null)
+                        {
+                            obj.BtnEn.SetText(obj.QHOR.EnlabelCaption.Replace("#wait", UserNum.ToString()));
+                        }
+
+                        if (obj.BtnTag != null)
+                        {
+                            obj.BtnTag.SetText(obj.QHOR.TagCaption.Replace("#wait", UserNum.ToString()));
+                        }
+                    }
+                }
+                Thread.Sleep(10 * 1000);
+
+            } while (true);
         }
 
         public ButtomControl InitAddPosition(Point position, string _wdbh)

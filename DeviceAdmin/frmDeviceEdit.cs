@@ -17,7 +17,15 @@ namespace QM.Client.DeviceAdmin
         {
             InitializeComponent();
         }
-
+        public frmDeviceEdit(bool mtp)
+        {
+            InitializeComponent();
+            isTP = mtp;
+            if (isTP)
+            {
+                pnTP.Visible = true;
+            }
+        }
         private void frmTPEdit_Load(object sender, EventArgs e)
         {
             if (opType != "add")
@@ -46,6 +54,11 @@ namespace QM.Client.DeviceAdmin
                 txtDevicemodel.Text = m_devi.Devicemodel;//
                 txtHostaddr.Text = m_devi.Hostaddr;//
                 txtAddress.Text = m_devi.Address;//
+
+                if (isTP)
+                {
+                    txtColNumber.Text = m_devi.ColNumber.HasValue ? m_devi.ColNumber.Value.ToString() : "";
+                }
             }
             catch (Exception e)
             {
@@ -68,7 +81,10 @@ namespace QM.Client.DeviceAdmin
             m_devi.Devicemodel = txtDevicemodel.Text;//
             m_devi.Hostaddr = txtHostaddr.Text;//
             m_devi.Address = txtAddress.Text;//
-
+            if (isTP)
+            {
+                m_devi.ColNumber = Convert.ToInt32(txtColNumber.Text);
+            }
             return m_devi;
         }
 
@@ -76,6 +92,8 @@ namespace QM.Client.DeviceAdmin
         {
             this.Close();
         }
+
+        public bool isTP { get; set; }
 
         private void btnSave_Click(object sender, EventArgs e)
         {
@@ -87,6 +105,20 @@ namespace QM.Client.DeviceAdmin
             if (txtAddress.Text == "")
             {
                 ShowMsg("请输入地址!");
+            }
+            if (isTP)
+            {
+                if (txtColNumber.Text == "")
+                {
+                    ShowMsg("请输入行字数。");
+                    return;
+                }
+                int Test = 0;
+                if (!int.TryParse(txtColNumber.Text, out Test))
+                {
+                    ShowMsg(" 行字数不正确。");
+                    return;
+                }
             }
             DeviceOR sg = SetValue();
 

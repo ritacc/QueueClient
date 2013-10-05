@@ -2311,6 +2311,10 @@ namespace QClient.QueueClinetServiceReference {
         
         private System.DateTime CreatetimeField;
         
+        private System.Nullable<int> RowNumberField;
+        
+        private System.Nullable<int> ColNumberField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -2460,6 +2464,188 @@ namespace QClient.QueueClinetServiceReference {
                 if ((this.CreatetimeField.Equals(value) != true)) {
                     this.CreatetimeField = value;
                     this.RaisePropertyChanged("Createtime");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=11)]
+        public System.Nullable<int> RowNumber {
+            get {
+                return this.RowNumberField;
+            }
+            set {
+                if ((this.RowNumberField.Equals(value) != true)) {
+                    this.RowNumberField = value;
+                    this.RaisePropertyChanged("RowNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=12)]
+        public System.Nullable<int> ColNumber {
+            get {
+                return this.ColNumberField;
+            }
+            set {
+                if ((this.ColNumberField.Equals(value) != true)) {
+                    this.ColNumberField = value;
+                    this.RaisePropertyChanged("ColNumber");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ConfigOR", Namespace="http://www.ritacc.com/")]
+    [System.SerializableAttribute()]
+    public partial class ConfigOR : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tp_4_advField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tp_5_advField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tp_8_advField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string tp_8_showField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string zhp_4_advField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string zhp_5_advField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string zhp_8_advField;
+        
+        private int volumeField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string tp_4_adv {
+            get {
+                return this.tp_4_advField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tp_4_advField, value) != true)) {
+                    this.tp_4_advField = value;
+                    this.RaisePropertyChanged("tp_4_adv");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string tp_5_adv {
+            get {
+                return this.tp_5_advField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tp_5_advField, value) != true)) {
+                    this.tp_5_advField = value;
+                    this.RaisePropertyChanged("tp_5_adv");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string tp_8_adv {
+            get {
+                return this.tp_8_advField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tp_8_advField, value) != true)) {
+                    this.tp_8_advField = value;
+                    this.RaisePropertyChanged("tp_8_adv");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string tp_8_show {
+            get {
+                return this.tp_8_showField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.tp_8_showField, value) != true)) {
+                    this.tp_8_showField = value;
+                    this.RaisePropertyChanged("tp_8_show");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string zhp_4_adv {
+            get {
+                return this.zhp_4_advField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.zhp_4_advField, value) != true)) {
+                    this.zhp_4_advField = value;
+                    this.RaisePropertyChanged("zhp_4_adv");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string zhp_5_adv {
+            get {
+                return this.zhp_5_advField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.zhp_5_advField, value) != true)) {
+                    this.zhp_5_advField = value;
+                    this.RaisePropertyChanged("zhp_5_adv");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string zhp_8_adv {
+            get {
+                return this.zhp_8_advField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.zhp_8_advField, value) != true)) {
+                    this.zhp_8_advField = value;
+                    this.RaisePropertyChanged("zhp_8_adv");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=7)]
+        public int volume {
+            get {
+                return this.volumeField;
+            }
+            set {
+                if ((this.volumeField.Equals(value) != true)) {
+                    this.volumeField = value;
+                    this.RaisePropertyChanged("volume");
                 }
             }
         }
@@ -2716,6 +2902,10 @@ namespace QClient.QueueClinetServiceReference {
         [System.Runtime.Serialization.OptionalFieldAttribute()]
         private string tpAddressField;
         
+        private System.Nullable<int> RowNumberField;
+        
+        private System.Nullable<int> ColNumberField;
+        
         [global::System.ComponentModel.BrowsableAttribute(false)]
         public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
             get {
@@ -2921,6 +3111,32 @@ namespace QClient.QueueClinetServiceReference {
             }
         }
         
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=15)]
+        public System.Nullable<int> RowNumber {
+            get {
+                return this.RowNumberField;
+            }
+            set {
+                if ((this.RowNumberField.Equals(value) != true)) {
+                    this.RowNumberField = value;
+                    this.RaisePropertyChanged("RowNumber");
+                }
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(IsRequired=true, Order=16)]
+        public System.Nullable<int> ColNumber {
+            get {
+                return this.ColNumberField;
+            }
+            set {
+                if ((this.ColNumberField.Equals(value) != true)) {
+                    this.ColNumberField = value;
+                    this.RaisePropertyChanged("ColNumber");
+                }
+            }
+        }
+        
         public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
         
         protected void RaisePropertyChanged(string propertyName) {
@@ -2958,6 +3174,10 @@ namespace QClient.QueueClinetServiceReference {
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 BussinessID 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getBussinessInfo", ReplyAction="*")]
         QClient.QueueClinetServiceReference.getBussinessInfoResponse getBussinessInfo(QClient.QueueClinetServiceReference.getBussinessInfoRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 BussinessID 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetBussinessWiatUser", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetBussinessWiatUserResponse GetBussinessWiatUser(QClient.QueueClinetServiceReference.GetBussinessWiatUserRequest request);
         
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 param 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/getCall", ReplyAction="*")]
@@ -3002,6 +3222,10 @@ namespace QClient.QueueClinetServiceReference {
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 BillNo 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/UpdatePJ", ReplyAction="*")]
         QClient.QueueClinetServiceReference.UpdatePJResponse UpdatePJ(QClient.QueueClinetServiceReference.UpdatePJRequest request);
+        
+        // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 GetXMLConfigResult 以后生成的消息协定未标记为 nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetXMLConfig", ReplyAction="*")]
+        QClient.QueueClinetServiceReference.GetXMLConfigResponse GetXMLConfig(QClient.QueueClinetServiceReference.GetXMLConfigRequest request);
         
         // CODEGEN: 命名空间 http://www.ritacc.com/ 的元素名称 strKey 以后生成的消息协定未标记为 nillable
         [System.ServiceModel.OperationContractAttribute(Action="http://www.ritacc.com/GetClientValue", ReplyAction="*")]
@@ -3434,6 +3658,74 @@ namespace QClient.QueueClinetServiceReference {
         
         public getBussinessInfoResponseBody(string getBussinessInfoResult) {
             this.getBussinessInfoResult = getBussinessInfoResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetBussinessWiatUserRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBussinessWiatUser", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetBussinessWiatUserRequestBody Body;
+        
+        public GetBussinessWiatUserRequest() {
+        }
+        
+        public GetBussinessWiatUserRequest(QClient.QueueClinetServiceReference.GetBussinessWiatUserRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetBussinessWiatUserRequestBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public string BussinessID;
+        
+        public GetBussinessWiatUserRequestBody() {
+        }
+        
+        public GetBussinessWiatUserRequestBody(string BussinessID) {
+            this.BussinessID = BussinessID;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetBussinessWiatUserResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetBussinessWiatUserResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetBussinessWiatUserResponseBody Body;
+        
+        public GetBussinessWiatUserResponse() {
+        }
+        
+        public GetBussinessWiatUserResponse(QClient.QueueClinetServiceReference.GetBussinessWiatUserResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetBussinessWiatUserResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(Order=0)]
+        public int GetBussinessWiatUserResult;
+        
+        public GetBussinessWiatUserResponseBody() {
+        }
+        
+        public GetBussinessWiatUserResponseBody(int GetBussinessWiatUserResult) {
+            this.GetBussinessWiatUserResult = GetBussinessWiatUserResult;
         }
     }
     
@@ -4173,6 +4465,67 @@ namespace QClient.QueueClinetServiceReference {
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetXMLConfigRequest {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetXMLConfig", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetXMLConfigRequestBody Body;
+        
+        public GetXMLConfigRequest() {
+        }
+        
+        public GetXMLConfigRequest(QClient.QueueClinetServiceReference.GetXMLConfigRequestBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute()]
+    public partial class GetXMLConfigRequestBody {
+        
+        public GetXMLConfigRequestBody() {
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
+    public partial class GetXMLConfigResponse {
+        
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="GetXMLConfigResponse", Namespace="http://www.ritacc.com/", Order=0)]
+        public QClient.QueueClinetServiceReference.GetXMLConfigResponseBody Body;
+        
+        public GetXMLConfigResponse() {
+        }
+        
+        public GetXMLConfigResponse(QClient.QueueClinetServiceReference.GetXMLConfigResponseBody Body) {
+            this.Body = Body;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.ritacc.com/")]
+    public partial class GetXMLConfigResponseBody {
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
+        public QClient.QueueClinetServiceReference.ConfigOR GetXMLConfigResult;
+        
+        public GetXMLConfigResponseBody() {
+        }
+        
+        public GetXMLConfigResponseBody(QClient.QueueClinetServiceReference.ConfigOR GetXMLConfigResult) {
+            this.GetXMLConfigResult = GetXMLConfigResult;
+        }
+    }
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
+    [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+    [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class GetClientValueRequest {
         
         [System.ServiceModel.MessageBodyMemberAttribute(Name="GetClientValue", Namespace="http://www.ritacc.com/", Order=0)]
@@ -4540,6 +4893,19 @@ namespace QClient.QueueClinetServiceReference {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetBussinessWiatUserResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetBussinessWiatUser(QClient.QueueClinetServiceReference.GetBussinessWiatUserRequest request) {
+            return base.Channel.GetBussinessWiatUser(request);
+        }
+        
+        public int GetBussinessWiatUser(string BussinessID) {
+            QClient.QueueClinetServiceReference.GetBussinessWiatUserRequest inValue = new QClient.QueueClinetServiceReference.GetBussinessWiatUserRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetBussinessWiatUserRequestBody();
+            inValue.Body.BussinessID = BussinessID;
+            QClient.QueueClinetServiceReference.GetBussinessWiatUserResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetBussinessWiatUser(inValue);
+            return retVal.Body.GetBussinessWiatUserResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
         QClient.QueueClinetServiceReference.getCallResponse QClient.QueueClinetServiceReference.QueueClientSoap.getCall(QClient.QueueClinetServiceReference.getCallRequest request) {
             return base.Channel.getCall(request);
         }
@@ -4679,6 +5045,18 @@ namespace QClient.QueueClinetServiceReference {
             inValue.Body.PJ = PJ;
             QClient.QueueClinetServiceReference.UpdatePJResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).UpdatePJ(inValue);
             return retVal.Body.UpdatePJResult;
+        }
+        
+        [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
+        QClient.QueueClinetServiceReference.GetXMLConfigResponse QClient.QueueClinetServiceReference.QueueClientSoap.GetXMLConfig(QClient.QueueClinetServiceReference.GetXMLConfigRequest request) {
+            return base.Channel.GetXMLConfig(request);
+        }
+        
+        public QClient.QueueClinetServiceReference.ConfigOR GetXMLConfig() {
+            QClient.QueueClinetServiceReference.GetXMLConfigRequest inValue = new QClient.QueueClinetServiceReference.GetXMLConfigRequest();
+            inValue.Body = new QClient.QueueClinetServiceReference.GetXMLConfigRequestBody();
+            QClient.QueueClinetServiceReference.GetXMLConfigResponse retVal = ((QClient.QueueClinetServiceReference.QueueClientSoap)(this)).GetXMLConfig(inValue);
+            return retVal.Body.GetXMLConfigResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]

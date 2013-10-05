@@ -5,6 +5,7 @@ using System.Text;
 using QClient.Core.Model;
 using QClient.QueueClinetServiceReference;
 using System.Windows;
+using QClient.HD;
 
 namespace QClient.Core.ViewModel
 {
@@ -117,7 +118,10 @@ namespace QClient.Core.ViewModel
                     return false;
                 }
 
-                ImgSetViewModel.Instance.PrintSlip(result);
+                //ImgSetViewModel.Instance.PrintSlip(result);
+               
+
+
 
                 //取号成功： result票号
                 errorMsg = result;
@@ -196,11 +200,11 @@ namespace QClient.Core.ViewModel
                     if (WebViewModel.Instance.QH(qhandy.LabelJobno, mCard, out mErrorMsg))
                     {
                         //成功不处理
-                       // MessageBox.Show(mErrorMsg);
+                       MessageBox.Show(mErrorMsg);
                     }
                     else
                     {
-                        //MessageBox.Show(mErrorMsg);
+                        MessageBox.Show(mErrorMsg);
                     }
                 }
                 else

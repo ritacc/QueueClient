@@ -52,7 +52,10 @@ values ('@Id','@Name',SoundDev,'@Description','@OrgBH',
         public WindowOR SelectWindowByNo(string windowNo)
         {
             string sql = string.Format(@"select fjq.Address fjqAddress,pjq.Address pjqAddress
-,tp.Address tpAddress,w.* from t_window w
+,tp.Address tpAddress
+,tp.rowNumber
+,tp.ColNumber
+,w.* from t_window w
 left join t_device fjq on w.name=fjq.WindowNo and fjq.DeviceTypeID=1
 left join t_device pjq on w.name=pjq.WindowNo and pjq.DeviceTypeID=3
 left join t_device tp on w.name=tp.WindowNo and tp.DeviceTypeID=2 where w.Name='{0}' ", windowNo);
@@ -68,7 +71,10 @@ left join t_device tp on w.name=tp.WindowNo and tp.DeviceTypeID=2 where w.Name='
         public List<WindowOR> SelectWindows()
         {
             string sql = @"select fjq.Address fjqAddress,pjq.Address pjqAddress
-,tp.Address tpAddress,w.* from t_window w
+,tp.Address tpAddress
+,tp.rowNumber
+,tp.ColNumber
+,w.* from t_window w
 left join t_device fjq on w.name=fjq.WindowNo and fjq.DeviceTypeID=1
 left join t_device pjq on w.name=pjq.WindowNo and pjq.DeviceTypeID=3
 left join t_device tp on w.name=tp.WindowNo and tp.DeviceTypeID=2 

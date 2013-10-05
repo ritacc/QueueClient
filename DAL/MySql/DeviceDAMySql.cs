@@ -128,8 +128,10 @@ from t_device d where DeviceTypeID={0} order by Windowno,Address", DeviceType);
                 throw new Exception("包含重复数据！");
             }
             string sql = @"insert into t_device (ID,DeviceTypeID,WindowNo,WindowType,DeviceModel,
+ColNumber,RowNumber,
 HostAddr,Address,Status,UpdateTime,CreateTime)
 values ('@ID',@DeviceTypeID,'@WindowNo','@WindowType','@DeviceModel',
+'@ColNumber','@RowNumber',
 '@HostAddr','@Address',0,'@UpdateTime','@CreateTime')";
             sql = sql.Replace("@ID", device.Id);	//
             sql = sql.Replace("@DeviceTypeID", device.Devicetypeid.ToString());	//
@@ -139,6 +141,8 @@ values ('@ID',@DeviceTypeID,'@WindowNo','@WindowType','@DeviceModel',
             sql = sql.Replace("@HostAddr", device.Hostaddr);	//
             sql = sql.Replace("@Address", device.Address);	//
             sql = sql.Replace("@Status", device.Status.ToString());	//
+            sql = sql.Replace("@ColNumber",  device.ColNumber.HasValue? device.ColNumber.Value.ToString(): "");
+            sql = sql.Replace("@RowNumber", device.RowNumber.HasValue ? device.RowNumber.Value.ToString() : "");
             sql = sql.Replace("@UpdateTime", device.Updatetime.ToString("yyyy-MM-dd HH:mm:ss"));	//
             sql = sql.Replace("@CreateTime", device.Createtime.ToString("yyyy-MM-dd HH:mm:ss"));	//
 
@@ -156,6 +160,8 @@ values ('@ID',@DeviceTypeID,'@WindowNo','@WindowType','@DeviceModel',
             string sql = @"update t_device set WindowNo='@WindowNo'
 ,WindowType='@WindowType'
 ,DeviceModel='@DeviceModel'
+,ColNumber='@ColNumber'
+,RowNumber='@RowNumber'
 ,HostAddr='@HostAddr'
 ,Address='@Address'
 ,UpdateTime='@UpdateTime'  where ID='@ID'";
@@ -167,7 +173,9 @@ values ('@ID',@DeviceTypeID,'@WindowNo','@WindowType','@DeviceModel',
             sql = sql.Replace("@DeviceModel", device.Devicemodel);	//
             sql = sql.Replace("@HostAddr", device.Hostaddr);	//
             sql = sql.Replace("@Address", device.Address);	//
-            
+            sql = sql.Replace("@ColNumber", device.ColNumber.HasValue ? device.ColNumber.Value.ToString() : "");
+            sql = sql.Replace("@RowNumber", device.RowNumber.HasValue ? device.RowNumber.Value.ToString() : "");
+
             sql = sql.Replace("@UpdateTime", device.Updatetime.ToString("yyyy-MM-dd HH:mm:ss"));	//
             
 
