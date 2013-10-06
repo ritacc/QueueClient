@@ -64,8 +64,9 @@ namespace MSS
 			m_obj.LR = m_obj.SS - m_obj.CB;
 
 			m_obj.GHS = GHS.Text;
-
+            m_obj.CH = CH.Text;
 			m_obj.GMR = GMR.Text;
+            
 			m_obj.LXDH = LXDH.Text;
 			m_obj.XSRQ = XSRQ.Value;
 			m_obj.SHZK = SHZK.Text;
@@ -77,17 +78,29 @@ namespace MSS
 			PhoneOR m_obj = setValue();
 			if (m_obj == null)
 				return;
-			if (m_OpType == "add")
-			{
-				try
-				{
-					new PhoneDA().Insert(m_obj);
-				}
-				catch (Exception ex)
-				{
-					showMsg(ex.Message);
-				}
-			}
+            if (m_OpType == "add")
+            {
+                try
+                {
+                    new PhoneDA().Insert(m_obj);
+                }
+                catch (Exception ex)
+                {
+                    showMsg(ex.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    m_obj.ID = Convert.ToInt32(m_ID);
+                    new PhoneDA().Update(m_obj);
+                }
+                catch (Exception ex)
+                {
+                    showMsg(ex.Message);
+                }
+            }
 			_IsReutrn = true;
 			this.Close();
 		}
@@ -102,7 +115,28 @@ namespace MSS
 		}
 		private void frmPhoneEdit_Load(object sender, EventArgs e)
 		{
-
+            if (m_OpType == "edit")
+            {
+                loadData();
+            }
 		}
+
+        private void loadData()
+        {
+            PhoneOR m_obj = new PhoneDA().selectARowDate(m_ID);
+
+            JX.Text=m_obj.JX;
+            SS.Text=m_obj.SS.ToString();
+            CB.Text = m_obj.CB.ToString();
+
+
+            GHS.Text=m_obj.GHS;
+            CH.Text=m_obj.CH;
+            GMR.Text=m_obj.GMR;
+            LXDH.Text=m_obj.LXDH;
+            XSRQ.Value=m_obj.XSRQ;
+            SHZK.Text=m_obj.SHZK;
+        }
+
 	}
 }

@@ -1,11 +1,14 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using System.Data;
 
 namespace MSSClass.Entity
 {
 	public class PhoneOR
 	{
+        public int ID { get; set; }
+
 		/// <summary>
 		///  [机型]
 		/// </summary>
@@ -52,5 +55,24 @@ namespace MSSClass.Entity
 		///  [售后状况]
 		/// </summary>
 		public string SHZK { get; set; }
+
+        public PhoneOR()
+        {
+
+        }
+
+        public PhoneOR(DataRow dr)
+        {
+            JX = dr["JX"].ToString();
+            SS = Convert.ToDouble(dr["SS"].ToString());
+            CB = Convert.ToDouble(dr["CB"].ToString());
+            LR = Convert.ToDouble(dr["LR"].ToString());
+            CH = dr["CH"].ToString();
+            GMR = dr["GMR"].ToString();
+            LXDH = dr["LXDH"].ToString();
+            XSRQ = Convert.ToDateTime(dr["XSRQ"].ToString());
+            SHZK = dr["SHZK"].ToString();
+
+        }
 	}
 }

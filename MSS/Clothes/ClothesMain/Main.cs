@@ -80,6 +80,68 @@ namespace Clothes.SellingClothes
 				BindGridView();
 		}
 
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection gv = this.GdTodayList.SelectedRows;
+            if (gv.Count == 0)
+            {
+                MessageBox.Show("请选择记录？", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string id = gv[0].Cells[0].Value.ToString();
+            if (string.IsNullOrEmpty(id))
+            {
+                MessageBox.Show("请选择记录？", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            frmPhoneEdit edit = new frmPhoneEdit();
+            edit.OpType = "edit";
+            edit.ID = id;
+            edit.ShowDialog();
+            if (edit.IsReutrn)
+                BindGridView();
+        }
+        
+        /// <summary>
+        /// 弹出窗体
+        /// </summary>
+        /// <param name="str">弹出内容</param>
+        private void showMsg(string str)
+        {
+            str = str.Replace("'", "");
+            MessageBox.Show(str, "提示");
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            DataGridViewSelectedRowCollection gv = this.GdTodayList.SelectedRows;
+            if (gv.Count == 0)
+            {
+                MessageBox.Show("请选择记录？", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+            string id = gv[0].Cells[0].Value.ToString();
+            if (string.IsNullOrEmpty(id))
+            {
+                MessageBox.Show("请选择记录？", "错误", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                return;
+            }
+
+            if (MessageBox.Show("你确定要删除此记录吗？", "错误", MessageBoxButtons.YesNo, MessageBoxIcon.Warning) == DialogResult.Yes)
+            {
+                try
+                {
+                    new PhoneDA().Delete(id);
+                    BindGridView();
+                }
+                catch (Exception ex)
+                {
+                    showMsg(ex.Message);
+                }
+            }
+        }
+
         
 
         
