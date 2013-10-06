@@ -10,6 +10,7 @@ using System.Data.OleDb;
 using MSSClass.DBCommon;
 using MSSClass.Dal;
 using MSSClass;
+using MSS;
 
 namespace Clothes.SellingClothes
 {
@@ -25,17 +26,7 @@ namespace Clothes.SellingClothes
 
         }
 
-        private void tsmSellCholes_Click(object sender, EventArgs e)
-        {
-            SellClothe obj = new SellClothe();           
-            obj.ShowDialog();
-        }
-
-        private void tsmBuyClothes_Click(object sender, EventArgs e)
-        {
-            BuyclothesList obj = new BuyclothesList();
-            obj.ShowDialog();
-        }
+       
         #region ÊÖ»ú
         PhoneDA mPhoneDA = new PhoneDA();
         private void BindGridView()
@@ -78,6 +69,16 @@ namespace Clothes.SellingClothes
         {
 
         }
+
+		private void btnAdd_Click(object sender, EventArgs e)
+		{
+			frmPhoneEdit edit = new frmPhoneEdit();
+			edit.Owner = this;
+			edit.OpType = "add";
+			edit.ShowDialog();
+			if (edit.IsReutrn)
+				BindGridView();
+		}
 
         
 

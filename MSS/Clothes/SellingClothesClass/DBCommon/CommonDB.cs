@@ -20,6 +20,7 @@ namespace MSSClass.DBCommon
 
         protected OleDbConnection getConnection()
         {
+			//Provider=Microsoft.Jet.OLEDB.4.0;
             string connectionString = string.Format(@"Provider=Microsoft.Jet.OLEDB.4.0;Data Source={0};
 User ID=admin;Password=;Jet OLEDB:Database Password=ABCabc123",appconifg.Instance.DBConnectionPath);
             OleDbConnection cn = new OleDbConnection(connectionString);
@@ -88,8 +89,7 @@ User ID=admin;Password=;Jet OLEDB:Database Password=ABCabc123",appconifg.Instanc
                 catch (Exception ex)
                 {
 
-                    _errorInfo = ex.Message;
-                    return false;
+					throw ex;
                 }
                 try
                 {

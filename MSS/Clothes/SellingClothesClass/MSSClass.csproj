@@ -63,6 +63,7 @@
     <Compile Include="Dal\SystemsetDA.cs" />
     <Compile Include="DBCommon\CommonDB.cs" />
     <Compile Include="Entity\BuyclothesOR.cs" />
+    <Compile Include="Entity\PhoneOR.cs" />
     <Compile Include="Entity\SellclothesOR.cs" />
     <Compile Include="Entity\SystemsetOR.cs" />
     <Compile Include="Entity\UsecontrolOR.cs" />

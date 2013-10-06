@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Text;
 using System.Data;
 using MSSClass.DBCommon;
+using MSSClass.Entity;
 
 namespace MSSClass.Dal
 {
@@ -22,7 +23,7 @@ GHS as [供货商],
 GMR as [购买人],
 LXDH as [联系电话],
 XSRQ as [销售日期],
-SHZK as [售后状况
+SHZK as [售后状况]
 from phone ";
 
 
@@ -42,6 +43,19 @@ from phone ";
 
            return dt;
        }
+
+	   #region 插入
+	   /// <summary>
+	   /// 插入BuyClothes
+	   /// </summary>
+	   public bool Insert(PhoneOR mobj)
+	   {
+		   string sql = string.Format("insert into phone ( JX,SS,CB, LR, CH,GHS,GMR,LXDH,XSRQ,SHZK) values ('{0}',{1}, {2},{3}, '{4}', '{5}', '{6}', '{7}', '{8}', '{9}')",
+			 mobj.JX, mobj.SS, mobj.CB, mobj.LR, mobj.CH, mobj.GHS, mobj.GMR, mobj.LXDH, mobj.XSRQ, mobj.SHZK);
+
+		   return db.excuteNonquery(sql);
+	   }
+	   #endregion
 
        public DataTable selectCountData(string where)
        {

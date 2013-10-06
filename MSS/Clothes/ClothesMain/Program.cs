@@ -15,7 +15,7 @@ namespace Clothes.SellingClothes
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            appconifg.m_DBConnectionPath = string.Format("{0}\\DBMSS.accdb", Application.StartupPath);
+			appconifg.m_DBConnectionPath = string.Format("{0}\\DBMSS.mdb", Application.StartupPath);
 
             //Application.Run(new Login());
             //if (Globals.isLogin)
