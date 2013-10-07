@@ -88,7 +88,7 @@ from Maintain ";
 		/// </summary>
 		public bool Insert(MaintainOR mobj)
 		{
-			string sql = string.Format("insert into Maintain ( MC,SS,CB, LR,GHS,RQ) values ('{0}',{1}, {2},{3}, '{4}', '{5}')",
+            string sql = string.Format("insert into Maintain ( MC,SS,CB, LR,GHS,RJ) values ('{0}',{1}, {2},{3}, '{4}', '{5}')",
 			  mobj.MC, mobj.SS, mobj.CB, mobj.LR, mobj.GHS, mobj.RQ);
 
 			return db.excuteNonquery(sql);
@@ -98,7 +98,7 @@ from Maintain ";
 		#region 修改
 		public bool Update(MaintainOR mobj)
 		{
-			string sql = string.Format("update Maintain set MC='{0}',SS={1},CB={2}, LR={3},GHS='{4}',RQ='{5}' where id={6}",
+            string sql = string.Format("update Maintain set MC='{0}',SS={1},CB={2}, LR={3},GHS='{4}',RJ='{5}' where id={6}",
 			  mobj.MC, mobj.SS, mobj.CB, mobj.LR, mobj.GHS, mobj.RQ, mobj.ID);
 			return db.excuteNonquery(sql);
 		}

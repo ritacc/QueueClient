@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Windows.Forms;
 using MSSClass;
+using MSS;
 
 namespace Clothes.SellingClothes
 {
@@ -17,11 +18,11 @@ namespace Clothes.SellingClothes
             Application.SetCompatibleTextRenderingDefault(false);
 			appconifg.m_DBConnectionPath = string.Format("{0}\\DBMSS.mdb", Application.StartupPath);
 
-            //Application.Run(new Login());
-            //if (Globals.isLogin)
-            //{
+            Application.Run(new FrmLogin());
+            if (Globals.isLogin)
+            {
                 Application.Run(new Main());
-            //}
+            }
             Application.Exit();
 
 

@@ -26,9 +26,10 @@ namespace Clothes.SellingClothes
 			BindPartsGridView();
 			BindGridView();
 			BindMaintainGridView();
+            if (Globals.CurrentUser != null)
+                this.Text = this.Text + "   " + Globals.CurrentUser.UserName;
         }
 
-       
         #region 手机
         PhoneDA mPhoneDA = new PhoneDA();
         private void BindGridView()
@@ -135,7 +136,7 @@ namespace Clothes.SellingClothes
 		{
 			try
 			{
-				string where = string.Format(" XSRQ>=#{0} 00:00:00# and XSRQ<=#{1} 23:59:59#", dptPartsStart.Value.ToString("yyyy-MM-dd"), dtpPartsEnd.Value.ToString("yyyy-MM-dd"));
+                string where = string.Format(" RJ>=#{0} 00:00:00# and RJ<=#{1} 23:59:59#", dptPartsStart.Value.ToString("yyyy-MM-dd"), dtpPartsEnd.Value.ToString("yyyy-MM-dd"));
 				DataTable dt = mPartsDA.selectViewData(where);
 				this.dgParts.DataSource = dt;
 
@@ -151,16 +152,13 @@ namespace Clothes.SellingClothes
 						dataCount.Rows[0]["sellPriceCount"].ToString(),
 						dataCount.Rows[0]["purchaseCount"].ToString(),
 						dataCount.Rows[0]["profitCount"].ToString());
-					lblShowMsg.Text = value;
+                    lblPartsShowMsg.Text = value;
 				}
 			}
 			catch (System.Exception ex)
 			{
 				Error.WriteLog("SellClothe : Form:BindGridView(),001", "0001", ex.Message);
 			}
-
-
-
 		}
 		private void btnPartsSearch_Click(object sender, EventArgs e)
 		{
@@ -174,7 +172,7 @@ namespace Clothes.SellingClothes
 			edit.OpType = "add";
 			edit.ShowDialog();
 			if (edit.IsReutrn)
-				BindGridView();
+                BindPartsGridView();
 		}
 
 		private void btnPartsEdit_Click(object sender, EventArgs e)
@@ -197,7 +195,7 @@ namespace Clothes.SellingClothes
 			edit.ID = id;
 			edit.ShowDialog();
 			if (edit.IsReutrn)
-				BindGridView();
+                BindPartsGridView();
 		}
 
 		private void btnPartsDelete_Click(object sender, EventArgs e)
@@ -236,7 +234,7 @@ namespace Clothes.SellingClothes
 		{
 			try
 			{
-				string where = string.Format(" XSRQ>=#{0} 00:00:00# and XSRQ<=#{1} 23:59:59#", dtpMantainStart.Value.ToString("yyyy-MM-dd"), dtpMantainEnd.Value.ToString("yyyy-MM-dd"));
+                string where = string.Format(" RJ>=#{0} 00:00:00# and RJ<=#{1} 23:59:59#", dtpMantainStart.Value.ToString("yyyy-MM-dd"), dtpMantainEnd.Value.ToString("yyyy-MM-dd"));
 				DataTable dt = mMaintainDA.selectViewData(where);
 				this.dgMaintain.DataSource = dt;
 				
@@ -247,20 +245,17 @@ namespace Clothes.SellingClothes
 					lblShowMsg.Text = "";
 				else
 				{
-					string value = string.Format("{0},到{1}销售金额：{2}\t，成本：{3}\t，利润：{4}", this.dtpMantainStart.Text, dtpPhoneEnd.Text,
+                    string value = string.Format("{0},到{1}销售金额：{2}\t，成本：{3}\t，利润：{4}", this.dtpMantainStart.Text, dtpMantainEnd.Text,
 						dataCount.Rows[0]["sellPriceCount"].ToString(),
 						dataCount.Rows[0]["purchaseCount"].ToString(),
 						dataCount.Rows[0]["profitCount"].ToString());
-					lblShowMsg.Text = value;
+                    lblMaintainShowMsg.Text = value;
 				}
 			}
 			catch (System.Exception ex)
 			{
 				Error.WriteLog("SellClothe : Form:BindGridView(),001", "0001", ex.Message);
 			}
-
-
-
 		}
 		private void btnMaintainSearch_Click(object sender, EventArgs e)
 		{
@@ -274,7 +269,7 @@ namespace Clothes.SellingClothes
 			edit.OpType = "add";
 			edit.ShowDialog();
 			if (edit.IsReutrn)
-				BindGridView();
+                BindMaintainGridView();
 		}
 
 		private void btnMaintainEdit_Click(object sender, EventArgs e)
@@ -297,7 +292,7 @@ namespace Clothes.SellingClothes
 			edit.ID = id;
 			edit.ShowDialog();
 			if (edit.IsReutrn)
-				BindGridView();
+                BindMaintainGridView();
 		}
 
 		private void btnMaintainDelete_Click(object sender, EventArgs e)
@@ -344,9 +339,12 @@ namespace Clothes.SellingClothes
 
 		#endregion
 
-
-
-
+        private void btnUserAdmin_Click(object sender, EventArgs e)
+        {
+            FrmUserList frm = new FrmUserList();
+            frm.Owner = this;
+            frm.ShowDialog();
+        }
 	}
 
      

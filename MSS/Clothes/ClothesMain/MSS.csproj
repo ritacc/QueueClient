@@ -60,6 +60,12 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="FrmLogin.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmLogin.Designer.cs">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </Compile>
     <Compile Include="frmMaintainEdit.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -78,6 +84,18 @@
     <Compile Include="frmPhoneEdit.Designer.cs">
       <DependentUpon>frmPhoneEdit.cs</DependentUpon>
     </Compile>
+    <Compile Include="FrmUserEdit.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserEdit.Designer.cs">
+      <DependentUpon>FrmUserEdit.cs</DependentUpon>
+    </Compile>
+    <Compile Include="FrmUserList.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FrmUserList.Designer.cs">
+      <DependentUpon>FrmUserList.cs</DependentUpon>
+    </Compile>
     <Compile Include="Globals.cs" />
     <Compile Include="Main.cs">
       <SubType>Form</SubType>
@@ -92,6 +110,9 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resource.resx</DependentUpon>
     </Compile>
+    <EmbeddedResource Include="FrmLogin.resx">
+      <DependentUpon>FrmLogin.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="frmMaintainEdit.resx">
       <DependentUpon>frmMaintainEdit.cs</DependentUpon>
     </EmbeddedResource>
@@ -100,6 +121,12 @@
     </EmbeddedResource>
     <EmbeddedResource Include="frmPhoneEdit.resx">
       <DependentUpon>frmPhoneEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserEdit.resx">
+      <DependentUpon>FrmUserEdit.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="FrmUserList.resx">
+      <DependentUpon>FrmUserList.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="Main.resx">
       <SubType>Designer</SubType>

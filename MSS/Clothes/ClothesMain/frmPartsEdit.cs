@@ -67,7 +67,34 @@ namespace MSS
 		}
 		private void btnSave_Click(object sender, EventArgs e)
 		{
-
+            PartsOR m_obj = setValue();
+            if (m_obj == null)
+                return;
+            if (m_OpType == "add")
+            {
+                try
+                {
+                    new PartsDA().Insert(m_obj);
+                }
+                catch (Exception ex)
+                {
+                    showMsg(ex.Message);
+                }
+            }
+            else
+            {
+                try
+                {
+                    m_obj.ID = Convert.ToInt32(m_ID);
+                    new PartsDA().Update(m_obj);
+                }
+                catch (Exception ex)
+                {
+                    showMsg(ex.Message);
+                }
+            }
+            _IsReutrn = true;
+            this.Close();
 		}
 		/// <summary>
 		/// 弹出窗体

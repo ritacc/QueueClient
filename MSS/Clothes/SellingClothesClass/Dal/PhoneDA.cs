@@ -67,7 +67,7 @@ from phone ";
 
        public PhoneOR selectARowDate(string m_id)
        {
-           string sql = string.Format("select * from phone where   id={0}", m_id);
+           string sql = string.Format("select * from phone where id={0}", m_id);
            DataTable dt = null;
            try
            {

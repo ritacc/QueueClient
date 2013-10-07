@@ -89,7 +89,7 @@ from Parts ";
 		/// </summary>
 		public bool Insert(PartsOR mobj)
 		{
-			string sql = string.Format("insert into Parts ( MC,SS,CB, LR,GHS,RQ) values ('{0}',{1}, {2},{3}, '{4}', '{5}')",
+            string sql = string.Format("insert into Parts ( MC,SS,CB, LR,GHS,RJ) values ('{0}',{1}, {2},{3}, '{4}', '{5}')",
 			  mobj.MC, mobj.SS, mobj.CB, mobj.LR,   mobj.GHS,mobj.RQ);
 
 			return db.excuteNonquery(sql);
@@ -99,7 +99,7 @@ from Parts ";
 		#region 修改
 		public bool Update(PartsOR mobj)
 		{
-			string sql = string.Format("update Parts set MC='{0}',SS={1},CB={2}, LR={3},GHS='{4}',RQ='{5}' where id={6}",
+            string sql = string.Format("update Parts set MC='{0}',SS={1},CB={2}, LR={3},GHS='{4}',RJ='{5}' where id={6}",
 			  mobj.MC, mobj.SS, mobj.CB, mobj.LR, mobj.GHS, mobj.RQ, mobj.ID);
 			return db.excuteNonquery(sql);
 		}

@@ -53,8 +53,9 @@ namespace MSSClass.Entity
 			MC = dr["MC"].ToString();
 			SS = Convert.ToDouble(dr["SS"].ToString());
 			CB = Convert.ToDouble(dr["CB"].ToString());
-			LR = Convert.ToDouble(dr["LR"].ToString()); 
-			RQ = Convert.ToDateTime(dr["RQ"].ToString()); 
+			LR = Convert.ToDouble(dr["LR"].ToString());
+            GHS = dr["GHS"].ToString();
+            RQ = Convert.ToDateTime(dr["RJ"].ToString()); 
 		}
 	}
 }
