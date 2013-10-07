@@ -9,10 +9,10 @@
     <OutputType>WinExe</OutputType>
     <AppDesignerFolder>Properties</AppDesignerFolder>
     <RootNamespace>MSS</RootNamespace>
-    <AssemblyName>Clothes</AssemblyName>
+    <AssemblyName>白沙手机饰界营业管理系统</AssemblyName>
     <Win32Resource>
     </Win32Resource>
-    <ApplicationIcon>mosaic.ico</ApplicationIcon>
+    <ApplicationIcon>xiaozhu.ico</ApplicationIcon>
     <TargetFrameworkVersion>v2.0</TargetFrameworkVersion>
     <FileUpgradeFlags>
     </FileUpgradeFlags>
@@ -60,17 +60,17 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BuyclothesEdit.cs">
+    <Compile Include="frmMaintainEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BuyclothesEdit.Designer.cs">
-      <DependentUpon>BuyclothesEdit.cs</DependentUpon>
+    <Compile Include="frmMaintainEdit.Designer.cs">
+      <DependentUpon>frmMaintainEdit.cs</DependentUpon>
     </Compile>
-    <Compile Include="BuyclothesList.cs">
+    <Compile Include="frmPartsEdit.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="BuyclothesList.Designer.cs">
-      <DependentUpon>BuyclothesList.cs</DependentUpon>
+    <Compile Include="frmPartsEdit.Designer.cs">
+      <DependentUpon>frmPartsEdit.cs</DependentUpon>
     </Compile>
     <Compile Include="frmPhoneEdit.cs">
       <SubType>Form</SubType>
@@ -87,13 +87,16 @@
     </Compile>
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <EmbeddedResource Include="BuyclothesEdit.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>BuyclothesEdit.cs</DependentUpon>
+    <Compile Include="Resource.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resource.resx</DependentUpon>
+    </Compile>
+    <EmbeddedResource Include="frmMaintainEdit.resx">
+      <DependentUpon>frmMaintainEdit.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="BuyclothesList.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>BuyclothesList.cs</DependentUpon>
+    <EmbeddedResource Include="frmPartsEdit.resx">
+      <DependentUpon>frmPartsEdit.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmPhoneEdit.resx">
       <DependentUpon>frmPhoneEdit.cs</DependentUpon>
@@ -107,19 +110,15 @@
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </EmbeddedResource>
-    <EmbeddedResource Include="SellClothe.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SellClothe.cs</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="SellClotheEdit.resx">
-      <SubType>Designer</SubType>
-      <DependentUpon>SellClotheEdit.cs</DependentUpon>
-    </EmbeddedResource>
     <Compile Include="Properties\Resources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Resource.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <LastGenOutput>Resource.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -129,23 +128,13 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <Compile Include="SellClothe.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SellClothe.Designer.cs">
-      <DependentUpon>SellClothe.cs</DependentUpon>
-    </Compile>
-    <Compile Include="SellClotheEdit.cs">
-      <SubType>Form</SubType>
-    </Compile>
-    <Compile Include="SellClotheEdit.Designer.cs">
-      <DependentUpon>SellClotheEdit.cs</DependentUpon>
-    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Icon\mosaic.ico" />
-    <Content Include="Images\mianBg.JPG" />
+    <Content Include="Icon\xiaozhu.ico" />
     <Content Include="mosaic.ico" />
+    <Content Include="xiaozhu.ico" />
+    <None Include="Resources\IconXiaozhu.ico" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\SellingClothesClass\MSSClass.csproj">

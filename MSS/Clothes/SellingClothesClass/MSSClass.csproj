@@ -57,14 +57,14 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Appconifg.cs" />
-    <Compile Include="Dal\BuyclothesDA.cs" />
+    <Compile Include="Dal\MaintainDA.cs" />
+    <Compile Include="Dal\PartsDA.cs" />
     <Compile Include="Dal\PhoneDA.cs" />
-    <Compile Include="Dal\SellclothesDA.cs" />
     <Compile Include="Dal\SystemsetDA.cs" />
     <Compile Include="DBCommon\CommonDB.cs" />
-    <Compile Include="Entity\BuyclothesOR.cs" />
+    <Compile Include="Entity\MaintainOR.cs" />
+    <Compile Include="Entity\PartsOR.cs" />
     <Compile Include="Entity\PhoneOR.cs" />
-    <Compile Include="Entity\SellclothesOR.cs" />
     <Compile Include="Entity\SystemsetOR.cs" />
     <Compile Include="Entity\UsecontrolOR.cs" />
     <Compile Include="Error.cs" />

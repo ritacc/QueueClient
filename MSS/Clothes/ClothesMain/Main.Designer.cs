@@ -28,223 +28,476 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.tabControl1 = new System.Windows.Forms.TabControl();
-            this.tabPage1 = new System.Windows.Forms.TabPage();
-            this.panel2 = new System.Windows.Forms.Panel();
-            this.panel3 = new System.Windows.Forms.Panel();
-            this.lblShowMsg = new System.Windows.Forms.Label();
-            this.GdTodayList = new System.Windows.Forms.DataGridView();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.dtpEnd = new System.Windows.Forms.DateTimePicker();
-            this.btnSearch = new System.Windows.Forms.Button();
-            this.dtpSellDt = new System.Windows.Forms.DateTimePicker();
-            this.lblSellTime = new System.Windows.Forms.Label();
-            this.btnSellPhone = new System.Windows.Forms.Button();
-            this.btnAdd = new System.Windows.Forms.Button();
-            this.tabPage2 = new System.Windows.Forms.TabPage();
-            this.tabPage3 = new System.Windows.Forms.TabPage();
-            this.btnDelete = new System.Windows.Forms.Button();
-            this.btnEdit = new System.Windows.Forms.Button();
-            this.tabControl1.SuspendLayout();
-            this.tabPage1.SuspendLayout();
-            this.panel2.SuspendLayout();
-            this.panel3.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GdTodayList)).BeginInit();
-            this.panel1.SuspendLayout();
-            this.SuspendLayout();
-            // 
-            // tabControl1
-            // 
-            this.tabControl1.Controls.Add(this.tabPage1);
-            this.tabControl1.Controls.Add(this.tabPage2);
-            this.tabControl1.Controls.Add(this.tabPage3);
-            this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tabControl1.Location = new System.Drawing.Point(0, 0);
-            this.tabControl1.Name = "tabControl1";
-            this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(995, 506);
-            this.tabControl1.TabIndex = 0;
-            // 
-            // tabPage1
-            // 
-            this.tabPage1.Controls.Add(this.panel2);
-            this.tabPage1.Controls.Add(this.panel1);
-            this.tabPage1.Location = new System.Drawing.Point(4, 21);
-            this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage1.Size = new System.Drawing.Size(987, 481);
-            this.tabPage1.TabIndex = 0;
-            this.tabPage1.Text = "手机";
-            this.tabPage1.UseVisualStyleBackColor = true;
-            // 
-            // panel2
-            // 
-            this.panel2.Controls.Add(this.panel3);
-            this.panel2.Controls.Add(this.GdTodayList);
-            this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.panel2.Location = new System.Drawing.Point(3, 60);
-            this.panel2.Name = "panel2";
-            this.panel2.Size = new System.Drawing.Size(981, 418);
-            this.panel2.TabIndex = 1;
-            // 
-            // panel3
-            // 
-            this.panel3.Controls.Add(this.lblShowMsg);
-            this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
-            this.panel3.Location = new System.Drawing.Point(0, 370);
-            this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(981, 48);
-            this.panel3.TabIndex = 1;
-            // 
-            // lblShowMsg
-            // 
-            this.lblShowMsg.AutoSize = true;
-            this.lblShowMsg.Location = new System.Drawing.Point(14, 18);
-            this.lblShowMsg.Name = "lblShowMsg";
-            this.lblShowMsg.Size = new System.Drawing.Size(41, 12);
-            this.lblShowMsg.TabIndex = 1;
-            this.lblShowMsg.Text = "信息：";
-            // 
-            // GdTodayList
-            // 
-            this.GdTodayList.AllowUserToAddRows = false;
-            this.GdTodayList.AllowUserToDeleteRows = false;
-            this.GdTodayList.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.GdTodayList.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.GdTodayList.Location = new System.Drawing.Point(0, 0);
-            this.GdTodayList.Name = "GdTodayList";
-            this.GdTodayList.RowTemplate.Height = 23;
-            this.GdTodayList.Size = new System.Drawing.Size(981, 418);
-            this.GdTodayList.TabIndex = 0;
-            // 
-            // panel1
-            // 
-            this.panel1.Controls.Add(this.btnDelete);
-            this.panel1.Controls.Add(this.btnEdit);
-            this.panel1.Controls.Add(this.dtpEnd);
-            this.panel1.Controls.Add(this.btnSearch);
-            this.panel1.Controls.Add(this.dtpSellDt);
-            this.panel1.Controls.Add(this.lblSellTime);
-            this.panel1.Controls.Add(this.btnSellPhone);
-            this.panel1.Controls.Add(this.btnAdd);
-            this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
-            this.panel1.Location = new System.Drawing.Point(3, 3);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(981, 57);
-            this.panel1.TabIndex = 0;
-            // 
-            // dtpEnd
-            // 
-            this.dtpEnd.Location = new System.Drawing.Point(254, 5);
-            this.dtpEnd.Name = "dtpEnd";
-            this.dtpEnd.Size = new System.Drawing.Size(137, 21);
-            this.dtpEnd.TabIndex = 8;
-            // 
-            // btnSearch
-            // 
-            this.btnSearch.Location = new System.Drawing.Point(397, 4);
-            this.btnSearch.Name = "btnSearch";
-            this.btnSearch.Size = new System.Drawing.Size(47, 23);
-            this.btnSearch.TabIndex = 7;
-            this.btnSearch.Text = "查询";
-            this.btnSearch.UseVisualStyleBackColor = true;
-            this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
-            // 
-            // dtpSellDt
-            // 
-            this.dtpSellDt.Location = new System.Drawing.Point(83, 5);
-            this.dtpSellDt.Name = "dtpSellDt";
-            this.dtpSellDt.Size = new System.Drawing.Size(137, 21);
-            this.dtpSellDt.TabIndex = 6;
-            // 
-            // lblSellTime
-            // 
-            this.lblSellTime.AutoSize = true;
-            this.lblSellTime.Location = new System.Drawing.Point(11, 10);
-            this.lblSellTime.Name = "lblSellTime";
-            this.lblSellTime.Size = new System.Drawing.Size(65, 12);
-            this.lblSellTime.TabIndex = 5;
-            this.lblSellTime.Text = "销售时间：";
-            // 
-            // btnSellPhone
-            // 
-            this.btnSellPhone.Enabled = false;
-            this.btnSellPhone.Location = new System.Drawing.Point(315, 28);
-            this.btnSellPhone.Name = "btnSellPhone";
-            this.btnSellPhone.Size = new System.Drawing.Size(75, 23);
-            this.btnSellPhone.TabIndex = 1;
-            this.btnSellPhone.Text = "卖手机";
-            this.btnSellPhone.UseVisualStyleBackColor = true;
-            this.btnSellPhone.Click += new System.EventHandler(this.btnSellPhone_Click);
-            // 
-            // btnAdd
-            // 
-            this.btnAdd.Location = new System.Drawing.Point(540, 5);
-            this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(59, 23);
-            this.btnAdd.TabIndex = 0;
-            this.btnAdd.Text = "添加";
-            this.btnAdd.UseVisualStyleBackColor = true;
-            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
-            // 
-            // tabPage2
-            // 
-            this.tabPage2.Location = new System.Drawing.Point(4, 21);
-            this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
-            this.tabPage2.Size = new System.Drawing.Size(758, 481);
-            this.tabPage2.TabIndex = 1;
-            this.tabPage2.Text = "维修";
-            this.tabPage2.UseVisualStyleBackColor = true;
-            // 
-            // tabPage3
-            // 
-            this.tabPage3.Location = new System.Drawing.Point(4, 21);
-            this.tabPage3.Name = "tabPage3";
-            this.tabPage3.Size = new System.Drawing.Size(758, 481);
-            this.tabPage3.TabIndex = 2;
-            this.tabPage3.Text = "配件";
-            this.tabPage3.UseVisualStyleBackColor = true;
-            // 
-            // btnDelete
-            // 
-            this.btnDelete.Location = new System.Drawing.Point(673, 3);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(55, 26);
-            this.btnDelete.TabIndex = 10;
-            this.btnDelete.Text = "删除";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
-            // 
-            // btnEdit
-            // 
-            this.btnEdit.Location = new System.Drawing.Point(605, 3);
-            this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(55, 26);
-            this.btnEdit.TabIndex = 9;
-            this.btnEdit.Text = "修改";
-            this.btnEdit.UseVisualStyleBackColor = true;
-            this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
-            // 
-            // Main
-            // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
-            this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(995, 506);
-            this.Controls.Add(this.tabControl1);
-            this.Name = "Main";
-            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "进销系统";
-            this.Load += new System.EventHandler(this.Main_Load);
-            this.tabControl1.ResumeLayout(false);
-            this.tabPage1.ResumeLayout(false);
-            this.panel2.ResumeLayout(false);
-            this.panel3.ResumeLayout(false);
-            this.panel3.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.GdTodayList)).EndInit();
-            this.panel1.ResumeLayout(false);
-            this.panel1.PerformLayout();
-            this.ResumeLayout(false);
+			System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Main));
+			this.tabControl1 = new System.Windows.Forms.TabControl();
+			this.tabPage1 = new System.Windows.Forms.TabPage();
+			this.panel2 = new System.Windows.Forms.Panel();
+			this.panel3 = new System.Windows.Forms.Panel();
+			this.lblShowMsg = new System.Windows.Forms.Label();
+			this.dgPhone = new System.Windows.Forms.DataGridView();
+			this.panel1 = new System.Windows.Forms.Panel();
+			this.btnDelete = new System.Windows.Forms.Button();
+			this.btnEdit = new System.Windows.Forms.Button();
+			this.dtpPhoneEnd = new System.Windows.Forms.DateTimePicker();
+			this.btnSearch = new System.Windows.Forms.Button();
+			this.dtpPhoneStart = new System.Windows.Forms.DateTimePicker();
+			this.lblSellTime = new System.Windows.Forms.Label();
+			this.btnAdd = new System.Windows.Forms.Button();
+			this.tabPage2 = new System.Windows.Forms.TabPage();
+			this.panel4 = new System.Windows.Forms.Panel();
+			this.btnMaintainDelete = new System.Windows.Forms.Button();
+			this.btnMaintainEdit = new System.Windows.Forms.Button();
+			this.dtpMantainEnd = new System.Windows.Forms.DateTimePicker();
+			this.btnMaintainSearch = new System.Windows.Forms.Button();
+			this.dtpMantainStart = new System.Windows.Forms.DateTimePicker();
+			this.label1 = new System.Windows.Forms.Label();
+			this.btnMaintainAdd = new System.Windows.Forms.Button();
+			this.panel5 = new System.Windows.Forms.Panel();
+			this.label2 = new System.Windows.Forms.Label();
+			this.dgMaintain = new System.Windows.Forms.DataGridView();
+			this.tabPage3 = new System.Windows.Forms.TabPage();
+			this.panel6 = new System.Windows.Forms.Panel();
+			this.btnPartsDelete = new System.Windows.Forms.Button();
+			this.btnPartsEdit = new System.Windows.Forms.Button();
+			this.dtpPartsEnd = new System.Windows.Forms.DateTimePicker();
+			this.btnPartsSearch = new System.Windows.Forms.Button();
+			this.dptPartsStart = new System.Windows.Forms.DateTimePicker();
+			this.label3 = new System.Windows.Forms.Label();
+			this.btnPartsAdd = new System.Windows.Forms.Button();
+			this.panel7 = new System.Windows.Forms.Panel();
+			this.label4 = new System.Windows.Forms.Label();
+			this.dgParts = new System.Windows.Forms.DataGridView();
+			this.tabControl1.SuspendLayout();
+			this.tabPage1.SuspendLayout();
+			this.panel2.SuspendLayout();
+			this.panel3.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgPhone)).BeginInit();
+			this.panel1.SuspendLayout();
+			this.tabPage2.SuspendLayout();
+			this.panel4.SuspendLayout();
+			this.panel5.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgMaintain)).BeginInit();
+			this.tabPage3.SuspendLayout();
+			this.panel6.SuspendLayout();
+			this.panel7.SuspendLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgParts)).BeginInit();
+			this.SuspendLayout();
+			// 
+			// tabControl1
+			// 
+			this.tabControl1.Controls.Add(this.tabPage1);
+			this.tabControl1.Controls.Add(this.tabPage2);
+			this.tabControl1.Controls.Add(this.tabPage3);
+			this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.tabControl1.Location = new System.Drawing.Point(0, 0);
+			this.tabControl1.Name = "tabControl1";
+			this.tabControl1.SelectedIndex = 0;
+			this.tabControl1.Size = new System.Drawing.Size(995, 506);
+			this.tabControl1.TabIndex = 0;
+			// 
+			// tabPage1
+			// 
+			this.tabPage1.Controls.Add(this.panel2);
+			this.tabPage1.Controls.Add(this.panel1);
+			this.tabPage1.Location = new System.Drawing.Point(4, 22);
+			this.tabPage1.Name = "tabPage1";
+			this.tabPage1.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage1.Size = new System.Drawing.Size(987, 480);
+			this.tabPage1.TabIndex = 0;
+			this.tabPage1.Text = "手机";
+			this.tabPage1.UseVisualStyleBackColor = true;
+			// 
+			// panel2
+			// 
+			this.panel2.Controls.Add(this.panel3);
+			this.panel2.Controls.Add(this.dgPhone);
+			this.panel2.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.panel2.Location = new System.Drawing.Point(3, 39);
+			this.panel2.Name = "panel2";
+			this.panel2.Size = new System.Drawing.Size(981, 438);
+			this.panel2.TabIndex = 1;
+			// 
+			// panel3
+			// 
+			this.panel3.Controls.Add(this.lblShowMsg);
+			this.panel3.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel3.Location = new System.Drawing.Point(0, 399);
+			this.panel3.Name = "panel3";
+			this.panel3.Size = new System.Drawing.Size(981, 39);
+			this.panel3.TabIndex = 1;
+			// 
+			// lblShowMsg
+			// 
+			this.lblShowMsg.AutoSize = true;
+			this.lblShowMsg.Location = new System.Drawing.Point(14, 8);
+			this.lblShowMsg.Name = "lblShowMsg";
+			this.lblShowMsg.Size = new System.Drawing.Size(41, 12);
+			this.lblShowMsg.TabIndex = 1;
+			this.lblShowMsg.Text = "信息：";
+			// 
+			// dgPhone
+			// 
+			this.dgPhone.AllowUserToAddRows = false;
+			this.dgPhone.AllowUserToDeleteRows = false;
+			this.dgPhone.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgPhone.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgPhone.Location = new System.Drawing.Point(0, 0);
+			this.dgPhone.Name = "dgPhone";
+			this.dgPhone.RowTemplate.Height = 23;
+			this.dgPhone.Size = new System.Drawing.Size(981, 438);
+			this.dgPhone.TabIndex = 0;
+			// 
+			// panel1
+			// 
+			this.panel1.Controls.Add(this.btnDelete);
+			this.panel1.Controls.Add(this.btnEdit);
+			this.panel1.Controls.Add(this.dtpPhoneEnd);
+			this.panel1.Controls.Add(this.btnSearch);
+			this.panel1.Controls.Add(this.dtpPhoneStart);
+			this.panel1.Controls.Add(this.lblSellTime);
+			this.panel1.Controls.Add(this.btnAdd);
+			this.panel1.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel1.Location = new System.Drawing.Point(3, 3);
+			this.panel1.Name = "panel1";
+			this.panel1.Size = new System.Drawing.Size(981, 36);
+			this.panel1.TabIndex = 0;
+			// 
+			// btnDelete
+			// 
+			this.btnDelete.Location = new System.Drawing.Point(673, 3);
+			this.btnDelete.Name = "btnDelete";
+			this.btnDelete.Size = new System.Drawing.Size(55, 26);
+			this.btnDelete.TabIndex = 10;
+			this.btnDelete.Text = "删除";
+			this.btnDelete.UseVisualStyleBackColor = true;
+			this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+			// 
+			// btnEdit
+			// 
+			this.btnEdit.Location = new System.Drawing.Point(605, 3);
+			this.btnEdit.Name = "btnEdit";
+			this.btnEdit.Size = new System.Drawing.Size(55, 26);
+			this.btnEdit.TabIndex = 9;
+			this.btnEdit.Text = "修改";
+			this.btnEdit.UseVisualStyleBackColor = true;
+			this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
+			// 
+			// dtpPhoneEnd
+			// 
+			this.dtpPhoneEnd.Location = new System.Drawing.Point(254, 5);
+			this.dtpPhoneEnd.Name = "dtpPhoneEnd";
+			this.dtpPhoneEnd.Size = new System.Drawing.Size(137, 21);
+			this.dtpPhoneEnd.TabIndex = 8;
+			// 
+			// btnSearch
+			// 
+			this.btnSearch.Location = new System.Drawing.Point(397, 4);
+			this.btnSearch.Name = "btnSearch";
+			this.btnSearch.Size = new System.Drawing.Size(47, 23);
+			this.btnSearch.TabIndex = 7;
+			this.btnSearch.Text = "查询";
+			this.btnSearch.UseVisualStyleBackColor = true;
+			this.btnSearch.Click += new System.EventHandler(this.btnSearch_Click);
+			// 
+			// dtpPhoneStart
+			// 
+			this.dtpPhoneStart.Location = new System.Drawing.Point(83, 5);
+			this.dtpPhoneStart.Name = "dtpPhoneStart";
+			this.dtpPhoneStart.Size = new System.Drawing.Size(137, 21);
+			this.dtpPhoneStart.TabIndex = 6;
+			// 
+			// lblSellTime
+			// 
+			this.lblSellTime.AutoSize = true;
+			this.lblSellTime.Location = new System.Drawing.Point(11, 10);
+			this.lblSellTime.Name = "lblSellTime";
+			this.lblSellTime.Size = new System.Drawing.Size(65, 12);
+			this.lblSellTime.TabIndex = 5;
+			this.lblSellTime.Text = "销售时间：";
+			// 
+			// btnAdd
+			// 
+			this.btnAdd.Location = new System.Drawing.Point(540, 5);
+			this.btnAdd.Name = "btnAdd";
+			this.btnAdd.Size = new System.Drawing.Size(59, 23);
+			this.btnAdd.TabIndex = 0;
+			this.btnAdd.Text = "添加";
+			this.btnAdd.UseVisualStyleBackColor = true;
+			this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
+			// 
+			// tabPage2
+			// 
+			this.tabPage2.Controls.Add(this.panel4);
+			this.tabPage2.Controls.Add(this.panel5);
+			this.tabPage2.Controls.Add(this.dgMaintain);
+			this.tabPage2.Location = new System.Drawing.Point(4, 22);
+			this.tabPage2.Name = "tabPage2";
+			this.tabPage2.Padding = new System.Windows.Forms.Padding(3);
+			this.tabPage2.Size = new System.Drawing.Size(987, 480);
+			this.tabPage2.TabIndex = 1;
+			this.tabPage2.Text = "维修";
+			this.tabPage2.UseVisualStyleBackColor = true;
+			// 
+			// panel4
+			// 
+			this.panel4.Controls.Add(this.btnMaintainDelete);
+			this.panel4.Controls.Add(this.btnMaintainEdit);
+			this.panel4.Controls.Add(this.dtpMantainEnd);
+			this.panel4.Controls.Add(this.btnMaintainSearch);
+			this.panel4.Controls.Add(this.dtpMantainStart);
+			this.panel4.Controls.Add(this.label1);
+			this.panel4.Controls.Add(this.btnMaintainAdd);
+			this.panel4.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel4.Location = new System.Drawing.Point(3, 3);
+			this.panel4.Name = "panel4";
+			this.panel4.Size = new System.Drawing.Size(981, 36);
+			this.panel4.TabIndex = 3;
+			// 
+			// btnMaintainDelete
+			// 
+			this.btnMaintainDelete.Location = new System.Drawing.Point(673, 3);
+			this.btnMaintainDelete.Name = "btnMaintainDelete";
+			this.btnMaintainDelete.Size = new System.Drawing.Size(55, 26);
+			this.btnMaintainDelete.TabIndex = 10;
+			this.btnMaintainDelete.Text = "删除";
+			this.btnMaintainDelete.UseVisualStyleBackColor = true;
+			this.btnMaintainDelete.Click += new System.EventHandler(this.btnMaintainDelete_Click);
+			// 
+			// btnMaintainEdit
+			// 
+			this.btnMaintainEdit.Location = new System.Drawing.Point(605, 3);
+			this.btnMaintainEdit.Name = "btnMaintainEdit";
+			this.btnMaintainEdit.Size = new System.Drawing.Size(55, 26);
+			this.btnMaintainEdit.TabIndex = 9;
+			this.btnMaintainEdit.Text = "修改";
+			this.btnMaintainEdit.UseVisualStyleBackColor = true;
+			this.btnMaintainEdit.Click += new System.EventHandler(this.btnMaintainEdit_Click);
+			// 
+			// dtpMantainEnd
+			// 
+			this.dtpMantainEnd.Location = new System.Drawing.Point(254, 5);
+			this.dtpMantainEnd.Name = "dtpMantainEnd";
+			this.dtpMantainEnd.Size = new System.Drawing.Size(137, 21);
+			this.dtpMantainEnd.TabIndex = 8;
+			// 
+			// btnMaintainSearch
+			// 
+			this.btnMaintainSearch.Location = new System.Drawing.Point(397, 4);
+			this.btnMaintainSearch.Name = "btnMaintainSearch";
+			this.btnMaintainSearch.Size = new System.Drawing.Size(47, 23);
+			this.btnMaintainSearch.TabIndex = 7;
+			this.btnMaintainSearch.Text = "查询";
+			this.btnMaintainSearch.UseVisualStyleBackColor = true;
+			this.btnMaintainSearch.Click += new System.EventHandler(this.btnMaintainSearch_Click);
+			// 
+			// dtpMantainStart
+			// 
+			this.dtpMantainStart.Location = new System.Drawing.Point(83, 5);
+			this.dtpMantainStart.Name = "dtpMantainStart";
+			this.dtpMantainStart.Size = new System.Drawing.Size(137, 21);
+			this.dtpMantainStart.TabIndex = 6;
+			// 
+			// label1
+			// 
+			this.label1.AutoSize = true;
+			this.label1.Location = new System.Drawing.Point(11, 10);
+			this.label1.Name = "label1";
+			this.label1.Size = new System.Drawing.Size(65, 12);
+			this.label1.TabIndex = 5;
+			this.label1.Text = "销售时间：";
+			// 
+			// btnMaintainAdd
+			// 
+			this.btnMaintainAdd.Location = new System.Drawing.Point(540, 5);
+			this.btnMaintainAdd.Name = "btnMaintainAdd";
+			this.btnMaintainAdd.Size = new System.Drawing.Size(59, 23);
+			this.btnMaintainAdd.TabIndex = 0;
+			this.btnMaintainAdd.Text = "添加";
+			this.btnMaintainAdd.UseVisualStyleBackColor = true;
+			this.btnMaintainAdd.Click += new System.EventHandler(this.btnMaintainAdd_Click);
+			// 
+			// panel5
+			// 
+			this.panel5.Controls.Add(this.label2);
+			this.panel5.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel5.Location = new System.Drawing.Point(3, 438);
+			this.panel5.Name = "panel5";
+			this.panel5.Size = new System.Drawing.Size(981, 39);
+			this.panel5.TabIndex = 4;
+			// 
+			// label2
+			// 
+			this.label2.AutoSize = true;
+			this.label2.Location = new System.Drawing.Point(14, 8);
+			this.label2.Name = "label2";
+			this.label2.Size = new System.Drawing.Size(41, 12);
+			this.label2.TabIndex = 1;
+			this.label2.Text = "信息：";
+			// 
+			// dgMaintain
+			// 
+			this.dgMaintain.AllowUserToAddRows = false;
+			this.dgMaintain.AllowUserToDeleteRows = false;
+			this.dgMaintain.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgMaintain.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgMaintain.Location = new System.Drawing.Point(3, 3);
+			this.dgMaintain.Name = "dgMaintain";
+			this.dgMaintain.RowTemplate.Height = 23;
+			this.dgMaintain.Size = new System.Drawing.Size(981, 474);
+			this.dgMaintain.TabIndex = 2;
+			// 
+			// tabPage3
+			// 
+			this.tabPage3.Controls.Add(this.panel6);
+			this.tabPage3.Controls.Add(this.panel7);
+			this.tabPage3.Controls.Add(this.dgParts);
+			this.tabPage3.Location = new System.Drawing.Point(4, 22);
+			this.tabPage3.Name = "tabPage3";
+			this.tabPage3.Size = new System.Drawing.Size(987, 480);
+			this.tabPage3.TabIndex = 2;
+			this.tabPage3.Text = "配件";
+			this.tabPage3.UseVisualStyleBackColor = true;
+			// 
+			// panel6
+			// 
+			this.panel6.Controls.Add(this.btnPartsDelete);
+			this.panel6.Controls.Add(this.btnPartsEdit);
+			this.panel6.Controls.Add(this.dtpPartsEnd);
+			this.panel6.Controls.Add(this.btnPartsSearch);
+			this.panel6.Controls.Add(this.dptPartsStart);
+			this.panel6.Controls.Add(this.label3);
+			this.panel6.Controls.Add(this.btnPartsAdd);
+			this.panel6.Dock = System.Windows.Forms.DockStyle.Top;
+			this.panel6.Location = new System.Drawing.Point(0, 0);
+			this.panel6.Name = "panel6";
+			this.panel6.Size = new System.Drawing.Size(987, 36);
+			this.panel6.TabIndex = 3;
+			// 
+			// btnPartsDelete
+			// 
+			this.btnPartsDelete.Location = new System.Drawing.Point(673, 3);
+			this.btnPartsDelete.Name = "btnPartsDelete";
+			this.btnPartsDelete.Size = new System.Drawing.Size(55, 26);
+			this.btnPartsDelete.TabIndex = 10;
+			this.btnPartsDelete.Text = "删除";
+			this.btnPartsDelete.UseVisualStyleBackColor = true;
+			this.btnPartsDelete.Click += new System.EventHandler(this.btnPartsDelete_Click);
+			// 
+			// btnPartsEdit
+			// 
+			this.btnPartsEdit.Location = new System.Drawing.Point(605, 3);
+			this.btnPartsEdit.Name = "btnPartsEdit";
+			this.btnPartsEdit.Size = new System.Drawing.Size(55, 26);
+			this.btnPartsEdit.TabIndex = 9;
+			this.btnPartsEdit.Text = "修改";
+			this.btnPartsEdit.UseVisualStyleBackColor = true;
+			this.btnPartsEdit.Click += new System.EventHandler(this.btnPartsEdit_Click);
+			// 
+			// dtpPartsEnd
+			// 
+			this.dtpPartsEnd.Location = new System.Drawing.Point(254, 5);
+			this.dtpPartsEnd.Name = "dtpPartsEnd";
+			this.dtpPartsEnd.Size = new System.Drawing.Size(137, 21);
+			this.dtpPartsEnd.TabIndex = 8;
+			// 
+			// btnPartsSearch
+			// 
+			this.btnPartsSearch.Location = new System.Drawing.Point(397, 4);
+			this.btnPartsSearch.Name = "btnPartsSearch";
+			this.btnPartsSearch.Size = new System.Drawing.Size(47, 23);
+			this.btnPartsSearch.TabIndex = 7;
+			this.btnPartsSearch.Text = "查询";
+			this.btnPartsSearch.UseVisualStyleBackColor = true;
+			this.btnPartsSearch.Click += new System.EventHandler(this.btnPartsSearch_Click);
+			// 
+			// dptPartsStart
+			// 
+			this.dptPartsStart.Location = new System.Drawing.Point(83, 5);
+			this.dptPartsStart.Name = "dptPartsStart";
+			this.dptPartsStart.Size = new System.Drawing.Size(137, 21);
+			this.dptPartsStart.TabIndex = 6;
+			// 
+			// label3
+			// 
+			this.label3.AutoSize = true;
+			this.label3.Location = new System.Drawing.Point(11, 10);
+			this.label3.Name = "label3";
+			this.label3.Size = new System.Drawing.Size(65, 12);
+			this.label3.TabIndex = 5;
+			this.label3.Text = "销售时间：";
+			// 
+			// btnPartsAdd
+			// 
+			this.btnPartsAdd.Location = new System.Drawing.Point(540, 5);
+			this.btnPartsAdd.Name = "btnPartsAdd";
+			this.btnPartsAdd.Size = new System.Drawing.Size(59, 23);
+			this.btnPartsAdd.TabIndex = 0;
+			this.btnPartsAdd.Text = "添加";
+			this.btnPartsAdd.UseVisualStyleBackColor = true;
+			this.btnPartsAdd.Click += new System.EventHandler(this.btnPartsAdd_Click);
+			// 
+			// panel7
+			// 
+			this.panel7.Controls.Add(this.label4);
+			this.panel7.Dock = System.Windows.Forms.DockStyle.Bottom;
+			this.panel7.Location = new System.Drawing.Point(0, 441);
+			this.panel7.Name = "panel7";
+			this.panel7.Size = new System.Drawing.Size(987, 39);
+			this.panel7.TabIndex = 4;
+			// 
+			// label4
+			// 
+			this.label4.AutoSize = true;
+			this.label4.Location = new System.Drawing.Point(14, 8);
+			this.label4.Name = "label4";
+			this.label4.Size = new System.Drawing.Size(41, 12);
+			this.label4.TabIndex = 1;
+			this.label4.Text = "信息：";
+			// 
+			// dgParts
+			// 
+			this.dgParts.AllowUserToAddRows = false;
+			this.dgParts.AllowUserToDeleteRows = false;
+			this.dgParts.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+			this.dgParts.Dock = System.Windows.Forms.DockStyle.Fill;
+			this.dgParts.Location = new System.Drawing.Point(0, 0);
+			this.dgParts.Name = "dgParts";
+			this.dgParts.RowTemplate.Height = 23;
+			this.dgParts.Size = new System.Drawing.Size(987, 480);
+			this.dgParts.TabIndex = 2;
+			// 
+			// Main
+			// 
+			this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 12F);
+			this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+			this.ClientSize = new System.Drawing.Size(995, 506);
+			this.Controls.Add(this.tabControl1);
+			this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+			this.Name = "Main";
+			this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
+			this.Text = "白沙手机饰界营业管理系统";
+			this.Load += new System.EventHandler(this.Main_Load);
+			this.tabControl1.ResumeLayout(false);
+			this.tabPage1.ResumeLayout(false);
+			this.panel2.ResumeLayout(false);
+			this.panel3.ResumeLayout(false);
+			this.panel3.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgPhone)).EndInit();
+			this.panel1.ResumeLayout(false);
+			this.panel1.PerformLayout();
+			this.tabPage2.ResumeLayout(false);
+			this.panel4.ResumeLayout(false);
+			this.panel4.PerformLayout();
+			this.panel5.ResumeLayout(false);
+			this.panel5.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgMaintain)).EndInit();
+			this.tabPage3.ResumeLayout(false);
+			this.panel6.ResumeLayout(false);
+			this.panel6.PerformLayout();
+			this.panel7.ResumeLayout(false);
+			this.panel7.PerformLayout();
+			((System.ComponentModel.ISupportInitialize)(this.dgParts)).EndInit();
+			this.ResumeLayout(false);
 
         }
 
@@ -255,18 +508,39 @@
         private System.Windows.Forms.TabPage tabPage2;
         private System.Windows.Forms.TabPage tabPage3;
         private System.Windows.Forms.Panel panel2;
-        private System.Windows.Forms.DataGridView GdTodayList;
+        private System.Windows.Forms.DataGridView dgPhone;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.Button btnAdd;
-        private System.Windows.Forms.Button btnSellPhone;
+		private System.Windows.Forms.Button btnAdd;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.Label lblShowMsg;
-        private System.Windows.Forms.DateTimePicker dtpEnd;
+        private System.Windows.Forms.DateTimePicker dtpPhoneEnd;
         private System.Windows.Forms.Button btnSearch;
-        private System.Windows.Forms.DateTimePicker dtpSellDt;
+        private System.Windows.Forms.DateTimePicker dtpPhoneStart;
         private System.Windows.Forms.Label lblSellTime;
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnEdit;
+		private System.Windows.Forms.Panel panel4;
+		private System.Windows.Forms.Button btnMaintainDelete;
+		private System.Windows.Forms.Button btnMaintainEdit;
+		private System.Windows.Forms.DateTimePicker dtpMantainEnd;
+		private System.Windows.Forms.Button btnMaintainSearch;
+		private System.Windows.Forms.DateTimePicker dtpMantainStart;
+		private System.Windows.Forms.Label label1;
+		private System.Windows.Forms.Button btnMaintainAdd;
+		private System.Windows.Forms.Panel panel5;
+		private System.Windows.Forms.Label label2;
+		private System.Windows.Forms.DataGridView dgMaintain;
+		private System.Windows.Forms.Panel panel6;
+		private System.Windows.Forms.Button btnPartsDelete;
+		private System.Windows.Forms.Button btnPartsEdit;
+		private System.Windows.Forms.DateTimePicker dtpPartsEnd;
+		private System.Windows.Forms.Button btnPartsSearch;
+		private System.Windows.Forms.DateTimePicker dptPartsStart;
+		private System.Windows.Forms.Label label3;
+		private System.Windows.Forms.Button btnPartsAdd;
+		private System.Windows.Forms.Panel panel7;
+		private System.Windows.Forms.Label label4;
+		private System.Windows.Forms.DataGridView dgParts;
 
 
     }
