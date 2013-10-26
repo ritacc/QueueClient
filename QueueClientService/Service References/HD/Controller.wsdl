@@ -37,13 +37,10 @@
       <s:element name="PlaySpeakerSound">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="playType" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="contentCN" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="contentEN" type="s:string" />
             <s:element minOccurs="0" maxOccurs="1" name="playSequence" type="s:string" />
             <s:element minOccurs="1" maxOccurs="1" name="volume" type="s:int" />
-            <s:element minOccurs="0" maxOccurs="1" name="customerNO" type="s:string" />
-            <s:element minOccurs="0" maxOccurs="1" name="windowNO" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -51,6 +48,24 @@
         <s:complexType>
           <s:sequence>
             <s:element minOccurs="0" maxOccurs="1" name="PlaySpeakerSoundResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlayWirelessSpeakerSound">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="devAddr" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="playType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="volume" type="s:int" />
+            <s:element minOccurs="0" maxOccurs="1" name="customerNO" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="windowNO" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="PlayWirelessSpeakerSoundResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="PlayWirelessSpeakerSoundResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -130,20 +145,6 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="PlayCallerSound">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="devAddr" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
-      <s:element name="PlayCallerSoundResponse">
-        <s:complexType>
-          <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="PlayCallerSoundResult" type="s:string" />
-          </s:sequence>
-        </s:complexType>
-      </s:element>
       <s:element name="GetDeviceStatus">
         <s:complexType>
           <s:sequence>
@@ -178,18 +179,20 @@
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="InitDevice">
+      <s:element name="OperateCaller">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="1" maxOccurs="1" name="devType" type="s:int" />
+            <s:element minOccurs="1" maxOccurs="1" name="operType" type="s:int" />
             <s:element minOccurs="0" maxOccurs="1" name="devAddr" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="userName" type="s:string" />
+            <s:element minOccurs="1" maxOccurs="1" name="status" type="s:unsignedByte" />
           </s:sequence>
         </s:complexType>
       </s:element>
-      <s:element name="InitDeviceResponse">
+      <s:element name="OperateCallerResponse">
         <s:complexType>
           <s:sequence>
-            <s:element minOccurs="0" maxOccurs="1" name="InitDeviceResult" type="s:string" />
+            <s:element minOccurs="0" maxOccurs="1" name="OperateCallerResult" type="s:string" />
           </s:sequence>
         </s:complexType>
       </s:element>
@@ -212,6 +215,12 @@
   </wsdl:message>
   <wsdl:message name="PlaySpeakerSoundSoapOut">
     <wsdl:part name="parameters" element="tns:PlaySpeakerSoundResponse" />
+  </wsdl:message>
+  <wsdl:message name="PlayWirelessSpeakerSoundSoapIn">
+    <wsdl:part name="parameters" element="tns:PlayWirelessSpeakerSound" />
+  </wsdl:message>
+  <wsdl:message name="PlayWirelessSpeakerSoundSoapOut">
+    <wsdl:part name="parameters" element="tns:PlayWirelessSpeakerSoundResponse" />
   </wsdl:message>
   <wsdl:message name="ShowScreenMSGSoapIn">
     <wsdl:part name="parameters" element="tns:ShowScreenMSG" />
@@ -237,12 +246,6 @@
   <wsdl:message name="ShowCallerMSGSoapOut">
     <wsdl:part name="parameters" element="tns:ShowCallerMSGResponse" />
   </wsdl:message>
-  <wsdl:message name="PlayCallerSoundSoapIn">
-    <wsdl:part name="parameters" element="tns:PlayCallerSound" />
-  </wsdl:message>
-  <wsdl:message name="PlayCallerSoundSoapOut">
-    <wsdl:part name="parameters" element="tns:PlayCallerSoundResponse" />
-  </wsdl:message>
   <wsdl:message name="GetDeviceStatusSoapIn">
     <wsdl:part name="parameters" element="tns:GetDeviceStatus" />
   </wsdl:message>
@@ -255,11 +258,11 @@
   <wsdl:message name="GetDeviceMSGSoapOut">
     <wsdl:part name="parameters" element="tns:GetDeviceMSGResponse" />
   </wsdl:message>
-  <wsdl:message name="InitDeviceSoapIn">
-    <wsdl:part name="parameters" element="tns:InitDevice" />
+  <wsdl:message name="OperateCallerSoapIn">
+    <wsdl:part name="parameters" element="tns:OperateCaller" />
   </wsdl:message>
-  <wsdl:message name="InitDeviceSoapOut">
-    <wsdl:part name="parameters" element="tns:InitDeviceResponse" />
+  <wsdl:message name="OperateCallerSoapOut">
+    <wsdl:part name="parameters" element="tns:OperateCallerResponse" />
   </wsdl:message>
   <wsdl:portType name="ControllerSoap">
     <wsdl:operation name="ReadCardData">
@@ -273,12 +276,17 @@
       <wsdl:output message="tns:PrintSlipSoapOut" />
     </wsdl:operation>
     <wsdl:operation name="PlaySpeakerSound">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;音箱播放声音&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; playType：播放类型。1（只播放主音箱），2（只播放无线音箱），3（主音箱和无线音箱都播放）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentCN：中文播放内容。例如“请;A;0;0;1;号顾客到;1;号;窗口;”其中，所有以分号隔开的文字对应到播放文件，如“请;”对应“请.wav”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentEN：英文播放内容。例如“customer;A;0;0;1;please come to;window;1;”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; playSequence：播放顺序，以分号隔开多个语种。1（提示音），2（普通话），3（英语），4（粤语）。例如“1;2;3;4;”表示先播提示音，然后播普通话，然后播英语，然后播粤语&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; volume：播放音量，范围是0~9&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; customerNO：顾客号。该参数仅当playType为2或3的时候有效&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; windowNO：窗口号。该参数仅当playType为2或3的时候有效&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）&lt;br/&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：如果遇到声音无法播放，可能是由于路径名称过长造成的，请使用简写的文件名重试。例如英文的please come to可能需要用缩写p_c_t&lt;/font&gt;</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;主音箱播放声音&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentCN：中文播放内容。例如“请;A;0;0;1;号顾客到;1;号;窗口;”其中，所有以分号隔开的文字对应到播放文件，如“请;”对应“请.wav”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; contentEN：英文播放内容。例如“customer;A;0;0;1;please come to;window;1;”&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; playSequence：播放顺序，以分号隔开多个语种。1（提示音），2（普通话），3（英语），4（粤语）。例如“1;2;3;4;”表示先播提示音，然后播普通话，然后播英语，然后播粤语&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; volume：播放音量，范围是0~9&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）&lt;br/&gt;&lt;br/&gt;&lt;font color='red'&gt;FAQ：如果遇到声音无法播放，可能是由于路径名称过长造成的，请使用简写的文件名重试。例如英文的please come to可能需要用缩写p_c_t&lt;/font&gt;</wsdl:documentation>
       <wsdl:input message="tns:PlaySpeakerSoundSoapIn" />
       <wsdl:output message="tns:PlaySpeakerSoundSoapOut" />
     </wsdl:operation>
+    <wsdl:operation name="PlayWirelessSpeakerSound">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;无线音箱播放声音&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：无线音箱硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; volume：播放类型。1（普通叫号），2（呼叫大堂经理），3（呼叫业务顾问），4（呼叫保安）&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; volume：播放音量，范围是0~9&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; customerNO：顾客号&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; windowNO：窗口号&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）</wsdl:documentation>
+      <wsdl:input message="tns:PlayWirelessSpeakerSoundSoapIn" />
+      <wsdl:output message="tns:PlayWirelessSpeakerSoundSoapOut" />
+    </wsdl:operation>
     <wsdl:operation name="ShowScreenMSG">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;屏幕显示信息&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：屏幕类型。1（窗口屏），2（综合屏）&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; showType：显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：屏幕的硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; width：屏幕宽度，一个字的点阵数是16，若屏幕可以显示5个字，则屏幕宽度为5*16=80，以此类推，中文占一个字，英文或数字占半个字&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; width：屏幕高度，一个字的点阵数是16，若屏幕的是综合屏，有4行，则屏幕高度为4*16=64，若屏幕是条屏，只有1行，则屏幕高度为1*16=16以此类推，以此类推&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; billNum：票号。当showType为1时，此参数有效&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; windowNum：窗口号。当showType为1事，此参数有效&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; msg：自定义信息。当showType为2时，此参数有效&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）</wsdl:documentation>
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;屏幕显示信息&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：屏幕类型。1（窗口屏），2（综合屏）&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; showType：显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：屏幕的硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; width：屏幕宽度，一个字的点阵数是16，若屏幕可以显示5个字，则屏幕宽度为5*16=80，以此类推，中文占一个字，英文或数字占半个字&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; height：屏幕高度，一个字的点阵数是16，若屏幕的是综合屏，有4行，则屏幕高度为4*16=64，若屏幕是条屏，只有1行，则屏幕高度为1*16=16以此类推，以此类推&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; billNum：票号。当showType为1时，此参数有效&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; windowNum：窗口号。当showType为1事，此参数有效&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; msg：自定义信息。当showType为2时，此参数有效&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）</wsdl:documentation>
       <wsdl:input message="tns:ShowScreenMSGSoapIn" />
       <wsdl:output message="tns:ShowScreenMSGSoapOut" />
     </wsdl:operation>
@@ -297,11 +305,6 @@
       <wsdl:input message="tns:ShowCallerMSGSoapIn" />
       <wsdl:output message="tns:ShowCallerMSGSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="PlayCallerSound">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;呼叫器播放蜂鸣声&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：呼叫器的硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（执行成功），其他值（执行失败）</wsdl:documentation>
-      <wsdl:input message="tns:PlayCallerSoundSoapIn" />
-      <wsdl:output message="tns:PlayCallerSoundSoapOut" />
-    </wsdl:operation>
     <wsdl:operation name="GetDeviceStatus">
       <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;获取设备的状态&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：1（呼叫器），2（窗口屏），3（综合屏），4（评价器），5（主音箱），6（无线音箱），7（银行卡），8（二代证），9（打印机）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：设备硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; width：屏幕宽度，一个字的点阵数是16，若屏幕可以显示5个字，则屏幕宽度为5*16=80，以此类推，中文占一个字，英文或数字占半个字&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; width：屏幕高度，一个字的点阵数是16，若屏幕的是综合屏，有4行，则屏幕高度为4*16=64，若屏幕是条屏，只有1行，则屏幕高度为1*16=16以此类推，以此类推&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; timeout：阻塞的时间，单位为秒&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（工作正常），其他值（工作异常）</wsdl:documentation>
       <wsdl:input message="tns:GetDeviceStatusSoapIn" />
@@ -312,10 +315,10 @@
       <wsdl:input message="tns:GetDeviceMSGSoapIn" />
       <wsdl:output message="tns:GetDeviceMSGSoapOut" />
     </wsdl:operation>
-    <wsdl:operation name="InitDevice">
-      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;初始化设备&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; devType：设备类型，1（呼叫器），2（评价器）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：设备硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; timeout：阻塞的时间，单位为秒&lt;br/&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（初始化成功），其他值（初始化失败）</wsdl:documentation>
-      <wsdl:input message="tns:InitDeviceSoapIn" />
-      <wsdl:output message="tns:InitDeviceSoapOut" />
+    <wsdl:operation name="OperateCaller">
+      <wsdl:documentation xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">&lt;br/&gt;&lt;b&gt;&lt;font size='2'&gt;操作呼叫器&lt;/font&gt;&lt;/b&gt;&lt;br/&gt;&lt;br/&gt;输入参数:&lt;br/&gt;&lt;font color='blue'&gt;int&lt;/font&gt; operType：操作类型，1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; devAddr：设备硬件地址。硬件地址应该为3位，不足3位则补零，例如001&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; userName：登录用户名。当operType为3时有效&lt;/br&gt;&lt;font color='blue'&gt;int&lt;/font&gt; status：设置呼叫器是否登录成功，当operType为3时有效。0（登录成功），其他值（登录失败）&lt;/br&gt;&lt;br/&gt;返回结果:&lt;br/&gt;&lt;font color='blue'&gt;string&lt;/font&gt; “0”（操作成功），其他值（操作失败）</wsdl:documentation>
+      <wsdl:input message="tns:OperateCallerSoapIn" />
+      <wsdl:output message="tns:OperateCallerSoapOut" />
     </wsdl:operation>
   </wsdl:portType>
   <wsdl:binding name="ControllerSoap" type="tns:ControllerSoap">
@@ -340,6 +343,15 @@
     </wsdl:operation>
     <wsdl:operation name="PlaySpeakerSound">
       <soap:operation soapAction="http://ContollerWebService.com/PlaySpeakerSound" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayWirelessSpeakerSound">
+      <soap:operation soapAction="http://ContollerWebService.com/PlayWirelessSpeakerSound" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -383,15 +395,6 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlayCallerSound">
-      <soap:operation soapAction="http://ContollerWebService.com/PlayCallerSound" style="document" />
-      <wsdl:input>
-        <soap:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetDeviceStatus">
       <soap:operation soapAction="http://ContollerWebService.com/GetDeviceStatus" style="document" />
       <wsdl:input>
@@ -410,8 +413,8 @@
         <soap:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InitDevice">
-      <soap:operation soapAction="http://ContollerWebService.com/InitDevice" style="document" />
+    <wsdl:operation name="OperateCaller">
+      <soap:operation soapAction="http://ContollerWebService.com/OperateCaller" style="document" />
       <wsdl:input>
         <soap:body use="literal" />
       </wsdl:input>
@@ -442,6 +445,15 @@
     </wsdl:operation>
     <wsdl:operation name="PlaySpeakerSound">
       <soap12:operation soapAction="http://ContollerWebService.com/PlaySpeakerSound" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="PlayWirelessSpeakerSound">
+      <soap12:operation soapAction="http://ContollerWebService.com/PlayWirelessSpeakerSound" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>
@@ -485,15 +497,6 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="PlayCallerSound">
-      <soap12:operation soapAction="http://ContollerWebService.com/PlayCallerSound" style="document" />
-      <wsdl:input>
-        <soap12:body use="literal" />
-      </wsdl:input>
-      <wsdl:output>
-        <soap12:body use="literal" />
-      </wsdl:output>
-    </wsdl:operation>
     <wsdl:operation name="GetDeviceStatus">
       <soap12:operation soapAction="http://ContollerWebService.com/GetDeviceStatus" style="document" />
       <wsdl:input>
@@ -512,8 +515,8 @@
         <soap12:body use="literal" />
       </wsdl:output>
     </wsdl:operation>
-    <wsdl:operation name="InitDevice">
-      <soap12:operation soapAction="http://ContollerWebService.com/InitDevice" style="document" />
+    <wsdl:operation name="OperateCaller">
+      <soap12:operation soapAction="http://ContollerWebService.com/OperateCaller" style="document" />
       <wsdl:input>
         <soap12:body use="literal" />
       </wsdl:input>

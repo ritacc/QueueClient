@@ -4,6 +4,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Windows;
 using System.Windows.Media;
+using System.Diagnostics;
 
 namespace QSoft.Core.Util
 {
@@ -23,6 +24,14 @@ namespace QSoft.Core.Util
                 Directory.CreateDirectory(ApplicationDataPath);
             }
             return Path.Combine(ApplicationDataPath, path);
+        }
+        
+        public static string GetStartpath()
+        {
+            string mPath = System.IO.Path.GetDirectoryName(Process.GetCurrentProcess().MainModule.FileName);
+            if (!mPath.EndsWith("\\"))
+                mPath += "\\";
+            return mPath;
         }
 
         public static string GetAppPath(string path1, string path2)

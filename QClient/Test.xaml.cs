@@ -30,11 +30,12 @@ namespace QClient
             ControllerSoapClient HDClient = new ControllerSoapClient();
 
             ErrorLog.WriteLog("InitDevice：", "011");
-            string Result = HDClient.InitDevice(1, "011");
-            ErrorLog.WriteLog("InitDevice：_Result", Result);
+
+            //string Result = HDClient.InitDevice(1, "011");
+            //ErrorLog.WriteLog("InitDevice：_Result", Result);
 
             ErrorLog.WriteLog("GetDeviceStatus：", "011");
-             Result = HDClient.GetDeviceStatus(1, "011", 0, 0, 10);
+            string Result = HDClient.GetDeviceStatus(1, "011", 0, 0, 10);
             ErrorLog.WriteLog("GetDeviceStatus：_Result", Result);
 
             string fjqAddress = "011";

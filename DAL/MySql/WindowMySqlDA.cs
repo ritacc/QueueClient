@@ -89,7 +89,6 @@ order by name";
                 listWindow.Add( new WindowOR(dr));
             }
             return listWindow;
-
         }
 
         

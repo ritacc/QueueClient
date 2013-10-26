@@ -58,9 +58,6 @@ namespace Clothes.SellingClothes
             {
                 Error.WriteLog("SellClothe : Form:BindGridView(),001", "0001", ex.Message);
             }
-
-
-
         }
         private void btnSearch_Click(object sender, EventArgs e)
         {
@@ -345,7 +342,43 @@ namespace Clothes.SellingClothes
             frm.Owner = this;
             frm.ShowDialog();
         }
-	}
+
+        #region Search
+        private void btnSearchPgSearch_Click(object sender, EventArgs e)
+        {
+            BindGridViewSearch();
+        }
+
+        private void BindGridViewSearch()
+        {
+            try
+            {
+                string where = string.Format(" XSRQ>=#{0} 00:00:00# and XSRQ<=#{1} 23:59:59#", dtpSearchStart.Value.ToString("yyyy-MM-dd"), dtpSearchEnd.Value.ToString("yyyy-MM-dd"));
+                string where1 = string.Format(" RJ>=#{0} 00:00:00# and RJ<=#{1} 23:59:59#", dtpSearchStart.Value.ToString("yyyy-MM-dd"), dtpSearchEnd.Value.ToString("yyyy-MM-dd"));
+                DataTable dt = new SearchDA().selectViewData(where, where1);
+                this.dgSearch.DataSource = dt;
+
+
+                DataTable dataCount = new SearchDA().selectCountData(where, where1);
+
+                if (dataCount.Rows.Count == 0)
+                    lblShowMsg.Text = "";
+                else
+                {
+                    string value = string.Format("{0},到{1}销售金额：{2}\t，成本：{3}\t，利润：{4}", this.dtpPhoneStart.Text, dtpPhoneEnd.Text,
+                        dataCount.Rows[0]["sellPriceCount"].ToString(),
+                        dataCount.Rows[0]["purchaseCount"].ToString(),
+                        dataCount.Rows[0]["profitCount"].ToString());
+                    lblSearch.Text = value;
+                }
+            }
+            catch (System.Exception ex)
+            {
+                Error.WriteLog("SellClothe : Form:BindGridView(),001", "0001", ex.Message);
+            }
+        }
+        #endregion
+    }
 
      
 }

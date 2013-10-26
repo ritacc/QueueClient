@@ -119,10 +119,6 @@ namespace QClient.Core.ViewModel
                 }
 
                 //ImgSetViewModel.Instance.PrintSlip(result);
-               
-
-
-
                 //取号成功： result票号
                 errorMsg = result;
                 //打印票号

@@ -102,6 +102,7 @@
     <Compile Include="Core\Converter\BooleanToVisibilityConverter.cs" />
     <Compile Include="Core\Model\Custom.cs" />
     <Compile Include="Core\Uitl\HotKey.cs" />
+    <Compile Include="Core\Uitl\Logger\ErrorLog.cs" />
     <Compile Include="Core\ViewModel\LoginViewModel.cs" />
     <Compile Include="Core\ViewModel\MainViewModel.cs" />
     <Compile Include="GlobalData.cs" />
@@ -155,11 +156,6 @@
     <Compile Include="Core\Model\Base\EntityObject.cs" />
     <Compile Include="Core\Uitl\Common.cs" />
     <Compile Include="Core\Uitl\Converter.cs" />
-    <Compile Include="Core\Uitl\Logger\ILogger.cs" />
-    <Compile Include="Core\Uitl\Logger\Logger.cs" />
-    <Compile Include="Core\Uitl\Logger\LoggerFactory.cs" />
-    <Compile Include="Core\Uitl\Logger\LoggerLevel.cs" />
-    <Compile Include="Core\Uitl\Logger\WriteFileLogger.cs" />
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>

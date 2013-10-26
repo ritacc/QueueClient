@@ -9,6 +9,7 @@ using System.Windows.Media.Imaging;
 using QSoft.View;
 using System.Collections.ObjectModel;
 using System.Windows.Threading;
+using QSoft.Core.Uitl.Logger;
 
 namespace QSoft.Core.ViewModel
 {
@@ -39,7 +40,7 @@ namespace QSoft.Core.ViewModel
         public ObservableCollection<BussinessQueueOR> QueuesInfo { get; set; }
 
         MainWindow _Page;
-        
+
         /// <summary>
         /// 主页，用于切换
         /// </summary>
@@ -48,7 +49,7 @@ namespace QSoft.Core.ViewModel
         SysParamConfigOR _SysParaConfigObj;
         #endregion
 
-       
+
 
         #region 构造函数
 
@@ -105,7 +106,7 @@ namespace QSoft.Core.ViewModel
                 return v;
             }
         }
-     
+
 
         /// <summary>
         /// 刷新队队信息
@@ -114,7 +115,7 @@ namespace QSoft.Core.ViewModel
         private void RefQueues()
         {
             bool mIsChange = false;
-            BussinessQueueOR[] vBusiness=null;
+            BussinessQueueOR[] vBusiness = null;
             try
             {
                 vBusiness = GetBussinessList();
@@ -319,7 +320,7 @@ namespace QSoft.Core.ViewModel
                 }
                 if (string.IsNullOrEmpty(_NowBillNo) &&
                     (parameter == "RECALL" || parameter == "DELAY" || parameter == "TRANSFER"
-                   || parameter == "WELCOME" || parameter == "JUDGE" ))
+                   || parameter == "WELCOME" || parameter == "JUDGE"))
                 {
                     ShowErrorMsg("请先呼号客户!");
                     return;
@@ -363,7 +364,7 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void StopServer()
         {
-            if (MessageBox.Show("确定要退出系统吗？","提示",MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
+            if (MessageBox.Show("确定要退出系统吗？", "提示", MessageBoxButton.OKCancel) == MessageBoxResult.Cancel)
             {
                 return;
             }
@@ -380,7 +381,7 @@ namespace QSoft.Core.ViewModel
                 }
             }
         }
-        
+
         /// <summary>
         /// 调用呼号接口
         /// </summary>
@@ -406,14 +407,22 @@ namespace QSoft.Core.ViewModel
             mObj.ShowDialog();
             if (mObj.IsOK)
             {
-                string msg = GetCall("DELAY", string.Format("{0}##{1}", _NowBillNo, mObj.DelayNumber));
-                if (msg == "0") {
-                    CanncelCurrentQueue(_NowBillNo);
-                    _NowBillNo = "";
-                }
-                else
+                try
                 {
-                    ShowErrorMsg(msg);
+                    string msg = GetCall("DELAY", string.Format("{0}##{1}", _NowBillNo, mObj.DelayNumber));
+                    if (msg == "0")
+                    {
+                        CanncelCurrentQueue(_NowBillNo);
+                        _NowBillNo = "";
+                    }
+                    else
+                    {
+                        ShowErrorMsg(msg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorLog.WriteLog("CallTransfer:", ex.Message);
                 }
             }
         }
@@ -427,14 +436,22 @@ namespace QSoft.Core.ViewModel
             frmTran.ShowDialog();
             if (frmTran.IsOK)
             {
-                string msg = GetCall("TRANSFER", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
-                if (msg == "0") {
-                    CanncelCurrentQueue(_NowBillNo);
-                    _NowBillNo = "";
-                }
-                else
+                try
                 {
-                    ShowErrorMsg(msg);
+                    string msg = GetCall("TRANSFER", string.Format("{0}##{1}", _NowBillNo, frmTran.TargetWinNmber));
+                    if (msg == "0")
+                    {
+                        CanncelCurrentQueue(_NowBillNo);
+                        _NowBillNo = "";
+                    }
+                    else
+                    {
+                        ShowErrorMsg(msg);
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorLog.WriteLog("CallTransfer:", ex.Message);
                 }
             }
         }
@@ -443,23 +460,31 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallSpecall()
         {
-            Specall frmSpe = new Specall();
-            frmSpe.Owner = this._Page;
-            frmSpe.ShowDialog();
-            if (frmSpe.IsOK)
+            try
             {
-                string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
-                    GlobalData.WindowNo, frmSpe.CallType, frmSpe.BillNo));
-                if (msg == "0") {
-                    if (frmSpe.CallType == "客户")
+                Specall frmSpe = new Specall();
+                frmSpe.Owner = this._Page;
+                frmSpe.ShowDialog();
+                if (frmSpe.IsOK)
+                {
+                    string msg = GetCall("SPECALL", string.Format("{0}##{1}##{2}",
+                        GlobalData.WindowNo, frmSpe.CallType, frmSpe.BillNo));
+                    if (msg == "0")
                     {
-                        SetCurrentQueue(frmSpe.BillNo);
+                        if (frmSpe.CallType == "客户")
+                        {
+                            SetCurrentQueue(frmSpe.BillNo);
+                        }
+                    }
+                    else
+                    {
+                        ShowErrorMsg(msg);
                     }
                 }
-                else
-                {
-                    ShowErrorMsg(msg);
-                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.WriteLog("CallSpecall:", ex.Message);
             }
         }
 
@@ -469,22 +494,29 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallGetNext()
         {
-            int TimeLen = GetTimeLen(lastCallTime, DateTime.Now);
-            int Calllimittime = Convert.ToInt32(_SysParaConfigObj.Calllimittime);
-            if (TimeLen < Calllimittime && Calllimittime > 0)
+            try
             {
-                ShowErrorMsg(string.Format("叫号时间间隔不能小于：{0}秒。", _SysParaConfigObj.Calllimittime));
-                return;
+                int TimeLen = GetTimeLen(lastCallTime, DateTime.Now);
+                int Calllimittime = Convert.ToInt32(_SysParaConfigObj.Calllimittime);
+                if (TimeLen < Calllimittime && Calllimittime > 0)
+                {
+                    ShowErrorMsg(string.Format("叫号时间间隔不能小于：{0}秒。", _SysParaConfigObj.Calllimittime));
+                    return;
+                }
+                string value = GetCall("CALL", GlobalData.WindowNo);
+                RefQueues();
+                if (value.IndexOf("error:") >= 0)
+                {
+                    ShowErrorMsg(value);
+                    return;
+                }
+                lastCallTime = DateTime.Now;
+                this.SetCurrentQueue(value);
             }
-            string value = GetCall("CALL", GlobalData.WindowNo);
-            RefQueues();
-            if (value.IndexOf("error:") >= 0)
+            catch (Exception ex)
             {
-                ShowErrorMsg(value);
-                return;
+                ErrorLog.WriteLog("CallGetNext:", ex.Message);
             }
-            lastCallTime = DateTime.Now;
-            this.SetCurrentQueue(value);
         }
         //Calllimittime
         /// <summary>
@@ -492,14 +524,21 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallReCall()
         {
-            string value = GetCall("RECALL", _NowBillNo);
-            //if (value == "1")
-            //{
-            //    RefQueues();
-            //}else
-            if (value != "0")
+            try
             {
-                ShowErrorMsg(value);
+                string value = GetCall("RECALL", _NowBillNo);
+                //if (value == "1")
+                //{
+                //    RefQueues();
+                //}else
+                if (value != "0")
+                {
+                    ShowErrorMsg(value);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.WriteLog("CallReCall:", ex.Message);
             }
         }
         /// <summary>
@@ -507,10 +546,17 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallWelcome()
         {
-            string value = GetCall("WELCOME", _NowBillNo);
-            if (value != "0")
+            try
             {
-                ShowErrorMsg(value);
+                string value = GetCall("WELCOME", _NowBillNo);
+                if (value != "0")
+                {
+                    ShowErrorMsg(value);
+                }
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.WriteLog("CallWelcome:", ex.Message);
             }
         }
 
@@ -519,14 +565,21 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallJudge()
         {
-            string value = GetCall("JUDGE", _NowBillNo);
-            if (value != "0")
+            try
             {
-                ShowErrorMsg(value);
+                string value = GetCall("JUDGE", _NowBillNo);
+                if (value != "0")
+                {
+                    ShowErrorMsg(value);
+                }
+                else
+                {
+                    RefQueues();
+                }
             }
-            else
+            catch (Exception ex)
             {
-                RefQueues();
+                ErrorLog.WriteLog("CallJudge:", ex.Message);
             }
         }
         /// <summary>
@@ -534,7 +587,8 @@ namespace QSoft.Core.ViewModel
         /// </summary>
         private void CallPause()
         {
-           
+            try
+            {
                 string value = GetCall("PAUSE", GlobalData.WindowNo);
                 if (value != "0")
                 {
@@ -549,25 +603,35 @@ namespace QSoft.Core.ViewModel
 
                     _NowEmployeeStaus = EmployeeStatus.Pause;
                 }
-           
+            }
+            catch (Exception ex)
+            {
+                ErrorLog.WriteLog("CallPause:", ex.Message);
+            }
         }
         /// <summary>
         /// 恢复
         /// </summary>
         private void CallRestart()
         {
-
-            string value = GetCall("RESTART", GlobalData.WindowNo);
-            if (value != "0")
+            try
             {
-                ShowErrorMsg(value);
+                string value = GetCall("RESTART", GlobalData.WindowNo);
+                if (value != "0")
+                {
+                    ShowErrorMsg(value);
+                }
+                else
+                {
+                    _Page.PauseButtonTextBlock.Text = "暂停";
+                    _Page.btnPauseReStart.CommandParameter = "PAUSE";
+                    _Page.PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/pause.png", UriKind.RelativeOrAbsolute));
+                    _NowEmployeeStaus = EmployeeStatus.Normal;
+                }
             }
-            else
+            catch (Exception ex)
             {
-                _Page.PauseButtonTextBlock.Text = "暂停";
-                _Page.btnPauseReStart.CommandParameter = "PAUSE";
-                _Page.PauseButtonImage.Source = new BitmapImage(new Uri(@"Resources/Images/pause.png", UriKind.RelativeOrAbsolute));
-                _NowEmployeeStaus = EmployeeStatus.Normal;
+                ErrorLog.WriteLog("CallRestart:", ex.Message);
             }
         }
         #endregion

@@ -13,6 +13,7 @@ using System.Collections.ObjectModel;
 using QClient.QueueClinetServiceReference;
 using System.Threading;
 using System.Windows.Threading;
+using QClient.Core.Uitl.Logger;
 
 namespace QClient
 {
@@ -178,32 +179,39 @@ namespace QClient
 
                 foreach (RefButtomText obj in ListQH)
                 {
-                    if (obj.QHOR.LabelCaption.IndexOf("#wait") > 0 || obj.QHOR.EnlabelCaption.IndexOf("#wait") > 0 || obj.QHOR.TagCaption.IndexOf("#wait") > 0)
+                    try
                     {
-                        int UserNum = 0;
-                        if (!string.IsNullOrEmpty(obj.QHOR.LabelJobno))
+                        if (obj.QHOR.LabelCaption.IndexOf("#wait") > 0 || obj.QHOR.EnlabelCaption.IndexOf("#wait") > 0 || obj.QHOR.TagCaption.IndexOf("#wait") > 0)
                         {
-                            UserNum = client.GetBussinessWiatUser(obj.QHOR.LabelJobno);
-                        }
-                        else
-                        {
-                            UserNum = 0;
-                        }
+                            int UserNum = 0;
+                            if (!string.IsNullOrEmpty(obj.QHOR.LabelJobno))
+                            {
+                                UserNum = client.GetBussinessWiatUser(obj.QHOR.LabelJobno);
+                            }
+                            else
+                            {
+                                UserNum = 0;
+                            }
 
-                        if (obj.BtnKJ != null)
-                        {
-                            obj.BtnKJ.SetText(obj.QHOR.LabelCaption.Replace("#wait", UserNum.ToString()));
-                        }
+                            if (obj.BtnKJ != null)
+                            {
+                                obj.BtnKJ.SetText(obj.QHOR.LabelCaption.Replace("#wait", UserNum.ToString()));
+                            }
 
-                        if (obj.BtnEn != null)
-                        {
-                            obj.BtnEn.SetText(obj.QHOR.EnlabelCaption.Replace("#wait", UserNum.ToString()));
-                        }
+                            if (obj.BtnEn != null)
+                            {
+                                obj.BtnEn.SetText(obj.QHOR.EnlabelCaption.Replace("#wait", UserNum.ToString()));
+                            }
 
-                        if (obj.BtnTag != null)
-                        {
-                            obj.BtnTag.SetText(obj.QHOR.TagCaption.Replace("#wait", UserNum.ToString()));
+                            if (obj.BtnTag != null)
+                            {
+                                obj.BtnTag.SetText(obj.QHOR.TagCaption.Replace("#wait", UserNum.ToString()));
+                            }
                         }
+                    }
+                    catch (Exception ex)
+                    {
+                        ErrorLog.WriteLog("RefButtomText：#wait", ex.Message);
                     }
                 }
                 Thread.Sleep(10 * 1000);

@@ -46,6 +46,11 @@ namespace QM.Client.WebService.Control
         ///playSequence：播放顺序，以分号隔开多个语种。1（提示音），2（普通话），3（英语），4（粤语）。例如“1;2;3;4;”表示先播提示音，然后播普通话
         /// </summary>
         public string playSequence { get; set; }
+
+        /// <summary>
+        /// 无线音箱地址。
+        /// </summary>
+        public string WirelessAddr { get; set; }
         #endregion
 
         List<WindowLoginInfoOR> ListWindowLogins = new List<WindowLoginInfoOR>();
@@ -54,6 +59,9 @@ namespace QM.Client.WebService.Control
         /// 获取窗口
         /// </summary>
         List<WindowOR> ListWindows = new List<WindowOR>();
+
+        List<DeviceOR> ListZPOR=new List<DeviceOR>();
+           
 
         //Vip卡处理
         VipCardHeadle VipCardHeadObj;
@@ -117,47 +125,63 @@ namespace QM.Client.WebService.Control
         /// </summary>
         public QueueMian()
         {
-            InitBankNo();
-            //Vip优先时间处理类
-            VipCardHeadObj = new VipCardHeadle();
-            VipCardHeadObj.Init();
-
-            List<BussinessOR> ListBuss=new List<BussinessOR>();//所有业务
-            //查询 所有的业务队列
-            ListBuss = _busDA.selectAllBussiness();
-
-            QhQueues = new List<BussinessQueueOR>();
-            //根据队列，取出已取号的排队信息。
-            foreach (BussinessOR obj in ListBuss)
+            try
             {
-                BussinessQueueOR bussQue = new BussinessQueueOR();
-                bussQue.Init(obj);
-                bussQue.BussQueues = _QueueDA.selectBussinessQueues(obj.Id);//获取此队列未办结的取号记录
-                foreach (QueueInfoOR qhObj in bussQue.BussQueues)
+                InitBankNo();
+                //Vip优先时间处理类
+                VipCardHeadObj = new VipCardHeadle();
+                VipCardHeadObj.Init();
+
+                List<BussinessOR> ListBuss = new List<BussinessOR>();//所有业务
+                //查询 所有的业务队列
+                ListBuss = _busDA.selectAllBussiness();
+
+                QhQueues = new List<BussinessQueueOR>();
+                //根据队列，取出已取号的排队信息。
+                foreach (BussinessOR obj in ListBuss)
                 {
-                    if (!string.IsNullOrEmpty(qhObj.Cardno))
+                    BussinessQueueOR bussQue = new BussinessQueueOR();
+                    bussQue.Init(obj);
+                    bussQue.BussQueues = _QueueDA.selectBussinessQueues(obj.Id);//获取此队列未办结的取号记录
+                    foreach (QueueInfoOR qhObj in bussQue.BussQueues)
                     {
-                        qhObj.VipFirstTime = VipCardHeadObj.GetFirstTime(qhObj.Cardno);
+                        if (!string.IsNullOrEmpty(qhObj.Cardno))
+                        {
+                            qhObj.VipFirstTime = VipCardHeadObj.GetFirstTime(qhObj.Cardno);
+                        }
+                    }
+                    QhQueues.Add(bussQue);
+                }
+
+                //初使化登录日志
+                ListWindowLogins = _WindowLoginDA.SelectToDayLogins();
+
+                //获取窗口
+                ListWindows = new WindowMySqlDA().SelectWindows();
+
+                //业务角色处理
+                BussRoleObj = new BussinessRoleHeadle();
+                BussRoleObj.Init();
+
+                //参数设置
+                _SysparaConfigObj = new SysParaMySqlDA().SelectConfigORByWdbh();
+
+                //读取config.xml文件
+                _Config = new ReadXmlConfig().Read();
+
+                List<DeviceOR> ListAllZP = new DeviceDAMySql().SelectAllDevices();
+                foreach (DeviceOR obj in ListAllZP)
+                {
+                    if (obj.Devicetypeid == 4)
+                    {
+                        ListZPOR.Add(obj);
                     }
                 }
-                QhQueues.Add(bussQue);
             }
-
-            //初使化登录日志
-           ListWindowLogins= _WindowLoginDA.SelectToDayLogins();
-
-            //获取窗口
-           ListWindows = new WindowMySqlDA().SelectWindows();
-
-            //业务角色处理
-           BussRoleObj = new BussinessRoleHeadle();
-           BussRoleObj.Init();
-
-            //参数设置
-            _SysparaConfigObj= new SysParaMySqlDA().SelectConfigORByWdbh();
-
-            //读取config.xml文件
-            _Config = new ReadXmlConfig().Read();
+            catch (Exception ex)
+            {
+                ErrorLog.WriteLog("QueueMian_Init#ex", ex.Message);
+            }
         }
 
         private ConfigOR _Config = null;
@@ -170,6 +194,7 @@ namespace QM.Client.WebService.Control
             BankNo = ConfigurationManager.AppSettings["BankNo"];            
             playType = Convert.ToInt32(ConfigurationManager.AppSettings["playType"]);
             playSequence = ConfigurationManager.AppSettings["playSequence"];
+            WirelessAddr = ConfigurationManager.AppSettings["WirelessAddr"];
         }
         #endregion
 
@@ -183,6 +208,7 @@ namespace QM.Client.WebService.Control
         /// <returns></returns>
         public string getLogin(string userid, string password, string windowid)
         {
+            ErrorLog.WriteLog("getLogin#F", userid);
             EmployeeOR _empOR = new EmployeeMySqlDA().SelectAEmployeeLogin(userid, password);
             if (_empOR == null)
             {
@@ -229,11 +255,10 @@ namespace QM.Client.WebService.Control
                 _Login.BussinessRoleOn = BussRoleObj.GetBussinessRoleOn(_empOR, _winOR);
                 _WindowLoginDA.InsertLoginWindowInfo(_Login);//写入数据库
                 ListWindowLogins.Add(_Login);
-                
-
             }
             catch (Exception ex)
             {
+                ErrorLog.WriteLog("getLogin#ex", ex.Message);
                 return ex.Message; //写入数据库出错。
             }
             return "0";
@@ -272,7 +297,7 @@ namespace QM.Client.WebService.Control
             }
             catch (Exception ex)
             {
-                return ex.Message;
+                ErrorLog.WriteLog("endService#ex", ex.Message);
             }
             return "0";//正常结束
         }
@@ -548,7 +573,7 @@ namespace QM.Client.WebService.Control
             
             //移出重呼两次的取号
             RemovePre(mWindowNo);
-           
+            HDDA.Instance.ListZP = ListZPOR;
             QueueInfoOR mSelectQhObj=null;
             //先处理其它窗口过来的属况,即不用排队
             List<QueueInfoOR> mQueueTranseferList = new List<QueueInfoOR>();//转移排队列表
@@ -643,7 +668,7 @@ namespace QM.Client.WebService.Control
                     mSelectQhObj.Employno = _winLogin.Employno;
                     mSelectQhObj.Employname = _winLogin.Employname;
 
-					HDDA.Instance.PlayBill(mSelectQhObj.Billno, mWindowNo, _Config.volume);
+                    HDDA.Instance.PlayBill(mSelectQhObj.Billno, mWindowNo, _Config.volume, WirelessAddr);
 
 					_QueueDA.UpdateCall(mSelectQhObj);
 					return mSelectQhObj.Billno;
@@ -702,7 +727,7 @@ namespace QM.Client.WebService.Control
                 string result = HDDA.Instance.ShowTpMsg(mwinOR.tpAddress, content, mBillNo, mWindowNo, mwinOR);
                 if (result == "0")
                 {
-                    HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume);
+                    HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume, WirelessAddr);
                 }
                 return result;
 
@@ -819,26 +844,26 @@ namespace QM.Client.WebService.Control
                 string result = HDDA.Instance.ShowTpMsgSelf(mwinOR.tpAddress, content, mwinOR);
 				if (result == "0")
 				{
-					HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume);
+                    HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume, WirelessAddr);
 				}
 				return result;
 				//呼号代码
 			}
             else if (mCallType == "大堂经理")
             {
-				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
+                return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume, WirelessAddr);
             }
             else if (mCallType == "客户经理")
             {
-				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
+                return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume, WirelessAddr);
             }
             else if (mCallType == "保安")
             {
-				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
+                return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume, WirelessAddr);
             }
             else if (mCallType == "业务顾问")
             {
-				return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume);
+                return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume, WirelessAddr);
             }
             else if (mCallType == "一米线")//参数三为，窗口号
             {

@@ -36,6 +36,7 @@
             this.panel3 = new System.Windows.Forms.Panel();
             this.lblShowMsg = new System.Windows.Forms.Label();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btnUserAdmin = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnEdit = new System.Windows.Forms.Button();
             this.dtpPhoneEnd = new System.Windows.Forms.DateTimePicker();
@@ -67,7 +68,15 @@
             this.dptPartsStart = new System.Windows.Forms.DateTimePicker();
             this.label3 = new System.Windows.Forms.Label();
             this.btnPartsAdd = new System.Windows.Forms.Button();
-            this.btnUserAdmin = new System.Windows.Forms.Button();
+            this.tabPage4 = new System.Windows.Forms.TabPage();
+            this.panel8 = new System.Windows.Forms.Panel();
+            this.dtpSearchEnd = new System.Windows.Forms.DateTimePicker();
+            this.btnSearchPgSearch = new System.Windows.Forms.Button();
+            this.dtpSearchStart = new System.Windows.Forms.DateTimePicker();
+            this.label2 = new System.Windows.Forms.Label();
+            this.dgSearch = new System.Windows.Forms.DataGridView();
+            this.panel9 = new System.Windows.Forms.Panel();
+            this.lblSearch = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.panel2.SuspendLayout();
@@ -82,6 +91,10 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgParts)).BeginInit();
             this.panel7.SuspendLayout();
             this.panel6.SuspendLayout();
+            this.tabPage4.SuspendLayout();
+            this.panel8.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSearch)).BeginInit();
+            this.panel9.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -89,6 +102,7 @@
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Controls.Add(this.tabPage3);
+            this.tabControl1.Controls.Add(this.tabPage4);
             this.tabControl1.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tabControl1.Location = new System.Drawing.Point(0, 0);
             this.tabControl1.Name = "tabControl1";
@@ -163,6 +177,16 @@
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(981, 36);
             this.panel1.TabIndex = 0;
+            // 
+            // btnUserAdmin
+            // 
+            this.btnUserAdmin.Location = new System.Drawing.Point(901, 4);
+            this.btnUserAdmin.Name = "btnUserAdmin";
+            this.btnUserAdmin.Size = new System.Drawing.Size(75, 23);
+            this.btnUserAdmin.TabIndex = 2;
+            this.btnUserAdmin.Text = "用户管理";
+            this.btnUserAdmin.UseVisualStyleBackColor = true;
+            this.btnUserAdmin.Click += new System.EventHandler(this.btnUserAdmin_Click);
             // 
             // btnDelete
             // 
@@ -468,15 +492,92 @@
             this.btnPartsAdd.UseVisualStyleBackColor = true;
             this.btnPartsAdd.Click += new System.EventHandler(this.btnPartsAdd_Click);
             // 
-            // btnUserAdmin
+            // tabPage4
             // 
-            this.btnUserAdmin.Location = new System.Drawing.Point(901, 4);
-            this.btnUserAdmin.Name = "btnUserAdmin";
-            this.btnUserAdmin.Size = new System.Drawing.Size(75, 23);
-            this.btnUserAdmin.TabIndex = 2;
-            this.btnUserAdmin.Text = "用户管理";
-            this.btnUserAdmin.UseVisualStyleBackColor = true;
-            this.btnUserAdmin.Click += new System.EventHandler(this.btnUserAdmin_Click);
+            this.tabPage4.Controls.Add(this.dgSearch);
+            this.tabPage4.Controls.Add(this.panel8);
+            this.tabPage4.Controls.Add(this.panel9);
+            this.tabPage4.Location = new System.Drawing.Point(4, 21);
+            this.tabPage4.Name = "tabPage4";
+            this.tabPage4.Size = new System.Drawing.Size(987, 481);
+            this.tabPage4.TabIndex = 3;
+            this.tabPage4.Text = "记录查询";
+            this.tabPage4.UseVisualStyleBackColor = true;
+            // 
+            // panel8
+            // 
+            this.panel8.Controls.Add(this.dtpSearchEnd);
+            this.panel8.Controls.Add(this.btnSearchPgSearch);
+            this.panel8.Controls.Add(this.dtpSearchStart);
+            this.panel8.Controls.Add(this.label2);
+            this.panel8.Dock = System.Windows.Forms.DockStyle.Top;
+            this.panel8.Location = new System.Drawing.Point(0, 0);
+            this.panel8.Name = "panel8";
+            this.panel8.Size = new System.Drawing.Size(987, 36);
+            this.panel8.TabIndex = 3;
+            // 
+            // dtpSearchEnd
+            // 
+            this.dtpSearchEnd.Location = new System.Drawing.Point(254, 5);
+            this.dtpSearchEnd.Name = "dtpSearchEnd";
+            this.dtpSearchEnd.Size = new System.Drawing.Size(137, 21);
+            this.dtpSearchEnd.TabIndex = 8;
+            // 
+            // btnSearchPgSearch
+            // 
+            this.btnSearchPgSearch.Location = new System.Drawing.Point(397, 4);
+            this.btnSearchPgSearch.Name = "btnSearchPgSearch";
+            this.btnSearchPgSearch.Size = new System.Drawing.Size(47, 23);
+            this.btnSearchPgSearch.TabIndex = 7;
+            this.btnSearchPgSearch.Text = "查询";
+            this.btnSearchPgSearch.UseVisualStyleBackColor = true;
+            this.btnSearchPgSearch.Click += new System.EventHandler(this.btnSearchPgSearch_Click);
+            // 
+            // dtpSearchStart
+            // 
+            this.dtpSearchStart.Location = new System.Drawing.Point(83, 5);
+            this.dtpSearchStart.Name = "dtpSearchStart";
+            this.dtpSearchStart.Size = new System.Drawing.Size(137, 21);
+            this.dtpSearchStart.TabIndex = 6;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(11, 10);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(65, 12);
+            this.label2.TabIndex = 5;
+            this.label2.Text = "销售时间：";
+            // 
+            // dgSearch
+            // 
+            this.dgSearch.AllowUserToAddRows = false;
+            this.dgSearch.AllowUserToDeleteRows = false;
+            this.dgSearch.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgSearch.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.dgSearch.Location = new System.Drawing.Point(0, 36);
+            this.dgSearch.Name = "dgSearch";
+            this.dgSearch.RowTemplate.Height = 23;
+            this.dgSearch.Size = new System.Drawing.Size(987, 406);
+            this.dgSearch.TabIndex = 2;
+            // 
+            // panel9
+            // 
+            this.panel9.Controls.Add(this.lblSearch);
+            this.panel9.Dock = System.Windows.Forms.DockStyle.Bottom;
+            this.panel9.Location = new System.Drawing.Point(0, 442);
+            this.panel9.Name = "panel9";
+            this.panel9.Size = new System.Drawing.Size(987, 39);
+            this.panel9.TabIndex = 4;
+            // 
+            // lblSearch
+            // 
+            this.lblSearch.AutoSize = true;
+            this.lblSearch.Location = new System.Drawing.Point(14, 8);
+            this.lblSearch.Name = "lblSearch";
+            this.lblSearch.Size = new System.Drawing.Size(41, 12);
+            this.lblSearch.TabIndex = 1;
+            this.lblSearch.Text = "信息：";
             // 
             // Main
             // 
@@ -510,6 +611,12 @@
             this.panel7.PerformLayout();
             this.panel6.ResumeLayout(false);
             this.panel6.PerformLayout();
+            this.tabPage4.ResumeLayout(false);
+            this.panel8.ResumeLayout(false);
+            this.panel8.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.dgSearch)).EndInit();
+            this.panel9.ResumeLayout(false);
+            this.panel9.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -555,6 +662,15 @@
 		private System.Windows.Forms.Label lblPartsShowMsg;
         private System.Windows.Forms.DataGridView dgParts;
         private System.Windows.Forms.Button btnUserAdmin;
+        private System.Windows.Forms.TabPage tabPage4;
+        private System.Windows.Forms.Panel panel8;
+        private System.Windows.Forms.DateTimePicker dtpSearchEnd;
+        private System.Windows.Forms.Button btnSearchPgSearch;
+        private System.Windows.Forms.DateTimePicker dtpSearchStart;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.DataGridView dgSearch;
+        private System.Windows.Forms.Panel panel9;
+        private System.Windows.Forms.Label lblSearch;
 
 
     }

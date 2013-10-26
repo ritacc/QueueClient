@@ -13,6 +13,8 @@ namespace QM.Client.WebService.Control
         private static readonly HDDA _instance = new HDDA();
         public static HDDA Instance { get { return _instance; } }
 
+        public  List<DeviceOR> ListZP { get; set; }
+
         protected ControllerSoapClient _HDSoapClient;
         public ControllerSoapClient GetHDClient()
         {
@@ -44,6 +46,7 @@ namespace QM.Client.WebService.Control
                     Thread th = new Thread(pjr.GetPJResult);
                     th.Start();
                 }
+                ErrorLog.WriteLog("PJ#OK", result);
             }
             catch (Exception ex)
             {
@@ -67,6 +70,7 @@ namespace QM.Client.WebService.Control
                 {
 
                 }
+                ErrorLog.WriteLog("TpShowSuspendedRestore#OK", result);
             }
             catch (Exception ex)
             {
@@ -95,6 +99,8 @@ namespace QM.Client.WebService.Control
 
                     ControllerSoapClient HDClient = new ControllerSoapClient();
                     string msg = HDClient.PrintSlip("Branch=#Number=GR0005#BusinessType=个人外汇G#Count=4#TipMsg2=#Time=2013-08-18 22:31:29#Birthday=##", 12);
+
+                    ErrorLog.WriteLog("PrintSlip#OK", msg);
                 }
             }
             catch (Exception ex)
@@ -111,21 +117,23 @@ namespace QM.Client.WebService.Control
         /// <summary>
         /// 呼号票号
         /// </summary>
-        public void PlayBill(string BillNo, string WindowNo, int vol)
+        public void PlayBill(string BillNo, string WindowNo, int vol,string WirelessAddr)
         {
             try
             {
                 //请;A;0;0;1;号顾客到;1;号;窗口;
                 string content = string.Format("请;{0}号顾客到;{1}号;窗口;", MsgToPlayFormat(BillNo), MsgToPlayFormat(WindowNo));
                 string contentEN = string.Format("customer;{0}please come to;window;{1};", MsgToPlayFormat(BillNo), MsgToPlayFormat(WindowNo));
-                GetHDClient().PlaySpeakerSound(
-                    QueueClient._QueueMain.playType
-                    , content
+                
+                GetHDClient().PlaySpeakerSound(content
                     , contentEN
                     , QueueClient._QueueMain.playSequence   //播放顺序
-                    , vol
-                    , ""
-                    , "");
+                    , vol);
+
+                //无线音箱
+                GetHDClient().PlayWirelessSpeakerSound(WirelessAddr, 1, vol, BillNo, WindowNo);
+
+                ErrorLog.WriteLog("PlayBill#OK", "#PlayWirelessSpeakerSound#PlaySpeakerSound");
             }
             catch (Exception ex)
             {
@@ -134,20 +142,34 @@ namespace QM.Client.WebService.Control
         }
 
 
-        public string PlaySpecial(string PlayTpye, string WindowNo, int vol)
+        public string PlaySpecial(string PlayTpye, string WindowNo, int vol, string WirelessAddr)
         {
             try
             {
                 //请;大堂经理;到;1;号;窗口;
                 string content = string.Format("请;{0};到;{1}号;窗口;", PlayTpye, MsgToPlayFormat(WindowNo));
                 string contentEN = string.Format("{0}please come to;window;{1};", PlayTypeCNToEn(PlayTpye), MsgToPlayFormat(WindowNo));
-                return GetHDClient().PlaySpeakerSound(QueueClient._QueueMain.playType
-                    , content
+                
+                //playType：播放类型。1（普通叫号），2（呼叫大堂经理），3（呼叫业务顾问），4（呼叫保安）
+                int iPlaType = 2;
+                if (PlayTpye == "大堂经理")
+                {
+                    iPlaType = 2;
+                }
+                else if (PlayTpye == "业务顾问")
+                {
+                    iPlaType = 3;
+                }
+                else if (PlayTpye == "保安")
+                {
+                    iPlaType = 4;
+                }
+                GetHDClient().PlayWirelessSpeakerSound(WirelessAddr, iPlaType, vol, "", WindowNo);
+                //主音箱
+                return GetHDClient().PlaySpeakerSound(content
                     , contentEN
                     , QueueClient._QueueMain.playSequence   //播放顺序
-                    , vol
-                    , ""
-                    , "");
+                    , vol);
             }
             catch (Exception ex)
             {
@@ -196,7 +218,31 @@ namespace QM.Client.WebService.Control
         {
             try
             {
-                return GetHDClient().ShowScreenMSG(1//屏幕类型。1（窗口屏），2（综合屏）
+                //显示主屏信息
+                try
+                {
+                    foreach (DeviceOR obj in ListZP)
+                    {
+                        if (string.IsNullOrEmpty(obj.Address))
+                        {
+                            string strResultZ = GetHDClient().ShowScreenMSG(1//屏幕类型。1（窗口屏），2（综合屏）
+                                                         , 2//显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）
+                                                         , obj.Address
+                                                         , 16 * obj.ColNumber.Value
+                                                         , 16 * obj.RowNumber.Value
+                                                         , Bill
+                                                         , ""
+                                                         , Bill);
+
+                            ErrorLog.WriteLog("ShowScreenMSG_ZP#OK:", string.Format("主屏_显示：地址：{0} 结果：{1}", obj.Address, strResultZ));
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    ErrorLog.WriteLog("ShowScreenMSG#ZP:", ex.Message);
+                }
+                string strResult= GetHDClient().ShowScreenMSG(1//屏幕类型。1（窗口屏），2（综合屏）
                     , 1//显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）
                     , devAddr
                     , _windOR.ColNumber.Value * 16
@@ -204,6 +250,8 @@ namespace QM.Client.WebService.Control
                     , Bill
                     , Windowno
                     , content);
+                ErrorLog.WriteLog("ShowScreenMSG_TP_OK:", string.Format("窗口屏显示：地址：{0} 结果：{1}",devAddr,strResult));
+                return strResult;
             }
             catch (Exception ex)
             {
@@ -224,7 +272,7 @@ namespace QM.Client.WebService.Control
         {
             try
             {
-                return GetHDClient().ShowScreenMSG(1//屏幕类型。1（窗口屏），2（综合屏）
+                string strResultZ= GetHDClient().ShowScreenMSG(1//屏幕类型。1（窗口屏），2（综合屏）
                     , 2//显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）
                     , devAddr
                     , _windOR.ColNumber.Value * 16
@@ -232,6 +280,8 @@ namespace QM.Client.WebService.Control
                     , ""
                     , ""
                     , content);
+                ErrorLog.WriteLog("ShowTpMsgSelf_ZP#OK:", string.Format("主屏_显示：地址：{0},  结果：{1}", devAddr, strResultZ));
+                return strResultZ;
             }
             catch (Exception ex)
             {

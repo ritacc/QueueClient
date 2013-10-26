@@ -60,6 +60,7 @@
     <Compile Include="Dal\MaintainDA.cs" />
     <Compile Include="Dal\PartsDA.cs" />
     <Compile Include="Dal\PhoneDA.cs" />
+    <Compile Include="Dal\SearchDA.cs" />
     <Compile Include="Dal\SystemsetDA.cs" />
     <Compile Include="Dal\UserDA.cs" />
     <Compile Include="DBCommon\CommonDB.cs" />
