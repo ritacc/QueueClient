@@ -11,7 +11,7 @@ namespace QM.Client.WebService.Control
         protected static string GetFilePath()
         {
             string strTime = DateTime.Now.ToString("yyyyMMdd");
-            return string.Format("{0}log{1}.txt", Common.GetPath(), strTime);
+            return string.Format("{0}log{1}.txt", Common.GetPathLog(), strTime);
         }
 
         public static void WriteLog(string ErrorCode, string msg)

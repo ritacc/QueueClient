@@ -21,7 +21,8 @@ namespace QM.Client.WebService.Control
 元素结构包含：是否VIP、取号时间、换算后排队时间、转移窗口号、延后人数、延后时间。
 其中，转移窗口号只有按下转移后才使用，延后人数在按下延后以及后面的呼叫后更新；数据结构采用hash实现，关键字是业务类型ID，值是队列，队列里面是元素。延后人数和延后时间作为延后策略的可选项，目前先实现延后时间，预留延后人数的逻辑与接口，实现时可以快速实现；
          */
-         
+        public  string _StartPath = string.Empty; 
+
         BussinessMySqlDA _busDA = new BussinessMySqlDA();//业务DA
         QueueInfoMySqlDA _QueueDA = new QueueInfoMySqlDA();//取号DA
         WindowLoginInfoDA _WindowLoginDA = new WindowLoginInfoDA();
@@ -646,7 +647,7 @@ namespace QM.Client.WebService.Control
                     mSelectQhObj = mQueueList[0];
 
                 mQueueList.Clear();
-            }           
+            }
 
             if (mSelectQhObj != null)
             {
@@ -654,8 +655,8 @@ namespace QM.Client.WebService.Control
 				string content = _Config.tp_8_show.Replace("*", mSelectQhObj.Billno)
 					.Replace("#", mWindowNo);
 
-				int mWidth = (_Config.tp_8_show.Length - 2) * 16
-					+ (mSelectQhObj.Billno.Length + mWindowNo.Length) * 8;
+                //int mWidth = (_Config.tp_8_show.Length - 2) * 16
+                //    + (mSelectQhObj.Billno.Length + mWindowNo.Length) * 8;
 
 				string result = HDDA.Instance.ShowTpMsg(_windOR.tpAddress, content,mSelectQhObj.Billno,mWindowNo,_windOR);//显示条屏信息
 				if (result == "0")
@@ -835,16 +836,28 @@ namespace QM.Client.WebService.Control
 				if (mwinOR == null)
 					return "窗口不存在！";
 
-				string content = _Config.tp_8_show.Replace("*", mBillNo)
-					.Replace("#", mWindowNo);
-
-                //int mWidth = (_Config.tp_8_show.Length - 2) * 16
-                //    + (mBillNo.Length + mWindowNo.Length) * 8;
-
+				string content = _Config.tp_8_show.Replace("*", mBillNo).Replace("#", mWindowNo);                
                 string result = HDDA.Instance.ShowTpMsgSelf(mwinOR.tpAddress, content, mwinOR);
-				if (result == "0")
-				{
-                    HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume, WirelessAddr);
+                if (result == "0")
+                {
+                    WindowLoginInfoOR _winLogin = GetLoginLogByWindowNo(mWindowNo);
+                    if (_winLogin == null)
+                    {
+                        return "error:未登录！";
+                    }
+
+                    objQH.Status = 1;
+                    objQH.Waitinterval = GetTimeLen(objQH.Prillbilltime, DateTime.Now);
+                    objQH.Windowno = _winLogin.Windowno;
+                    objQH.Employno = _winLogin.Employno;
+                    objQH.Employname = _winLogin.Employname;
+
+                    HDDA.Instance.PlayBill(objQH.Billno, mWindowNo, _Config.volume, WirelessAddr);
+
+                    _QueueDA.UpdateCall(objQH);
+                    RemovePre(mWindowNo);
+                    return "";
+                    //HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume, WirelessAddr);
 				}
 				return result;
 				//呼号代码
@@ -979,7 +992,7 @@ namespace QM.Client.WebService.Control
             {
                 foreach (QueueInfoOR objQue in objQhQue.BussQueues)
                 {
-                    if (objQue.Status == 1  && objQue.Windowno == windowNo)
+                    if (objQue.Status != 0  && objQue.Windowno == windowNo)
                     {
                         ListRemoveQH.Add(objQue);
                     }
@@ -1045,6 +1058,7 @@ namespace QM.Client.WebService.Control
 
                 //票号#业务名称#当前业务人数#当前网点人数
                 string result= string.Format("{0}#{1}#{2}#{3}", _BillNo, _CurentBuss.Name,mWaitpeoplebusssiness,mWaitpeoplebank);
+                
                 if (HDDA.Instance.PrintSlip(result))
                 {
 

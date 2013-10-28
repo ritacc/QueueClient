@@ -55,9 +55,26 @@ namespace QM.Client.WebService.Control
         {
 
             // 如果只有文件名, 打开文件对话框会影响当前默认目录, 所以需要试探下
+            if (string.IsNullOrEmpty(_StartPath))
+            {
+                _StartPath = QueueClient._QueueMain._StartPath;
+            }
             if (!_StartPath.EndsWith("\\"))
                 _StartPath += "\\";
             return _StartPath;
+        }
+
+        public static string GetPathLog()
+        {
+
+            // 如果只有文件名, 打开文件对话框会影响当前默认目录, 所以需要试探下
+            if (string.IsNullOrEmpty(_StartPath))
+            {
+                _StartPath = QueueClient._QueueMain._StartPath;
+            }
+            if (!_StartPath.EndsWith("\\"))
+                _StartPath += "\\";
+            return _StartPath+"log\\";
         }
 
     }

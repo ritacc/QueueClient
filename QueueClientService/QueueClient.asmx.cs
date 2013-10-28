@@ -29,8 +29,10 @@ namespace QM.Client.WebService
                 {
                     if (_QueueMain == null)
                     {
-                        Common._StartPath = Server.MapPath("");
+                         Common._StartPath = Server.MapPath("");
                         _QueueMain = new QueueMian();
+                        _QueueMain._StartPath = Server.MapPath("");
+                        
                     }
                 }
             }

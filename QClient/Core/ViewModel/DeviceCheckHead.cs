@@ -101,18 +101,19 @@ namespace QClient.Core.ViewModel
                 string result = string.Empty;
                 if (!string.IsNullOrEmpty(win.pjqAddress))
                 {
+                    
                     result = GetHDClient().ShowScreenMSG(1,
                           2,
                           win.tpAddress,
-                          16 * (_Config.tp_8_adv.Length),
+                          16 * win.ColNumber.Value,
                           16,
                           "",
                           "",
                           _Config.tp_8_adv);
                     if (result == "0")
                     {
-                        //ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
-                        //    string.Format("窗口屏初使化  成功  ：窗口名：{0},地址：{1},结果:{2}",win.Name, win.tpAddress,result));
+                        ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                            string.Format("窗口屏初使化  成功  ：窗口名：{0},地址：{1},结果:{2}", win.Name, win.tpAddress, result));
                     }
                     else
                     {
@@ -126,11 +127,11 @@ namespace QClient.Core.ViewModel
                 {
                     //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
                     //result = GetHDClient().PlayCallerSound(win.pjqAddress);
-                    result = GetHDClient().OperateCaller(2, win.pjqAddress, "", 0);
+                    result = GetHDClient().OperateCaller(2, win.fjqAddress, "", 0);
                     if (result == "0")
                     {
-                        //ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
-                        //    string.Format("评价器初使化  成功  ：窗口名：{0},评价器地址：{1},结果:{2}", win.Name, win.pjqAddress, result));
+                        ErrorLog.WriteLog("InitDevice#ShowScreenMSG",
+                            string.Format("评价器初使化  成功  ：窗口名：{0},评价器地址：{1},结果:{2}", win.Name, win.pjqAddress, result));
                     }
                     else
                     {
@@ -446,8 +447,7 @@ namespace QClient.Core.ViewModel
                 else
                 {
                     ShowErrorMsg(msg);
-                }
-            
+                }            
         }
 
         /// <summary>

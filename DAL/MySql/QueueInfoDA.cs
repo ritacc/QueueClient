@@ -211,9 +211,8 @@ Processinterval=@Processinterval  where ID='@ID' ";
 
 	   public bool UpdateCallJudge(string id,int pjresult)
 	   {
-		   string sql = @"update t_queueinfo  set status=3,FinishTime=now(),
-Processinterval=@Processinterval  where ID='@ID' ";
-		   sql = sql.Replace("@Processinterval", pjresult.ToString());
+           string sql = @"update t_queueinfo  set status=3,Judge=@Judge  where ID='@ID' ";
+           sql = sql.Replace("@Judge", pjresult.ToString());
 		   sql = sql.Replace("@ID", id);
 		   return dbMySql.ExecuteNoQuery(sql) > 0;
 	   }

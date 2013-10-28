@@ -83,7 +83,7 @@
     <Content Include="web.config">
       <SubType>Designer</SubType>
     </Content>
-    <Content Include="资料.txt" />
+    <None Include="资料.txt" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="web.Debug.config">

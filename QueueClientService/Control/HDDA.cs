@@ -5,6 +5,7 @@ using System.Web;
 using QM.Client.WebService.HD;
 using System.Threading;
 using QM.Client.Entity;
+using QM.Client.DA.MySql;
 
 namespace QM.Client.WebService.Control
 {
@@ -96,9 +97,11 @@ namespace QM.Client.WebService.Control
                           .Replace("<#bussNmae>", arr[1])
                           .Replace("<#WaitUserLen>", arr[3])
                           .Replace("<#Time>", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
-
+                    
                     ControllerSoapClient HDClient = new ControllerSoapClient();
-                    string msg = HDClient.PrintSlip("Branch=#Number=GR0005#BusinessType=个人外汇G#Count=4#TipMsg2=#Time=2013-08-18 22:31:29#Birthday=##", 12);
+
+                    ErrorLog.WriteLog("PRINT_MSG", Content);
+                    string msg = HDClient.PrintSlip(Content,5);
 
                     ErrorLog.WriteLog("PrintSlip#OK", msg);
                 }
@@ -148,8 +151,9 @@ namespace QM.Client.WebService.Control
             {
                 //请;大堂经理;到;1;号;窗口;
                 string content = string.Format("请;{0};到;{1}号;窗口;", PlayTpye, MsgToPlayFormat(WindowNo));
-                string contentEN = string.Format("{0}please come to;window;{1};", PlayTypeCNToEn(PlayTpye), MsgToPlayFormat(WindowNo));
-                
+                ErrorLog.WriteLog("content", content);
+                string contentEN = string.Format("{0};please come to;window;{1}", PlayTypeCNToEn(PlayTpye), MsgToPlayFormat(WindowNo));
+                ErrorLog.WriteLog("contentEN", contentEN);
                 //playType：播放类型。1（普通叫号），2（呼叫大堂经理），3（呼叫业务顾问），4（呼叫保安）
                 int iPlaType = 2;
                 if (PlayTpye == "大堂经理")
@@ -183,14 +187,17 @@ namespace QM.Client.WebService.Control
             string EnType = "";
             switch (PalyTpye)
             {
+                case "大堂经理":
+                    EnType = "dtjl";
+                    break;
                 case "客户经理":
-                    EnType = "";
+                    EnType = "kfjl";
                     break;
                 case "保安":
-                    EnType = "";
+                    EnType = "ba";
                     break;
                 case "业务顾问":
-                    EnType = "";
+                    EnType = "ywgw";
                     break;
             }
             return EnType;
@@ -221,20 +228,25 @@ namespace QM.Client.WebService.Control
                 //显示主屏信息
                 try
                 {
-                    foreach (DeviceOR obj in ListZP)
+                    if (ListZP != null && ListZP.Count > 0)
                     {
-                        if (string.IsNullOrEmpty(obj.Address))
+                        foreach (DeviceOR obj in ListZP)
                         {
-                            string strResultZ = GetHDClient().ShowScreenMSG(1//屏幕类型。1（窗口屏），2（综合屏）
-                                                         , 2//显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）
-                                                         , obj.Address
-                                                         , 16 * obj.ColNumber.Value
-                                                         , 16 * obj.RowNumber.Value
-                                                         , Bill
-                                                         , ""
-                                                         , Bill);
-
-                            ErrorLog.WriteLog("ShowScreenMSG_ZP#OK:", string.Format("主屏_显示：地址：{0} 结果：{1}", obj.Address, strResultZ));
+                            if (!string.IsNullOrEmpty(obj.Address))
+                            {
+                                string strResultZ = GetHDClient().ShowScreenMSG(2//屏幕类型。1（窗口屏），2（综合屏）
+                                                             , 1//显示类型。1（显示客户号|窗口号），2（显示自定义信息），3（窗口屏专属，显示暂停服务），4（窗口屏专属，显示服务恢复）
+                                                             , obj.Address
+                                                             , 16 * obj.ColNumber.Value
+                                                             , 16 * obj.RowNumber.Value
+                                                             , Bill
+                                                             , Windowno
+                                                             , "");
+                                ErrorLog.WriteLog("ShowTpMsg_test", string.Format("ColNumber*16={0},row*16={1},bill:{2}", 16 * obj.ColNumber.Value
+                                                             , 16 * obj.RowNumber.Value
+                                                             , Bill));
+                                ErrorLog.WriteLog("ShowTpMsg#ShowScreenMSG_ZP#OK:", string.Format("主屏_显示：地址：{0} 结果：{1}", obj.Address, strResultZ));
+                            }
                         }
                     }
                 }
@@ -325,18 +337,30 @@ namespace QM.Client.WebService.Control
         public void GetPJResult()
         {
             string result = HDDA.Instance.GetHDClient().GetDeviceMSG(2, Address, 10);//获取评价信息
+            ErrorLog.WriteLog("GET_PJ_Resutl", string.Format("BillNo:{0},queuID:{1}, result:{2}", BillNo, queuID, result));
             //com1,9600,011|EAV_MSG|7
-            if (result.IndexOf("EAV_MSG") > 0)
+            if (!string.IsNullOrEmpty(result))
             {
                 string[] arr = result.Split('|');
+                ErrorLog.WriteLog("GET_PJ_Resutl1", string.Format("length:{0}", arr.Length));
                 if (arr.Length == 3)
                 {
                     int pjR = 0;
+                    ErrorLog.WriteLog("GET_PJ_Resutl1", string.Format("arr[2]:{0}", arr[2]));
                     if (!string.IsNullOrEmpty(arr[2]))
                     {
                         if (int.TryParse(arr[2], out pjR))
                         {
-
+                            try
+                            {
+                                ErrorLog.WriteLog("updatePJResult#Prev", pjR.ToString());
+                                new QueueInfoMySqlDA().UpdateCallJudge(queuID, pjR);
+                                ErrorLog.WriteLog("updatePJResult", pjR.ToString());
+                            }
+                            catch (Exception ex)
+                            {
+                                ErrorLog.WriteLog("updatePJResult#ex", ex.Message);
+                            }
                         }
                     }
                 }

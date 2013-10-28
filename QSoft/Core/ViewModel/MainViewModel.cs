@@ -488,7 +488,7 @@ namespace QSoft.Core.ViewModel
             }
         }
 
-        DateTime lastCallTime = DateTime.Now;
+        DateTime lastCallTime = DateTime.Now.AddMinutes(-10);
         /// <summary>
         /// 呼叫下一位	CALL	空串
         /// </summary>
