@@ -822,30 +822,30 @@ namespace QM.Client.WebService.Control
             string mCallType = strArr[1];//呼叫类型
             string mBillNo = strArr[2];//票号
 
-			if (mCallType == "客户")
-			{
-				QueueInfoOR objQH = GetQueueInfo(mBillNo);
-				if (objQH == null)
-					return string.Format("票号:{0} 不存在!", mBillNo);
-				if (objQH.Status == 3)
-				{
-					return "此单号已办结";
-				}
+            if (mCallType == "客户")
+            {
+                QueueInfoOR objQH = GetQueueInfo(mBillNo);
+                if (objQH == null)
+                    return string.Format("票号:{0} 不存在!", mBillNo);
+                if (objQH.Status == 3)
+                {
+                    return "此单号已办结";
+                }
 
                 WindowOR mwinOR = GetAWindow(mWindowGet);
-				if (mwinOR == null)
-					return "窗口不存在！";
+                if (mwinOR == null)
+                    return "窗口不存在！";
 
-				string content = _Config.tp_8_show.Replace("*", mBillNo).Replace("#", mWindowNo);                
+                WindowLoginInfoOR _winLogin = GetLoginLogByWindowNo(mWindowGet);
+                if (_winLogin == null)
+                {
+                    return "error:未登录！";
+                }
+
+                string content = _Config.tp_8_show.Replace("*", mBillNo).Replace("#", mWindowNo);
                 string result = HDDA.Instance.ShowTpMsgSelf(mwinOR.tpAddress, content, mwinOR);
                 if (result == "0")
                 {
-                    WindowLoginInfoOR _winLogin = GetLoginLogByWindowNo(mWindowNo);
-                    if (_winLogin == null)
-                    {
-                        return "error:未登录！";
-                    }
-
                     objQH.Status = 1;
                     objQH.Waitinterval = GetTimeLen(objQH.Prillbilltime, DateTime.Now);
                     objQH.Windowno = _winLogin.Windowno;
@@ -856,12 +856,12 @@ namespace QM.Client.WebService.Control
 
                     _QueueDA.UpdateCall(objQH);
                     RemovePre(mWindowNo);
-                    return "";
+                    return "0";
                     //HDDA.Instance.PlayBill(mBillNo, mWindowNo, _Config.volume, WirelessAddr);
-				}
-				return result;
-				//呼号代码
-			}
+                }
+                return result;
+                //呼号代码
+            }
             else if (mCallType == "大堂经理")
             {
                 return HDDA.Instance.PlaySpecial(mCallType, mWindowNo, _Config.volume, WirelessAddr);
