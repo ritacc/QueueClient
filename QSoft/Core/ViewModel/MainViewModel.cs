@@ -473,7 +473,9 @@ namespace QSoft.Core.ViewModel
                     {
                         if (frmSpe.CallType == "客户")
                         {
-                            SetCurrentQueue(frmSpe.BillNo);
+                            CanncelCurrentQueue(_NowBillNo);
+                            _NowBillNo = frmSpe.BillNo;
+                            this.SetCurrentQueue(_NowBillNo);
                         }
                     }
                     else
@@ -574,6 +576,7 @@ namespace QSoft.Core.ViewModel
                 }
                 else
                 {
+                    _NowBillNo = "";
                     RefQueues();
                 }
             }
