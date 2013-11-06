@@ -28,10 +28,5 @@
                    FontWeight="Bold" Name="lblMsg"/>
         <Button Grid.Row="2" Content="直接取号"  FontSize="12"  Height="40" Width="80" Name="btnButtom"
            Style="{StaticResource buttomNumber}"     VerticalAlignment="Center" HorizontalAlignment="Center" Click="btnButtom_Click"   />
-
-        <TextBox Height="25" HorizontalAlignment="Left" Margin="12,7,0,0" Name="txtCard" VerticalAlignment="Top" Width="202" />
-        <Button Content="测试"  FontSize="12"  Height="33" Width="70"
-                VerticalAlignment="Center" HorizontalAlignment="Left" Click="Button_Click" Margin="228,5,0,58" Grid.RowSpan="2" />
-        
     </Grid>
 </Window>

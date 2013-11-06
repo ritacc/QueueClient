@@ -181,7 +181,7 @@ namespace QClient
                 {
                     try
                     {
-                        if (obj.QHOR.LabelCaption.IndexOf("#wait") > 0 || obj.QHOR.EnlabelCaption.IndexOf("#wait") > 0 || obj.QHOR.TagCaption.IndexOf("#wait") > 0)
+                        if (obj.QHOR.LabelCaption.IndexOf("#wait") >= 0 || obj.QHOR.EnlabelCaption.IndexOf("#wait") >= 0 || obj.QHOR.TagCaption.IndexOf("#wait") >= 0)
                         {
                             int UserNum = 0;
                             if (!string.IsNullOrEmpty(obj.QHOR.LabelJobno))

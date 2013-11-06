@@ -281,7 +281,10 @@ namespace QClient.Core.ViewModel
                     {
                         //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
                         DeviceCheckHead.Instance.GetHDClient().OperateCaller(1, Window.fjqAddress,"",3);
-                        //DeviceCheckHead.Instance.GetHDClient().InitDevice(1, Window.fjqAddress);
+
+                        //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
+                        //设置呼叫器是否登录成功，当operType为3时有效。0（设置登录失败），其他值（设置登录成功）
+                        string result = DeviceCheckHead.Instance.GetHDClient().OperateCaller(3, Window.fjqAddress, UserID, 0);
                     }
                     catch (Exception ex)
                     {
@@ -474,6 +477,7 @@ namespace QClient.Core.ViewModel
 				UserID = data;
 				//记录柜员号
 				loginStatus = 2;
+                ErrorLog.WriteTestLog("#呼叫器地址.", Window.fjqAddress);
 				DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(6, Window.fjqAddress
 					, "m1", "", 0, ""
 					, 0, 0, 0, 0
@@ -486,6 +490,9 @@ namespace QClient.Core.ViewModel
 				string loginmsg = DeviceCheckHead.Instance.GetQueueClient().getLogin(UserID, password, Window.Name);
 				if (loginmsg != "0")//失败
 				{
+                    //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
+                    //设置呼叫器是否登录成功，当operType为3时有效。0（设置登录失败），其他值（设置登录成功）
+                    string result = DeviceCheckHead.Instance.GetHDClient().OperateCaller(3, Window.fjqAddress, UserID, 0);
 					DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(2, Window.fjqAddress
 					, "m1", "", 0, ""
 					, 1	//login：登录是否成功，showtype为2时有效。0（成功），1（失败）
@@ -494,25 +501,21 @@ namespace QClient.Core.ViewModel
 					UserID = "";
 
                     isWork = false;
-
-                    //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
-                    //status：设置呼叫器是否登录成功，当operType为3时有效。0（登录成功），其他值（登录失败）
-                    string result = DeviceCheckHead.Instance.GetHDClient().OperateCaller(3, Window.fjqAddress, UserID, 4);
                     ErrorLog.WriteLog("设备登录状态：", result);
 				}
 				else//成功
 				{
+                    //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
+                    //设置呼叫器是否登录成功，当operType为3时有效。0（设置登录失败），其他值（设置登录成功）
+                    string result = DeviceCheckHead.Instance.GetHDClient().OperateCaller(2, Window.fjqAddress, UserID, 2);
+                    ErrorLog.WriteLog("设备登录状态：", result);
+
 					DeviceCheckHead.Instance.GetHDClient().ShowCallerMSG(2, Window.fjqAddress
 						, "m1", "", 0, ""
 						, 0	//login：登录是否成功，showtype为2时有效。0（成功），1（失败）
 						, 0, 0, 0, "");
 					loginStatus = 3;
                     isWork = true;
-
-                    //1（初始化呼叫器），2，（呼叫器播放蜂鸣声），3（设置呼叫器登录状态）
-                    //status：设置呼叫器是否登录成功，当operType为3时有效。0（登录成功），其他值（登录失败）
-                    string result = DeviceCheckHead.Instance.GetHDClient().OperateCaller(3, Window.fjqAddress, UserID, 0);
-                    ErrorLog.WriteLog("设备登录状态：", result);
 				}
 			}
 		}

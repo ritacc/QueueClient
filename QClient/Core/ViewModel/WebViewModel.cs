@@ -160,7 +160,7 @@ namespace QClient.Core.ViewModel
 
                     if (TimeLen < Contickettime && Contickettime > 0)
                     {
-                        ShowErrorMsg(string.Format("连续取号最短时间间隔不能小于：{0}秒。", Contickettime));
+                        ShowErrorMsg(string.Format("连续取号隔不能小于：{0}秒。", Contickettime));
                         return;
                     }
                     LastGetTime = DateTime.Now;
