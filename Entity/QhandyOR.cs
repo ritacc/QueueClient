@@ -422,7 +422,15 @@ namespace QM.Client.Entity
             set { _Windowid = value; }
         }
 
+		public double ButtonWidth { get; set; }
+		public double ButtonHeight { get; set; }
 
+		private string _bg;
+		public string Bg
+		{
+			get { return _bg; }
+			set { _bg = value; }
+		}
 
         /// <summary>
         /// Qhandy构造函数
@@ -511,6 +519,10 @@ namespace QM.Client.Entity
             _Windowonid = "";
             // 
             _Windowid = "";
+
+			ButtonWidth = 200;
+			ButtonHeight = 50;
+			Bg = "bg1.png";
         }
 
         /// <summary>
@@ -603,6 +615,13 @@ namespace QM.Client.Entity
             _Windowonid = row["windowOnID"].ToString().Trim();
             // 窗口ID
             _Windowid = row["windowID"].ToString().Trim();
+
+			if (!string.IsNullOrEmpty(row["LABEL_Width"].ToString().Trim()))
+				ButtonWidth = Convert.ToDouble(row["LABEL_Width"].ToString().Trim());
+
+			if (!string.IsNullOrEmpty(row["LABEL_Height"].ToString().Trim()))
+				ButtonHeight = Convert.ToDouble(row["LABEL_Height"].ToString().Trim());
+			Bg = row["LABEL_BG"].ToString().Trim();
         }
     }
 }

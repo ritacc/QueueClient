@@ -1,2 +1,11 @@
-﻿2013-05-26
+﻿2013-11-08
+1. 修改按钮。
+2. sql
+ALTER TABLE `t_qhandy`
+ADD COLUMN `LABEL_Height`  float NULL AFTER `windowID`,
+ADD COLUMN `LABEL_Width`  float NULL AFTER `LABEL_Height`,
+ADD COLUMN `LABEL_BG`  varchar(50) NULL AFTER `LABEL_Width`;
+
+
+2013-05-26
 1. 当从菜单启动时，背景无效bug

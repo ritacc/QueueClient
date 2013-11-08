@@ -128,6 +128,7 @@ namespace QClient
             bc.DataContext = mbc.ButtomOR;
             bc.SetValue(Canvas.LeftProperty, Convert.ToDouble(mbc.ButtomOR.LabelLeft));
             bc.SetValue(Canvas.TopProperty, Convert.ToDouble(mbc.ButtomOR.LabelTop));
+			bc.SetSizeBg();
             bc.SetTextInfo();
             //string mName = "kj" + mbc.ID;
             //bc.Name = mName;

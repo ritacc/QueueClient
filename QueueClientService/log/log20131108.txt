@@ -1,0 +1,4 @@
+ErrorCode:QueueMian_Init#ex ;时间：08-11-2013 16:53:36,ERROR [HY000] [MySQL][ODBC 5.1 Driver]Access denied for user 'root'@'localhost' (using password: YES)
+ERROR [HY000] [MySQL][ODBC 5.1 Driver]Access denied for user 'root'@'localhost' (using password: YES)
+ErrorCode:QueueMian_Init#ex ;时间：08-11-2013 17:03:56,ERROR [HY000] [MySQL][ODBC 5.1 Driver]Access denied for user 'root'@'localhost' (using password: YES)
+ERROR [HY000] [MySQL][ODBC 5.1 Driver]Access denied for user 'root'@'localhost' (using password: YES)

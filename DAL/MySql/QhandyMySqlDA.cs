@@ -36,7 +36,8 @@ TAG_FONTNAME,TAG_FONTUNDERLINE,TAG_FONTITALIC,TAG_FONTBOLD,TAG_FONTSIZE,
 TAG_TOPOFFSET,TAG_LEFTOFFSET,LABEL_TYPE,ENLABEL_VISIBLE,ENLABEL_CAPTION,
 ENLABEL_FONTCOLOR,ENLABEL_FONTNAME,ENLABEL_FONTITALIC,ENLABEL_FONTUNDERLINE,ENLABEL_FONTBOLD,
 ENLABEL_FONTSIZE,SCREENTYPE,ENLABEL_LEFTOFFSET,ENLABEL_TOPOFFSET,ButtomType,
-windowOnID,windowID)
+windowOnID,windowID
+,LABEL_Height,LABEL_Width,LABEL_BG)
 values ('@ID','@OrgBH',@LABEL_IDX,@LABEL_VISIBLE,'@LABEL_CAPTION',
 @LABEL_FONTCOLOR,'@LABEL_FONTNAME',@LABEL_FONTUNDERLINE,@LABEL_FONTITALIC,@LABEL_FONTBOLD,
 @LABEL_FONTSIZE,@LABEL_TOP,@LABEL_LEFT,'@LABEL_JOBNO','@LABEL_JOBNAME',
@@ -45,7 +46,8 @@ values ('@ID','@OrgBH',@LABEL_IDX,@LABEL_VISIBLE,'@LABEL_CAPTION',
 @TAG_TOPOFFSET,@TAG_LEFTOFFSET,'@LABEL_TYPE',@ENLABEL_VISIBLE,'@ENLABEL_CAPTION',
 @ENLABEL_FONTCOLOR,'@ENLABEL_FONTNAME',@ENLABEL_FONTITALIC,@ENLABEL_FONTUNDERLINE,@ENLABEL_FONTBOLD,
 @ENLABEL_FONTSIZE,@SCREENTYPE,@ENLABEL_LEFTOFFSET,@ENLABEL_TOPOFFSET,@ButtomType,
-'@windowOnID','@windowID')";
+'@windowOnID','@windowID'
+,@LABEL_Height,@LABEL_Width,'@LABEL_BG')";
             sql = sql.Replace("@ID", qhandy.Id);	//
             sql = sql.Replace("@OrgBH", qhandy.Orgbh);	//
             sql = sql.Replace("@LABEL_IDX", qhandy.LabelIdx.ToString());	//
@@ -88,6 +90,10 @@ values ('@ID','@OrgBH',@LABEL_IDX,@LABEL_VISIBLE,'@LABEL_CAPTION',
             sql = sql.Replace("@ButtomType", boolGetFlag(qhandy.Buttomtype));	//按钮类型，0功能按钮，1 页窗口按钮。
             sql = sql.Replace("@windowOnID", qhandy.Windowonid);	//按钮关联窗口ID
             sql = sql.Replace("@windowID", qhandy.Windowid);	//窗口ID
+
+			sql = sql.Replace("@LABEL_Height", qhandy.ButtonHeight.ToString());
+			sql = sql.Replace("@LABEL_Width", qhandy.ButtonWidth.ToString());
+			sql = sql.Replace("@LABEL_BG", qhandy.Bg); 
 
             return sql;
         }

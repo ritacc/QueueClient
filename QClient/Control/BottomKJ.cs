@@ -12,6 +12,8 @@ using QClinet.Core.Util;
 using QClient.Core.Util;
 using System.Windows.Threading;
 using System.Threading;
+using System.Windows.Media.Imaging;
+
 
 
 namespace QClient
@@ -35,19 +37,7 @@ namespace QClient
 
             
             //背景
-            LinearGradientBrush FColor = new LinearGradientBrush();
-            FColor.StartPoint = new Point(0.5, 1);
-            FColor.EndPoint = new Point(0.5, 0);
            
-            GradientStop g = new GradientStop();
-            g.Color = Colors.White;
-            FColor.GradientStops.Add(g);
-
-            g = new GradientStop();
-            g.Color = Converter.ToColor("#FFCED4D9");
-            g.Offset = 1;
-            FColor.GradientStops.Add(g);
-            rect.Fill = FColor;
             rect.RadiusX = rect.RadiusY = 8.0;
 
 
@@ -57,6 +47,54 @@ namespace QClient
             _Content.Children.Add(tb);
 
         }
+		public void SetSizeBg()
+		{
+			if (this.Tag != null)
+			{
+				if (this.Tag is ButtomControl)
+				{
+					var obj = this.Tag as ButtomControl;
+					this.Width = obj.ButtomOR.ButtonWidth;
+					this.Height = obj.ButtomOR.ButtonHeight;
+
+					if (string.IsNullOrEmpty(obj.ButtomOR.Bg))
+						obj.ButtomOR.Bg = "bg1.png";
+
+					string mPath = Common.GetStartpath() + "Resources\\Buttonbg\\" + obj.ButtomOR.Bg;
+					if (!System.IO.File.Exists(mPath))
+					{
+						LinearGradientBrush FColor = new LinearGradientBrush();
+						FColor.StartPoint = new Point(0.5, 1);
+						FColor.EndPoint = new Point(0.5, 0);
+
+						GradientStop g = new GradientStop();
+						g.Color = Colors.White;
+						FColor.GradientStops.Add(g);
+
+						g = new GradientStop();
+						g.Color = Converter.ToColor("#FFCED4D9");
+						g.Offset = 1;
+						FColor.GradientStops.Add(g);
+						rect.Fill = FColor; 
+					}
+					else
+					{
+
+						//BitmapImage bitmap = new BitmapImage(new Uri(gbUrl, UriKind.Absolute));
+						ImageBrush img = new ImageBrush()
+						{
+							ImageSource = new BitmapImage(new Uri(mPath, UriKind.Absolute))
+						};
+
+						//ImageBrush img = new ImageBrush();
+						//img.ImageSource = img;
+						img.Stretch = Stretch.Fill;
+						rect.Fill = img;
+					}
+				}
+			}
+		}
+
         public void SetText(string Content)
         {
             this.Dispatcher.BeginInvoke(DispatcherPriority.Normal,
