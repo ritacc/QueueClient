@@ -63,7 +63,9 @@
     <EmbeddedResource Include="FrmMain.resx">
       <DependentUpon>FrmMain.cs</DependentUpon>
     </EmbeddedResource>
-    <None Include="app.config" />
+    <None Include="app.config">
+      <SubType>Designer</SubType>
+    </None>
     <None Include="Service References\QueueClient\QueueClient.wsdl" />
     <None Include="Service References\QueueClient\TestServeice.QueueClient.BussinessBasicInfoOR.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
