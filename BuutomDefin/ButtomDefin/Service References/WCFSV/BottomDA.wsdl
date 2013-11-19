@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:wsap="http://schemas.xmlsoap.org/ws/2004/08/addressing/policy" xmlns:wsa10="http://www.w3.org/2005/08/addressing" xmlns:tns="http://tempuri.org/" xmlns:msc="http://schemas.microsoft.com/ws/2005/12/wsdl/contract" xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:wsx="http://schemas.xmlsoap.org/ws/2004/09/mex" xmlns:wsp="http://schemas.xmlsoap.org/ws/2004/09/policy" xmlns:wsam="http://www.w3.org/2007/05/addressing/metadata" xmlns:wsa="http://schemas.xmlsoap.org/ws/2004/08/addressing" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" xmlns:wsaw="http://www.w3.org/2006/05/addressing/wsdl" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:wsu="http://docs.oasis-open.org/wss/2004/01/oasis-200401-wss-wssecurity-utility-1.0.xsd" xmlns:xsd="http://www.w3.org/2001/XMLSchema" name="BottomDA" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <xsd:schema targetNamespace="http://tempuri.org/Imports">
+      <xsd:import schemaLocation="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd0" namespace="http://tempuri.org/" />
+      <xsd:import schemaLocation="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd1" namespace="http://schemas.microsoft.com/2003/10/Serialization/" />
+      <xsd:import schemaLocation="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd2" namespace="http://schemas.datacontract.org/2004/07/QM.Entity.ParaSet" />
+      <xsd:import schemaLocation="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd3" namespace="http://schemas.datacontract.org/2004/07/QM.Web.WCF" />
+    </xsd:schema>
+  </wsdl:types>
+  <wsdl:message name="IBottomDA_DoWork_InputMessage">
+    <wsdl:part name="parameters" element="tns:DoWork" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_DoWork_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DoWorkResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetABottom_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetABottom" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetABottom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetABottomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetBottomList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetBottomList" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetBottomList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetBottomListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_Insert_InputMessage">
+    <wsdl:part name="parameters" element="tns:Insert" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_Insert_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_UpdateBottom_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBottom" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_UpdateBottom_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdateBottomResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetYWList_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetYWList" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetYWList_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetYWListResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetPageWinS_InputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageWinS" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_GetPageWinS_OutputMessage">
+    <wsdl:part name="parameters" element="tns:GetPageWinSResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_InsertPageWin_InputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPageWin" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_InsertPageWin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:InsertPageWinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_UpdatePageWin_InputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePageWin" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_UpdatePageWin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:UpdatePageWinResponse" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_DeletepageWin_InputMessage">
+    <wsdl:part name="parameters" element="tns:DeletepageWin" />
+  </wsdl:message>
+  <wsdl:message name="IBottomDA_DeletepageWin_OutputMessage">
+    <wsdl:part name="parameters" element="tns:DeletepageWinResponse" />
+  </wsdl:message>
+  <wsdl:portType name="IBottomDA">
+    <wsdl:operation name="DoWork">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/DoWork" message="tns:IBottomDA_DoWork_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/DoWorkResponse" message="tns:IBottomDA_DoWork_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetABottom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/GetABottom" message="tns:IBottomDA_GetABottom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/GetABottomResponse" message="tns:IBottomDA_GetABottom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetBottomList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/GetBottomList" message="tns:IBottomDA_GetBottomList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/GetBottomListResponse" message="tns:IBottomDA_GetBottomList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="Insert">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/Insert" message="tns:IBottomDA_Insert_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/InsertResponse" message="tns:IBottomDA_Insert_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBottom">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/UpdateBottom" message="tns:IBottomDA_UpdateBottom_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/UpdateBottomResponse" message="tns:IBottomDA_UpdateBottom_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetYWList">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/GetYWList" message="tns:IBottomDA_GetYWList_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/GetYWListResponse" message="tns:IBottomDA_GetYWList_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="GetPageWinS">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/GetPageWinS" message="tns:IBottomDA_GetPageWinS_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/GetPageWinSResponse" message="tns:IBottomDA_GetPageWinS_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="InsertPageWin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/InsertPageWin" message="tns:IBottomDA_InsertPageWin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/InsertPageWinResponse" message="tns:IBottomDA_InsertPageWin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePageWin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/UpdatePageWin" message="tns:IBottomDA_UpdatePageWin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/UpdatePageWinResponse" message="tns:IBottomDA_UpdatePageWin_OutputMessage" />
+    </wsdl:operation>
+    <wsdl:operation name="DeletepageWin">
+      <wsdl:input wsaw:Action="http://tempuri.org/IBottomDA/DeletepageWin" message="tns:IBottomDA_DeletepageWin_InputMessage" />
+      <wsdl:output wsaw:Action="http://tempuri.org/IBottomDA/DeletepageWinResponse" message="tns:IBottomDA_DeletepageWin_OutputMessage" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="BasicHttpBinding_IBottomDA" type="tns:IBottomDA">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="DoWork">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/DoWork" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetABottom">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/GetABottom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetBottomList">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/GetBottomList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="Insert">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/Insert" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdateBottom">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/UpdateBottom" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetYWList">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/GetYWList" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="GetPageWinS">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/GetPageWinS" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="InsertPageWin">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/InsertPageWin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="UpdatePageWin">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/UpdatePageWin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+    <wsdl:operation name="DeletepageWin">
+      <soap:operation soapAction="http://tempuri.org/IBottomDA/DeletepageWin" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="BottomDA">
+    <wsdl:port name="BasicHttpBinding_IBottomDA" binding="tns:BasicHttpBinding_IBottomDA">
+      <soap:address location="http://localhost:6076/WCF/BottomDA.svc" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

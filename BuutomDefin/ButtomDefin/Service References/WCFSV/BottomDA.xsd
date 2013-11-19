@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="utf-8"?>
+<xs:schema xmlns:tns="http://schemas.datacontract.org/2004/07/QM.Entity.ParaSet" elementFormDefault="qualified" targetNamespace="http://schemas.datacontract.org/2004/07/QM.Entity.ParaSet" xmlns:xs="http://www.w3.org/2001/XMLSchema">
+  <xs:complexType name="QhandyOR">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Bg" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="ButtomType" type="xs:boolean" />
+      <xs:element minOccurs="0" name="ButtonHeight" type="xs:double" />
+      <xs:element minOccurs="0" name="ButtonWidth" type="xs:double" />
+      <xs:element minOccurs="0" name="EnlabelCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EnlabelFontbold" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnlabelFontcolor" type="xs:int" />
+      <xs:element minOccurs="0" name="EnlabelFontitalic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnlabelFontname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="EnlabelFontsize" type="xs:int" />
+      <xs:element minOccurs="0" name="EnlabelFontunderline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="EnlabelLeftoffset" type="xs:int" />
+      <xs:element minOccurs="0" name="EnlabelTopoffset" type="xs:int" />
+      <xs:element minOccurs="0" name="EnlabelVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelFontbold" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LabelFontcolor" type="xs:int" />
+      <xs:element minOccurs="0" name="LabelFontitalic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LabelFontname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelFontsize" type="xs:int" />
+      <xs:element minOccurs="0" name="LabelFontunderline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LabelIdx" type="xs:int" />
+      <xs:element minOccurs="0" name="LabelJobname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelJobno" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelLeft" type="xs:int" />
+      <xs:element minOccurs="0" name="LabelPrintstr" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelShade" type="xs:boolean" />
+      <xs:element minOccurs="0" name="LabelTop" type="xs:int" />
+      <xs:element minOccurs="0" name="LabelType" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="LabelVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Orgbh" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Screentype" type="xs:int" />
+      <xs:element minOccurs="0" name="TagCaption" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TagFontbold" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TagFontcolor" type="xs:int" />
+      <xs:element minOccurs="0" name="TagFontitalic" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TagFontname" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="TagFontsize" type="xs:int" />
+      <xs:element minOccurs="0" name="TagFontunderline" type="xs:boolean" />
+      <xs:element minOccurs="0" name="TagLeftoffset" type="xs:int" />
+      <xs:element minOccurs="0" name="TagTopoffset" type="xs:int" />
+      <xs:element minOccurs="0" name="TagVisible" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Windowid" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Windowonid" nillable="true" type="xs:string" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="QhandyOR" nillable="true" type="tns:QhandyOR" />
+  <xs:complexType name="ArrayOfQhandyOR">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="QhandyOR" nillable="true" type="tns:QhandyOR" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfQhandyOR" nillable="true" type="tns:ArrayOfQhandyOR" />
+  <xs:complexType name="ArrayOfPageWinOR">
+    <xs:sequence>
+      <xs:element minOccurs="0" maxOccurs="unbounded" name="PageWinOR" nillable="true" type="tns:PageWinOR" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="ArrayOfPageWinOR" nillable="true" type="tns:ArrayOfPageWinOR" />
+  <xs:complexType name="PageWinOR">
+    <xs:sequence>
+      <xs:element minOccurs="0" name="Height" type="xs:int" />
+      <xs:element minOccurs="0" name="ISSelect" type="xs:boolean" />
+      <xs:element minOccurs="0" name="Id" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Name" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Orgbh" nillable="true" type="xs:string" />
+      <xs:element minOccurs="0" name="Width" type="xs:int" />
+    </xs:sequence>
+  </xs:complexType>
+  <xs:element name="PageWinOR" nillable="true" type="tns:PageWinOR" />
+</xs:schema>

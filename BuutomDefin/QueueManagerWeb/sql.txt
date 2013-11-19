@@ -1,0 +1,10 @@
+﻿ALTER TABLE dbo.t_Qhandy ADD
+	LABEL_Height float(53) NULL,
+	LABEL_Width float(53) NULL,
+	LABEL_BG varchar(50) NULL
+GO
+ALTER TABLE dbo.t_Qhandy ADD CONSTRAINT
+	DF_t_Qhandy_LABEL_Height DEFAULT 0 FOR LABEL_Height
+GO
+ALTER TABLE dbo.t_Qhandy ADD CONSTRAINT
+	DF_t_Qhandy_LABEL_Width DEFAULT 0 FOR LABEL_Width

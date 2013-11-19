@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="QM.Web.WPFDA.BottomDA" CodeBehind="BottomDA.svc.cs" %>

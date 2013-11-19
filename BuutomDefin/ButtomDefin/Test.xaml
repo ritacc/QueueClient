@@ -1,0 +1,33 @@
+﻿<controls:ChildWindow x:Class="ButtomDefin.Test"
+           xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" 
+           xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml" 
+           xmlns:controls="clr-namespace:System.Windows.Controls;assembly=System.Windows.Controls"
+           Width="543" Height="407" 
+           Title="Test" xmlns:my="clr-namespace:ButtomDefin.Control">
+    <Grid x:Name="LayoutRoot" Margin="2">
+        <Grid.RowDefinitions>
+            <RowDefinition />
+            <RowDefinition Height="Auto" />
+        </Grid.RowDefinitions>
+        
+        <Rectangle  Stroke="#FFA1ACB7"  RadiusX="8" RadiusY="8"  Canvas.Left="94" Canvas.Top="64">
+            <Rectangle.Fill>
+                <LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+                    <GradientStop Color="#FFCED4D9" Offset="1"/>
+                    <GradientStop Color="White"/>
+                </LinearGradientBrush>
+            </Rectangle.Fill>
+        </Rectangle>
+        
+        <!--<Grid>
+            <Grid.ColumnDefinitions>
+                
+                <ColumnDefinition/>
+                <ColumnDefinition/>
+            </Grid.ColumnDefinitions>
+            
+        </Grid>-->
+        <Button x:Name="CancelButton" Content="取消" Click="CancelButton_Click" Width="75" Height="23" HorizontalAlignment="Right" Margin="0,12,0,0" Grid.Row="1" />
+        <my:FloatPanel Height="50" HorizontalAlignment="Left" Margin="136,67,0,0" x:Name="floatPanel1" VerticalAlignment="Top" Width="100" />
+    </Grid>
+</controls:ChildWindow>

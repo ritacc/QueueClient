@@ -1,0 +1,37 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="859a73cb-f1bd-4996-9d9a-2290997a9122" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+  <ClientOptions>
+    <GenerateAsynchronousMethods>true</GenerateAsynchronousMethods>
+    <EnableDataBinding>true</EnableDataBinding>
+    <ExcludedTypes />
+    <ImportXmlTypes>false</ImportXmlTypes>
+    <GenerateInternalTypes>false</GenerateInternalTypes>
+    <GenerateMessageContracts>false</GenerateMessageContracts>
+    <NamespaceMappings />
+    <CollectionMappings>
+      <CollectionMapping TypeName="System.Collections.ObjectModel.ObservableCollection`1" Category="List" />
+    </CollectionMappings>
+    <GenerateSerializableTypes>false</GenerateSerializableTypes>
+    <Serializer>Auto</Serializer>
+    <UseSerializerForFaults>true</UseSerializerForFaults>
+    <ReferenceAllAssemblies>true</ReferenceAllAssemblies>
+    <ReferencedAssemblies />
+    <ReferencedDataContractTypes />
+    <ServiceContractMappings />
+  </ClientOptions>
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:6076/WCF/BottomDA.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="BottomDA.xsd" MetadataType="Schema" ID="9f1b3b28-920b-47e8-9de6-d7623ab02755" SourceId="1" SourceUrl="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd2" />
+    <MetadataFile FileName="BottomDA2.xsd" MetadataType="Schema" ID="6eb10225-7bd5-4e3f-bef6-ee8eadc28b74" SourceId="1" SourceUrl="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd0" />
+    <MetadataFile FileName="BottomDA1.xsd" MetadataType="Schema" ID="8f4d016e-182b-4943-8552-c9fb2c0eb87a" SourceId="1" SourceUrl="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd3" />
+    <MetadataFile FileName="BottomDA.disco" MetadataType="Disco" ID="a36a17dd-5cf0-4902-ad45-86e8d7ed87a5" SourceId="1" SourceUrl="http://localhost:6076/WCF/BottomDA.svc?disco" />
+    <MetadataFile FileName="BottomDA.wsdl" MetadataType="Wsdl" ID="bff024dc-2fa1-44bf-b314-59b3a5e49b34" SourceId="1" SourceUrl="http://localhost:6076/WCF/BottomDA.svc?wsdl" />
+    <MetadataFile FileName="BottomDA3.xsd" MetadataType="Schema" ID="1fb759b1-27cf-445e-bc04-b457d87c578d" SourceId="1" SourceUrl="http://localhost:6076/WCF/BottomDA.svc?xsd=xsd1" />
+  </Metadata>
+  <Extensions>
+    <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />
+    <ExtensionFile FileName="configuration.svcinfo" Name="configuration.svcinfo" />
+  </Extensions>
+</ReferenceGroup>

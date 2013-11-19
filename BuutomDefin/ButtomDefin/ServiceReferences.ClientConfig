@@ -1,0 +1,17 @@
+﻿<configuration>
+    <system.serviceModel>
+        <bindings>
+            <basicHttpBinding>
+                <binding name="BasicHttpBinding_IBottomDA" maxBufferSize="2147483647"
+                    maxReceivedMessageSize="2147483647">
+                    <security mode="None" />
+                </binding>
+            </basicHttpBinding>
+        </bindings>
+        <client>
+            <endpoint address="http://localhost:6076/WCF/BottomDA.svc" binding="basicHttpBinding"
+                bindingConfiguration="BasicHttpBinding_IBottomDA" contract="WCFSV.IBottomDA"
+                name="BasicHttpBinding_IBottomDA" />
+        </client>
+    </system.serviceModel>
+</configuration>

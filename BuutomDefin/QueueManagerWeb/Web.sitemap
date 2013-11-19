@@ -1,0 +1,113 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<siteMap xmlns="http://schemas.microsoft.com/AspNet/SiteMap-File-1.0" >
+	<siteMapNode url="Main/Default.aspx"  title="主页"  description="排队机联网集中平台">
+    <siteMapNode roles="3" url="ParaConf/YwdybList.aspx?id=ywdy" title="业务单元" description="业务单元">
+      <siteMapNode url="ParaConf/YwdybList.aspx" title="业务单元" description="业务单元">
+        <siteMapNode url="ParaConf/YwdybEdit.aspx" title="编辑" description="编辑"  />
+        <siteMapNode url="ParaConf/YwdybList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+      </siteMapNode>
+    </siteMapNode>
+    <siteMapNode roles="3" url="ParaConf/CkbList.aspx?id=ywdy" title="业务定义" description="业务定义">
+      <siteMapNode url="ParaConf/YWBList.aspx" title="基本信息" description="基本信息">
+        <siteMapNode url="ParaConf/YWBEdit.aspx" title="编辑" description="编辑"  />
+        <siteMapNode url="ParaConf/YWBList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+      </siteMapNode>
+      <siteMapNode url="ParaConf/YWPZBList.aspx" title="业务单元" description="业务单元">
+        <siteMapNode url="ParaConf/YWPZBEdit.aspx" title="编辑" description="编辑"  />
+        <siteMapNode url="ParaConf/YWPZBList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+      </siteMapNode>
+    </siteMapNode>
+    <siteMapNode roles="3" url="ParaConf/CkbList.aspx?id=ck" title="窗口" description="窗口">
+      <siteMapNode url="ParaConf/CkbList.aspx" title="窗口" description="窗口">
+        <siteMapNode url="ParaConf/CkbEdit.aspx" title="编辑" description="编辑"  />
+        <siteMapNode url="ParaConf/CkbList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+      </siteMapNode>
+      <siteMapNode url="ParaConf/CkywdybList.aspx" title="窗口业务单元" description="窗口业务单元">
+        <siteMapNode url="ParaConf/CkywdybEdit.aspx" title="编辑" description="编辑"  />
+        <siteMapNode url="ParaConf/CkywdybList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+      </siteMapNode>
+    </siteMapNode>
+    <siteMapNode url="ParaConf/VipKSJDYList.aspx?id=vip" title="Vip卡管理" description="Vip卡管理">
+      <siteMapNode url="ParaConf/VipKSJDYList.aspx" title="Vip卡数据定义" description="Vip卡数据定义">
+        <siteMapNode url="ParaConf/VipKSJDYEdit.aspx " title="编辑" description="编辑"></siteMapNode>
+        <siteMapNode url="ParaConf/VipKSJDYList.aspx?Delete" title="删除" description="删除"></siteMapNode>
+      </siteMapNode>
+      <siteMapNode url="ParaConf/VipKhbList.aspx" title="Vip卡客户列表"  description="Vip卡客户列表" >
+        <siteMapNode url="ParaConf/VipKhbEdit.aspx " title="编辑" description="编辑"></siteMapNode>
+        <siteMapNode url="ParaConf/VipKhbList.aspx?Delete" title="删除" description="删除"></siteMapNode>
+      </siteMapNode>
+      <siteMapNode url="ParaConf/VipKOtherList.aspx" title="Vip其他设置"  description="Vip其他设置" />
+
+    </siteMapNode>
+	<siteMapNode roles="3" url="QH/ButtomAdminList.aspx?id=admin" title="网点按钮定义" description="网点按钮定义">
+		<siteMapNode url="QH/ButtomAdminList.aspx" title="网点按钮定义列表"  description="网点按钮定义列表" >
+			<siteMapNode url="QH/ButtomAdminEdit.aspx" title="管理" description="管理"></siteMapNode>
+		</siteMapNode>
+	</siteMapNode>
+		
+	<siteMapNode roles="3" url="ParaConf/YwdybList.aspx?id=auth" title="参数配置" description="参数配置">
+      <siteMapNode url="ParaConf/SysParamQhConfig.aspx" title="取号" description="取号"/>
+      <siteMapNode url="ParaConf/SysParamSoundsConfig.aspx" title="声音" description="声音"/>
+      <siteMapNode url="ParaConf/SysParamPmpmConfig.aspx" title="屏幕票面" description="屏幕票面"></siteMapNode>
+      <siteMapNode url="ParaConf/SysParamTxConfig.aspx" title="通讯" description="通讯"/>
+      <siteMapNode url="ParaConf/SysParamCallConfig.aspx" title="呼叫" description="呼叫"/>
+      <siteMapNode url="ParaConf/SysParamOtherConfig.aspx" title="其他设置" description="其他设置"/>
+      <siteMapNode url="ParaConf/SysParamMainSoundsConfig.aspx" title="主显屏、语音卡设置" description="主显屏、语音卡设置"/>
+      <siteMapNode url="ParaConf/SysParamCkpShowConfig.aspx" title="窗口屏显示模板" description="窗口屏显示模板"/>
+      <siteMapNode url="ParaConf/SysParamLjwdConfig.aspx" title="临近网点" description="临近网点"/>
+      <siteMapNode url="ParaConf/SysParamGzmsList.aspx" title="工作模式列表" description="工作模式列表">
+        <siteMapNode url="ParaConf/SysParamGzmsEdit.aspx" title="编辑" description="编辑"></siteMapNode>
+        <siteMapNode url="ParaConf/SysParamGzmsList.aspx?Delete" title="编辑" description="编辑"></siteMapNode>
+      </siteMapNode>
+      <siteMapNode url="ParaConf/SysParamGzmsConfig.aspx" title="模式设定" description="模式设定"></siteMapNode>
+    </siteMapNode>
+    <siteMapNode roles="3" url="wdjk/wdjkList.aspx?id=admin" title="网点监控" description="网点监控">
+			<siteMapNode url="wdjk/wdjkList.aspx" title="网点监控" description="网点监控"/>
+      <siteMapNode url="Monitor/QhlsList.aspx" title="当日流水" description="当日流水"/>
+		</siteMapNode>
+		<siteMapNode roles="3" url="Stat/fyrjqsfx.aspx?id=admin" title="查询统计" description="查询统计">
+			<siteMapNode url="TJ/fwrjqsfx.aspx" title="服务日均趋势分析" description="服务日均趋势分析"/>
+			
+			<siteMapNode url="TJ/kfllrjqsfx.aspx" title="客户浏览日均趋势分析" description="客户浏览日均趋势分析"/>
+			<siteMapNode url="TJ/khllfsdfbt.aspx" title="客户流量分时段分布图" description="客户流量分时段分布图"/>
+			
+			<siteMapNode url="TJ/Khdhsjrjqst.aspx" title="客户等候时间日均趋势图" description="客户等候时间日均趋势分析"/>
+			<siteMapNode url="TJ/Khddsjfsdfbt.aspx" title="客户等待时间分时段分布图" description="客户等待时间分时段分布图"/>
+			
+			<siteMapNode url="TJ/gsddhsjflzbt.aspx" title="各时段等候时间分类占比图" description="各时段等候时间分类占比图"/>
+			
+			<siteMapNode url="TJ/Gyfwpjfxhtj.aspx" title="柜员服务评价分析和统计" description="柜员服务评价分析和统计"/>
+			
+			<siteMapNode url="TJ/Gyfwxlfxhtj.aspx" title="柜员服务效率分析和统计" description="柜员服务效率分析和统计"/>
+			
+			<siteMapNode url="TJ/Dlmydfxhtj.aspx" title="队列满意度分析和统计" description="队列满意度分析和统计"/>
+			<siteMapNode url="TJ/Lslsbfxhtj.aspx" title="历史流水表分析和统计" description="历史流水表分析和统计"/>
+		</siteMapNode>
+		<siteMapNode url="SysAdmin/YHHHBList.aspx?id=admin" title="系统管理"  description="系统管理">
+			<siteMapNode url="SysAdmin/YHHHBList.aspx" title="网点维护"  description="网点维护">
+				<siteMapNode url="SysAdmin/YHHHBEdit.aspx" title="编辑" description="编辑"  />
+				<siteMapNode url="SysAdmin/YHHHBList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+			</siteMapNode>
+			<siteMapNode url="SysAdmin/YGBList.aspx" title="用户列表"  description="用户列表">
+				<siteMapNode url="SysAdmin/YGBEdit.aspx" title="编辑" description="编辑"  />
+				<siteMapNode url="SysAdmin/YGBList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+			</siteMapNode>
+			<siteMapNode url="SysAdmin/UserList.aspx" title="管理员管理"  description="管理员管理">
+				<siteMapNode url="SysAdmin/UserEdit.aspx" title="编辑" description="编辑"  />
+				<siteMapNode url="SysAdmin/UserList.aspx?Delete" title="删除" description="删除" isFunction="true" />
+			</siteMapNode>
+			<siteMapNode url="wdjk/wdjkSetList.aspx" title="网点监控配置"  description="网点监控配置">
+				<siteMapNode url="wdjk/wdjkSetEdit.aspx" title="编辑" description="编辑"  />
+			</siteMapNode>
+			
+			<siteMapNode url="Role/RoleList.aspx" title="角色列表" description="角色列表"  imagePath="group.gif">
+				<siteMapNode url="Role/RoleSet.aspx" title="权限设置" description="权限设置" />
+				<siteMapNode url="Role/RoleEdit.aspx" title="编辑" description="添加、修改角色" isFunction="true" />
+				<siteMapNode url="Role/RoleList.aspx?Delete" title="删除" description="删除" />
+			</siteMapNode>
+			<siteMapNode url="Role/UserAuthList.aspx" title="用户授权"  description="给用户授予角色">
+				<siteMapNode url="Role/UserAuthEdit.aspx" title="授权" description="授权授权" />
+			</siteMapNode>
+		</siteMapNode>
+	</siteMapNode>
+</siteMap>
