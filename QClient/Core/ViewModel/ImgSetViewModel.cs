@@ -30,7 +30,7 @@ namespace QClient.Core.ViewModel
                   _ConfigUrl = GetConfigServerURL();
 
               return _ConfigUrl; 
-          }          
+          }
       }
 
       public Uri ConfigHDUrl
@@ -106,7 +106,11 @@ namespace QClient.Core.ViewModel
       }
       public string GetPwd()
       {
-          return GetClient().GetClientValue("pwd");
+          using (var client = new QueueClientSoapClient())
+          {
+              return client.GetClientValue("pwd");
+          }
+          //return GetClient().GetClientValue("pwd");
       }
 
       public string SetImgPathPassword(string Path, string newPwd)
