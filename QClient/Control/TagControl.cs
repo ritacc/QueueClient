@@ -63,7 +63,7 @@ namespace QClient
                     this.Content = tb;
 
                     tb.FontSize = 12.0;
-                    tb.HorizontalAlignment = HorizontalAlignment.Center;
+                    tb.HorizontalAlignment = HorizontalAlignment.Left;
                     tb.VerticalAlignment = VerticalAlignment.Center;
                     tb.FontSize = obj.ButtomOR.TagFontsize;
 

@@ -99,10 +99,8 @@ namespace QM.Client.WebService.Control
                           .Replace("<#Time>", DateTime.Now.ToString("yyyy-MM-dd HH:mm:ss"));
                     
                     ControllerSoapClient HDClient = new ControllerSoapClient();
-
                     ErrorLog.WriteLog("PRINT_MSG", Content);
                     string msg = HDClient.PrintSlip(Content,5);
-
                     ErrorLog.WriteLog("PrintSlip#OK", msg);
                 }
             }

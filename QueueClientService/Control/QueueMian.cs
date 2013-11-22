@@ -7,6 +7,7 @@ using QM.Client.Entity;
 using System.Collections;
 using System.Configuration;
 using System.Linq;
+using System.Text;
 
 namespace QM.Client.WebService.Control
 {
@@ -1034,10 +1035,12 @@ namespace QM.Client.WebService.Control
             {
                 return mErrorMsg;
             }
+			StringBuilder sbLog = new StringBuilder();
+			sbLog.AppendLine(string.Format("开始时间：{0}",DateTime.Now.ToString("dd HH:mm:ss:fff")));
             try
             {
                 string _BillNo = _CurentBuss.Prefix + GetBillNo(mbussinessID);
-
+				sbLog.AppendLine(string.Format("时间：{0} ,编号：{1}", DateTime.Now.ToString("dd HH:mm:ss:fff"), _BillNo));
                 int mWaitpeoplebusssiness = 0;
                 int mWaitpeoplebank = 0;
                 //int mCustemclass = 0;
@@ -1058,11 +1061,14 @@ namespace QM.Client.WebService.Control
 
                 //票号#业务名称#当前业务人数#当前网点人数
                 string result= string.Format("{0}#{1}#{2}#{3}", _BillNo, _CurentBuss.Name,mWaitpeoplebusssiness,mWaitpeoplebank);
-                
+
+				sbLog.AppendLine(string.Format("入库完成到打印：{0}  ", DateTime.Now.ToString("dd HH:mm:ss:fff")));
                 if (HDDA.Instance.PrintSlip(result))
                 {
 
                 }
+				sbLog.AppendLine(string.Format("打印结束：{0}  \r\n", DateTime.Now.ToString("dd HH:mm:ss:fff")));
+				ErrorLog.WriteLog("时间测试：		", sbLog.ToString());
                 return result;
             }
             catch (Exception ex)
